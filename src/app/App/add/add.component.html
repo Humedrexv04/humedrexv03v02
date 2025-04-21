@@ -1,0 +1,47 @@
+<!-- Modificado el HTML para mejor estructura -->
+<ion-header>
+  <ion-toolbar class="header-toolbar">
+    <ion-title class="header-title">🌱 Agregar Nueva Planta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-container">
+  <div class="form-card">
+    <!-- Sección de imagen con preview -->
+    <div class="image-section">
+      <label class="image-upload-label">
+        📸 Subir imagen
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" #fileInput>
+      </label>
+      <div class="image-preview" *ngIf="img">
+        <img [src]="img" alt="Previsualización de la planta">
+      </div>
+    </div>
+
+    <!-- Campos del formulario con iconos -->
+    <ion-item class="form-item">
+      <ion-icon name="leaf" slot="start" class="form-icon"></ion-icon>
+      <ion-label position="stacked" class="input-label">Nombre de la planta</ion-label>
+      <ion-input [(ngModel)]="name" name="name" class="custom-input" placeholder="Ej: Suculenta"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-icon name="water" slot="start" class="form-icon"></ion-icon>
+      <ion-label position="stacked" class="input-label">Riego cada (horas)</ion-label>
+      <ion-input type="time" [(ngModel)]="horario" name="horario" class="custom-input"
+        placeholder="Ej: 48"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-icon name="thermometer" slot="start" class="form-icon"></ion-icon>
+      <ion-label position="stacked" class="input-label">Humedad requerida (%)</ion-label>
+      <ion-input type="number" [(ngModel)]="humedad" name="humedad" class="custom-input"
+        placeholder="Ej: 60"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="submit-button" (click)="addPlant()">
+      <ion-icon name="add-circle" slot="start"></ion-icon>
+      Agregar a mi jardín
+    </ion-button>
+  </div>
+</ion-content>

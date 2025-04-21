@@ -1,0 +1,199 @@
+/* ========== ESTILOS GENERALES ========== */
+ion-content {
+    --background: #1b2a2f;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========== HEADER ========== */
+ion-toolbar {
+    --background: #0f3d3e;
+    --color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+ion-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== TEXTO DE BIENVENIDA ========== */
+h2 {
+    color: #a8dadc;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== TARJETA DE PERFIL ========== */
+ion-card.card {
+    --main-color: #ffffff;
+    --submain-color: #a8dadc;
+    --bg-color: #264653;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background: var(--bg-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+ion-card.card:hover {
+    transform: scale(1.02);
+}
+
+/* Fondo de la tarjeta */
+.card__img {
+    height: 150px;
+    width: 100%;
+    background: linear-gradient(135deg, #0f3d3e, #2a9d8f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Avatar */
+.card__avatar {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card__avatar:hover {
+    transform: scale(1.1);
+}
+
+.profile-icon {
+    font-size: 80px;
+    color: var(--main-color);
+}
+
+/* ========== INFORMACIÓN DEL USUARIO ========== */
+ion-card-header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+ion-card-title.card__title {
+    font-weight: 500;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+ion-card-subtitle.card__subtitle {
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--submain-color);
+}
+
+/* Contenido de la tarjeta */
+ion-card-content {
+    width: 100%;
+    padding: 16px;
+}
+
+/* ========== SECCIÓN PLANTAS EN INVENTARIO ========== */
+ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 20px;
+    color: white;
+}
+
+ion-icon[name="leaf-outline"] {
+    font-size: 24px;
+    color: #2a9d8f;
+    transition: transform 0.3s ease-in-out;
+}
+
+ion-item:hover ion-icon {
+    transform: rotate(15deg);
+}
+
+/* ========== BOTÓN DE CERRAR SESIÓN ========== */
+.logout-button {
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    --background: #e63946;
+    --color: white;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    --background: #c71f37;
+    transform: translateY(-2px);
+    --box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+}
+
+.logout-button:active {
+    transform: translateY(0);
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    ion-content {
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    ion-card.card {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .profile-icon {
+        font-size: 70px;
+    }
+
+    .logout-button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    ion-card.card {
+        width: 95%;
+    }
+
+    .profile-icon {
+        font-size: 60px;
+    }
+
+    .logout-button {
+        font-size: 13px;
+    }
+}

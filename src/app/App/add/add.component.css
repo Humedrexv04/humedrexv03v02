@@ -1,0 +1,196 @@
+/* ========== HEADER ========== */
+.header-toolbar {
+  --background: #0f3d3e;
+  /* Verde oscuro azulado */
+  --color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-title {
+  font-family: 'Pacifico';
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+.content-container {
+  --background: linear-gradient(160deg, #1b2a2f 0%, #264653 100%);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 24px;
+}
+
+/* ========== TARJETA DEL FORMULARIO ========== */
+.form-card {
+  background: #264653;
+  /* Verde oscuro */
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== SECCIÓN DE IMAGEN ========== */
+.image-section {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.image-upload-label {
+  display: inline-block;
+  background: #2a9d8f;
+  /* Verde claro */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload-label:hover {
+  background: #21867a;
+  transform: translateY(-2px);
+}
+
+.image-input {
+  display: none;
+}
+
+.image-preview {
+  margin-top: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid #2a9d8f;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========== CAMPOS DEL FORMULARIO ========== */
+.form-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 28px;
+  --border-radius: 12px;
+}
+
+.input-label {
+  color: #e9f5e6 !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.5px;
+}
+
+.custom-input {
+  --background: #1b2a2f;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 14px !important;
+  --padding-bottom: 14px !important;
+  border-radius: 12px !important;
+  --border-width: 2px;
+  --border-color: #2a9d8f;
+  --color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.custom-input:hover {
+  --background: #264653;
+  --border-color: #52b788;
+}
+
+.custom-input:focus-within {
+  --border-color: #2a9d8f;
+  box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.2);
+}
+
+.form-icon {
+  color: #2a9d8f;
+  font-size: 1.4rem;
+  margin-right: 12px;
+}
+
+/* ========== BOTÓN DE AGREGAR PLANTA ========== */
+.submit-button {
+  --background: #e63946;
+  /* Rojo */
+  --background-activated: #c71f37;
+  --background-hover: #ff6b6b;
+  --color: white;
+  --border-radius: 15px;
+  --padding-top: 18px;
+  --padding-bottom: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 24px;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+}
+
+/* ========== ANIMACIONES MEJORADAS ========== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-card {
+  animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+  .form-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .header-title {
+    font-size: 1.1rem;
+  }
+
+  .input-label {
+    font-size: 1rem !important;
+  }
+
+  .custom-input {
+    --padding-start: 12px !important;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-container {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+
+  .image-upload-label {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+  }
+}

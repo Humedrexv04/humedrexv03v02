@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inventario de Plantas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="swiper-content" padding>
+  <!-- Swiper Container -->
+  <swiper-container class="mySwiper" grab-cursor="true">
+    <!-- Iterar sobre las plantas y crear un slide por cada una -->
+    <swiper-slide *ngFor="let plant of plants">
+      <app-planta-item [plant]="plant" class="plant-item"></app-planta-item>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

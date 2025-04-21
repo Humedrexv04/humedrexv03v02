@@ -1,0 +1,101 @@
+/* ========== HEADER ========== */
+ion-toolbar {
+  --background: #0f3d3e; /* Verde oscuro azulado */
+  --color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== CARD HEADER ========== */
+ion-card-header ion-card-title {
+  color: white !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+ion-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+ion-content {
+  --background: linear-gradient(160deg, #1b2a2f 0%, #264653 100%);
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 24px;
+}
+
+/* ========== TARJETA DEL FORMULARIO ========== */
+ion-card {
+  background: #264653; /* Verde oscuro */
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* ========== LISTA DE DATOS ========== */
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 28px;
+  --border-radius: 12px;
+}
+
+ion-label {
+  color: #e9f5e6 !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 8px !important;
+  letter-spacing: 0.5px;
+}
+
+ion-note {
+  color: white;
+  font-size: 1rem;
+}
+
+/* ========== ANIMACIONES MEJORADAS ========== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+  ion-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  ion-title {
+    font-size: 1.1rem;
+  }
+
+  ion-label {
+    font-size: 1rem !important;
+  }
+
+  ion-note {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  ion-content {
+    --padding-start: 8px;
+    --padding-end: 8px;
+  }
+}

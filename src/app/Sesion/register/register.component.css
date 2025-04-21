@@ -1,0 +1,150 @@
+/* ========== ESTILOS GENERALES ========== */
+.content {
+    background: #1b2a2f;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.ion-padding {
+    padding: 16px;
+}
+
+/* Contenedor para centrar el formulario */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* Ocupa toda la altura de la pantalla */
+}
+
+/* Estilos generales del formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2em;
+    background-color: #171717;
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Estilo del título */
+#heading {
+    text-align: center;
+    margin: 2em 0;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+/* Estilo de los campos de entrada */
+.field {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: white;
+}
+
+/* Estilo personalizado para los inputs */
+.custom-input {
+    background: transparent;
+    color: #d3d3d3;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    outline: none;
+}
+
+.custom-input::placeholder {
+    color: #d3d3d3;
+}
+
+/* Estilo de los botones */
+.custom-button {
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    margin: 0.5em 0;
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Botón de Registrarse */
+.button1 {
+    background: #4CAF50;
+    color: white;
+}
+
+.button1:hover {
+    background: #45a049;
+}
+
+/* Botón de ¿Ya tienes cuenta? */
+.button2 {
+    background: #4285f4;
+    color: white;
+}
+
+.button2:hover {
+    background: #357abd;
+}
+
+/* Fila de botones (Registrarse y ¿Ya tienes cuenta?) */
+.btn-row {
+    display: flex;
+    gap: 10px;
+    /* Espacio entre los botones */
+}
+
+.btn-row button {
+    flex: 1;
+    /* Ambos botones ocupan el mismo espacio */
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    /* Tamaño de letra pequeño */
+    margin-top: 0.5em;
+    /* Espacio superior */
+    text-align: left;
+    /* Centrar el texto */
+    font-style: italic;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 600px) {
+    .form {
+        padding: 1em;
+    }
+
+    .btn-row {
+        /* En móviles, los botones se apilan verticalmente */
+        flex-direction: column;
+        gap: 5px;
+        /* Espacio reducido entre botones */
+    }
+
+    .btn-row button {
+        width: 100%;
+        /* Los botones ocupan el 100% del ancho en móviles */
+    }
+}

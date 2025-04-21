@@ -1,0 +1,223 @@
+/* ========== ESTILOS GENERALES ========== */
+.content {
+  background: #1b2a2f;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 120px);
+  /* Altura de la pantalla menos header y tabs */
+}
+
+/* ========== HEADER ========== */
+.toolbar {
+  background: #0f3d3e;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  text-align: center;
+}
+
+.header-title-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-clear {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.profile-button {
+  font-size: 24px;
+}
+
+/* ========== PESTAÑAS ========== */
+.app-tabs {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1b2a2f;
+}
+
+/* Barra de pestañas */
+.tab-bar {
+  background: #0f3d3e;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  height: 60px;
+  border-radius: 25px 25px 0 0;
+  margin: 0 10px;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Botón de pestaña */
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  position: relative;
+  text-decoration: none;
+  color: white;
+  height: 100%;
+}
+
+/* Pestaña seleccionada */
+.tab-button.tab-selected {
+  animation: float 0.4s ease-out forwards;
+  background: #2a9d8f;
+  color: white;
+}
+
+/* Íconos de las pestañas */
+.tab-icon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.tab-button.tab-selected .tab-icon {
+  transform: scale(1.15);
+  color: white;
+}
+
+/* Texto de la pestaña */
+.tab-label {
+  font-size: 0.8rem;
+  margin-top: 4px;
+  transition: all 0.3s ease;
+}
+
+.tab-button.tab-selected .tab-label {
+  color: white;
+  font-weight: 500;
+}
+
+/* Efecto de subrayado de la pestaña seleccionada */
+.tab-button.tab-selected::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background-color: #a8dadc;
+  border-radius: 2px;
+  animation: underline 0.3s ease-out;
+}
+
+@keyframes underline {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 40%;
+  }
+}
+
+/* Animaciones y efectos */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Contador de plantas */
+.plant-counter {
+  position: absolute;
+  top: -1px;
+  right: 32px;
+  background-color: #FF5722;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  z-index: 1;
+  animation: bounce 0.5s ease-in-out;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+  .content {
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .profile-icon {
+    font-size: 70px;
+  }
+
+  .logout-button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .card {
+    width: 95%;
+  }
+
+  .profile-icon {
+    font-size: 60px;
+  }
+
+  .logout-button {
+    font-size: 13px;
+  }
+}

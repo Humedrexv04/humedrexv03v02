@@ -1,0 +1,179 @@
+/* Header Styles */
+.header-toolbar {
+    --background: #1b4332; /* Verde oscuro principal */
+    --color: #ffffff;
+    box-shadow: 0 2px 8px rgba(27, 67, 50, 0.2);
+}
+
+.header-title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.back-button {
+    --color: #d8f3dc; /* Verde claro para contraste */
+    --background-hover: rgba(216, 243, 220, 0.1);
+}
+
+/* Content Background */
+ion-content {
+    --background: linear-gradient(160deg, #f1f8f3 0%, #d8f3dc 100%);
+}
+
+/* Main Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    padding: 2rem;
+}
+
+/* Plant Card */
+.plant-card {
+    background: #ffffff;
+    border-radius: 25px;
+    max-width: 720px;
+    width: 100%;
+    margin: 1rem auto;
+    box-shadow: 0 4px 20px rgba(27, 67, 50, 0.15);
+    border: 2px solid #d8f3dc;
+}
+
+/* Plant Name */
+.plant-name {
+    color: #1b4332; /* Verde oscuro */
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Schedule Styles */
+.plant-schedule {
+    color: #2d6a4f; /* Verde medio */
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.schedule-icon {
+    color: #40916c; /* Verde vibrante */
+    font-size: 1.6rem;
+}
+
+/* Image Container */
+.image-container {
+    padding: 0 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.plant-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 3px solid #b7e4c7;
+    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.1);
+}
+
+/* Humidity Section */
+.humidity-container {
+    padding: 1rem 2rem;
+    background: #f8fff9;
+    border-radius: 15px;
+    margin: 1.5rem;
+}
+
+.humidity-text {
+    color: #1b4332;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.humidity-progress {
+    --progress-background: #2d6a4f;
+    --buffer-background: #d8f3dc;
+    height: 12px;
+    border-radius: 6px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 720px;
+    padding: 0 1.5rem;
+    margin-top: 2rem;
+}
+
+.delete-button {
+    --background: #c82333; /* Rojo oscuro */
+    --background-activated: #a71e2b;
+    --color: white;
+    --border-radius: 12px;
+    flex: 1;
+}
+
+.edit-button {
+    --background: #2d6a4f; /* Verde medio */
+    --background-activated: #1b4332;
+    --color: white;
+    --border-radius: 12px;
+    flex: 1;
+}
+
+.button-icon {
+    color: white;
+    font-size: 1.4rem;
+    margin-right: 0.8rem;
+}
+
+/* Hover Effects */
+ion-button {
+    transition: all 0.3s ease;
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(27, 67, 50, 0.2);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .plant-card {
+        max-width: 95%;
+    }
+    
+    .plant-image {
+        height: 280px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plant-name {
+        font-size: 1.8rem;
+    }
+    
+    .plant-image {
+        height: 220px;
+    }
+    
+    .humidity-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+    
+    .button-icon {
+        font-size: 1.2rem;
+    }
+}

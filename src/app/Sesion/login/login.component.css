@@ -1,0 +1,289 @@
+/* Estilos generales */
+.main-content {
+  background: #1b2a2f;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Contenedor para centrar el formulario */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Estilos generales del formulario */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2em;
+  background-color: #171717;
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Estilo del título */
+#heading {
+  text-align: center;
+  margin: 2em 0;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+}
+
+/* Estilo de los campos de entrada */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-icon {
+  height: 1.3em;
+  width: 1.3em;
+  fill: white;
+}
+
+/* Estilo personalizado para inputs */
+.custom-input {
+  background: transparent;
+  color: #d3d3d3;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.custom-input::placeholder {
+  color: #d3d3d3;
+}
+
+/* Estilo de los botones */
+.custom-button {
+  border-radius: 25px;
+  transition: 0.4s ease-in-out;
+  margin: 0.5em 0;
+  padding: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Botones de colores */
+.button1 {
+  background: #4CAF50;
+  /* Verde */
+  color: white;
+}
+
+.button1:hover {
+  background: #45a049;
+  /* Verde más oscuro al hacer hover */
+}
+
+.button2 {
+  background: #4285f4;
+  /* Azul */
+  color: white;
+}
+
+.button2:hover {
+  background: #357abd;
+  /* Azul más oscuro al hacer hover */
+}
+
+/* Botón de olvidé mi contraseña */
+.button3 {
+  background: #f44336;
+  /* Rojo */
+  color: white;
+}
+
+.button3:hover {
+  background: #d32f2f;
+  /* Rojo más oscuro al hacer hover */
+}
+
+/* Botón de Google */
+.button4 {
+  background: #ffffff;
+  /* Fondo blanco */
+  color: #757575;
+  /* Texto gris */
+  border-radius: 25px;
+  /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* Sombra suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* Espacio entre el ícono y el texto */
+  padding: 10px;
+  /* Espaciado interno */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* Transición suave */
+}
+
+.button4:hover {
+  background: #f1f1f1;
+  /* Fondo gris claro al hacer hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Sombra más pronunciada al hacer hover */
+}
+
+/* Estilo del ícono de Google dentro del botón */
+.button4 svg {
+  width: 20px;
+  /* Tamaño del ícono */
+  height: 20px;
+  /* Tamaño del ícono */
+  margin-right: 8px;
+  /* Espacio entre el ícono y el texto */
+}
+
+/* Estilo del texto dentro del botón */
+.button4 span {
+  font-size: 1em;
+  /* Tamaño del texto */
+  font-weight: 500;
+  /* Grosor del texto */
+}
+
+/* Fila de botones (Iniciar Sesión y Registrarse) */
+.btn-row {
+  display: flex;
+  gap: 10px;
+  /* Espacio entre los botones */
+}
+
+.btn-row button {
+  flex: 1;
+  /* Los botones ocupan todo el espacio disponible */
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: red;
+  font-size: 1em;
+  /* Tamaño de letra pequeño */
+  margin-top: 0.5em;
+  /* Espacio superior */
+  text-align: left;
+  /* Centrar el texto */
+  font-style: italic;
+}
+
+/* Media Queries para Responsividad */
+
+/* Pantallas pequeñas (menos de 600px) */
+@media (max-width: 600px) {
+  .form {
+    padding: 1.5em;
+    /* Reducir el padding */
+    max-width: 90%;
+    /* Ajustar el ancho máximo */
+  }
+
+  #heading {
+    font-size: 1.1em;
+    /* Reducir el tamaño del título */
+    margin: 1.5em 0;
+    /* Ajustar el margen */
+  }
+
+  .field {
+    padding: 0.5em;
+    /* Reducir el padding de los campos */
+  }
+
+  .custom-button {
+    margin: 0.4em 0;
+    /* Reducir el margen de los botones */
+  }
+
+  .button4 {
+    gap: 8px;
+    /* Reducir el espacio entre ícono y texto */
+    padding: 8px;
+    /* Reducir el padding */
+  }
+
+  .button4 svg {
+    width: 18px;
+    /* Reducir el tamaño del ícono */
+    height: 18px;
+  }
+
+  .button4 span {
+    font-size: 0.9em;
+    /* Reducir el tamaño del texto */
+  }
+
+  .btn-row {
+    gap: 8px;
+    /* Reducir el espacio entre botones */
+  }
+}
+
+/* Pantallas medianas (entre 600px y 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .form {
+    max-width: 80%;
+    /* Ajustar el ancho máximo */
+  }
+
+  #heading {
+    font-size: 1.15em;
+    /* Ajustar el tamaño del título */
+  }
+
+  .field {
+    padding: 0.55em;
+    /* Ajustar el padding de los campos */
+  }
+
+  .custom-button {
+    margin: 0.45em 0;
+    /* Ajustar el margen de los botones */
+  }
+
+  .button4 {
+    gap: 10px;
+    /* Ajustar el espacio entre ícono y texto */
+    padding: 9px;
+    /* Ajustar el padding */
+  }
+
+  .button4 svg {
+    width: 19px;
+    /* Ajustar el tamaño del ícono */
+    height: 19px;
+  }
+
+  .button4 span {
+    font-size: 0.95em;
+    /* Ajustar el tamaño del texto */
+  }
+
+  .btn-row {
+    gap: 9px;
+    /* Ajustar el espacio entre botones */
+  }
+}

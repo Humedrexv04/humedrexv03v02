@@ -1,0 +1,80 @@
+/* Variables globales para el tema claro */
+
+:root {
+    /* Colores principales */
+    --primary-green: #2d6a4f;
+    --secondary-green: #4a7852;
+    --accent-green: #8dae7f;
+    --background-light: #f5fbf3;
+    --text-dark: #2a2a2a;
+    --highlight: #c7ddb5;
+    --success: #6a994e;
+    --card-background: #ffffff;
+}
+
+/* Variables globales para el tema oscuro */
+.dark-theme {
+    --primary-green: #1a3d2f;
+    --secondary-green: #2f4d3e;
+    --accent-green: #556b5a;
+    --background-light: #121212;
+    --text-dark: #e0e0e0;
+    --highlight: #3d4a36;
+    --success: #4a7852;
+    --card-background: #1e1e1e;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos base */
+ion-app {
+    transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* Aplicar colores globales */
+ion-content {
+    --background: var(--background-light);
+    --color: var(--text-dark);
+}
+
+ion-toolbar {
+    --background: var(--primary-green);
+    --color: white;
+}
+
+ion-card {
+    --background: var(--card-background);
+    box-shadow: var(--card-shadow);
+}
+
+/* Botones */
+ion-button {
+    --background: var(--primary-green);
+    --background-activated: var(--secondary-green);
+    --background-hover: var(--accent-green);
+    --color: white;
+    transition: all 0.3s ease;
+}
+
+/* Tabs */
+ion-tab-bar {
+    --background: var(--card-background);
+    --color: var(--text-dark);
+    --color-selected: var(--primary-green);
+    box-shadow: var(--card-shadow);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Transiciones suaves */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

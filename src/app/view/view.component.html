@@ -1,0 +1,39 @@
+<!-- HTML -->
+<header class="app-header">
+    <div class="toolbar header-toolbar">
+        <button class="btn-clear profile-button" (click)="goToProfile()">
+            <i class="fas fa-user-circle"></i>
+        </button>
+        <div class="header-title-container">
+            <h1 class="header-title">MI JARDÍN</h1>
+        </div>
+    </div>
+</header>
+
+<main class="content">
+    <!-- Contenido principal aquí -->
+</main>
+
+<nav class="app-tabs">
+    <div class="tab-bar custom-tab-bar">
+        <!-- Inventario - Izquierda -->
+        <a class="tab-button inventory-tab" [routerLink]="['/plant-list']" routerLinkActive="tab-selected"
+            id="tab-button-plant-list">
+            <i class="fas fa-leaf tab-icon"></i>
+            <span class="tab-label">Plantas</span>
+            <div class="plant-counter">{{ plantCount }}</div>
+        </a>
+
+        <!-- Add - Centro -->
+        <a class="tab-button add-tab" [routerLink]="['/add']" routerLinkActive="tab-selected" id="tab-button-add">
+            <i class="fas fa-plus-circle tab-icon"></i>
+            <span class="tab-label">Agregar</span>
+        </a>
+
+        <!-- Agua - Derecha -->
+        <a class="tab-button water-tab" [routerLink]="['/cant']" routerLinkActive="tab-selected" id="tab-button-water">
+            <i class="fas fa-tint tab-icon"></i>
+            <span class="tab-label">Riego</span>
+        </a>
+    </div>
+</nav>

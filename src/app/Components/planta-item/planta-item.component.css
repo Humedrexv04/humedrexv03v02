@@ -1,0 +1,59 @@
+/* Estilos para la tarjeta */
+.card {
+    width: 375px;
+    height: 77vh;
+    background: #1a2e1a; /* Fondo verde oscuro */
+    border: 5px solid #4caf50; /* Borde verde claro */
+    border-radius: 40px;
+    overflow: hidden; /* Para que los bordes redondeados funcionen correctamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+/* Estilos para la imagen */
+.image {
+    border-radius: 40px 40px 0 0; /* Bordes redondeados solo en la parte superior */
+    width: 100%;
+    height: 400px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.plant-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 30px; /* Bordes redondeados para la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+}
+
+/* Estilos para el título */
+.plantTitle {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #4caf50; /* Color verde claro para el texto */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 10px 0;
+}
+
+/* Estilos para el botón */
+.ver-detalles {
+    --background: #4caf50; /* Fondo verde claro al hacer hover */
+    --color: #1a2e1a; /* Texto verde oscuro al hacer hover */
+    --border-radius: 0 0 38px 38px; /* Bordes redondeados solo en la parte inferior */
+    --border-width: 5px; /* Grosor del borde */
+    --border-color: #4caf50; /* Borde verde claro */
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    --padding-start: 0;
+    --padding-end: 0;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: --background 0.2s, --color 0.2s;
+}

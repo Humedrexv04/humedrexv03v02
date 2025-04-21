@@ -1,0 +1,86 @@
+/* ========== ESTILOS GENERALES ========== */
+.swiper-content {
+    height: 100%;
+    --background: linear-gradient(160deg, #1b2a2f 0%, #264653 100%);
+    /* Fondo oscuro con azul verdoso */
+}
+
+/* ========== SWIPER ========== */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    padding: 20px 0;
+}
+
+.swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========== TARJETAS DE PLANTAS ========== */
+.plant-item {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #264653;
+    /* Fondo oscuro */
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 768px) and (min-height: 600px) {
+    .swiper-slide {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) and (max-height: 599px) {
+    .swiper-slide {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) and (min-height: 600px) {
+    .swiper-slide {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) and (max-height: 599px) {
+    .swiper-slide {
+        height: 250px;
+    }
+}
+
+@media (max-width: 360px) {
+    .swiper-container {
+        padding: 10px 0;
+    }
+
+    .swiper-slide {
+        height: 200px;
+    }
+
+    .plant-item {
+        padding: 10px;
+    }
+}
+
+/* ========== ELIMINAR ESTILOS ANTIGUOS DE ion-list ========== */
+ion-list {
+    background: transparent;
+    padding: 0;
+}

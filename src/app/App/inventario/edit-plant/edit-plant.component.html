@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar class="header-toolbar">
+    <ion-title class="header-title">Editar Planta</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="gotoPlantDetail()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-container">
+  <form *ngIf="plant" class="form-card">
+    <div class="image-section">
+      <label class="image-upload-label">
+        📸 Cambiar imagen
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input">
+      </label>
+      <div class="image-preview" *ngIf="img">
+        <img [src]="img" alt="Previsualización de la planta" class="preview-image">
+      </div>
+      <div class="image-preview" *ngIf="!img && plant.img">
+        <img [src]="plant.img" alt="Imagen actual de la planta" class="preview-image">
+      </div>
+    </div>
+
+    <ion-item class="form-item">
+      <ion-label position="floating" class="input-label">Nombre</ion-label>
+      <ion-input [(ngModel)]="plant.name" name="name" required class="custom-input"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating" class="input-label">Horario</ion-label>
+      <ion-input [(ngModel)]="plant.horario" name="horario" required class="custom-input" type="time" ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating" class="input-label">Humedad (%)</ion-label>
+      <ion-input type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" class="submit-button" (click)="updatePlant()">
+      Actualizar Planta
+    </ion-button>
+  </form>
+</ion-content>
