@@ -1,11 +1,11 @@
-<!-- Modificado el HTML para mejor estructura -->
-<ion-header>
-  <ion-toolbar class="header-toolbar">
-    <ion-title class="header-title">🌱 Agregar Nueva Planta</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- Cabecera con HTML estándar -->
+<header class="header">
+  <div class="header-toolbar">
+    <h1 class="header-title">🌱 Agregar Nueva Planta</h1>
+  </div>
+</header>
 
-<ion-content class="content-container">
+<div class="content-container">
   <div class="form-card">
     <!-- Sección de imagen con preview -->
     <div class="image-section">
@@ -19,29 +19,60 @@
     </div>
 
     <!-- Campos del formulario con iconos -->
-    <ion-item class="form-item">
-      <ion-icon name="leaf" slot="start" class="form-icon"></ion-icon>
-      <ion-label position="stacked" class="input-label">Nombre de la planta</ion-label>
-      <ion-input [(ngModel)]="name" name="name" class="custom-input" placeholder="Ej: Suculenta"></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <span class="form-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 512 512">
+          <path
+            d="M321.89 171.42C233 114 141 155.22 56 65.22c-19.8-21-8.3 235.5 98.1 332.7 77.79 71 197.9 63.08 238.4-5.92s18.28-163.17-70.61-220.58z"
+            fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+          <path d="M173 253c86 81 175 129 292 147" fill="none" stroke="currentColor" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="32" />
+        </svg>
+      </span>
+      <div class="input-container">
+        <label class="input-label">Nombre de la planta</label>
+        <input [(ngModel)]="name" name="name" class="custom-input" placeholder="Ej: Suculenta">
+      </div>
+    </div>
 
-    <ion-item class="form-item">
-      <ion-icon name="water" slot="start" class="form-icon"></ion-icon>
-      <ion-label position="stacked" class="input-label">Riego cada (horas)</ion-label>
-      <ion-input type="time" [(ngModel)]="horario" name="horario" class="custom-input"
-        placeholder="Ej: 48"></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <span class="form-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 512 512">
+          <path
+            d="M256 43.91s-144 158.3-144 270.3c0 88.36 55.64 144 144 144s144-55.64 144-144c0-112-144-270.3-144-270.3zm0 384c-35.34 0-64-29.24-64-65.31s28.66-65.31 64-65.31 64 29.25 64 65.31-28.7 65.31-64 65.31z"
+            fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+        </svg>
+      </span>
+      <div class="input-container">
+        <label class="input-label">Riego cada (horas)</label>
+        <input type="time" [(ngModel)]="horario" name="horario" class="custom-input" placeholder="Ej: 48">
+      </div>
+    </div>
 
-    <ion-item class="form-item">
-      <ion-icon name="thermometer" slot="start" class="form-icon"></ion-icon>
-      <ion-label position="stacked" class="input-label">Humedad requerida (%)</ion-label>
-      <ion-input type="number" [(ngModel)]="humedad" name="humedad" class="custom-input"
-        placeholder="Ej: 60"></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <span class="form-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 512 512">
+          <path
+            d="M307.72 302.27a8 8 0 01-3.72-6.75V80a48 48 0 00-48-48h0a48 48 0 00-48 48v215.52a8 8 0 01-3.71 6.74 97.51 97.51 0 00-44.19 86.07A96 96 0 00256 384a96 96 0 0095.9-89.24 97.52 97.52 0 00-44.18-92.49z"
+            fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+          <circle cx="256" cy="302" r="12" fill="currentColor" />
+        </svg>
+      </span>
+      <div class="input-container">
+        <label class="input-label">Humedad requerida (%)</label>
+        <input type="number" [(ngModel)]="humedad" name="humedad" class="custom-input" placeholder="Ej: 60">
+      </div>
+    </div>
 
-    <ion-button expand="block" class="submit-button" (click)="addPlant()">
-      <ion-icon name="add-circle" slot="start"></ion-icon>
+    <button class="submit-button" (click)="addPlant()">
+      <span class="button-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 512 512">
+          <path
+            d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm80 224h-64v64a16 16 0 01-32 0v-64h-64a16 16 0 010-32h64v-64a16 16 0 0132 0v64h64a16 16 0 010 32z"
+            fill="currentColor" />
+        </svg>
+      </span>
       Agregar a mi jardín
-    </ion-button>
+    </button>
   </div>
-</ion-content>
+</div>
