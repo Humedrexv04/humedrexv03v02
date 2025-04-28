@@ -34,11 +34,10 @@ export class CredientialWifiComponent implements OnInit {
   }
 
   connectToDevice(): void {
-    this.showConfigInstructions = true;
+    this.showConfigInstructions = true; // Activa la tarjeta de instrucciones con animación
   }
 
   openConfigPage(): void {
-    // Intenta abrir la página de configuración del ESP32
     window.open('http://192.168.4.1', '_blank');
   }
 
@@ -56,12 +55,14 @@ export class CredientialWifiComponent implements OnInit {
       updateDoc(deviceDocRef, {
         ssid: this.ssid,
         password: this.password,
-        connected: true
-      }).then(() => {
-        this.router.navigate(['/view']);
-      }).catch(err => {
-        console.error('Error al guardar las credenciales: ', err);
-      });
+        connected: true,
+      })
+        .then(() => {
+          this.router.navigate(['/view']);
+        })
+        .catch((err) => {
+          console.error('Error al guardar las credenciales: ', err);
+        });
     }
   }
 

@@ -1,148 +1,263 @@
-/* ====== CONTENEDOR PRINCIPAL ====== */
-.container {
-    width: 100%;
-    max-width: 480px;
-    margin: 40px auto;
-    padding: 30px;
-    background: linear-gradient(to bottom, var(--light-blue), var(--white));
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
+// Definición de variables
+$light-blue: #e0f7fa;
+$white: #ffffff;
+$dark-blue: #1e3a8a;
+$medium-blue: #60a5fa;
+$peach: #ffccbc;
+$black: #1f2937;
+
+// Mixin para transiciones
+@mixin transition($properties...) {
+  transition: $properties 0.3s ease;
 }
 
-/* ====== TÍTULOS ====== */
+// Estilos globales para la barra de desplazamiento (opcional, si quieres scroll en toda la página)
+html {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $medium-blue $white;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $medium-blue;
+    border-radius: 8px;
+
+    &:hover {
+      background: $dark-blue;
+    }
+  }
+}
+
+// Contenedor principal
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 24px;
+  background: linear-gradient(to bottom, $light-blue, $white);
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+    padding: 32px;
+  }
+
+  @media (max-width: 360px) {
+    margin: 20px 8px;
+    padding: 16px;
+  }
+}
+
+// Títulos
 h2 {
-    font-size: 2rem;
-    color: var(--dark-blue);
-    margin-bottom: 20px;
+  font-size: clamp(1.8rem, 5vw, 2rem);
+  color: $dark-blue;
+  margin-bottom: 16px;
 }
 
 h3 {
-    font-size: 1.6rem;
-    color: var(--medium-blue);
-    margin-bottom: 15px;
+  font-size: clamp(1.4rem, 4vw, 1.6rem);
+  color: $medium-blue;
+  margin-bottom: 12px;
 }
 
 h4 {
-    font-size: 1.4rem;
-    color: var(--dark-blue);
-    margin-top: 25px;
+  font-size: clamp(1.2rem, 3.5vw, 1.4rem);
+  color: $dark-blue;
+  margin-top: 20px;
 }
 
-/* ====== INSTRUCCIONES ====== */
+// Instrucciones
 .instructions-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(6px);
-    padding: 25px;
-    border: 2px solid var(--medium-blue);
-    border-radius: 20px;
-    box-shadow: 0 6px 16px rgba(135, 214, 229, 0.2);
-    margin-top: 20px;
-    text-align: left;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  padding: 20px;
+  border: 2px solid $medium-blue;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(135, 214, 229, 0.2);
+  margin-top: 16px;
+  text-align: left;
+  max-height: 675px; // Ajustado para mejor responsividad
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $medium-blue $white;
+
+  // Animación de entrada
+  animation: slideIn 0.5s ease-out forwards;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $white;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $medium-blue;
+    border-radius: 8px;
+
+    &:hover {
+      background: $dark-blue;
+    }
+  }
+
+  ol {
+    padding-left: 16px;
+    margin-bottom: 16px;
+
+    li {
+      margin-bottom: 10px;
+      color: $black;
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+    }
+  }
+
+  @media (max-width: 360px) {
+    max-height: 350px;
+  }
 }
 
-.instructions-card ol {
-    padding-left: 20px;
-    margin-bottom: 20px;
+// Keyframes para la animación de entrada
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.instructions-card li {
-    margin-bottom: 12px;
-    color: var(--black);
-    font-size: 1.1rem;
-}
-
-/* ====== TEXTOS ====== */
+// Textos
 p {
-    font-size: 1.1rem;
-    color: var(--black);
-    margin-bottom: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: $black;
+  margin-bottom: 16px;
 }
 
 .info-text {
-    font-size: 1rem;
-    color: var(--medium-blue);
-    margin-top: 15px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: $medium-blue;
+  margin-top: 12px;
 }
 
-/* ====== BOTONES PRINCIPALES ====== */
+// Botones principales
 .primary-button {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 12px;
-    font-size: 1.1rem;
-    background: linear-gradient(to right, var(--peach), #fff2e6);
-    color: var(--dark-blue);
-    border: 2px solid var(--peach);
-    border-radius: 14px;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  background: linear-gradient(to right, $peach, #fff2e6);
+  color: $dark-blue;
+  border: 2px solid $peach;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  @include transition(background, transform, box-shadow);
 
-.primary-button:hover {
-    background: linear-gradient(to right, #fff2e6, var(--peach));
+  &:hover {
+    background: linear-gradient(to right, #fff2e6, $peach);
     transform: translateY(-2px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
+  }
 
-.primary-button:active {
+  &:active {
     transform: translateY(0);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px  Movimento para los botones principales
+  }
+
+  &:focus {
+    outline: 2px solid $dark-blue;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 }
 
-/* ====== BOTÓN SECUNDARIO (Volver) ====== */
+// Botón secundario
 .secondary-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: transparent;
-    color: var(--dark-blue);
-    border: 2px solid var(--medium-blue);
-    border-radius: 12px;
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: transparent;
+  color: $dark-blue;
+  border: 2px solid $medium-blue;
+  border-radius: 12px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  @include transition(background, color);
+
+  &:hover {
+    background: $medium-blue;
+    color: $white;
+  }
+
+  &:focus {
+    outline: 2px solid $dark-blue;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 360px) {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
 }
 
-.secondary-button:hover {
-    background: var(--medium-blue);
-    color: var(--white);
-}
-
-/* ====== FORMULARIO MANUAL ====== */
+// Formulario manual
 .manual-config {
-    margin-top: 30px;
+  margin-top: 24px;
+
+  h4 {
+    margin-bottom: 16px;
+  }
 }
 
 .form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
+  margin-bottom: 16px;
+  text-align: left;
 
-label {
+  label {
     display: block;
     font-weight: 600;
     margin-bottom: 6px;
-    color: var(--dark-blue);
-}
+    color: $dark-blue;
+  }
 
-input[type="text"],
-input[type="password"] {
+  input[type='text'],
+  input[type='password'] {
     width: 100%;
     padding: 10px;
-    font-size: 1rem;
-    border: 2px solid var(--medium-blue);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    border: 2px solid $medium-blue;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.8);
     font-family: 'Poppins', sans-serif;
     outline: none;
-    transition: border-color 0.3s ease;
-}
+    @include transition(border-color);
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: var(--peach);
+    &:focus {
+      border-color: $peach;
+    }
+  }
 }

@@ -4,46 +4,61 @@
   <div *ngIf="!showConfigInstructions">
     <p>Para configurar tu dispositivo ESP32, primero necesitas conectarlo a tu red WiFi.</p>
     <p>Sigue estos pasos:</p>
-
-    <button (click)="connectToDevice()" class="primary-button">
-      Comenzar configuración
-    </button>
+    <button (click)="connectToDevice()" class="primary-button">Comenzar configuración</button>
   </div>
 
-  <div *ngIf="showConfigInstructions">
-    <div class="instructions-card">
-      <h3>Instrucciones de configuración</h3>
-      <ol>
-        <li>En tu teléfono o computadora, busca una red WiFi que comience con "ESP32-"</li>
-        <li>Conéctate a esta red utilizando la contraseña: <strong>password123</strong></li>
-        <li>Una vez conectado, presiona el botón de abajo para abrir la página de configuración</li>
-      </ol>
+  <div *ngIf="showConfigInstructions" class="instructions-card">
+    <h3>Instrucciones de configuración</h3>
+    <ol>
+      <li>En tu teléfono o computadora, busca una red WiFi que comience con "ESP32-".</li>
+      <li>
+        Conéctate a esta red utilizando la contraseña: <strong>password123</strong>.
+      </li>
+      <li>
+        Una vez conectado, presiona el botón de abajo para abrir la página de configuración.
+      </li>
+    </ol>
 
-      <button (click)="openConfigPage()" class="primary-button">
-        Abrir página de configuración
-      </button>
+    <button (click)="openConfigPage()" class="primary-button">
+      Abrir página de configuración
+    </button>
 
-      <p class="info-text">Si el botón no funciona, abre manualmente el navegador y ve a:
-        <strong>http://192.168.4.1</strong></p>
+    <p class="info-text">
+      Si el botón no funciona, abre manualmente el navegador y ve a:
+      <strong><a href="http://192.168.4.1" target="_blank">http://192.168.4.1</a></strong>
+    </p>
 
-      <div class="manual-config">
-        <h4>O configura manualmente desde la aplicación:</h4>
-        <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label for="ssid">Nombre de la red WiFi (SSID):</label>
-            <input type="text" id="ssid" name="ssid" [(ngModel)]="ssid" required>
-          </div>
+    <div class="manual-config">
+      <h4>O configura manualmente desde la aplicación:</h4>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="ssid">Nombre de la red WiFi (SSID):</label>
+          <input
+            type="text"
+            id="ssid"
+            name="ssid"
+            [(ngModel)]="ssid"
+            required
+            placeholder="Ingresa el SSID"
+          />
+        </div>
 
-          <div class="form-group">
-            <label for="password">Contraseña WiFi:</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" required>
-          </div>
+        <div class="form-group">
+          <label for="password">Contraseña WiFi:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="password"
+            required
+            placeholder="Ingresa la contraseña"
+          />
+        </div>
 
-          <button type="submit" class="primary-button">Guardar configuración</button>
-        </form>
-      </div>
-
-      <button (click)="goToEnterId()" class="secondary-button">Volver</button>
+        <button type="submit" class="primary-button">Guardar configuración</button>
+      </form>
     </div>
+
+    <button (click)="goToEnterId()" class="secondary-button">Volver</button>
   </div>
 </div>

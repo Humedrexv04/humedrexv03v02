@@ -1,8 +1,24 @@
-<div class="device-id-form">
-  <h2 class="form-title">Ingresar ID del Dispositivo</h2>
+<div class="container">
+  <h2>Ingresar ID del Dispositivo</h2>
+  <p>Por favor, ingresa el ID único de tu dispositivo para vincularlo a tu cuenta.</p>
 
-  <input type="text" [(ngModel)]="deviceId" placeholder="ID del dispositivo" class="form-input" />
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="deviceId">ID del Dispositivo:</label>
+      <input
+        type="text"
+        id="deviceId"
+        name="deviceId"
+        [(ngModel)]="deviceId"
+        placeholder="Ingresa el ID del dispositivo"
+        required
+      />
+    </div>
 
-  <button class="submit-button" (click)="onSubmit()">Enviar</button>
-  <button class="submit-button" (click)="returnToDispositivos()">Volver</button>
+    <button type="submit" class="primary-button">Vincular Dispositivo</button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+  <button (click)="returnToDispositivos()" class="secondary-button">Volver a Dispositivos</button>
 </div>
