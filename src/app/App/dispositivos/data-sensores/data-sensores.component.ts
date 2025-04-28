@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth'; // Inyectar el servicio de autenticación
 
 @Component({
@@ -15,6 +15,7 @@ export class DataSensoresComponent implements OnInit {
   deviceData: any = null;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private firestore: Firestore,
     private auth: Auth // Inyectar el servicio de autenticación
@@ -46,5 +47,9 @@ export class DataSensoresComponent implements OnInit {
     }).catch(err => {
       console.error("Error al obtener los datos del dispositivo: ", err);
     });
+  }
+
+  goToDispositivos(){
+    this.router.navigate(['/dispositivos']);
   }
 }

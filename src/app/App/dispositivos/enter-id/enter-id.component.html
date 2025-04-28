@@ -1,6 +1,8 @@
-<div>
-  <h2>Ingresar ID del Dispositivo</h2>
+<div class="device-id-form">
+  <h2 class="form-title">Ingresar ID del Dispositivo</h2>
 
-  <input type="text" [(ngModel)]="deviceId" placeholder="ID del dispositivo" />
-  <button (click)="onSubmit()">Enviar</button>
+  <input type="text" [(ngModel)]="deviceId" placeholder="ID del dispositivo" class="form-input" />
+
+  <button class="submit-button" (click)="onSubmit()">Enviar</button>
+  <button class="submit-button" (click)="returnToDispositivos()">Volver</button>
 </div>

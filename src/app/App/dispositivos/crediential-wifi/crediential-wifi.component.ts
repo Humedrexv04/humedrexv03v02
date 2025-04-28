@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Auth } from '@angular/fire/auth';  // Inyectar el servicio de autenticación
+import { Auth } from '@angular/fire/auth';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-crediential-wifi',
-  imports: [FormsModule],
+  imports: [FormsModule, NgIf],
   templateUrl: './crediential-wifi.component.html',
   styleUrls: ['./crediential-wifi.component.scss'],
 })
@@ -14,41 +16,56 @@ export class CredientialWifiComponent implements OnInit {
   ssid: string = '';
   password: string = '';
   deviceId: string = '';
+  showConfigInstructions: boolean = false;
+  configUrl: SafeResourceUrl;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private firestore: Firestore,
-    private auth: Auth // Inyectar el servicio de autenticación
-  ) { }
+    private auth: Auth,
+    private sanitizer: DomSanitizer
+  ) {
+    this.configUrl = this.sanitizer.bypassSecurityTrustResourceUrl('http://192.168.4.1');
+  }
 
   ngOnInit(): void {
-    this.deviceId = this.route.snapshot.paramMap.get('deviceId')!; // Obtén el ID del dispositivo de la URL
+    this.deviceId = this.route.snapshot.paramMap.get('deviceId')!;
+  }
+
+  connectToDevice(): void {
+    this.showConfigInstructions = true;
+  }
+
+  openConfigPage(): void {
+    // Intenta abrir la página de configuración del ESP32
+    window.open('http://192.168.4.1', '_blank');
   }
 
   onSubmit(): void {
     if (this.ssid && this.password) {
-      const userUid = this.auth.currentUser?.uid;  // Obtener el UID del usuario autenticado
+      const userUid = this.auth.currentUser?.uid;
 
       if (!userUid) {
         console.error('Usuario no autenticado');
         return;
       }
 
-      // Obtener la referencia del documento del dispositivo del usuario
       const deviceDocRef = doc(this.firestore, `users/${userUid}/devices/${this.deviceId}`);
 
-      // Actualizar las credenciales WiFi y el estado de conexión del dispositivo
       updateDoc(deviceDocRef, {
         ssid: this.ssid,
         password: this.password,
-        connected: true // Marcar el dispositivo como conectado
+        connected: true
       }).then(() => {
-        // Redirigir al usuario a la vista donde se visualiza el estado
         this.router.navigate(['/view']);
       }).catch(err => {
         console.error('Error al guardar las credenciales: ', err);
       });
     }
+  }
+
+  goToEnterId() {
+    this.router.navigate(['/enter-id']);
   }
 }

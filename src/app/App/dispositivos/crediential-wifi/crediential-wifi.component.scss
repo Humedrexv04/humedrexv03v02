@@ -1,137 +1,148 @@
-/* Estilos generales */
-div {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px;
-    background-color: #f5f9f5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-h2 {
-    color: #2e7d32;
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 22px;
-}
-
-/* Estilos para los inputs */
-input {
+/* ====== CONTENEDOR PRINCIPAL ====== */
+.container {
     width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 16px;
-    border: 2px solid #c8e6c9;
-    border-radius: 10px;
-    font-size: 15px;
-    background-color: #fff;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 30px;
+    background: linear-gradient(to bottom, var(--light-blue), var(--white));
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
 }
 
-input:focus {
-    outline: none;
-    border-color: #4caf50;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+/* ====== TÍTULOS ====== */
+h2 {
+    font-size: 2rem;
+    color: var(--dark-blue);
+    margin-bottom: 20px;
 }
 
-input::placeholder {
-    color: #a5a5a5;
-    opacity: 1;
+h3 {
+    font-size: 1.6rem;
+    color: var(--medium-blue);
+    margin-bottom: 15px;
 }
 
-/* Estilo específico para el campo de contraseña */
-input[type="password"] {
-    letter-spacing: 1px;
+h4 {
+    font-size: 1.4rem;
+    color: var(--dark-blue);
+    margin-top: 25px;
 }
 
-/* Estilo para el botón */
-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 16px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-}
-
-button:active {
-    background-color: #3d8b40;
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos para iconos (opcional) */
-.input-container {
-    position: relative;
-    margin-bottom: 16px;
-}
-
-.input-container i {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    color: #4caf50;
-    font-size: 18px;
-}
-
-/* Estilos para mostrar/ocultar contraseña */
-.password-toggle {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    color: #757575;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* Estilos responsive */
-@media (max-width: 480px) {
-    div {
-        padding: 15px;
-    }
-
-    h2 {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    input {
-        padding: 12px 14px;
-        font-size: 14px;
-    }
-
-    button {
-        padding: 14px;
-        font-size: 15px;
-    }
-}
-
-/* Clases para validación */
-.invalid {
-    border-color: #ef5350 !important;
-}
-
-.valid {
-    border-color: #66bb6a !important;
-}
-
-.error-message {
-    color: #ef5350;
-    font-size: 13px;
-    margin-top: -12px;
-    margin-bottom: 12px;
+/* ====== INSTRUCCIONES ====== */
+.instructions-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 25px;
+    border: 2px solid var(--medium-blue);
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(135, 214, 229, 0.2);
+    margin-top: 20px;
     text-align: left;
 }
 
-.success-message {
-    color: #2e7d32;
-    font-size: 14px;
-    text-align: center;
+.instructions-card ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.instructions-card li {
+    margin-bottom: 12px;
+    color: var(--black);
+    font-size: 1.1rem;
+}
+
+/* ====== TEXTOS ====== */
+p {
+    font-size: 1.1rem;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+.info-text {
+    font-size: 1rem;
+    color: var(--medium-blue);
+    margin-top: 15px;
+}
+
+/* ====== BOTONES PRINCIPALES ====== */
+.primary-button {
+    display: block;
+    width: 100%;
     margin: 10px 0;
-    font-weight: 500;
+    padding: 12px;
+    font-size: 1.1rem;
+    background: linear-gradient(to right, var(--peach), #fff2e6);
+    color: var(--dark-blue);
+    border: 2px solid var(--peach);
+    border-radius: 14px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    background: linear-gradient(to right, #fff2e6, var(--peach));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ====== BOTÓN SECUNDARIO (Volver) ====== */
+.secondary-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--dark-blue);
+    border: 2px solid var(--medium-blue);
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+    background: var(--medium-blue);
+    color: var(--white);
+}
+
+/* ====== FORMULARIO MANUAL ====== */
+.manual-config {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--dark-blue);
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid var(--medium-blue);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--peach);
 }

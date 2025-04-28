@@ -41,7 +41,11 @@ export const routes: Routes = [
                 path: 'plant-list',
                 loadComponent: () => import('./App/inventario/plant-list/plant-list.component').then(m => m.PlantListComponent)
             },
-
+            {
+                path: 'dispositivos',
+                loadComponent: () => import('./App/dispositivos/dispositivos.component').then(m => m.DispositivosComponent),
+                canActivate: [authGuardGuard]
+            }
         ]
     },
     {
@@ -52,11 +56,6 @@ export const routes: Routes = [
     {
         path: 'edit-plant/:id',
         loadComponent: () => import('./App/inventario/edit-plant/edit-plant.component').then(m => m.EditPlantComponent),
-        canActivate: [authGuardGuard]
-    },
-    {
-        path: 'dispositivos',
-        loadComponent: () => import('./App/dispositivos/dispositivos.component').then(m => m.DispositivosComponent),
         canActivate: [authGuardGuard]
     },
     {

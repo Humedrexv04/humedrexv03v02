@@ -1,151 +1,104 @@
-/* Estilos generales */
-:host {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ========== TARJETAS DE DISPOSITIVOS ========== */
+.device-card {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(to bottom, var(--light-blue), var(--white));
+    border: 3px solid var(--turquoise);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(135, 214, 229, 0.3);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    padding: 20px;
-    background-color: #f8faf8;
-}
-
-/* Tarjetas de dispositivos */
-.device-card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid #4caf50;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    font-family: 'Poppins', sans-serif;
 }
 
 .device-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transform: scale(1.02);
 }
 
-.device-card h3 {
-    color: #2e7d32;
-    margin: 0 0 10px 0;
-    font-size: 18px;
+.device-card__header {
+    text-align: center;
+}
+
+.device-card__title {
+    font-size: 1.4rem;
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.device-card__status {
+    font-size: 1rem;
+    color: var(--medium-blue);
+    margin: 0;
+}
+
+.device-card__status .connected {
+    color: green;
     font-weight: 600;
 }
 
-.device-card p {
-    color: #555;
-    margin: 8px 0;
-    font-size: 15px;
+.device-card__status .disconnected {
+    color: red;
+    font-weight: 600;
 }
 
-/* Botones */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
+/* Botón "Ver Detalles" */
+.device-button {
+    margin-top: 15px;
+    background: linear-gradient(to right, var(--peach), #fff2e6);
+    color: var(--dark-blue);
+    border: 2px solid var(--peach);
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
 
-.device-card button {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #c8e6c9;
+.device-button:hover {
+    background: linear-gradient(to right, #fff2e6, var(--peach));
+    transform: translateY(-2px);
 }
 
-.device-card button:active {
-    background-color: #d4edda;
-}
-
-.add-device button {
-    background-color: #4caf50;
-    color: white;
-    margin: 20px 0;
-}
-
-.add-device button:active {
-    background-color: #3d8b40;
-}
-
-.logout button {
-    background-color: #f8f9fa;
-    color: #dc3545;
-    border: 1px solid #f1aeb5;
-}
-
-.logout button:active {
-    background-color: #f1e5e6;
-}
-
-/* Mensaje sin dispositivos */
-.no-devices {
+/* Texto cuando no hay dispositivos */
+.no-devices-text {
     text-align: center;
-    color: #666;
-    padding: 40px 20px;
-    background-color: white;
-    border-radius: 12px;
-    margin: 20px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    color: var(--medium-blue);
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 40px;
 }
 
-/* Estado de conexión */
-.connected {
-    color: #4caf50;
-    font-weight: 500;
-}
-
-.disconnected {
-    color: #f44336;
-    font-weight: 500;
-}
-
-/* Diseño responsive */
-@media (max-width: 480px) {
-    :host {
-        padding: 15px;
-    }
-
-    .device-card {
-        padding: 16px;
-    }
-
-    .device-card h3 {
-        font-size: 17px;
-    }
-
-    button {
-        padding: 14px;
-        font-size: 16px;
-    }
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.device-card {
-    animation: fadeIn 0.4s ease-out forwards;
-}
-
-/* Mejora para el mensaje de no dispositivos */
-ng-template p {
+/* Botón "Añadir dispositivo" */
+.add-device {
     text-align: center;
-    color: #666;
-    padding: 30px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin: 20px 0;
+    margin-top: 30px;
 }
+
+.add-device-button {
+    background: linear-gradient(to right, var(--turquoise), var(--light-teal));
+    color: var(--white);
+    border: 2px solid var(--turquoise);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(135, 214, 229, 0.4);
+    font-family: 'Poppins', sans-serif;
+}
+
+.add-device-button:hover {
+    background: linear-gradient(to right, var(--light-teal), var(--turquoise));
+    transform: translateY(-2px);
+}
+
+/* Cierre de sesión usa el mismo logout-button que ya tenías */

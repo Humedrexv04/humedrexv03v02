@@ -81,4 +81,8 @@ export class EnterIdComponent implements OnInit {
       console.error('Error al actualizar el dispositivo en la colección global: ', err);
     });
   }
+
+  returnToDispositivos(){
+    this.router.navigate(['/dispositivos']);
+  }
 }

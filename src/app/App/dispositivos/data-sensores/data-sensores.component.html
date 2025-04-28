@@ -1,10 +1,25 @@
-<div *ngIf="deviceData; else loading">
-  <h3>Datos del Dispositivo: {{ deviceId }}</h3>
-  <p><strong>Humedad:</strong> {{ deviceData.humedad }}%</p>
-  <p><strong>Estado de la Válvula:</strong> {{ deviceData.valvula === 1 ? 'Abierta' : 'Cerrada' }}</p>
-  <p><strong>Nivel de Agua:</strong> {{ deviceData.agua }}%</p>
+<div *ngIf="deviceData; else loading" class="device-data-card">
+  <h3 class="device-data-title">Datos del Dispositivo: {{ deviceId }}</h3>
+
+  <div class="device-data-item">
+    <strong>Humedad:</strong> {{ deviceData.humedad }}%
+  </div>
+
+  <div class="device-data-item">
+    <strong>Estado de la Válvula:</strong> {{ deviceData.valvula === 1 ? 'Abierta' : 'Cerrada' }}
+  </div>
+
+  <div class="device-data-item">
+    <strong>Nivel de Agua:</strong> {{ deviceData.agua }}%
+  </div>
+
+  <button class="btn-dispositivos" (click)="goToDispositivos()">
+    Añadir Dispositivo
+  </button>
 </div>
 
 <ng-template #loading>
-  <p>Cargando datos...</p>
+  <div class="loading-message">
+    <p>Cargando datos...</p>
+  </div>
 </ng-template>
