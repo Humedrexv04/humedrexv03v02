@@ -1,55 +1,56 @@
-<ion-header>
-    <ion-toolbar color="primary" class="header-toolbar">
-        <ion-title class="header-title">Editar Planta</ion-title>
-        <ion-buttons slot="end">
-            <ion-button class="back-button" (click)="goToPlantList()">
+<header class="header">
+    <div class="toolbar header-toolbar">
+        <h1 class="header-title">Editar Planta</h1>
+        <div class="header-buttons">
+            <button class="back-button" (click)="goToPlantList()">
                 Volver
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+            </button>
+        </div>
+    </div>
+</header>
 
-<ion-content class="ion-padding">
+<main class="content">
     <!-- Contenedor principal para centrar la tarjeta y los botones -->
     <div class="main-container">
         <!-- Tarjeta de la planta -->
-        <ion-card *ngIf="plant" class="plant-card">
-            <ion-card-header class="ion-text-center">
+        <div *ngIf="plant" class="plant-card">
+            <div class="card-header text-center">
                 <!-- Nombre de la planta -->
-                <ion-card-title class="plant-name">{{ plant.name }}</ion-card-title>
+                <h2 class="plant-name">{{ plant.name }}</h2>
                 <!-- Horario con icono -->
-                <ion-card-subtitle class="plant-schedule">
-                    <ion-icon name="time" class="schedule-icon"></ion-icon>
+                <p class="plant-schedule">
+                    <span class="schedule-icon">⏱️</span>
                     {{ plant.horario }}
-                </ion-card-subtitle>
-            </ion-card-header>
+                </p>
+            </div>
 
-            <ion-card-content>
+            <div class="card-content">
                 <!-- Imagen de la planta -->
                 <div class="image-container">
                     <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
                 </div>
 
                 <!-- Humedad con barra de progreso -->
-                <div class="humidity-container ion-margin-top">
+                <div class="humidity-container margin-top">
                     <p class="humidity-text">Humedad: {{ plant.humedad }}%</p>
-                    <ion-progress-bar [value]="plant.humedad / 100" color="secondary"
-                        class="humidity-progress"></ion-progress-bar>
+                    <div class="progress-container">
+                        <div class="progress-bar humidity-progress" [style.width.%]="plant.humedad"></div>
+                    </div>
                 </div>
-            </ion-card-content>
-        </ion-card>
+            </div>
+        </div>
 
         <!-- Botones de acciones -->
         <div class="action-buttons">
-            <ion-button expand="block" color="danger" class="delete-button" (click)="deletePlant()" shape="round">
-                <ion-icon name="trash" class="button-icon"></ion-icon>
+            <button class="btn-block delete-button rounded" (click)="deletePlant()">
+                <span class="button-icon">🗑️</span>
                 Eliminar Planta
-            </ion-button>
+            </button>
 
-            <ion-button expand="block" color="primary" class="edit-button" (click)="gotoEditPlant()" shape="round">
-                <ion-icon name="create" class="button-icon"></ion-icon>
+            <button class="btn-block edit-button rounded" (click)="gotoEditPlant()">
+                <span class="button-icon">✏️</span>
                 Editar
-            </ion-button>
+            </button>
         </div>
     </div>
-</ion-content>
+</main>

@@ -1,15 +1,108 @@
-/* ========== ESTILOS GENERALES ========== */
+/* Estilos generales */
 .content {
-    background: #1b2a2f;
+    background: linear-gradient(180deg, #f7f2e4 40%, #7acfd1 100%);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    animation: backgroundGlow 10s ease-in-out infinite alternate;
 }
 
 .ion-padding {
     padding: 16px;
+}
+
+/* Animación de fondo para un efecto de resplandor */
+@keyframes backgroundGlow {
+    0% {
+        background: linear-gradient(180deg, #f7f2e4 40%, #7acfd1 100%);
+    }
+
+    100% {
+        background: linear-gradient(180deg, #f7f2e4 40%, #5bccd1 100%);
+    }
+}
+
+/* Elementos decorativos: burbujas flotantes */
+.content::before,
+.content::after {
+    content: '';
+    position: absolute;
+    background: #5bccd1;
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.content::before {
+    width: 40px;
+    height: 40px;
+    bottom: 20%;
+    left: 10%;
+    animation: floatBubbles 8s ease-in-out infinite;
+}
+
+.content::after {
+    width: 25px;
+    height: 25px;
+    bottom: 15%;
+    right: 15%;
+    animation: floatBubbles 12s ease-in-out infinite;
+}
+
+/* Animación de burbujas flotantes */
+@keyframes floatBubbles {
+    0% {
+        transform: translateY(0);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translateY(-40px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 0.2;
+    }
+}
+
+/* Imagen de fondo para plantas y agua */
+.background-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ocupa todo el fondo, como se solicitó */
+    object-fit: cover;
+    object-position: center center;
+    z-index: 0;
+    animation: floatIllustration 6s ease-in-out infinite;
+    box-shadow: 0 10px 20px rgba(12, 34, 48, 0.2);
+    opacity: 0.8;
+    /* Ligeramente transparente para legibilidad */
+}
+
+/* Animación de flotación para la ilustración */
+@keyframes floatIllustration {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 /* Contenedor para centrar el formulario */
@@ -18,133 +111,217 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    /* Ocupa toda la altura de la pantalla */
+    width: 100%;
+    z-index: 1;
 }
 
 /* Estilos generales del formulario */
 .form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 2em;
-    background-color: #171717;
-    border-radius: 25px;
+    gap: 20px;
+    padding: 2.5em;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #7acfd1;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(12, 34, 48, 0.15);
     transition: 0.4s ease-in-out;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Animación de entrada para el formulario */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Estilo del título */
 #heading {
     text-align: center;
-    margin: 2em 0;
-    color: rgb(255, 255, 255);
-    font-size: 1.2em;
+    margin: 0.5em 0;
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(12, 34, 48, 0.2);
 }
 
 /* Estilo de los campos de entrada */
 .field {
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    border-radius: 25px;
-    padding: 0.6em;
-    background-color: #171717;
-    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+    gap: 0.8em;
+    border-radius: 12px;
+    padding: 0.8em;
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field:hover {
+    border-color: #0a98b0;
+    box-shadow: 0 2px 8px rgba(10, 152, 176, 0.2);
+}
+
+.field:focus-within {
+    border-color: #22c1d8;
+    box-shadow: 0 2px 8px rgba(34, 193, 216, 0.3);
 }
 
 .input-icon {
     height: 1.3em;
     width: 1.3em;
-    fill: white;
+    fill: #0a98b0;
 }
 
-/* Estilo personalizado para los inputs */
+/* Estilo personalizado para inputs */
 .custom-input {
     background: transparent;
-    color: #d3d3d3;
-    padding: 0;
-    border: none;
-    box-shadow: none;
+    color: #000000;
     width: 100%;
+    border: none;
     outline: none;
+    padding: 8px 0;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .custom-input::placeholder {
-    color: #d3d3d3;
+    color: #000000;
 }
 
 /* Estilo de los botones */
 .custom-button {
     border-radius: 25px;
-    transition: 0.4s ease-in-out;
-    margin: 0.5em 0;
-    flex: 1;
-    padding: 10px 15px;
+    transition: all 0.4s ease-in-out;
+    margin: 0.5em auto;
+    padding: 12px;
     border: none;
+    font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: bold;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    width: 100%;
+    max-width: 250px;
 }
 
-/* Botón de Registrarse */
+/* Botón de "Registrarse" (equivalente a "Iniciar Sesión" en Login) */
 .button1 {
-    background: #4CAF50;
-    color: white;
+    background: linear-gradient(90deg, #22c1d8 0%, #0a98b0 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(34, 193, 216, 0.3);
 }
 
 .button1:hover {
-    background: #45a049;
+    background: linear-gradient(90deg, #0a98b0 0%, #22c1d8 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(10, 152, 176, 0.4);
 }
 
-/* Botón de ¿Ya tienes cuenta? */
+/* Botón de "¿Ya tienes cuenta?" (equivalente a "Registrarse" en Login) */
 .button2 {
-    background: #4285f4;
-    color: white;
+    background: linear-gradient(90deg, #d9d9d9 0%, #c9c9c9 100%);
+    color: #000000;
+    box-shadow: 0 4px 12px rgba(217, 217, 217, 0.3);
 }
 
 .button2:hover {
-    background: #357abd;
+    background: linear-gradient(90deg, #c9c9c9 0%, #d9d9d9 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(201, 201, 201, 0.4);
 }
 
 /* Fila de botones (Registrarse y ¿Ya tienes cuenta?) */
 .btn-row {
     display: flex;
-    gap: 10px;
-    /* Espacio entre los botones */
-}
-
-.btn-row button {
-    flex: 1;
-    /* Ambos botones ocupan el mismo espacio */
+    justify-content: center;
+    gap: 15px;
 }
 
 /* Estilo para los mensajes de error */
 .error-message {
-    color: red;
+    color: #f27d41;
     font-size: 0.9em;
-    /* Tamaño de letra pequeño */
-    margin-top: 0.5em;
-    /* Espacio superior */
-    text-align: left;
-    /* Centrar el texto */
+    margin-top: 0.3em;
+    text-align: center;
     font-style: italic;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Media queries para responsividad */
+/* Media Queries para Responsividad */
 @media (max-width: 600px) {
     .form {
-        padding: 1em;
+        padding: 1.5em;
+        max-width: 90%;
+    }
+
+    #heading {
+        font-size: 1.5em;
+        margin: 0.5em 0;
+    }
+
+    .field {
+        padding: 0.6em;
+    }
+
+    .custom-button {
+        padding: 10px;
+        font-size: 14px;
+        max-width: 200px;
     }
 
     .btn-row {
-        /* En móviles, los botones se apilan verticalmente */
+        gap: 10px;
         flex-direction: column;
-        gap: 5px;
-        /* Espacio reducido entre botones */
     }
 
-    .btn-row button {
-        width: 100%;
-        /* Los botones ocupan el 100% del ancho en móviles */
+    .background-illustration {
+        height: 100%;
+        /* Mantiene el fondo completo */
+    }
+
+    .content::before,
+    .content::after {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .form {
+        max-width: 80%;
+    }
+
+    #heading {
+        font-size: 1.6em;
+    }
+
+    .field {
+        padding: 0.7em;
+    }
+
+    .custom-button {
+        padding: 11px;
+        max-width: 220px;
+    }
+
+    .btn-row {
+        gap: 12px;
+    }
+
+    .background-illustration {
+        height: 100%;
+        /* Mantiene el fondo completo */
     }
 }

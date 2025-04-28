@@ -2,13 +2,13 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
 import { PlantService } from '../../../Services/plant.service';
 import { AuthService } from '../../../Services/auth.service';
 import { Plant } from '../../../Models/plant.mode';
-import { IonicModule } from '@ionic/angular';
 import { PlantaItemComponent } from '../../../Components/planta-item/planta-item.component';
 import { NgFor } from '@angular/common';
 
+
 @Component({
   selector: 'app-plant-list',
-  imports: [IonicModule, PlantaItemComponent, NgFor],
+  imports: [PlantaItemComponent, NgFor],
   templateUrl: './plant-list.component.html',
   styleUrls: ['./plant-list.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

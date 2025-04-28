@@ -1,0 +1,10 @@
+<div *ngIf="deviceData; else loading">
+  <h3>Datos del Dispositivo: {{ deviceId }}</h3>
+  <p><strong>Humedad:</strong> {{ deviceData.humedad }}%</p>
+  <p><strong>Estado de la Válvula:</strong> {{ deviceData.valvula === 1 ? 'Abierta' : 'Cerrada' }}</p>
+  <p><strong>Nivel de Agua:</strong> {{ deviceData.agua }}%</p>
+</div>
+
+<ng-template #loading>
+  <p>Cargando datos...</p>
+</ng-template>

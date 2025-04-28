@@ -11,13 +11,13 @@
 </header>
 
 <main class="content">
-    <!-- Contenido principal aquí -->
+    <router-outlet></router-outlet>
 </main>
 
 <nav class="app-tabs">
     <div class="tab-bar custom-tab-bar">
         <!-- Inventario - Izquierda -->
-        <a class="tab-button inventory-tab" [routerLink]="['/plant-list']" routerLinkActive="tab-selected"
+        <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
             id="tab-button-plant-list">
             <i class="fas fa-leaf tab-icon"></i>
             <span class="tab-label">Plantas</span>
@@ -25,15 +25,14 @@
         </a>
 
         <!-- Add - Centro -->
-        <a class="tab-button add-tab" [routerLink]="['/add']" routerLinkActive="tab-selected" id="tab-button-add">
+        <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected" id="tab-button-add">
             <i class="fas fa-plus-circle tab-icon"></i>
             <span class="tab-label">Agregar</span>
         </a>
-
-        <!-- Agua - Derecha -->
-        <a class="tab-button water-tab" [routerLink]="['/cant']" routerLinkActive="tab-selected" id="tab-button-water">
-            <i class="fas fa-tint tab-icon"></i>
-            <span class="tab-label">Riego</span>
+        <a class="tab-button add-tab" [routerLink]="['/dispositivos']" routerLinkActive="tab-selected"
+            id="tab-button-add">
+            <i class="fas fa-plus-circle tab-icon"></i>
+            <span class="tab-label">Dispositivos</span>
         </a>
     </div>
 </nav>

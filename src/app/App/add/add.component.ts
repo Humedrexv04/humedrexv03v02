@@ -3,16 +3,14 @@ import { PlantService } from '../../Services/plant.service';
 import { AuthService } from '../../Services/auth.service';
 import { Plant } from '../../Models/plant.mode';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { thermometer } from 'ionicons/icons';
-import { Esp32Service } from '../../Services/esp32.service';
 
 @Component({
   selector: 'app-add',
   standalone: true, // Agregar si usas Angular standalone components
-  imports: [FormsModule, IonicModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
@@ -27,7 +25,6 @@ export class AddComponent {
   constructor(
     private plantService: PlantService,
     private authService: AuthService,
-    private esp32Service: Esp32Service
   ) {
     addIcons({ thermometer });
   }

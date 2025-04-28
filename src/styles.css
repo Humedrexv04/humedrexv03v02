@@ -1,80 +1,96 @@
-/* Variables globales para el tema claro */
-
+/* ========== VARIABLES GLOBALES (TONOS MÁS CLAROS) ========== */
 :root {
-    /* Colores principales */
-    --primary-green: #2d6a4f;
-    --secondary-green: #4a7852;
-    --accent-green: #8dae7f;
-    --background-light: #f5fbf3;
-    --text-dark: #2a2a2a;
-    --highlight: #c7ddb5;
-    --success: #6a994e;
-    --card-background: #ffffff;
+    --dark-blue: #1e4a5d;
+    /* Sin cambio, se mantiene oscuro para contraste */
+    --medium-blue: #4aa1c3;
+    /* Más claro que #328cad */
+    --turquoise: #87d6e5;
+    /* Más claro que #6dccdd */
+    --light-blue: #eefafb;
+    /* Más claro que #e6f7fd */
+    --white: #ffffff;
+    /* Sin cambio */
+    --peach: #ffe6d1;
+    /* Más claro que #ffdcc2 */
+    --black: #2a2a2a;
+    /* Sin cambio, se mantiene oscuro para contraste */
+    --light-gray: #f5f5f5;
+    /* Más claro que #f0f0f0 */
+    --dark-teal: #62b0bb;
+    /* Más claro que #4a9ba8 */
+    --light-teal: #a8e0e9;
+    /* Más claro que #8fd5e1 */
 }
 
-/* Variables globales para el tema oscuro */
-.dark-theme {
-    --primary-green: #1a3d2f;
-    --secondary-green: #2f4d3e;
-    --accent-green: #556b5a;
-    --background-light: #121212;
-    --text-dark: #e0e0e0;
-    --highlight: #3d4a36;
-    --success: #4a7852;
-    --card-background: #1e1e1e;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Estilos base */
-ion-app {
-    transition: background-color 0.5s ease, color 0.3s ease;
-}
-
-/* Aplicar colores globales */
-ion-content {
-    --background: var(--background-light);
-    --color: var(--text-dark);
-}
-
-ion-toolbar {
-    --background: var(--primary-green);
-    --color: white;
-}
-
-ion-card {
-    --background: var(--card-background);
-    box-shadow: var(--card-shadow);
-}
-
-/* Botones */
-ion-button {
-    --background: var(--primary-green);
-    --background-activated: var(--secondary-green);
-    --background-hover: var(--accent-green);
-    --color: white;
-    transition: all 0.3s ease;
-}
-
-/* Tabs */
-ion-tab-bar {
-    --background: var(--card-background);
-    --color: var(--text-dark);
-    --color-selected: var(--primary-green);
-    box-shadow: var(--card-shadow);
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* Transiciones suaves */
+/* ========== BASE ========== */
 * {
-    transition: background-color 0.3s ease, color 0.3s ease;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 15.5px;
+    /* Aumentado ligeramente */
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+    background: linear-gradient(160deg, var(--dark-blue) 0%, #226177 100%);
+    color: var(--white);
+    line-height: 1.55;
+}
+
+/* ========== TIPOGRAFÍA ========== */
+h1,
+h2,
+h3 {
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    /* Aumentado ligeramente */
+    color: var(--white);
+}
+
+/* ========== BOTONES GLOBALES ========== */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    /* Aumentado ligeramente */
+    border-radius: 25px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--turquoise);
+    color: var(--dark-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--light-teal);
+    transform: translateY(-2px);
+}
+
+/* ========== MEDIA QUERIES GLOBALES ========== */
+@media (min-width: 360px) {
+    html {
+        font-size: 16px;
+        /* Aumentado ligeramente */
+    }
+}
+
+@media (min-width: 480px) {
+    html {
+        font-size: 16.5px;
+        /* Aumentado ligeramente */
+    }
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 17px;
+        /* Aumentado ligeramente */
+    }
 }

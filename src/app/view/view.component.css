@@ -1,32 +1,47 @@
 /* ========== ESTILOS GENERALES ========== */
 .content {
-  background: #1b2a2f;
-  padding: 20px;
+  background: var(--light-blue);
+  padding: 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 120px);
-  /* Altura de la pantalla menos header y tabs */
+  height: calc(100vh - 56px - 78px);
+  /* Ajustado para ocupar el espacio disponible */
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5),
+    inset 0 0 4px rgba(135, 214, 229, 0.3);
+  border: 3px solid var(--turquoise);
+  border-radius: 12px;
+  overflow-y: auto;
+  /* Asegurar desplazamiento vertical */
+  box-sizing: border-box;
 }
 
 /* ========== HEADER ========== */
-.toolbar {
-  background: #0f3d3e;
-  color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  padding: 10px 16px;
+.app-header {
+  z-index: 900;
+}
+
+.header-toolbar {
+  background: linear-gradient(to right, var(--dark-teal), var(--turquoise));
+  color: var(--main-color);
+  box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
+  border: 3px solid var(--turquoise);
+  border-bottom: 3px solid rgba(135, 214, 229, 0.7);
+  border-radius: 8px;
+  padding: 13px 21px;
   display: flex;
   align-items: center;
 }
 
 .header-title {
-  font-size: 1.5rem;
+  font-size: 1.95rem;
   font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1.3px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   margin: 0;
   text-align: center;
+  color: var(--dark-blue);
+  font-family: 'Poppins', sans-serif;
 }
 
 .header-title-container {
@@ -38,13 +53,19 @@
 .btn-clear {
   background: transparent;
   border: none;
-  color: white;
+  color: var(--medium-blue);
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
+  transition: all 0.3s ease;
 }
 
 .profile-button {
-  font-size: 24px;
+  font-size: 31px;
+}
+
+.btn-clear:hover {
+  color: var(--white);
+  transform: translateY(-2.6px);
 }
 
 /* ========== PESTAÑAS ========== */
@@ -53,20 +74,20 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #1b2a2f;
+  background: var(--light-blue);
 }
 
 /* Barra de pestañas */
 .tab-bar {
-  background: #0f3d3e;
-  color: white;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  height: 60px;
-  border-radius: 25px 25px 0 0;
-  margin: 0 10px;
-  padding: 8px 0;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
+  background: linear-gradient(to bottom, var(--light-blue), var(--white));
+  color: var(--dark-blue);
+  border-top: 1px solid var(--turquoise);
+  height: 78px;
+  border-radius: 33px 33px 0 0;
+  margin: 0 13px;
+  padding: 10px 0;
+  box-shadow: 0 -2px 10px rgba(135, 214, 229, 0.3);
+  backdrop-filter: blur(6.5px);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -81,37 +102,40 @@
   flex: 1;
   position: relative;
   text-decoration: none;
-  color: white;
+  color: var(--dark-blue);
   height: 100%;
+  transition: all 0.3s ease;
 }
 
 /* Pestaña seleccionada */
 .tab-button.tab-selected {
   animation: float 0.4s ease-out forwards;
-  background: #2a9d8f;
-  color: white;
+  background: linear-gradient(to right, var(--medium-blue), var(--turquoise));
+  color: var(--white);
+  border-radius: 14px;
 }
 
 /* Íconos de las pestañas */
 .tab-icon {
-  font-size: 1.5rem;
+  font-size: 1.95rem;
   transition: all 0.3s ease;
 }
 
 .tab-button.tab-selected .tab-icon {
-  transform: scale(1.15);
-  color: white;
+  transform: scale(1.5);
+  color: var(--white);
 }
 
 /* Texto de la pestaña */
 .tab-label {
-  font-size: 0.8rem;
-  margin-top: 4px;
+  font-size: 1.04rem;
+  margin-top: 5px;
   transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 .tab-button.tab-selected .tab-label {
-  color: white;
+  color: var(--white);
   font-weight: 500;
 }
 
@@ -119,16 +143,33 @@
 .tab-button.tab-selected::after {
   content: '';
   position: absolute;
-  bottom: 5px;
+  bottom: 6.5px;
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
-  height: 2px;
-  background-color: #a8dadc;
-  border-radius: 2px;
+  height: 2.6px;
+  background-color: var(--white);
+  border-radius: 2.6px;
   animation: underline 0.3s ease-out;
 }
 
+/* Contador de plantas */
+.plant-counter {
+  position: absolute;
+  top: -1.3px;
+  right: 42px;
+  background-color: var(--peach);
+  color: var(--dark-blue);
+  font-size: 0.91rem;
+  padding: 2.6px 8px;
+  border-radius: 50%;
+  z-index: 1;
+  box-shadow: 0 2.6px 10px rgba(0, 0, 0, 0.2);
+  animation: bounce 0.5s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Animaciones */
 @keyframes underline {
   from {
     width: 0;
@@ -139,18 +180,17 @@
   }
 }
 
-/* Animaciones y efectos */
 @keyframes float {
   0% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-13px);
   }
 
   100% {
-    transform: translateY(-8px);
+    transform: translateY(-10px);
   }
 }
 
@@ -162,62 +202,100 @@
   }
 
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-13px);
   }
 }
 
-/* Contador de plantas */
-.plant-counter {
-  position: absolute;
-  top: -1px;
-  right: 32px;
-  background-color: #FF5722;
-  color: white;
-  font-size: 0.7rem;
-  padding: 2px 6px;
-  border-radius: 50%;
-  z-index: 1;
-  animation: bounce 0.5s ease-in-out;
-}
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 359px) {
+  .header-title {
+    font-size: 1.69rem;
+  }
 
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 768px) {
+  .tab-bar {
+    height: 71px;
+    padding: 8px 0;
+  }
+
+  .tab-icon {
+    font-size: 1.69rem;
+  }
+
+  .tab-label {
+    font-size: 0.91rem;
+  }
+
+  .plant-counter {
+    font-size: 0.85rem;
+    padding: 1.3px 6.5px;
+  }
+
   .content {
-    padding: 10px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .card {
-    width: 90%;
-    max-width: 320px;
-  }
-
-  .profile-icon {
-    font-size: 70px;
-  }
-
-  .logout-button {
-    font-size: 14px;
+    height: calc(100vh - 56px - 71px);
+    padding: 20px;
   }
 }
 
-@media (max-width: 480px) {
-  h2 {
+@media (min-width: 360px) {
+  html {
+    font-size: 20.8px;
+  }
+}
+
+@media (min-width: 480px) {
+  .header-title {
+    font-size: 2.21rem;
+  }
+
+  .content {
+    padding: 32px;
+    height: calc(100vh - 56px - 85px);
+  }
+
+  .tab-bar {
+    height: 85px;
+    padding: 13px 0;
+  }
+
+  .tab-icon {
+    font-size: 2.21rem;
+  }
+
+  .tab-label {
+    font-size: 1.17rem;
+  }
+
+  .plant-counter {
+    font-size: 1.04rem;
+    padding: 3.9px 9px;
+  }
+}
+
+@media (min-width: 768px) {
+  .header-title {
+    font-size: 2.47rem;
+  }
+
+  .content {
+    padding: 39px;
+    height: calc(100vh - 56px - 91px);
+  }
+
+  .tab-bar {
+    height: 91px;
+    padding: 16px 0;
+  }
+
+  .tab-icon {
+    font-size: 2.47rem;
+  }
+
+  .tab-label {
     font-size: 1.3rem;
   }
 
-  .card {
-    width: 95%;
-  }
-
-  .profile-icon {
-    font-size: 60px;
-  }
-
-  .logout-button {
-    font-size: 13px;
+  .plant-counter {
+    font-size: 1.17rem;
+    padding: 5px 10px;
   }
 }

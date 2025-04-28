@@ -1,3 +1,20 @@
-<p>
-  dispositivos works!
-</p>
+<ng-container *ngIf="devices.length > 0; else noDevices">
+  <div *ngFor="let device of devices" class="device-card">
+    <h3>{{ device.deviceId }}</h3>
+    <p>Conectado: {{ device.connected ? 'Sí' : 'No' }}</p>
+    <button (click)="viewDevice(device.deviceId)">Ver Detalles</button>
+  </div>
+</ng-container>
+
+<ng-template #noDevices>
+  <p>No tienes dispositivos enlazados.</p>
+</ng-template>
+
+<div class="add-device">
+  <button (click)="addDevice()">Añadir Dispositivo</button>
+</div>
+
+<!-- Botón de cierre de sesión -->
+<div class="logout">
+  <button (click)="logout()">Cerrar sesión</button>
+</div>

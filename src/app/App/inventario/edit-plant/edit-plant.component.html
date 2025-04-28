@@ -1,13 +1,13 @@
-<ion-header>
-  <ion-toolbar class="header-toolbar">
-    <ion-title class="header-title">Editar Planta</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="gotoPlantDetail()">Cancelar</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<header class="header">
+  <div class="header-toolbar">
+    <h1 class="header-title">Editar Planta</h1>
+    <div class="header-buttons">
+      <button type="button" class="cancel-button" (click)="gotoPlantDetail()">Cancelar</button>
+    </div>
+  </div>
+</header>
 
-<ion-content class="content-container">
+<main class="content-container">
   <form *ngIf="plant" class="form-card">
     <div class="image-section">
       <label class="image-upload-label">
@@ -22,23 +22,23 @@
       </div>
     </div>
 
-    <ion-item class="form-item">
-      <ion-label position="floating" class="input-label">Nombre</ion-label>
-      <ion-input [(ngModel)]="plant.name" name="name" required class="custom-input"></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <label for="plant-name" class="input-label">Nombre</label>
+      <input id="plant-name" type="text" [(ngModel)]="plant.name" name="name" required class="custom-input">
+    </div>
 
-    <ion-item class="form-item">
-      <ion-label position="floating" class="input-label">Horario</ion-label>
-      <ion-input [(ngModel)]="plant.horario" name="horario" required class="custom-input" type="time" ></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <label for="plant-horario" class="input-label">Horario</label>
+      <input id="plant-horario" type="time" [(ngModel)]="plant.horario" name="horario" required class="custom-input">
+    </div>
 
-    <ion-item class="form-item">
-      <ion-label position="floating" class="input-label">Humedad (%)</ion-label>
-      <ion-input type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input"></ion-input>
-    </ion-item>
+    <div class="form-item">
+      <label for="plant-humedad" class="input-label">Humedad (%)</label>
+      <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input">
+    </div>
 
-    <ion-button expand="full" class="submit-button" (click)="updatePlant()">
+    <button type="button" class="submit-button" (click)="updatePlant()">
       Actualizar Planta
-    </ion-button>
+    </button>
   </form>
-</ion-content>
+</main>

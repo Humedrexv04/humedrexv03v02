@@ -1,43 +1,61 @@
-/* ========== ESTILOS GENERALES ========== */
-ion-content {
-    --background: #1b2a2f;
+/* ========== HEADER ========== */
+.page-header {
+    width: 100%;
+}
+
+.toolbar {
+    background: linear-gradient(to right, var(--dark-teal), var(--turquoise));
+    color: var(--main-color);
+    box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
+    border: 3px solid var(--turquoise);
+    border-bottom: 3px solid rgba(135, 214, 229, 0.7);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    color: var(--dark-blue);
+    /* Cambiado para combinar mejor */
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.content {
+    background: var(--light-blue);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* ========== HEADER ========== */
-ion-toolbar {
-    --background: #0f3d3e;
-    --color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-ion-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    min-height: calc(100vh - 56px);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5),
+        inset 0 0 4px rgba(135, 214, 229, 0.3);
+    border: 3px solid var(--turquoise);
+    border-radius: 12px;
 }
 
 /* ========== TEXTO DE BIENVENIDA ========== */
 h2 {
-    color: #a8dadc;
+    color: var(--medium-blue);
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
 }
 
 /* ========== TARJETA DE PERFIL ========== */
-ion-card.card {
-    --main-color: #ffffff;
-    --submain-color: #a8dadc;
-    --bg-color: #264653;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.card {
     position: relative;
     width: 100%;
     max-width: 350px;
@@ -46,14 +64,15 @@ ion-card.card {
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    background: var(--bg-color);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom, var(--light-blue), var(--white));
+    box-shadow: 0 4px 10px rgba(135, 214, 229, 0.3);
+    border: 3px solid var(--medium-blue);
     margin: 20px auto;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
 }
 
-ion-card.card:hover {
+.card:hover {
     transform: scale(1.02);
 }
 
@@ -61,7 +80,7 @@ ion-card.card:hover {
 .card__img {
     height: 150px;
     width: 100%;
-    background: linear-gradient(135deg, #0f3d3e, #2a9d8f);
+    background: linear-gradient(135deg, #e5ecef, var(--light-teal), rgba(255, 255, 255, 0.5));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,12 +91,12 @@ ion-card.card:hover {
 .card__avatar {
     width: 100px;
     height: 100px;
-    background: var(--bg-color);
+    background: var(--white);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -86,79 +105,114 @@ ion-card.card:hover {
 }
 
 .profile-icon {
-    font-size: 80px;
-    color: var(--main-color);
+    width: 80px;
+    height: 80px;
+    fill: var(--dark-blue);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
 }
 
 /* ========== INFORMACIÓN DEL USUARIO ========== */
-ion-card-header {
+.card-header {
     text-align: center;
     margin-top: 20px;
+    padding: 0;
+    width: 100%;
 }
 
-ion-card-title.card__title {
+.card__title {
     font-weight: 500;
     font-size: 18px;
-    color: #ffffff;
+    color: var(--black);
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
 }
 
-ion-card-subtitle.card__subtitle {
+.card__subtitle {
     font-weight: 400;
     font-size: 15px;
-    color: var(--submain-color);
+    color: var(--medium-blue);
+    margin: 5px 0 0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
 }
 
 /* Contenido de la tarjeta */
-ion-card-content {
+.card-content {
     width: 100%;
     padding: 16px;
+    box-sizing: border-box;
+    background: rgba(238, 250, 251, 0.7);
+    border-radius: 0 0 16px 16px;
 }
 
 /* ========== SECCIÓN PLANTAS EN INVENTARIO ========== */
-ion-item {
-    --background: transparent;
-    --padding-start: 0;
-    --inner-padding-end: 0;
+.info-item {
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
-    color: white;
+    color: var(--main-color);
+    padding: 8px 0;
+    border: 1px solid var(--turquoise);
+    border-radius: 8px;
 }
 
-ion-icon[name="leaf-outline"] {
-    font-size: 24px;
-    color: #2a9d8f;
+.icon-leaf {
+    width: 24px;
+    height: 24px;
+    color: var(--medium-blue);
+    margin-right: 16px;
     transition: transform 0.3s ease-in-out;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
 }
 
-ion-item:hover ion-icon {
+.info-item:hover .icon-leaf {
     transform: rotate(15deg);
+}
+
+.info-label {
+    font-size: 16px;
+    color: var(--dark-blue);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
 }
 
 /* ========== BOTÓN DE CERRAR SESIÓN ========== */
 .logout-button {
+    width: 100%;
     margin-top: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    --background: #e63946;
-    --color: white;
-    --border-radius: 12px;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to right, var(--peach), #fff2e6);
+    color: var(--dark-blue);
+    border-radius: 12px;
+    border: 2px solid var(--peach);
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    /* Nueva fuente */
 }
 
 .logout-button:hover {
-    --background: #c71f37;
+    background: linear-gradient(to right, #fff2e6, var(--peach));
     transform: translateY(-2px);
-    --box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
 .logout-button:active {
     transform: translateY(0);
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
-    ion-content {
+    .content {
         padding: 10px;
     }
 
@@ -166,17 +220,18 @@ ion-item:hover ion-icon {
         font-size: 1.5rem;
     }
 
-    ion-card.card {
+    .card {
         width: 90%;
         max-width: 320px;
     }
 
     .profile-icon {
-        font-size: 70px;
+        width: 70px;
+        height: 70px;
     }
 
     .logout-button {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -185,15 +240,16 @@ ion-item:hover ion-icon {
         font-size: 1.3rem;
     }
 
-    ion-card.card {
+    .card {
         width: 95%;
     }
 
     .profile-icon {
-        font-size: 60px;
+        width: 60px;
+        height: 60px;
     }
 
     .logout-button {
-        font-size: 13px;
+        font-size: 15px;
     }
 }

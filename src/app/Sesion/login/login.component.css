@@ -1,6 +1,6 @@
 /* Estilos generales */
 .main-content {
-  background: #1b2a2f;
+  background: linear-gradient(180deg, #f7f2e4 40%, #7acfd1 100%);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,95 @@
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  animation: backgroundGlow 10s ease-in-out infinite alternate;
+}
+
+/* Animación de fondo para un efecto de resplandor */
+@keyframes backgroundGlow {
+  0% {
+    background: linear-gradient(180deg, #f7f2e4 40%, #7acfd1 100%);
+  }
+
+  100% {
+    background: linear-gradient(180deg, #f7f2e4 40%, #5bccd1 100%);
+  }
+}
+
+/* Elementos decorativos: burbujas flotantes */
+.main-content::before,
+.main-content::after {
+  content: '';
+  position: absolute;
+  background: #5bccd1;
+  border-radius: 50%;
+  opacity: 0.2;
+  /* Más sutil */
+  z-index: 0;
+}
+
+.main-content::before {
+  width: 40px;
+  height: 40px;
+  bottom: 20%;
+  left: 10%;
+  animation: floatBubbles 8s ease-in-out infinite;
+}
+
+.main-content::after {
+  width: 25px;
+  height: 25px;
+  bottom: 15%;
+  right: 15%;
+  animation: floatBubbles 12s ease-in-out infinite;
+}
+
+/* Animación de burbujas flotantes */
+@keyframes floatBubbles {
+  0% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translateY(-40px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+}
+
+/* Imagen de fondo para plantas y agua */
+.background-illustration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+  object-position: bottom center;
+  z-index: 0;
+  animation: floatIllustration 6s ease-in-out infinite;
+  box-shadow: 0 10px 20px rgba(12, 34, 48, 0.2);
+}
+
+/* Animación de flotación para la ilustración */
+@keyframes floatIllustration {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Contenedor para centrar el formulario */
@@ -17,177 +106,221 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  z-index: 1;
 }
 
 /* Estilos generales del formulario */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 2em;
-  background-color: #171717;
-  border-radius: 25px;
+  gap: 20px;
+  /* Más espaciado entre elementos */
+  padding: 2.5em;
+  /* Más padding para un look más espacioso */
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Blanco con transparencia */
+  border: 2px solid #7acfd1;
+  /* Borde turquesa agua */
+  border-radius: 20px;
+  /* Más redondeado */
+  box-shadow: 0 8px 25px rgba(12, 34, 48, 0.15);
   transition: 0.4s ease-in-out;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
+  /* Un poco más ancho */
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Animación de entrada para el formulario */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Estilo del título */
 #heading {
   text-align: center;
-  margin: 2em 0;
-  color: rgb(255, 255, 255);
-  font-size: 1.2em;
+  margin: 0.5em 0;
+  /* Menos margen para mejor centrado vertical */
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(12, 34, 48, 0.2);
+  /* Sombra de texto */
 }
 
 /* Estilo de los campos de entrada */
 .field {
   display: flex;
   align-items: center;
-  gap: 0.5em;
-  border-radius: 25px;
-  padding: 0.6em;
-  background-color: #171717;
-  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+  gap: 0.8em;
+  border-radius: 12px;
+  padding: 0.8em;
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field:hover {
+  border-color: #0a98b0;
+  box-shadow: 0 2px 8px rgba(10, 152, 176, 0.2);
+}
+
+.field:focus-within {
+  border-color: #22c1d8;
+  /* Turquesa brillante al enfocar */
+  box-shadow: 0 2px 8px rgba(34, 193, 216, 0.3);
 }
 
 .input-icon {
   height: 1.3em;
   width: 1.3em;
-  fill: white;
+  fill: #0a98b0;
 }
 
 /* Estilo personalizado para inputs */
 .custom-input {
   background: transparent;
-  color: #d3d3d3;
+  color: #000000;
   width: 100%;
   border: none;
   outline: none;
-  padding: 10px 0;
+  padding: 8px 0;
   font-size: 16px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .custom-input::placeholder {
-  color: #d3d3d3;
+  color: #000000;
 }
 
 /* Estilo de los botones */
 .custom-button {
   border-radius: 25px;
-  transition: 0.4s ease-in-out;
-  margin: 0.5em 0;
+  transition: all 0.4s ease-in-out;
+  /* Transición más suave */
+  margin: 0.5em auto;
+  /* Centrado horizontal */
   padding: 12px;
   border: none;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   outline: none;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  /* Para centrar con margin: auto */
+  width: 100%;
+  /* Todos los botones con el mismo ancho */
+  max-width: 250px;
+  /* Ancho máximo para que no se estire demasiado */
 }
 
-/* Botones de colores */
+/* Botón de "Iniciar Sesión" */
 .button1 {
-  background: #4CAF50;
-  /* Verde */
-  color: white;
+  background: linear-gradient(90deg, #22c1d8 0%, #0a98b0 100%);
+  /* Gradiente turquesa */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(34, 193, 216, 0.3);
 }
 
 .button1:hover {
-  background: #45a049;
-  /* Verde más oscuro al hacer hover */
+  background: linear-gradient(90deg, #0a98b0 0%, #22c1d8 100%);
+  /* Gradiente invertido */
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(10, 152, 176, 0.4);
 }
 
+/* Botón de "Registrarse" */
 .button2 {
-  background: #4285f4;
-  /* Azul */
-  color: white;
+  background: linear-gradient(90deg, #d9d9d9 0%, #c9c9c9 100%);
+  /* Gradiente gris */
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(217, 217, 217, 0.3);
 }
 
 .button2:hover {
-  background: #357abd;
-  /* Azul más oscuro al hacer hover */
+  background: linear-gradient(90deg, #c9c9c9 0%, #d9d9d9 100%);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(201, 201, 201, 0.4);
 }
 
-/* Botón de olvidé mi contraseña */
+/* Botón de "Olvidé mi Contraseña" */
 .button3 {
-  background: #f44336;
-  /* Rojo */
-  color: white;
+  background: transparent;
+  color: #0a98b0;
+  font-size: 0.9em;
+  box-shadow: none;
+  /* Sin sombra para este botón */
 }
 
 .button3:hover {
-  background: #d32f2f;
-  /* Rojo más oscuro al hacer hover */
+  color: #156978;
+  transform: scale(1.02);
+  box-shadow: none;
 }
 
-/* Botón de Google */
+/* Botón de "Continuar con Google" */
 .button4 {
   background: #ffffff;
-  /* Fondo blanco */
-  color: #757575;
-  /* Texto gris */
+  color: #000000;
+  border: 1px solid #d9d9d9;
   border-radius: 25px;
-  /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Sombra suave */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  /* Espacio entre el ícono y el texto */
   padding: 10px;
-  /* Espaciado interno */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  /* Transición suave */
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 12px rgba(217, 217, 217, 0.3);
 }
 
 .button4:hover {
-  background: #f1f1f1;
-  /* Fondo gris claro al hacer hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Sombra más pronunciada al hacer hover */
+  background: #f7f2e4;
+  box-shadow: 0 6px 15px rgba(217, 217, 217, 0.4);
+  transform: scale(1.05);
 }
 
 /* Estilo del ícono de Google dentro del botón */
 .button4 svg {
   width: 20px;
-  /* Tamaño del ícono */
   height: 20px;
-  /* Tamaño del ícono */
   margin-right: 8px;
-  /* Espacio entre el ícono y el texto */
 }
 
 /* Estilo del texto dentro del botón */
 .button4 span {
   font-size: 1em;
-  /* Tamaño del texto */
   font-weight: 500;
-  /* Grosor del texto */
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Fila de botones (Iniciar Sesión y Registrarse) */
 .btn-row {
   display: flex;
-  gap: 10px;
-  /* Espacio entre los botones */
-}
-
-.btn-row button {
-  flex: 1;
-  /* Los botones ocupan todo el espacio disponible */
+  justify-content: center;
+  /* Centrado horizontal */
+  gap: 15px;
+  /* Más espaciado */
 }
 
 /* Estilo para los mensajes de error */
 .error-message {
-  color: red;
-  font-size: 1em;
-  /* Tamaño de letra pequeño */
-  margin-top: 0.5em;
-  /* Espacio superior */
-  text-align: left;
-  /* Centrar el texto */
+  color: #f27d41;
+  font-size: 0.9em;
+  margin-top: 0.3em;
+  text-align: center;
+  /* Centrado */
   font-style: italic;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Media Queries para Responsividad */
@@ -196,49 +329,53 @@
 @media (max-width: 600px) {
   .form {
     padding: 1.5em;
-    /* Reducir el padding */
     max-width: 90%;
-    /* Ajustar el ancho máximo */
   }
 
   #heading {
-    font-size: 1.1em;
-    /* Reducir el tamaño del título */
-    margin: 1.5em 0;
-    /* Ajustar el margen */
+    font-size: 1.5em;
+    margin: 0.5em 0;
   }
 
   .field {
-    padding: 0.5em;
-    /* Reducir el padding de los campos */
+    padding: 0.6em;
   }
 
   .custom-button {
-    margin: 0.4em 0;
-    /* Reducir el margen de los botones */
+    padding: 10px;
+    font-size: 14px;
+    max-width: 200px;
+    /* Más pequeño en pantallas pequeñas */
   }
 
   .button4 {
     gap: 8px;
-    /* Reducir el espacio entre ícono y texto */
     padding: 8px;
-    /* Reducir el padding */
   }
 
   .button4 svg {
     width: 18px;
-    /* Reducir el tamaño del ícono */
     height: 18px;
   }
 
   .button4 span {
     font-size: 0.9em;
-    /* Reducir el tamaño del texto */
   }
 
   .btn-row {
-    gap: 8px;
-    /* Reducir el espacio entre botones */
+    gap: 10px;
+    flex-direction: column;
+    /* Apilar botones en pantallas pequeñas */
+  }
+
+  .background-illustration {
+    height: 40%;
+  }
+
+  .main-content::before,
+  .main-content::after {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -246,44 +383,40 @@
 @media (min-width: 601px) and (max-width: 900px) {
   .form {
     max-width: 80%;
-    /* Ajustar el ancho máximo */
   }
 
   #heading {
-    font-size: 1.15em;
-    /* Ajustar el tamaño del título */
+    font-size: 1.6em;
   }
 
   .field {
-    padding: 0.55em;
-    /* Ajustar el padding de los campos */
+    padding: 0.7em;
   }
 
   .custom-button {
-    margin: 0.45em 0;
-    /* Ajustar el margen de los botones */
+    padding: 11px;
+    max-width: 220px;
   }
 
   .button4 {
     gap: 10px;
-    /* Ajustar el espacio entre ícono y texto */
     padding: 9px;
-    /* Ajustar el padding */
   }
 
   .button4 svg {
     width: 19px;
-    /* Ajustar el tamaño del ícono */
     height: 19px;
   }
 
   .button4 span {
     font-size: 0.95em;
-    /* Ajustar el tamaño del texto */
   }
 
   .btn-row {
-    gap: 9px;
-    /* Ajustar el espacio entre botones */
+    gap: 12px;
+  }
+
+  .background-illustration {
+    height: 45%;
   }
 }

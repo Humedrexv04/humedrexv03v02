@@ -2,14 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, addDoc, updateDoc, deleteDoc, doc, collectionData, getDoc, getDocs } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Plant } from '../Models/plant.mode';
-import { Esp32Service } from './esp32.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlantService {
   private _firestore = inject(Firestore);
-  private esp32Service = inject(Esp32Service); // Inyectar el servicio de ESP32
 
 
   constructor() { }

@@ -10,7 +10,7 @@ import { caretBack } from 'ionicons/icons';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss'],
+  styleUrls: ['./reset-password.component.css'],
   standalone: true, // Asegúrate de que el componente sea standalone
   imports: [NgIf, IonicModule, FormsModule], // Importa los módulos necesarios
 })
@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   errorMessage: string = '';
   route = inject(Router);
 
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService) {
     addIcons({ caretBack });
   }
 
@@ -44,20 +44,20 @@ export class ResetPasswordComponent implements OnInit {
     if (!this.validateEmail()) return;
 
     try {
-        await this.authService.sendPasswordReset(this.email);
-        this.message = 'Correo enviado a ' + this.email + '. Vuelve a intentar iniciar sesión.';
-        this.errorMessage = '';
+      await this.authService.sendPasswordReset(this.email);
+      this.message = 'Correo enviado a ' + this.email + '. Vuelve a intentar iniciar sesión.';
+      this.errorMessage = '';
     } catch (error: any) {
-        if (error.message === 'auth/user-not-found') {
-            this.errorMessage = 'El correo no está registrado.';
-        } else {
-            this.errorMessage = 'Error al enviar el correo. Inténtalo de nuevo más tarde.';
-        }
-        this.message = '';
+      if (error.message === 'auth/user-not-found') {
+        this.errorMessage = 'El correo no está registrado.';
+      } else {
+        this.errorMessage = 'Error al enviar el correo. Inténtalo de nuevo más tarde.';
+      }
+      this.message = '';
     }
-}
+  }
 
-  gotoLogIn(){
+  gotoLogIn() {
     this.route.navigate(['/login']);
   }
 }

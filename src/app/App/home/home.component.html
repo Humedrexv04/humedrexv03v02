@@ -1,39 +1,49 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mi Perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<header class="page-header">
+  <div class="toolbar">
+    <h1 class="title">Mi Perfil</h1>
+  </div>
+</header>
 
-<ion-content padding>
+<div class="content">
   <h2>Bienvenido a la aplicación</h2>
 
   <!-- Tarjeta de perfil -->
-  <ion-card class="card">
+  <div class="card">
     <!-- Imagen de fondo de la tarjeta -->
     <div class="card__img">
       <div class="card__avatar">
         <!-- Ícono de perfil -->
-        <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
+        <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z" />
+          <path
+            d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z" />
+        </svg>
       </div>
     </div>
 
     <!-- Información del usuario -->
-    <ion-card-header>
-      <ion-card-title class="card__title">{{ user.name }}</ion-card-title>
-      <ion-card-subtitle class="card__subtitle">{{ user.email }}</ion-card-subtitle>
-    </ion-card-header>
+    <div class="card-header">
+      <h2 class="card__title">{{ user.name }}</h2>
+      <h3 class="card__subtitle">{{ user.email }}</h3>
+    </div>
 
     <!-- Detalles adicionales -->
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-icon name="leaf-outline" slot="start" color="success"></ion-icon>
-        <ion-label>Plantas en inventario: {{ user.plantCount }}</ion-label>
-      </ion-item>
+    <div class="card-content">
+      <div class="info-item">
+        <svg class="icon-leaf" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+            d="M321.89 171.42C233 114 141 155.22 56 65.22c-19.8-21-8.3 235.5 98.1 332.7 77.79 71 197.9 63.08 238.4-5.92s18.28-163.17-70.61-220.58z" />
+          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+            d="M173 253c86 81 175 129 292 147" />
+        </svg>
+        <span class="info-label">Plantas en inventario: {{ user.plantCount }}</span>
+      </div>
 
       <!-- Botón de cerrar sesión -->
-      <ion-button expand="full" color="danger" (click)="logout()" class="logout-button">
+      <button class="logout-button" (click)="logout()">
         Cerrar Sesión
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,54 +1,106 @@
-/* 🎨 Header */
+/* ========== ESTILOS GENERALES ========== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ========== HEADER Y TOOLBAR ========== */
+.header {
+  background: linear-gradient(to right, var(--dark-blue), var(--medium-blue));
+  padding: 0.95rem 1.15rem;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(74, 161, 195, 0.3);
+  border: 2px solid var(--medium-blue);
+  border-bottom: 2px solid var(--medium-blue);
+}
+
 .header-toolbar {
-  --background: #2d6a4f;
-  /* Verde oscuro */
-  --color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
 }
 
 .header-title {
-  font-size: 1.8rem;
-  letter-spacing: 1px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.55rem;
+  text-align: center;
+  color: var(--white);
+  letter-spacing: 0.65px;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-/* 📌 Fondo general */
+.header-buttons {
+  display: flex;
+}
+
+.cancel-button {
+  color: var(--white);
+  background: linear-gradient(to right, #FF6F61, #FFE6E2);
+  border: 2px solid var(--medium-blue);
+  padding: 0.85rem 1.45rem;
+  border-radius: 26px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(255, 111, 97, 0.2);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-button:hover {
+  background: linear-gradient(to right, #FFE6E2, #FF6F61);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(255, 111, 97, 0.3);
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
 .content-container {
-  --background: linear-gradient(160deg, #f8f9fa 0%, #d8f3dc 100%);
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-top: 24px;
+  background-color: #FFFFFF;
+  padding: 1.2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-/* 📋 Formulario */
+/* ========== FORMULARIO ========== */
 .form-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: rgba(135, 214, 229, 0.75);
+  backdrop-filter: blur(8px);
+  border-radius: 17px;
+  padding: 1.45rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(168, 224, 233, 0.3);
   animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* 🖼️ Imagen */
+/* ========== SECCIÓN DE IMAGEN ========== */
 .image-section {
-  margin-bottom: 32px;
+  margin-bottom: 1.65rem;
   text-align: center;
 }
 
 .image-upload-label {
   display: inline-block;
-  background: #40916c;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  background: linear-gradient(to right, var(--medium-blue), var(--turquoise));
+  color: var(--white);
+  padding: 0.85rem 1.45rem;
+  border-radius: 26px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: all 0.25s ease;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 12px rgba(74, 161, 195, 0.3);
+  border: 2px solid var(--light-teal);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .image-upload-label:hover {
-  background: #2d6a4f;
+  background: linear-gradient(to right, var(--turquoise), var(--medium-blue));
   transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(74, 161, 195, 0.4);
 }
 
 .image-input {
@@ -56,83 +108,114 @@
 }
 
 .image-preview {
-  margin-top: 20px;
-  border-radius: 15px;
-  overflow: hidden;
-  border: 3px solid #d8f3dc;
+  margin-top: 1.65rem;
+  border-radius: 13px;
+  border: 2px solid var(--light-teal);
+  background-color: rgba(255, 255, 255, 0.5);
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.image-preview img {
+.preview-image {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 13px;
 }
 
-/* 📝 Campos de entrada */
+/* ========== CAMPOS DE ENTRADA ========== */
 .form-item {
-  --background: transparent;
-  --padding-start: 0;
-  --inner-padding-end: 0;
-  margin-bottom: 28px;
-  --border-radius: 12px;
+  background: transparent;
+  margin-bottom: 1.65rem;
+  border-radius: 12px;
 }
 
 .input-label {
-  color: #2d6a4f !important;
-  font-weight: 600 !important;
-  font-size: 1.1rem !important;
-  margin-bottom: 8px !important;
+  color: var(--dark-blue);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.65rem;
   letter-spacing: 0.5px;
+  display: block;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .custom-input {
-  --background: #f8f9fa;
-  --padding-start: 16px !important;
-  --padding-end: 16px !important;
-  --padding-top: 14px !important;
-  --padding-bottom: 14px !important;
-  border-radius: 12px !important;
-  --border-width: 2px;
-  --border-color: #d8f3dc;
-  --color: #2d6a4f;
+  background: rgba(238, 250, 251, 0.7);
+  padding: 0.85rem 1.05rem;
+  border-radius: 11px;
+  border: 2px solid var(--light-teal);
+  color: var(--dark-blue);
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .custom-input:hover {
-  --background: #ffffff;
-  --border-color: #95d5b2;
+  background: rgba(255, 255, 255, 0.9);
+  border-color: var(--medium-blue);
 }
 
-.custom-input:focus-within {
-  --border-color: #40916c;
-  box-shadow: 0 0 0 2px rgba(64, 145, 108, 0.2);
+.custom-input:focus {
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 2px rgba(74, 161, 195, 0.2);
+  outline: none;
 }
 
-/* 📌 Botón */
+/* ========== BOTÓN ========== */
 .submit-button {
-  --background: #40916c;
-  --background-activated: #2d6a4f;
-  --background-hover: #52b788;
-  --color: white;
-  --border-radius: 15px;
-  --padding-top: 18px;
-  --padding-bottom: 18px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-top: 24px;
+  position: relative;
+  background: linear-gradient(to right, var(--peach), #FFDBCC, #fff2e6);
+  /* Gradiente de add.css con un tono intermedio */
+  color: var(--dark-blue);
+  border-radius: 16px;
+  padding: 1.1rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: 0.55px;
+  border: 1px solid rgba(168, 224, 233, 0.5);
+  margin-top: 1.45rem;
   transition: all 0.3s ease;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 230, 209, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
+  transition: 0.5s ease;
+}
+
+.submit-button:hover::before {
+  left: 100%;
 }
 
 .submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(64, 145, 108, 0.3);
+  background: linear-gradient(to right, #fff2e6, #FFDBCC, var(--peach));
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(255, 230, 209, 0.3), 0 3px 10px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
-/* 📌 Animación de entrada */
+.submit-button:active {
+  background: linear-gradient(to right, #fff2e6, #FFDBCC, var(--peach));
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(255, 230, 209, 0.2), 0 1px 4px rgba(0, 0, 0, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* ========== ANIMACIÓN DE ENTRADA ========== */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -145,10 +228,10 @@
   }
 }
 
-/* 📱 Responsive */
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .form-card {
-    padding: 16px;
+    padding: 1.3rem;
     border-radius: 16px;
   }
 
@@ -157,27 +240,60 @@
   }
 
   .input-label {
-    font-size: 1rem !important;
+    font-size: 1rem;
   }
 
   .custom-input {
-    --padding-start: 12px !important;
+    padding: 0.75rem 0.95rem;
     font-size: 0.95rem;
   }
 }
 
 @media (max-width: 480px) {
   .content-container {
-    --padding-start: 8px;
-    --padding-end: 8px;
+    padding: 1.2rem 0.5rem;
   }
 
   .image-upload-label {
     width: 100%;
-    padding: 12px;
+    padding: 0.75rem;
   }
 
   .submit-button {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 359px) {
+  .header-title {
+    font-size: 1.4rem;
+  }
+
+  .form-card {
+    padding: 1.3rem;
+  }
+
+  .image-preview {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 480px) {
+  .header-title {
+    font-size: 1.75rem;
+  }
+
+  .form-card {
+    padding: 1.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .header-title {
+    font-size: 1.95rem;
+  }
+
+  .form-card {
+    padding: 2.2rem;
   }
 }

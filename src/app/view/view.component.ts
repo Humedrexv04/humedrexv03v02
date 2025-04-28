@@ -1,15 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { personCircle, leaf, addCircle, water } from 'ionicons/icons';
 import { PlantService } from '../Services/plant.service';
 import { AuthService } from '../Services/auth.service';
 import { Subscription } from 'rxjs';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-view',
-  imports: [IonicModule, RouterLink],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })

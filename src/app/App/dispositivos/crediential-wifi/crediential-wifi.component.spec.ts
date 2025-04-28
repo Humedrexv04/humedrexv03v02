@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { EnterIDComponent } from './enter-id.component';
+import { CredientialWifiComponent } from './crediential-wifi.component';
 
-describe('EnterIDComponent', () => {
-  let component: EnterIDComponent;
-  let fixture: ComponentFixture<EnterIDComponent>;
+describe('CredientialWifiComponent', () => {
+  let component: CredientialWifiComponent;
+  let fixture: ComponentFixture<CredientialWifiComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnterIDComponent ],
+      declarations: [ CredientialWifiComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EnterIDComponent);
+    fixture = TestBed.createComponent(CredientialWifiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

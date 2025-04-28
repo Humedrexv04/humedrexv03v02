@@ -1,9 +1,11 @@
-<ion-card class="card">
+<div class="card">
   <div class="image">
     <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
   </div>
-  <ion-card-header>
-    <ion-card-title class="plantTitle">{{ plant.name }}</ion-card-title>
-  </ion-card-header>
-  <ion-button class="ver-detalles" (click)="viewPlantDetails()">VER DETALLES</ion-button>
-</ion-card>
+  <div class="card-body">
+    <div class="card-header">
+      <h2 class="plantTitle">{{ plant.name }}</h2>
+    </div>
+    <button class="ver-detalles" (click)="viewPlantDetails()">VER DETALLES</button>
+  </div>
+</div>

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Esp32Service } from './esp32.service';
+import { DeviceService } from './device.service';
 
-describe('Esp32Service', () => {
-  let service: Esp32Service;
+describe('DeviceService', () => {
+  let service: DeviceService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Esp32Service);
+    service = TestBed.inject(DeviceService);
   });
 
   it('should be created', () => {

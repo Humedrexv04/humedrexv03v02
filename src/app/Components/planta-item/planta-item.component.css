@@ -1,59 +1,196 @@
-/* Estilos para la tarjeta */
-.card {
-    width: 375px;
-    height: 77vh;
-    background: #1a2e1a; /* Fondo verde oscuro */
-    border: 5px solid #4caf50; /* Borde verde claro */
-    border-radius: 40px;
-    overflow: hidden; /* Para que los bordes redondeados funcionen correctamente */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 50px;
+/* ========== ANIMACIONES ========== */
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Estilos para la imagen */
-.image {
-    border-radius: 40px 40px 0 0; /* Bordes redondeados solo en la parte superior */
+/* ========== CARD CONTAINER ========== */
+.card {
     width: 100%;
-    height: 400px; /* Ajusta la altura según sea necesario */
+    max-width: 1400px;
+    min-height: 220px;
+    /* Ajustado para que las imágenes se vean mejor */
+    background: rgba(245, 247, 250, 0.95);
+    border: 3px solid #A5D7E8;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(28, 37, 38, 0.15);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    animation: slideFadeIn 0.7s ease forwards;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 36px rgba(28, 37, 38, 0.25);
+}
+
+/* ========== IMAGE SECTION ========== */
+.image {
+    flex: 0 0 55%;
+    /* AUMENTADO: la imagen tiene más espacio */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    margin-top: 40px;
+    height: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    border-right: 2px dashed rgba(165, 215, 232, 0.5);
 }
 
 .plant-image {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 30px; /* Bordes redondeados para la imagen */
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    width: 100%;
+    height: 100%;
+    /* Se ajusta automáticamente al alto del contenedor */
+    max-height: 350px;
+    /* Limite de altura para evitar que las imágenes sean demasiado grandes */
+    object-fit: cover;
+    /* La imagen se ajusta sin perder proporciones */
+    object-position: center;
+    border-radius: 22px;
+    box-shadow: 0 6px 16px rgba(28, 37, 38, 0.2);
 }
 
-/* Estilos para el título */
-.plantTitle {
+
+/* ========== BODY SECTION ========== */
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+}
+
+/* ========== CARD HEADER ========== */
+.card-header {
     text-align: center;
-    font-size: 50px;
-    font-weight: bold;
-    color: #4caf50; /* Color verde claro para el texto */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 10px 0;
 }
 
-/* Estilos para el botón */
+.plantTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1C2526;
+    font-family: 'Roboto', sans-serif;
+    margin: 0.6rem 0;
+    text-shadow: 0 2px 5px rgba(165, 215, 232, 0.4);
+    position: relative;
+    padding-bottom: 0.4rem;
+}
+
+.plantTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #A5D7E8;
+    border-radius: 3px;
+}
+
+/* ========== BOTÓN VER DETALLES AJUSTADO ========== */
 .ver-detalles {
-    --background: #4caf50; /* Fondo verde claro al hacer hover */
-    --color: #1a2e1a; /* Texto verde oscuro al hacer hover */
-    --border-radius: 0 0 38px 38px; /* Bordes redondeados solo en la parte inferior */
-    --border-width: 5px; /* Grosor del borde */
-    --border-color: #4caf50; /* Borde verde claro */
-    --padding-top: 15px;
-    --padding-bottom: 15px;
-    --padding-start: 0;
-    --padding-end: 0;
-    font-weight: bold;
-    font-size: 15px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    transition: --background 0.2s, --color 0.2s;
+    width: auto;
+    /* El ancho es automático para ajustarse al contenido */
+    background: linear-gradient(to right, var(--peach), #fff2e6);
+    color: var(--dark-blue);
+    border-radius: 16px;
+    padding: 0.6rem 0.8rem;
+    /* Reduje un poco más el padding horizontal */
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+    border: 1px solid rgba(168, 224, 233, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(255, 230, 209, 0.2);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.ver-detalles:hover {
+    background: linear-gradient(to right, #fff2e6, var(--peach));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(255, 230, 209, 0.3);
+}
+
+.ver-detalles .button-icon {
+    margin-right: 0.5rem;
+}
+
+.ver-detalles .button-icon svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 359px) {
+    .card {
+        min-height: 180px;
+    }
+
+    .plantTitle {
+        font-size: 1.6rem;
+    }
+
+    .ver-detalles {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+    .card {
+        min-height: 190px;
+    }
+
+    .plantTitle {
+        font-size: 1.8rem;
+    }
+
+    .ver-detalles {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    .card {
+        min-height: 200px;
+    }
+
+    .plantTitle {
+        font-size: 2rem;
+    }
+
+    .ver-detalles {
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .card {
+        min-height: 210px;
+    }
+
+    .plantTitle {
+        font-size: 2.1rem;
+    }
+
+    .ver-detalles {
+        font-size: 1.3rem;
+    }
 }

@@ -7,7 +7,6 @@ import { AuthService } from '../../../Services/auth.service';
 import { addIcons } from 'ionicons';
 import { create, time, trash } from 'ionicons/icons';
 import { NgIf } from '@angular/common';
-import { Esp32Service } from '../../../Services/esp32.service'; // Importar el servicio de ESP32
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,7 +28,6 @@ export class PlantDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private router: Router,
-    private esp32Service: Esp32Service // Inyectar el servicio de ESP32
   ) {
     addIcons({
       trash,

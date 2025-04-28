@@ -1,0 +1,137 @@
+/* Estilos generales */
+div {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    background-color: #f5f9f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    color: #2e7d32;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 22px;
+}
+
+/* Estilos para los inputs */
+input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+input::placeholder {
+    color: #a5a5a5;
+    opacity: 1;
+}
+
+/* Estilo específico para el campo de contraseña */
+input[type="password"] {
+    letter-spacing: 1px;
+}
+
+/* Estilo para el botón */
+button {
+    background-color: #4caf50;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    background-color: #3d8b40;
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para iconos (opcional) */
+.input-container {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.input-container i {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #4caf50;
+    font-size: 18px;
+}
+
+/* Estilos para mostrar/ocultar contraseña */
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #757575;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Estilos responsive */
+@media (max-width: 480px) {
+    div {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+/* Clases para validación */
+.invalid {
+    border-color: #ef5350 !important;
+}
+
+.valid {
+    border-color: #66bb6a !important;
+}
+
+.error-message {
+    color: #ef5350;
+    font-size: 13px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.success-message {
+    color: #2e7d32;
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: 500;
+}
