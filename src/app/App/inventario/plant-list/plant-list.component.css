@@ -1,10 +1,12 @@
 /* ========== HEADER Y TOOLBAR ========== */
 .page-header {
-    background: linear-gradient(135deg, var(--dark-teal), var(--turquoise));
+    background: linear-gradient(135deg, #3A5A40, #88AA4E);
+    /* Dark green a medium green */
     padding: 0.9rem 1rem;
     position: relative;
     z-index: 100;
-    box-shadow: 0 3px 10px rgba(98, 176, 187, 0.5);
+    box-shadow: 0 3px 10px rgba(139, 170, 78, 0.5);
+    /* Sombra verde */
     border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -17,12 +19,15 @@
 }
 
 .page-title {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    /* Manteniendo tu tipografía consistente */
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    /* Blanco */
+    text-shadow: 0 2px 4px rgba(43, 58, 66, 0.3);
+    /* Dark blue */
     letter-spacing: 0.5px;
     position: relative;
     padding-bottom: 0.3rem;
@@ -45,10 +50,15 @@
     min-height: calc(100vh - 64px);
     padding: 0;
     box-sizing: border-box;
-    background: var(--light-blue);
+    background: #E5D9CE;
+    /* Subtle gradient center */
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border-left: 2px solid #88AA4E;
+    /* Medium green */
+    border-right: 2px solid #88AA4E;
+    /* Medium green */
 }
 
 .list-content {
@@ -78,6 +88,11 @@
         padding: 0.5rem;
         gap: 0.8rem;
     }
+
+    .main-content {
+        border-left: none;
+        border-right: none;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -102,5 +117,20 @@
 
     .plant-list {
         max-width: 800px;
+    }
+
+    .main-content {
+        border-left: 3px solid #88AA4E;
+        border-right: 3px solid #88AA4E;
+    }
+}
+
+@media (min-width: 1024px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .plant-list {
+        max-width: 900px;
     }
 }

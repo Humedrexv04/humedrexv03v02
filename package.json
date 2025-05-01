@@ -23,6 +23,8 @@
     "@capacitor/android": "^7.2.0",
     "@capacitor/cli": "^7.2.0",
     "@capacitor/core": "^7.2.0",
+    "@fortawesome/angular-fontawesome": "^1.0.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@ionic/angular": "^8.4.3",
     "ionicons": "^7.4.0",
     "rxjs": "~7.8.0",

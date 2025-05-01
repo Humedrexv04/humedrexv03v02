@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { addIcons } from 'ionicons';
-import { personCircle, leaf, addCircle, water } from 'ionicons/icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faUserCircle,         // Icono más estándar para perfil
+  faLeaf,               // Icono clásico de hoja
+  faSeedling,           // Icono de plantín/planta pequeña
+  faMicrochip           // Icono para dispositivos
+} from '@fortawesome/free-solid-svg-icons';
 import { PlantService } from '../Services/plant.service';
 import { AuthService } from '../Services/auth.service';
 import { Subscription } from 'rxjs';
@@ -8,7 +13,12 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-view',
-  imports: [RouterLink, RouterOutlet],
+  standalone: true,
+  imports: [
+    RouterLink,
+    RouterOutlet,
+    FontAwesomeModule
+  ],
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
@@ -18,23 +28,21 @@ export class ViewComponent {
   private plantsSubscription!: Subscription;
   private authSubscription!: Subscription;
 
+  // Iconos actualizados
+  faUserCircle = faUserCircle;
+  faLeaf = faLeaf;
+  faSeedling = faSeedling;
+  faMicrochip = faMicrochip;
+
   constructor(
     private plantService: PlantService,
     private authService: AuthService
-  ) {
-    addIcons({
-      personCircle,
-      addCircle,
-      water,
-      leaf
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.setupRealTimeCounter();
   }
 
-  // Método para ir al perfil
   goToProfile() {
     this.route.navigate(['/view/home']);
   }
@@ -42,24 +50,18 @@ export class ViewComponent {
   private setupRealTimeCounter() {
     this.authSubscription = this.authService.user$.subscribe(user => {
       if (user) {
-        if (this.plantsSubscription) {
-          this.plantsSubscription.unsubscribe();
-        }
+        this.plantsSubscription?.unsubscribe();
 
-        this.plantsSubscription = this.plantService.getPlantsObservable(user.uid).subscribe(plants => {
-          this.plantCount = plants.length;
-          console.log('Conteo actualizado:', this.plantCount);
-        });
+        this.plantsSubscription = this.plantService.getPlantsObservable(user.uid)
+          .subscribe(plants => {
+            this.plantCount = plants.length;
+          });
       }
     });
   }
 
   ngOnDestroy() {
-    if (this.plantsSubscription) {
-      this.plantsSubscription.unsubscribe();
-    }
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe();
-    }
+    this.plantsSubscription?.unsubscribe();
+    this.authSubscription?.unsubscribe();
   }
 }

@@ -1,29 +1,54 @@
-/* ========== HEADER ========== */
+/* ========== HEADER (AJUSTADO CON LA PALETA) ========== */
 .header {
-  background: linear-gradient(to right, var(--dark-blue), var(--medium-blue));
+  background: linear-gradient(to right, #3A5A40, #88AA4E);
+  /* Dark green a Medium green */
   padding: 0.95rem 1.15rem;
   z-index: 100;
-  box-shadow: 0 3px 15px rgba(74, 161, 195, 0.25);
-  /* Sombra más suave y difusa */
-  border: 2px solid var(--medium-blue);
-  border-bottom: 2px solid var(--medium-blue);
+  box-shadow: 0 3px 15px rgba(139, 170, 78, 0.25);
+  /* Sombra verde */
+  border: 2px solid #88AA4E;
+  /* Medium green */
+  border-bottom: 2px solid #3A5A40;
+  /* Dark green */
 }
 
-/* Estilo para el título del header */
 .header-title {
   font-family: 'Great Vibes', cursive;
-  /* Cambiado de Pacifico a Great Vibes */
   font-size: 1.55rem;
   text-align: center;
-  color: var(--white);
   letter-spacing: 0.65px;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   animation: fadeInUp 0.6s ease-out;
-  /* Animación de entrada */
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(43, 58, 66, 0.3);
+  /* Dark blue outline para contraste */
 }
 
-/* Animación para el título */
+/* ========== BOTÓN SUBIR IMAGEN (AJUSTADO CON LA PALETA) ========== */
+.image-upload-label {
+  background: linear-gradient(to right, #3A5A40, #88AA4E);
+  /* Dark green a medium green */
+  color: #FFFFFF;
+  border: 2px solid #2B3A42;
+  /* Dark blue outline */
+  box-shadow: 0 3px 12px rgba(58, 90, 64, 0.3);
+  display: inline-block;
+  padding: 0.85rem 1.45rem;
+  border-radius: 26px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-shadow: 0 1px 1px rgba(43, 58, 66, 0.3);
+}
+
+.image-upload-label:hover {
+  background: linear-gradient(to right, #88AA4E, #3A5A40);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(59, 149, 196, 0.4);
+}
+
+/* ========== RESTO DEL CSS PERMANECE IGUAL ========== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -36,55 +61,31 @@
   }
 }
 
-/* ========== CONTENEDOR PRINCIPAL ========== */
 .content-container {
   padding: 1.2rem;
   min-height: calc(100vh - 58px);
-  background-color: #FFFFFF;
+  background-color: #D8C9B9;
   overflow: auto;
 }
 
-/* ========== FORMULARIO ========== */
 .form-card {
-  background: rgba(135, 214, 229, 0.75);
+  background: rgba(139, 170, 78, 0.75);
   backdrop-filter: blur(8px);
   border-radius: 17px;
   padding: 1.45rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(168, 224, 233, 0.3);
+  box-shadow: 0 4px 16px rgba(43, 58, 66, 0.1);
+  border: 1px solid rgba(156, 190, 95, 0.3);
   max-width: 520px;
   margin: 0 auto;
 }
 
-/* ========== SECCIÓN DE IMAGEN ========== */
 .image-section {
   margin-bottom: 1.65rem;
   text-align: center;
-  border: 1px solid rgba(168, 224, 233, 0.5);
+  border: 1px solid rgba(156, 190, 95, 0.5);
   border-radius: 10px;
   padding: 0.5rem;
   height: auto;
-}
-
-.image-upload-label {
-  display: inline-block;
-  background: linear-gradient(to right, var(--medium-blue), var(--turquoise));
-  color: var(--white);
-  padding: 0.85rem 1.45rem;
-  border-radius: 26px;
-  border: 2px solid var(--medium-blue);
-  font-weight: 600;
-  font-size: 0.98rem;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  box-shadow: 0 3px 12px rgba(74, 161, 195, 0.3);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.image-upload-label:hover {
-  background: linear-gradient(to right, var(--turquoise), var(--medium-blue));
-  transform: translateY(-2px);
-  box-shadow: 0 5px 18px rgba(74, 161, 195, 0.4);
 }
 
 .image-input {
@@ -95,112 +96,103 @@
   margin: 1.2rem auto 0;
   border-radius: 13px;
   overflow: hidden;
-  border: 2px solid var(--light-teal);
+  border: 2px solid #A6BFD2;
   max-width: 300px;
   height: 175px;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Estilo para la imagen dentro del contenedor de vista previa */
 .image-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* ========== CAMPOS DEL FORMULARIO ========== */
 .form-item {
   display: flex;
   align-items: center;
   margin-bottom: 1.4rem;
-  border: 1px solid rgba(168, 224, 233, 0.5);
+  border: 1px solid rgba(156, 190, 95, 0.5);
   border-radius: 8px;
   padding: 0.3rem;
 }
 
 .input-container {
   flex: 1;
-  border: 1px solid rgba(168, 224, 233, 0.3);
+  border: 1px solid rgba(156, 190, 95, 0.3);
   border-radius: 6px;
   padding: 0.2rem;
 }
 
 .input-label {
-  color: var(--dark-blue);
+  color: #2B3A42;
   font-weight: 600;
   font-size: 1.05rem;
   margin-bottom: 0.55rem;
   display: block;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 1px rgba(43, 58, 66, 0.1);
 }
 
 .custom-input {
   width: 100%;
-  background: rgba(238, 250, 251, 0.7);
+  background: rgba(229, 217, 206, 0.7);
   padding: 1rem 1.2rem;
   border-radius: 11px;
-  border: 2px solid var(--light-teal);
-  color: var(--black);
+  border: 2px solid #A6BFD2;
+  color: #2B3A42;
   font-size: 1.05rem;
   transition: all 0.25s ease;
 }
 
 .custom-input:focus {
-  border-color: var(--turquoise);
+  border-color: #3E95C4;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(135, 214, 229, 0.15);
+  box-shadow: 0 0 0 3px rgba(107, 175, 211, 0.15);
 }
 
-/* Estilo para el placeholder */
 .custom-input::placeholder {
-  color: var(--dark-blue);
-  /* Cambiado para coherencia con el diseño */
+  color: #5B7A8C;
   opacity: 0.5;
-  /* Reducido ligeramente para suavizar */
 }
 
 .form-icon {
-  color: var(--dark-blue);
+  color: #3A5A40;
   font-size: 1.55rem;
   margin-right: 0.95rem;
   flex-shrink: 0;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 1px rgba(43, 58, 66, 0.1);
   transition: all 0.3s ease;
-  /* Añadido para efecto de hover */
 }
 
 .form-icon:hover {
   transform: scale(1.1);
-  /* Efecto de escalado al hacer hover */
-  color: var(--turquoise);
-  /* Cambio de color al hacer hover */
+  color: #88AA4E;
 }
 
-/* ========== BOTÓN ========== */
 .submit-button {
   width: 100%;
-  background: linear-gradient(to right, var(--peach), #fff2e6);
-  color: var(--dark-blue);
+  background: linear-gradient(to right, #D9B58C, #E5D9CE);
+  color: #2B3A42;
   border-radius: 16px;
   padding: 1.1rem;
   font-weight: 700;
   font-size: 1.08rem;
   letter-spacing: 0.55px;
   margin-top: 1.45rem;
-  border: 1px solid rgba(168, 224, 233, 0.5);
+  border: 1px solid rgba(156, 190, 95, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.25s ease;
   cursor: pointer;
-  box-shadow: 0 3px 12px rgba(255, 230, 209, 0.2);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 12px rgba(217, 181, 140, 0.2);
+  text-shadow: 0 1px 1px rgba(43, 58, 66, 0.1);
 }
 
 .submit-button:hover {
-  background: linear-gradient(to right, #fff2e6, var(--peach));
+  background: linear-gradient(to right, #E5D9CE, #D9B58C);
   transform: translateY(-2px);
-  box-shadow: 0 5px 18px rgba(255, 230, 209, 0.3);
+  box-shadow: 0 5px 18px rgba(217, 181, 140, 0.3);
 }
 
 .button-icon {
@@ -212,7 +204,6 @@
   height: 1.25rem;
 }
 
-/* ========== MEDIA QUERIES ========== */
 @media (max-width: 359px) {
   .header-title {
     font-size: 1.4rem;

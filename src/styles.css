@@ -1,25 +1,25 @@
-/* ========== VARIABLES GLOBALES (TONOS MÁS CLAROS) ========== */
+/* ========== VARIABLES GLOBALES (AJUSTADAS A LA IMAGEN) ========== */
 :root {
-    --dark-blue: #1e4a5d;
-    /* Sin cambio, se mantiene oscuro para contraste */
-    --medium-blue: #4aa1c3;
-    /* Más claro que #328cad */
-    --turquoise: #87d6e5;
-    /* Más claro que #6dccdd */
-    --light-blue: #eefafb;
-    /* Más claro que #e6f7fd */
-    --white: #ffffff;
-    /* Sin cambio */
-    --peach: #ffe6d1;
-    /* Más claro que #ffdcc2 */
-    --black: #2a2a2a;
-    /* Sin cambio, se mantiene oscuro para contraste */
-    --light-gray: #f5f5f5;
-    /* Más claro que #f0f0f0 */
-    --dark-teal: #62b0bb;
-    /* Más claro que #4a9ba8 */
-    --light-teal: #a8e0e9;
-    /* Más claro que #8fd5e1 */
+    --dark-blue: #2B3A42;
+    /* Dark blue outline del faucet */
+    --medium-blue: #5B7A8C;
+    /* Medium blue-gray del faucet */
+    --turquoise: #6BAFD3;
+    /* Light blue de las gotas de agua */
+    --light-blue: #E5D9CE;
+    /* Subtle gradient center del fondo */
+    --white: #FFFFFF;
+    /* Highlight white de las gotas */
+    --peach: #D9B58C;
+    /* Light tan del suelo */
+    --black: #2B3A42;
+    /* Seeds/dots en el suelo (mismo que dark-blue para consistencia) */
+    --light-gray: #D8C9B9;
+    /* Light beige del fondo */
+    --dark-teal: #3E95C4;
+    /* Darker blue de las gotas */
+    --light-teal: #A6BFD2;
+    /* Light blue highlight del faucet */
 }
 
 /* ========== BASE ========== */
@@ -31,13 +31,14 @@
 
 html {
     font-size: 15.5px;
-    /* Aumentado ligeramente */
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
 body {
-    background: linear-gradient(160deg, var(--dark-blue) 0%, #226177 100%);
-    color: var(--white);
+    background: linear-gradient(160deg, #D8C9B9 0%, #E5D9CE 100%);
+    /* Fondo beige con gradiente */
+    color: #2B3A42;
+    /* Dark blue para el texto principal */
     line-height: 1.55;
 }
 
@@ -47,15 +48,14 @@ h2,
 h3 {
     font-weight: 600;
     margin-bottom: 1.2rem;
-    /* Aumentado ligeramente */
-    color: var(--white);
+    color: #2B3A42;
+    /* Dark blue para los encabezados */
 }
 
 /* ========== BOTONES GLOBALES ========== */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    /* Aumentado ligeramente */
     border-radius: 25px;
     font-weight: 600;
     text-align: center;
@@ -64,12 +64,15 @@ h3 {
 }
 
 .btn-primary {
-    background-color: var(--turquoise);
-    color: var(--dark-blue);
+    background-color: #88AA4E;
+    /* Medium green de las hojas */
+    color: #FFFFFF;
+    /* Blanco para contraste */
 }
 
 .btn-primary:hover {
-    background-color: var(--light-teal);
+    background-color: #9CBE5F;
+    /* Light green de las hojas */
     transform: translateY(-2px);
 }
 
@@ -77,20 +80,17 @@ h3 {
 @media (min-width: 360px) {
     html {
         font-size: 16px;
-        /* Aumentado ligeramente */
     }
 }
 
 @media (min-width: 480px) {
     html {
         font-size: 16.5px;
-        /* Aumentado ligeramente */
     }
 }
 
 @media (min-width: 768px) {
     html {
         font-size: 17px;
-        /* Aumentado ligeramente */
     }
 }

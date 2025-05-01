@@ -1,7 +1,7 @@
 <header class="app-header">
     <div class="toolbar header-toolbar">
         <button class="btn-clear profile-button" (click)="goToProfile()">
-            <i class="fas fa-user-astronaut"></i>
+            <fa-icon [icon]="faUserCircle" class=""profile-icon></fa-icon>
         </button>
         <div class="header-title-container">
             <h1 class="header-title">MI JARDÍN</h1>
@@ -15,21 +15,24 @@
 
 <nav class="app-tabs">
     <div class="tab-bar custom-tab-bar">
+        <!-- Inventario -->
         <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
             id="tab-button-plant-list">
-            <i class="fas fa-leaf-heart"></i>
+            <fa-icon [icon]="faLeaf" class="tab-icon"></fa-icon>
             <span class="tab-label">Plantas</span>
             <div class="plant-counter">{{ plantCount }}</div>
         </a>
 
+        <!-- Agregar Planta -->
         <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected" id="tab-button-add">
-            <i class="fas fa-hand-holding-seedling"></i>
+            <fa-icon [icon]="faSeedling" class="tab-icon"></fa-icon>
             <span class="tab-label">Agregar</span>
         </a>
 
+        <!-- Dispositivos -->
         <a class="tab-button add-tab" [routerLink]="['/view/dispositivos']" routerLinkActive="tab-selected"
             id="tab-button-dispositivos">
-            <i class="fas fa-solar-panel"></i>
+            <fa-icon [icon]="faMicrochip" class="tab-icon"></fa-icon>
             <span class="tab-label">Dispositivos</span>
         </a>
     </div>

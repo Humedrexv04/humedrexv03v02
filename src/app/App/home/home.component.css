@@ -4,11 +4,16 @@
 }
 
 .toolbar {
-    background: linear-gradient(to right, var(--dark-teal), var(--turquoise));
-    color: var(--main-color);
-    box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
-    border: 3px solid var(--turquoise);
-    border-bottom: 3px solid rgba(135, 214, 229, 0.7);
+    background: linear-gradient(to right, #5B7A8C, #A6BFD2);
+    /* Gradiente del faucet: medium blue-gray a light blue highlight */
+    color: #2B3A42;
+    /* Dark blue (aunque no se usa directamente) */
+    box-shadow: 0 4px 6px rgba(107, 175, 211, 0.3);
+    /* Sombra con light blue */
+    border: 3px solid #6BAFD3;
+    /* Light blue de las gotas */
+    border-bottom: 3px solid rgba(107, 175, 211, 0.7);
+    /* Light blue con opacidad */
     border-radius: 8px;
     padding: 1rem;
     display: flex;
@@ -20,38 +25,41 @@
     font-size: 1.5rem;
     font-weight: 600;
     letter-spacing: 1px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(43, 58, 66, 0.2);
+    /* Sombra con dark blue */
     margin: 0;
-    color: var(--dark-blue);
-    /* Cambiado para combinar mejor */
+    color: #FFFFFF;
+    /* Blanco para contraste */
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 /* ========== CONTENIDO PRINCIPAL ========== */
 .content {
-    background: var(--light-blue);
+    background: #E5D9CE;
+    /* Subtle gradient center */
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: calc(100% - 56px);
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5),
-        inset 0 0 4px rgba(135, 214, 229, 0.3);
-    border: 3px solid var(--turquoise);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5), inset 0 0 4px rgba(107, 175, 211, 0.3);
+    /* Sombra con light blue */
+    border: 3px solid #6BAFD3;
+    /* Light blue de las gotas */
     border-radius: 12px;
 }
 
 /* ========== TEXTO DE BIENVENIDA ========== */
 h2 {
-    color: var(--medium-blue);
+    color: #2B3A42;
+    /* Dark blue para el texto */
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+    text-shadow: 1px 1px 2px rgba(43, 58, 66, 0.15);
+    /* Sombra con dark blue */
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 /* ========== TARJETA DE PERFIL ========== */
@@ -64,9 +72,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    background: linear-gradient(to bottom, var(--light-blue), var(--white));
-    box-shadow: 0 4px 10px rgba(135, 214, 229, 0.3);
-    border: 3px solid var(--medium-blue);
+    background: linear-gradient(to bottom, #E5D9CE, #FFFFFF);
+    /* Subtle gradient center a blanco */
+    box-shadow: 0 4px 10px rgba(107, 175, 211, 0.3);
+    /* Sombra con light blue */
+    border: 3px solid #5B7A8C;
+    /* Medium blue-gray */
     margin: 20px auto;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
@@ -80,7 +91,8 @@ h2 {
 .card__img {
     height: 150px;
     width: 100%;
-    background: linear-gradient(135deg, #e5ecef, var(--light-teal), rgba(255, 255, 255, 0.5));
+    background: linear-gradient(135deg, #E5D9CE, #A6BFD2, rgba(255, 255, 255, 0.5));
+    /* Gradiente: subtle gradient center a light blue highlight */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,12 +103,14 @@ h2 {
 .card__avatar {
     width: 100px;
     height: 100px;
-    background: var(--white);
+    background: #FFFFFF;
+    /* Blanco */
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
+    box-shadow: 0 4px 6px rgba(107, 175, 211, 0.3);
+    /* Sombra con light blue */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -107,8 +121,10 @@ h2 {
 .profile-icon {
     width: 80px;
     height: 80px;
-    fill: var(--dark-blue);
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    fill: #2B3A42;
+    /* Dark blue para el ícono */
+    filter: drop-shadow(0 1px 2px rgba(43, 58, 66, 0.4));
+    /* Sombra con dark blue */
 }
 
 /* ========== INFORMACIÓN DEL USUARIO ========== */
@@ -122,21 +138,23 @@ h2 {
 .card__title {
     font-weight: 500;
     font-size: 18px;
-    color: var(--black);
+    color: #2B3A42;
+    /* Dark blue para el texto */
     margin: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+    /* Sombra con dark blue */
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 .card__subtitle {
     font-weight: 400;
     font-size: 15px;
-    color: var(--medium-blue);
+    color: #5B7A8C;
+    /* Medium blue-gray para el subtítulo */
     margin: 5px 0 0;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 1px rgba(43, 58, 66, 0.15);
+    /* Sombra con dark blue */
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 /* Contenido de la tarjeta */
@@ -144,7 +162,8 @@ h2 {
     width: 100%;
     padding: 16px;
     box-sizing: border-box;
-    background: rgba(238, 250, 251, 0.7);
+    background: rgba(229, 217, 206, 0.7);
+    /* Subtle gradient center con opacidad */
     border-radius: 0 0 16px 16px;
 }
 
@@ -153,19 +172,23 @@ h2 {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    color: var(--main-color);
+    color: #2B3A42;
+    /* Dark blue (aunque no se usa directamente) */
     padding: 8px 0;
-    border: 1px solid var(--turquoise);
+    border: 1px solid #6BAFD3;
+    /* Light blue de las gotas */
     border-radius: 8px;
 }
 
 .icon-leaf {
     width: 24px;
     height: 24px;
-    color: var(--medium-blue);
+    color: #3A5A40;
+    /* Dark green de los detalles de las hojas */
     margin-right: 16px;
     transition: transform 0.3s ease-in-out;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 1px 2px rgba(43, 58, 66, 0.4));
+    /* Sombra con dark blue */
 }
 
 .info-item:hover .icon-leaf {
@@ -174,10 +197,11 @@ h2 {
 
 .info-label {
     font-size: 16px;
-    color: var(--dark-blue);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    color: #2B3A42;
+    /* Dark blue para el texto */
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+    /* Sombra con dark blue */
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 /* ========== BOTÓN DE CERRAR SESIÓN ========== */
@@ -186,28 +210,34 @@ h2 {
     margin-top: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    background: linear-gradient(to right, var(--peach), #fff2e6);
-    color: var(--dark-blue);
+    background: linear-gradient(to right, #D9B58C, #E5D9CE);
+    /* Gradiente: light tan a subtle gradient center */
+    color: #2B3A42;
+    /* Dark blue para el texto */
     border-radius: 12px;
-    border: 2px solid var(--peach);
+    border: 2px solid #D9B58C;
+    /* Light tan */
     padding: 12px 24px;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(43, 58, 66, 0.1);
+    /* Sombra con dark blue */
     transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
-    /* Nueva fuente */
 }
 
 .logout-button:hover {
-    background: linear-gradient(to right, #fff2e6, var(--peach));
+    background: linear-gradient(to right, #E5D9CE, #D9B58C);
+    /* Gradiente inverso */
     transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 8px rgba(43, 58, 66, 0.15);
+    /* Sombra con dark blue */
 }
 
 .logout-button:active {
     transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(43, 58, 66, 0.1);
+    /* Sombra con dark blue */
 }
 
 /* ========== RESPONSIVE DESIGN ========== */

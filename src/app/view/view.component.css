@@ -2,15 +2,18 @@
    ESTILOS GENERALES
 ================================== */
 .content {
-  background: var(--light-blue);
-  padding: 26px;
+  background: #E5D9CE;
+  /* Subtle gradient center */
+  padding: 5.5vmin;
+  /* Aumentado para más espacio */
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(100vh - 56px - 78px);
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5),
-    inset 0 0 4px rgba(135, 214, 229, 0.3);
-  border: 3px solid var(--turquoise);
+  height: calc(100vh - 10vmin - 14vmin);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.6), inset 0 0 5px rgba(156, 190, 95, 0.35);
+  /* Sombra más suave con light green */
+  border: 2px solid #88AA4E;
+  /* Medium green */
   border-radius: 12px;
   overflow-y: auto;
   box-sizing: border-box;
@@ -24,13 +27,19 @@
 }
 
 .header-toolbar {
-  background: linear-gradient(to right, var(--dark-teal), var(--turquoise));
-  color: var(--main-color);
-  box-shadow: 0 4px 6px rgba(135, 214, 229, 0.3);
-  border: 3px solid var(--turquoise);
-  border-bottom: 3px solid rgba(135, 214, 229, 0.7);
+  background: linear-gradient(to right, #3A5A40, #88AA4E);
+  /* Dark green a medium green */
+  color: #2B3A42;
+  /* Dark blue para el texto */
+  box-shadow: 0 5px 10px rgba(156, 190, 95, 0.45);
+  /* Sombra más pronunciada con light green */
+  border: 2px solid #88AA4E;
+  /* Medium green */
+  border-bottom: 3px solid #3A5A40;
+  /* Dark green */
   border-radius: 8px;
-  padding: 13px 21px;
+  padding: 2.5vmin 3.5vmin;
+  /* Aumentado para más espacio */
   display: flex;
   align-items: center;
 }
@@ -42,37 +51,53 @@
 }
 
 .header-title {
-  font-size: 1.95rem;
+  font-size: 5.5vmin;
   font-weight: 600;
-  letter-spacing: 1.3px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.1vmin;
+  text-shadow: 1px 1px 3px rgba(43, 58, 66, 0.35);
+  /* Sombra más suave */
   margin: 0;
   text-align: center;
-  color: var(--dark-blue);
+  color: #FFFFFF;
+  /* Blanco para contraste */
   font-family: 'Poppins', sans-serif;
 }
 
 .btn-clear {
   background: transparent;
   border: none;
-  color: var(--medium-blue);
   cursor: pointer;
-  padding: 10px;
+  padding: 2.5vmin;
+  /* Aumentado para un botón más grande */
   transition: all 0.3s ease;
 }
 
 .btn-clear:hover {
-  color: var(--white);
-  transform: translateY(-2.6px);
+  transform: translateY(-0.5vmin);
 }
 
-.profile-button i {
-  font-size: 31px;
-  transition: transform 0.3s ease;
+.profile-icon {
+  font-size: 30vmin;
+  /* Aumentado para mejor visibilidad */
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 140px;
+  max-height: 140px;
+  /* Ajustado para proporciones */
+  color: #D9B58C;
+  /* Light tan */
+  transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profile-button:hover i {
-  transform: rotate(-15deg) scale(1.1);
+.profile-button:hover .profile-icon {
+  transform: rotate(-15deg) scale(1.2);
+  /* Efecto más pronunciado */
+  color: #E5D9CE;
+  /* Subtle gradient center */
+  box-shadow: 0 0 20px rgba(217, 181, 140, 0.6);
+  /* Sombra más pronunciada en hover */
+  width: 140px;
+  height: 80px;
 }
 
 /* ================================
@@ -83,19 +108,27 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--light-blue);
+  background: #D8C9B9;
+  /* Light beige como base */
 }
 
 .tab-bar {
-  background: linear-gradient(to bottom, var(--light-blue), var(--white));
-  color: var(--dark-blue);
-  border-top: 1px solid var(--turquoise);
-  height: 78px;
-  border-radius: 33px 33px 0 0;
-  margin: 0 13px;
-  padding: 10px 0;
-  box-shadow: 0 -2px 10px rgba(135, 214, 229, 0.3);
-  backdrop-filter: blur(6.5px);
+  background: linear-gradient(to bottom, #E5D9CE, #D8C9B9, rgba(156, 190, 95, 0.2));
+  /* Degradado con toque verde claro */
+  color: #2B3A42;
+  /* Dark blue para el texto */
+  border-top: 2px solid #88AA4E;
+  /* Medium green más grueso */
+  height: 14vmin;
+  border-radius: 5vmin 5vmin 0 0;
+  margin: 0 2.5vmin;
+  /* Aumentado para más espacio */
+  padding: 2.5vmin 0;
+  /* Aumentado para más espacio */
+  box-shadow: 0 -3px 15px rgba(156, 190, 95, 0.45);
+  /* Sombra más pronunciada */
+  backdrop-filter: blur(10px);
+  /* Efecto más suave */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -109,96 +142,101 @@
   flex: 1;
   position: relative;
   text-decoration: none;
-  color: var(--dark-blue);
+  color: #2B3A42;
+  /* Dark blue */
   height: 100%;
-  transition: all 0.3s ease;
+  padding: 1vmin 2vmin;
+  transition: all 0.4s ease;
+}
+
+.tab-button:hover {
+  background: rgba(156, 190, 95, 0.25);
+  /* Light green con opacidad */
+  border-radius: 2vmin;
 }
 
 .tab-button.tab-selected {
   animation: float 0.4s ease-out forwards;
-  background: linear-gradient(to right, var(--medium-blue), var(--turquoise));
-  color: var(--white);
-  border-radius: 14px;
+  background: linear-gradient(to right, #3A5A40, #88AA4E);
+  /* Dark green a medium green */
+  color: #FFFFFF;
+  /* Blanco */
+  border-radius: 2vmin;
+  box-shadow: 0 0 15px rgba(156, 190, 95, 0.7);
+  /* Sombra más pronunciada */
 }
 
 .tab-icon {
-  font-size: 1.95rem;
-  transition: all 0.3s ease;
+  font-size: 5.5vmin;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 40px;
+  max-height: 40px;
+  color: #3A5A40;
+  /* Dark green */
+  transition: all 0.4s ease;
   position: relative;
-}
-
-/* Estilos específicos para cada icono */
-.fa-spa {
-  /* Icono de plantas */
-  transform-origin: bottom center;
-}
-
-.fa-plus-square {
-  /* Icono de agregar */
-  transform-origin: center;
-}
-
-.fa-tractor {
-  /* Icono de dispositivos */
-  transform-origin: center;
+  filter: drop-shadow(0 2px 4px rgba(43, 58, 66, 0.25));
+  /* Sombra más suave */
 }
 
 .tab-button.tab-selected .tab-icon {
   transform: scale(1.3);
-  color: var(--white);
+  color: #FFFFFF;
+  /* Blanco */
 }
 
-/* Efectos hover específicos */
-.tab-button:not(.tab-selected):hover .fa-spa {
-  animation: gentleSway 0.8s ease-in-out;
-}
-
-.tab-button:not(.tab-selected):hover .fa-plus-square {
-  animation: pulse 0.5s ease;
-}
-
-.tab-button:not(.tab-selected):hover .fa-tractor {
-  animation: shake 0.5s ease;
+.tab-button:not(.tab-selected):hover .tab-icon {
+  color: #88AA4E;
+  /* Medium green */
 }
 
 .tab-label {
-  font-size: 1.04rem;
-  margin-top: 5px;
-  transition: all 0.3s ease;
+  font-size: 2.8vmin;
+  margin-top: 1vmin;
+  transition: all 0.4s ease;
   font-family: 'Poppins', sans-serif;
+  text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+  /* Sombra más suave */
 }
 
 .tab-button.tab-selected .tab-label {
-  color: var(--white);
+  color: #FFFFFF;
   font-weight: 500;
 }
 
 .tab-button.tab-selected::after {
   content: '';
   position: absolute;
-  bottom: 6.5px;
+  bottom: 1vmin;
   left: 50%;
   transform: translateX(-50%);
   width: 40%;
-  height: 2.6px;
-  background-color: var(--white);
-  border-radius: 2.6px;
+  height: 0.5vmin;
+  background-color: #FFFFFF;
+  /* Blanco */
+  border-radius: 1vmin;
   animation: underline 0.3s ease-out;
 }
 
 .plant-counter {
   position: absolute;
-  top: -1.3px;
-  right: 42px;
-  background-color: var(--peach);
-  color: var(--dark-blue);
-  font-size: 0.91rem;
-  padding: 2.6px 8px;
+  top: -1vmin;
+  right: 1vmin;
+  background-color: #D9B58C;
+  /* Light tan */
+  color: #2B3A42;
+  /* Dark blue */
+  font-size: 2.2vmin;
+  padding: 0.5vmin 1.5vmin;
   border-radius: 50%;
   z-index: 1;
-  box-shadow: 0 2.6px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(43, 58, 66, 0.25);
+  /* Sombra más suave */
   animation: bounce 0.5s ease-in-out;
   font-family: 'Poppins', sans-serif;
+  text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+  /* Sombra más suave */
 }
 
 /* ================================
@@ -220,11 +258,11 @@
   }
 
   50% {
-    transform: translateY(-13px);
+    transform: translateY(-2vmin);
   }
 
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-1.5vmin);
   }
 }
 
@@ -236,11 +274,10 @@
   }
 
   50% {
-    transform: translateY(-13px);
+    transform: translateY(-2vmin);
   }
 }
 
-/* Nuevas animaciones para los iconos */
 @keyframes gentleSway {
 
   0%,
@@ -290,109 +327,368 @@
 }
 
 /* ================================
-   MEDIA QUERIES - Responsive
+   MEDIA QUERIES
 ================================== */
-@media (max-width: 359px) {
+/* Pantallas muy pequeñas (ej. iPhone 5/SE: 320px) */
+@media (max-width: 320px) {
   .header-title {
-    font-size: 1.69rem;
+    font-size: 4.5vmin;
   }
 
-  .profile-button i {
-    font-size: 28px;
+  .header-toolbar {
+    padding: 1.5vmin 2vmin;
   }
 
-  .tab-bar {
-    height: 71px;
-    padding: 8px 0;
+  .btn-clear {
+    padding: 2vmin;
+    /* Ajuste proporcional */
   }
 
-  .tab-icon {
-    font-size: 1.69rem;
-  }
-
-  .tab-label {
-    font-size: 0.91rem;
-  }
-
-  .plant-counter {
-    font-size: 0.85rem;
-    padding: 1.3px 6.5px;
+  .profile-icon {
+    font-size: 20vmin;
+    /* Ajuste proporcional */
+    min-width: 90px;
+    min-height: 90px;
   }
 
   .content {
-    height: calc(100vh - 56px - 71px);
-    padding: 20px;
-  }
-}
-
-@media (min-width: 360px) {
-  html {
-    font-size: 20.8px;
-  }
-}
-
-@media (min-width: 480px) {
-  .header-title {
-    font-size: 2.21rem;
-  }
-
-  .profile-button i {
-    font-size: 34px;
-  }
-
-  .content {
-    padding: 32px;
-    height: calc(100vh - 56px - 85px);
+    padding: 4vmin;
+    height: calc(100vh - 8vmin - 12vmin);
   }
 
   .tab-bar {
-    height: 85px;
-    padding: 13px 0;
+    height: 12vmin;
+    padding: 1.5vmin 0;
+    margin: 0 1.5vmin;
+  }
+
+  .tab-button {
+    padding: 0.8vmin 1.5vmin;
   }
 
   .tab-icon {
-    font-size: 2.21rem;
+    font-size: 4.5vmin;
   }
 
   .tab-label {
-    font-size: 1.17rem;
+    font-size: 2.2vmin;
+    margin-top: 0.8vmin;
   }
 
   .plant-counter {
-    font-size: 1.04rem;
-    padding: 3.9px 9px;
+    font-size: 1.9vmin;
+    padding: 0.4vmin 1.2vmin;
   }
 }
 
-@media (min-width: 768px) {
+/* Pantallas pequeñas (ej. iPhone 6/7/8: 375px) */
+@media (min-width: 321px) and (max-width: 375px) {
   .header-title {
-    font-size: 2.47rem;
+    font-size: 5vmin;
   }
 
-  .profile-button i {
-    font-size: 36px;
+  .header-toolbar {
+    padding: 1.8vmin 2.5vmin;
+  }
+
+  .btn-clear {
+    padding: 2.2vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 23vmin;
+    /* Ajuste proporcional */
+    min-width: 100px;
+    min-height: 100px;
   }
 
   .content {
-    padding: 39px;
-    height: calc(100vh - 56px - 91px);
+    padding: 4.5vmin;
+    height: calc(100vh - 9vmin - 13vmin);
   }
 
   .tab-bar {
-    height: 91px;
-    padding: 16px 0;
+    height: 13vmin;
+    padding: 1.8vmin 0;
+    margin: 0 1.8vmin;
+  }
+
+  .tab-button {
+    padding: 1vmin 1.8vmin;
   }
 
   .tab-icon {
-    font-size: 2.47rem;
+    font-size: 5vmin;
   }
 
   .tab-label {
-    font-size: 1.3rem;
+    font-size: 2.4vmin;
+    margin-top: 0.9vmin;
   }
 
   .plant-counter {
-    font-size: 1.17rem;
-    padding: 5px 10px;
+    font-size: 2vmin;
+    padding: 0.4vmin 1.3vmin;
+  }
+}
+
+/* Pantallas medianas (ej. iPhone XR/11: 414px) */
+@media (min-width: 376px) and (max-width: 414px) {
+  .header-title {
+    font-size: 5.2vmin;
+  }
+
+  .header-toolbar {
+    padding: 2vmin 3vmin;
+  }
+
+  .btn-clear {
+    padding: 2.4vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 26vmin;
+    /* Ajuste proporcional */
+    min-width: 110px;
+    min-height: 110px;
+  }
+
+  .content {
+    padding: 5vmin;
+    height: calc(100vh - 10vmin - 14vmin);
+  }
+
+  .tab-bar {
+    height: 14vmin;
+    padding: 2vmin 0;
+    margin: 0 2vmin;
+  }
+
+  .tab-button {
+    padding: 1.2vmin 2vmin;
+  }
+
+  .tab-icon {
+    font-size: 5.5vmin;
+  }
+
+  .tab-label {
+    font-size: 2.8vmin;
+    margin-top: 1vmin;
+  }
+
+  .plant-counter {
+    font-size: 2.2vmin;
+    padding: 0.5vmin 1.5vmin;
+  }
+}
+
+/* Pantallas grandes (ej. iPhone 14 Pro Max: 430px) */
+@media (min-width: 415px) and (max-width: 479px) {
+  .header-title {
+    font-size: 5.5vmin;
+  }
+
+  .header-toolbar {
+    padding: 2.2vmin 3.2vmin;
+  }
+
+  .btn-clear {
+    padding: 2.6vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 28vmin;
+    /* Ajuste proporcional */
+    min-width: 115px;
+    min-height: 115px;
+  }
+
+  .content {
+    padding: 5.5vmin;
+    height: calc(100vh - 11vmin - 15vmin);
+  }
+
+  .tab-bar {
+    height: 15vmin;
+    padding: 2.2vmin 0;
+    margin: 0 2.2vmin;
+  }
+
+  .tab-button {
+    padding: 1.4vmin 2.2vmin;
+  }
+
+  .tab-icon {
+    font-size: 5.8vmin;
+  }
+
+  .tab-label {
+    font-size: 3vmin;
+    margin-top: 1.1vmin;
+  }
+
+  .plant-counter {
+    font-size: 2.4vmin;
+    padding: 0.6vmin 1.6vmin;
+  }
+}
+
+/* Pantallas más grandes (ej. tabletas pequeñas: 768px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .header-title {
+    font-size: 6vmin;
+  }
+
+  .header-toolbar {
+    padding: 2.5vmin 3.5vmin;
+  }
+
+  .btn-clear {
+    padding: 2.8vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 30vmin;
+    /* Ajuste proporcional */
+    min-width: 120px;
+    min-height: 120px;
+  }
+
+  .content {
+    padding: 6vmin;
+    height: calc(100vh - 12vmin - 16vmin);
+  }
+
+  .tab-bar {
+    height: 16vmin;
+    padding: 2.5vmin 0;
+    margin: 0 2.5vmin;
+  }
+
+  .tab-button {
+    padding: 1.6vmin 2.5vmin;
+  }
+
+  .tab-icon {
+    font-size: 6vmin;
+  }
+
+  .tab-label {
+    font-size: 3.2vmin;
+    margin-top: 1.2vmin;
+  }
+
+  .plant-counter {
+    font-size: 2.7vmin;
+    padding: 0.7vmin 1.8vmin;
+  }
+}
+
+/* Pantallas de tabletas (ej. iPad Mini: 768px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .header-title {
+    font-size: 6.5vmin;
+  }
+
+  .header-toolbar {
+    padding: 3vmin 4vmin;
+  }
+
+  .btn-clear {
+    padding: 3vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 32vmin;
+    /* Ajuste proporcional */
+    min-width: 125px;
+    min-height: 125px;
+  }
+
+  .content {
+    padding: 7vmin;
+    height: calc(100vh - 13vmin - 17vmin);
+  }
+
+  .tab-bar {
+    height: 17vmin;
+    padding: 3vmin 0;
+    margin: 0 3vmin;
+  }
+
+  .tab-button {
+    padding: 2vmin 3vmin;
+  }
+
+  .tab-icon {
+    font-size: 6.5vmin;
+  }
+
+  .tab-label {
+    font-size: 3.8vmin;
+    margin-top: 1.5vmin;
+  }
+
+  .plant-counter {
+    font-size: 3.2vmin;
+    padding: 0.8vmin 2vmin;
+  }
+}
+
+/* Pantallas más grandes (ej. iPad Pro: 1024px) */
+@media (min-width: 1024px) {
+  .header-title {
+    font-size: 7vmin;
+  }
+
+  .header-toolbar {
+    padding: 3.5vmin 4.5vmin;
+  }
+
+  .btn-clear {
+    padding: 3.2vmin;
+    /* Ajuste proporcional */
+  }
+
+  .profile-icon {
+    font-size: 34vmin;
+    /* Ajuste proporcional */
+    min-width: 130px;
+    min-height: 130px;
+  }
+
+  .content {
+    padding: 8vmin;
+    height: calc(100vh - 14vmin - 18vmin);
+  }
+
+  .tab-bar {
+    height: 18vmin;
+    padding: 3.5vmin 0;
+    margin: 0 3.5vmin;
+  }
+
+  .tab-button {
+    padding: 2.5vmin 3.5vmin;
+  }
+
+  .tab-icon {
+    font-size: 7vmin;
+  }
+
+  .tab-label {
+    font-size: 4.2vmin;
+    margin-top: 1.8vmin;
+  }
+
+  .plant-counter {
+    font-size: 3.8vmin;
+    padding: 1vmin 2.5vmin;
   }
 }
