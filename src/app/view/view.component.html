@@ -1,8 +1,7 @@
-<!-- HTML -->
 <header class="app-header">
     <div class="toolbar header-toolbar">
         <button class="btn-clear profile-button" (click)="goToProfile()">
-            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-user-astronaut"></i>
         </button>
         <div class="header-title-container">
             <h1 class="header-title">MI JARDÍN</h1>
@@ -16,22 +15,21 @@
 
 <nav class="app-tabs">
     <div class="tab-bar custom-tab-bar">
-        <!-- Inventario - Izquierda -->
         <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
             id="tab-button-plant-list">
-            <i class="fas fa-leaf tab-icon"></i>
+            <i class="fas fa-leaf-heart"></i>
             <span class="tab-label">Plantas</span>
             <div class="plant-counter">{{ plantCount }}</div>
         </a>
 
-        <!-- Add - Centro -->
         <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected" id="tab-button-add">
-            <i class="fas fa-plus-circle tab-icon"></i>
+            <i class="fas fa-hand-holding-seedling"></i>
             <span class="tab-label">Agregar</span>
         </a>
+
         <a class="tab-button add-tab" [routerLink]="['/view/dispositivos']" routerLinkActive="tab-selected"
-            id="tab-button-add">
-            <i class="fas fa-plus-circle tab-icon"></i>
+            id="tab-button-dispositivos">
+            <i class="fas fa-solar-panel"></i>
             <span class="tab-label">Dispositivos</span>
         </a>
     </div>

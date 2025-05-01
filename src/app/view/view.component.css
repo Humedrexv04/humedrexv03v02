@@ -1,4 +1,6 @@
-/* ========== ESTILOS GENERALES ========== */
+/* ================================
+   ESTILOS GENERALES
+================================== */
 .content {
   background: var(--light-blue);
   padding: 26px;
@@ -6,17 +8,17 @@
   flex-direction: column;
   align-items: center;
   height: calc(100vh - 56px - 78px);
-  /* Ajustado para ocupar el espacio disponible */
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5),
     inset 0 0 4px rgba(135, 214, 229, 0.3);
   border: 3px solid var(--turquoise);
   border-radius: 12px;
   overflow-y: auto;
-  /* Asegurar desplazamiento vertical */
   box-sizing: border-box;
 }
 
-/* ========== HEADER ========== */
+/* ================================
+   HEADER
+================================== */
 .app-header {
   z-index: 900;
 }
@@ -33,6 +35,12 @@
   align-items: center;
 }
 
+.header-title-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 .header-title {
   font-size: 1.95rem;
   font-weight: 600;
@@ -44,12 +52,6 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.header-title-container {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
 .btn-clear {
   background: transparent;
   border: none;
@@ -59,16 +61,23 @@
   transition: all 0.3s ease;
 }
 
-.profile-button {
-  font-size: 31px;
-}
-
 .btn-clear:hover {
   color: var(--white);
   transform: translateY(-2.6px);
 }
 
-/* ========== PESTAÑAS ========== */
+.profile-button i {
+  font-size: 31px;
+  transition: transform 0.3s ease;
+}
+
+.profile-button:hover i {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+/* ================================
+   TABS DE NAVEGACIÓN
+================================== */
 .app-tabs {
   position: fixed;
   bottom: 0;
@@ -77,7 +86,6 @@
   background: var(--light-blue);
 }
 
-/* Barra de pestañas */
 .tab-bar {
   background: linear-gradient(to bottom, var(--light-blue), var(--white));
   color: var(--dark-blue);
@@ -93,7 +101,6 @@
   align-items: center;
 }
 
-/* Botón de pestaña */
 .tab-button {
   display: flex;
   flex-direction: column;
@@ -107,7 +114,6 @@
   transition: all 0.3s ease;
 }
 
-/* Pestaña seleccionada */
 .tab-button.tab-selected {
   animation: float 0.4s ease-out forwards;
   background: linear-gradient(to right, var(--medium-blue), var(--turquoise));
@@ -115,18 +121,46 @@
   border-radius: 14px;
 }
 
-/* Íconos de las pestañas */
 .tab-icon {
   font-size: 1.95rem;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Estilos específicos para cada icono */
+.fa-spa {
+  /* Icono de plantas */
+  transform-origin: bottom center;
+}
+
+.fa-plus-square {
+  /* Icono de agregar */
+  transform-origin: center;
+}
+
+.fa-tractor {
+  /* Icono de dispositivos */
+  transform-origin: center;
 }
 
 .tab-button.tab-selected .tab-icon {
-  transform: scale(1.5);
+  transform: scale(1.3);
   color: var(--white);
 }
 
-/* Texto de la pestaña */
+/* Efectos hover específicos */
+.tab-button:not(.tab-selected):hover .fa-spa {
+  animation: gentleSway 0.8s ease-in-out;
+}
+
+.tab-button:not(.tab-selected):hover .fa-plus-square {
+  animation: pulse 0.5s ease;
+}
+
+.tab-button:not(.tab-selected):hover .fa-tractor {
+  animation: shake 0.5s ease;
+}
+
 .tab-label {
   font-size: 1.04rem;
   margin-top: 5px;
@@ -139,7 +173,6 @@
   font-weight: 500;
 }
 
-/* Efecto de subrayado de la pestaña seleccionada */
 .tab-button.tab-selected::after {
   content: '';
   position: absolute;
@@ -153,7 +186,6 @@
   animation: underline 0.3s ease-out;
 }
 
-/* Contador de plantas */
 .plant-counter {
   position: absolute;
   top: -1.3px;
@@ -169,7 +201,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* Animaciones */
+/* ================================
+   ANIMACIONES
+================================== */
 @keyframes underline {
   from {
     width: 0;
@@ -206,10 +240,65 @@
   }
 }
 
-/* ========== MEDIA QUERIES ========== */
+/* Nuevas animaciones para los iconos */
+@keyframes gentleSway {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(5deg);
+  }
+
+  50% {
+    transform: rotate(-5deg);
+  }
+
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* ================================
+   MEDIA QUERIES - Responsive
+================================== */
 @media (max-width: 359px) {
   .header-title {
     font-size: 1.69rem;
+  }
+
+  .profile-button i {
+    font-size: 28px;
   }
 
   .tab-bar {
@@ -247,6 +336,10 @@
     font-size: 2.21rem;
   }
 
+  .profile-button i {
+    font-size: 34px;
+  }
+
   .content {
     padding: 32px;
     height: calc(100vh - 56px - 85px);
@@ -274,6 +367,10 @@
 @media (min-width: 768px) {
   .header-title {
     font-size: 2.47rem;
+  }
+
+  .profile-button i {
+    font-size: 36px;
   }
 
   .content {
