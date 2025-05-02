@@ -22,6 +22,12 @@
     /* Light blue highlight del faucet */
 }
 
+html,
+body {
+    height: auto !important;
+    overflow-y: auto !important;
+}
+
 /* ========== BASE ========== */
 * {
     box-sizing: border-box;
