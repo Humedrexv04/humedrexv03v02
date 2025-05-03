@@ -9,7 +9,7 @@ import { thermometer } from 'ionicons/icons';
 
 @Component({
   selector: 'app-add',
-  standalone: true, // Agregar si usas Angular standalone components
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
@@ -17,54 +17,102 @@ import { thermometer } from 'ionicons/icons';
 export class AddComponent {
   img: string = '';
   name: string = '';
-  horario: string = '';  // Se asegura que sea número
+  horario: string = '';
   humedad: number = 0;
-  sensorHumedad: number = 0;
+  sensorHumedad: { deviceId: string; sensorKey: string } = { deviceId: '', sensorKey: '' };
   electrovalvula: number = 0;
+  errorMessage: string | null = null;
+  isSubmitting: boolean = false;
 
   constructor(
     private plantService: PlantService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     addIcons({ thermometer });
   }
 
-  ngOnInit() {}
-
   async addPlant() {
-    try {
-        const user = await this.authService.getCurrentUser ();
-        if (!user) throw new Error('No se pudo obtener el usuario');
-
-        // Crear la planta
-        const newPlant: Plant = { 
-            img: this.img, 
-            name: this.name, 
-            horario: this.horario, 
-            humedad: this.humedad,
-            sensorHumedad: this.sensorHumedad, // Asegúrate de que estas propiedades existan
-            electrovalvula: this.electrovalvula // Asegúrate de que estas propiedades existan
-        };
-
-        // Llamar al servicio para agregar la planta
-        await this.plantService.addPlant(user.uid, newPlant);
-        console.log('✅ Planta agregada exitosamente');
-
-        // Limpiar formulario
-        this.resetForm();
-    } catch (error) {
-        console.error('❌ Error al agregar la planta, el sensor o la electrovalvula:', error);
+    if (this.isSubmitting) {
+      this.errorMessage = 'Por favor, espera a que se complete la operación actual.';
+      return;
     }
-}
+
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.errorMessage = null;
+
+    try {
+      const user = await this.authService.getCurrentUser();
+      if (!user) {
+        throw new Error('No se pudo obtener el usuario');
+      }
+
+      const newPlant: Plant = {
+        name: this.name,
+        horario: this.horario,
+        humedad: this.humedad,
+        img: this.img || undefined,
+        electrovalvula: this.electrovalvula || undefined
+      };
+
+      if (this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
+        newPlant.sensorHumedad = this.sensorHumedad;
+      }
+
+      await this.plantService.addPlant(user.uid, newPlant);
+      console.log('✅ Planta agregada exitosamente');
+      this.resetForm();
+    } catch (error: any) {
+      this.errorMessage = error.message || 'Error al agregar la planta. Intenta nuevamente.';
+      console.error('❌ Error al agregar la planta:', error);
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  private validateForm(): boolean {
+    if (!this.name.trim()) {
+      this.errorMessage = 'El nombre de la planta es requerido.';
+      return false;
+    }
+    if (!this.horario.trim()) {
+      this.errorMessage = 'El horario es requerido.';
+      return false;
+    }
+    if (this.humedad <= 0 || isNaN(this.humedad)) {
+      this.errorMessage = 'La humedad debe ser un número mayor que 0.';
+      return false;
+    }
+    if (this.electrovalvula < 0) {
+      this.errorMessage = 'La electroválvula no puede ser negativa.';
+      return false;
+    }
+    if (this.sensorHumedad.deviceId && !this.sensorHumedad.sensorKey) {
+      this.errorMessage = 'Si se especifica un dispositivo, también se debe especificar un sensor.';
+      return false;
+    }
+    if (!this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
+      this.errorMessage = 'Si se especifica un sensor, también se debe especificar un dispositivo.';
+      return false;
+    }
+    return true;
+  }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        this.errorMessage = 'Por favor, selecciona un archivo de imagen válido.';
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.img = e.target.result; // Asigna la imagen a la variable img
+        this.img = e.target.result;
       };
-      reader.readAsDataURL(file); // Lee el archivo como Data URL
+      reader.readAsDataURL(file);
     }
   }
 
@@ -73,5 +121,8 @@ export class AddComponent {
     this.name = '';
     this.horario = '';
     this.humedad = 0;
+    this.sensorHumedad = { deviceId: '', sensorKey: '' };
+    this.electrovalvula = 0;
+    this.errorMessage = null;
   }
 }

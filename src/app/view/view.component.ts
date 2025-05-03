@@ -25,8 +25,8 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 export class ViewComponent {
   route = inject(Router);
   plantCount: number = 0;
-  private plantsSubscription!: Subscription;
-  private authSubscription!: Subscription;
+  private plantsSubscription?: Subscription;
+  private authSubscription?: Subscription;
 
   // Iconos actualizados
   faUserCircle = faUserCircle;
@@ -52,9 +52,14 @@ export class ViewComponent {
       if (user) {
         this.plantsSubscription?.unsubscribe();
 
-        this.plantsSubscription = this.plantService.getPlantsObservable(user.uid)
-          .subscribe(plants => {
-            this.plantCount = plants.length;
+        this.plantsSubscription = this.plantService.loadPlants(user.uid)
+          .subscribe({
+            next: (plants) => {
+              this.plantCount = plants.length;
+            },
+            error: (error) => {
+              console.error('❌ Error al cargar las plantas:', error);
+            }
           });
       }
     });

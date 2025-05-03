@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Firestore, doc, getDoc, setDoc, updateDoc, DocumentReference } from '@angular/fire/firestore';
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
+import { DeviceService } from '../../../Services/device.service';
 
 @Component({
   selector: 'app-enter-id',
@@ -18,11 +18,11 @@ export class EnterIdComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private firestore: Firestore,
-    private auth: Auth
-  ) {}
+    private auth: Auth,
+    private deviceService: DeviceService // Inject the DeviceService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit(): void {
     this.errorMessage = null; // Resetear mensaje de error
@@ -41,32 +41,24 @@ export class EnterIdComponent implements OnInit {
       return;
     }
 
-    // Obtener referencia al dispositivo en la colección global
-    const deviceRef: DocumentReference = doc(this.firestore, `devices/${sanitizedDeviceId}`);
-
-    // Verificar si el dispositivo existe en la colección global
-    getDoc(deviceRef)
-      .then((docSnapshot) => {
-        if (docSnapshot.exists()) {
-          const deviceData = docSnapshot.data();
-
-          // Verificar si el dispositivo ya está asignado a otro usuario
-          if (deviceData?.['uid']) {
-            this.errorMessage = 'El dispositivo ya está asignado a otro usuario.';
-            console.error('El dispositivo ya está asignado a otro usuario');
-            return;
-          }
-
-          // Asignar el dispositivo al usuario actual
-          this.assignDeviceToUser(userUid, deviceRef, sanitizedDeviceId);
-        } else {
-          this.errorMessage = 'El dispositivo no existe. Verifica el ID ingresado.';
-          console.error('El dispositivo no existe en la colección global');
-        }
+    // Usar el DeviceService para agregar el dispositivo
+    this.deviceService.addDevice(sanitizedDeviceId)
+      .then(() => {
+        // Redirigir a la configuración WiFi
+        this.router.navigate(['/crediential-wifi', sanitizedDeviceId]);
       })
       .catch((err) => {
-        this.errorMessage = 'Error al verificar el dispositivo. Intenta nuevamente.';
-        console.error('Error al verificar dispositivo: ', err);
+        // Mapear errores del servicio a mensajes amigables para el usuario
+        if (err === 'Usuario no autenticado') {
+          this.errorMessage = 'Usuario no autenticado. Por favor, inicia sesión.';
+        } else if (err === 'El dispositivo no existe en Realtime Database') {
+          this.errorMessage = 'El dispositivo no existe. Verifica el ID ingresado.';
+        } else if (err === 'El dispositivo ya está asignado a otro usuario') {
+          this.errorMessage = 'El dispositivo ya está asignado a otro usuario.';
+        } else {
+          this.errorMessage = 'Error al asignar el dispositivo. Intenta nuevamente.';
+        }
+        console.error('Error al asignar dispositivo: ', err);
       });
   }
 
@@ -75,36 +67,6 @@ export class EnterIdComponent implements OnInit {
     if (!deviceId) return null;
     const sanitized = deviceId.trim(); // Eliminar espacios
     return sanitized.length > 0 ? sanitized : null;
-  }
-
-  // Método para asignar el dispositivo al usuario
-  private assignDeviceToUser(userUid: string, deviceRef: DocumentReference, deviceId: string): void {
-    // Actualizar el dispositivo en la colección global con el uid del usuario
-    updateDoc(deviceRef, {
-      uid: userUid,
-      conectado: true,
-      conectadoEn: new Date(),
-    })
-      .then(() => {
-        // Agregar el dispositivo a la subcolección del usuario
-        const userDeviceRef = doc(this.firestore, `users/${userUid}/devices/${deviceId}`);
-        return setDoc(userDeviceRef, {
-          deviceId: deviceId,
-          conectado: true,
-          creado: new Date(),
-          humedad: null,
-          valvula: null,
-          agua: null,
-        });
-      })
-      .then(() => {
-        // Redirigir a la configuración WiFi
-        this.router.navigate(['/crediential-wifi', deviceId]);
-      })
-      .catch((err) => {
-        this.errorMessage = 'Error al asignar el dispositivo. Intenta nuevamente.';
-        console.error('Error al asignar dispositivo: ', err);
-      });
   }
 
   returnToDispositivos(): void {

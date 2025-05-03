@@ -1,16 +1,13 @@
 <header class="header">
     <div class="toolbar header-toolbar">
-        <h1 class="header-title">Editar Planta</h1>
+        <h1 class="header-title">Detalles de la Planta</h1>
         <div class="header-buttons">
-            <button class="back-button" (click)="goToPlantList()">
-                Volver
-            </button>
+            <button class="back-button" (click)="goToPlantList()">Volver</button>
         </div>
     </div>
 </header>
 
 <main class="content">
-    <!-- Contenedor principal para centrar la tarjeta y los botones -->
     <div class="main-container">
         <!-- Tarjeta de la planta -->
         <div *ngIf="plant" class="plant-card">
@@ -30,14 +27,44 @@
                     <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
                 </div>
 
-                <!-- Humedad con barra de progreso -->
+                <!-- Humedad estática de la planta -->
                 <div class="humidity-container margin-top">
-                    <p class="humidity-text">Humedad: {{ plant.humedad }}%</p>
+                    <p class="humidity-text">Humedad registrada: {{ plant.humedad }}%</p>
                     <div class="progress-container">
                         <div class="progress-bar humidity-progress" [style.width.%]="plant.humedad"></div>
                     </div>
                 </div>
+
+                <!-- Humedad del sensor en tiempo real -->
+                <div *ngIf="humidityValue !== null" class="humidity-container margin-top">
+                    <p class="humidity-text">Humedad actual: {{ humidityValue }}%</p>
+                    <div class="progress-container">
+                        <div class="progress-bar humidity-progress" [style.width.%]="humidityValue"></div>
+                    </div>
+                </div>
+
+                <!-- Estado de la válvula -->
+                <div class="valve-container margin-top">
+                    <p class="valve-text">Estado de la válvula: {{ electrovalvulaState ? 'Abierta' : 'Cerrada' }}</p>
+                </div>
+
+                <!-- Mensaje de error -->
+                <div *ngIf="errorMessage" class="error-message">
+                    <p class="error-text">{{ errorMessage }}</p>
+                </div>
             </div>
+        </div>
+        <div class="manual-control-section">
+            <h3>Control Manual de Riego</h3>
+            <button (click)="activateManualWatering()" [disabled]="manualActivationActive || !plant?.sensorHumedad">
+                {{ manualActivationActive ? 'Regando...' : 'Activar Riego Manual' }}
+            </button>
+            <div *ngIf="manualActivationActive" class="countdown">
+                Tiempo restante: {{ remainingTime }} segundos
+            </div>
+            <p *ngIf="!plant?.sensorHumedad" class="warning">
+                No hay sensor asignado para control manual
+            </p>
         </div>
 
         <!-- Botones de acciones -->
@@ -46,7 +73,6 @@
                 <span class="button-icon">🗑️</span>
                 Eliminar Planta
             </button>
-
             <button class="btn-block edit-button rounded" (click)="gotoEditPlant()">
                 <span class="button-icon">✏️</span>
                 Editar

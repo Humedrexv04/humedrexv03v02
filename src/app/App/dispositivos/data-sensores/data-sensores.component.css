@@ -1,0 +1,39 @@
+.sensor-container{ max-width:1200px; margin:0 auto; padding:2rem; font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif }
+.sensor-container .header{ margin-bottom:2rem; padding-bottom:1rem; border-bottom:1px solid #eee }
+.sensor-container .header .back-button{ background:#f8f9fa; border:1px solid #dee2e6; padding:.5rem 1rem; border-radius:4px; cursor:pointer; transition:all .3s }
+.sensor-container .header .back-button:hover{ background:#e9ecef }
+.sensor-container .header .status-indicator{ margin-top:1rem; display:flex; align-items:center; justify-content:space-between }
+.sensor-container .header .status-indicator h1{ font-size:1.5rem; color:#2c3e50 }
+.sensor-container .header .status-indicator .connection-status{ display:flex; align-items:center; gap:.5rem }
+.sensor-container .header .status-indicator .connection-status div{ width:12px; height:12px; border-radius:50% }
+.sensor-container .header .status-indicator .connection-status div.connected{ background:#27ae60 }
+.sensor-container .header .status-indicator .connection-status div.disconnected{ background:#e74c3c }
+.sensor-container .header .status-indicator .connection-status span{ font-size:.9rem; color:#7f8c8d }
+.sensor-container .loading-state{ text-align:center; padding:2rem }
+.sensor-container .loading-state .spinner{ border:4px solid #f3f3f3; border-top:4px solid #3498db; border-radius:50%; width:40px; height:40px; animation:spin 1s linear infinite; margin:0 auto 1rem }
+.sensor-container .loading-state p{ color:#7f8c8d }
+.sensor-container .error-message{ background:#fee; color:#c0392b; padding:1rem; border-radius:4px; border:1px solid #c0392b; margin:1rem 0 }
+.sensor-container .main-content{ display:grid; gap:2rem }
+.sensor-container .main-content section{ background:#fff; padding:2rem; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,.1) }
+.sensor-container .main-content section h2{ color:#2c3e50; margin-bottom:1.5rem; font-size:1.2rem; text-transform:uppercase; letter-spacing:.05em }
+.sensor-container .main-content .sensor-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem }
+.sensor-container .main-content .sensor-grid .sensor-card{ padding:1.5rem; background:#f8f9fa; border-radius:8px; text-align:center }
+.sensor-container .main-content .sensor-grid .sensor-card h3{ color:#7f8c8d; margin-bottom:.5rem; font-size:1rem }
+.sensor-container .main-content .sensor-grid .sensor-card .sensor-value{ font-size:1.8rem; font-weight:bold; color:#2c3e50 }
+.sensor-container .main-content .sensor-grid .sensor-card .sensor-value .unit{ font-size:.8rem; color:#7f8c8d }
+.sensor-container .main-content .relay-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1rem }
+.sensor-container .main-content .relay-grid .relay-card{ padding:1.5rem; background:#fff; border-radius:8px; text-align:center; border:1px solid #dee2e6 }
+.sensor-container .main-content .relay-grid .relay-card h3{ color:#7f8c8d; margin-bottom:1rem }
+.sensor-container .main-content .relay-grid .relay-card .relay-button{ width:100%; padding:.75rem; border:none; border-radius:4px; background:#e74c3c; color:#fff; cursor:pointer; transition:all .3s }
+.sensor-container .main-content .relay-grid .relay-card .relay-button.active{ background:#27ae60 }
+.sensor-container .main-content .relay-grid .relay-card .relay-button:disabled{ background:#bdc3c7; cursor:not-allowed }
+.sensor-container .main-content .assignment-form{ display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)) }
+.sensor-container .main-content .assignment-form .form-group{ display:flex; flex-direction:column; gap:.5rem }
+.sensor-container .main-content .assignment-form .form-group label{ color:#7f8c8d; font-size:.9rem }
+.sensor-container .main-content .assignment-form .form-group .form-select{ padding:.5rem; border:1px solid #dee2e6; border-radius:4px; background:#fff }
+.sensor-container .main-content .assignment-form .assign-button{ align-self:end; padding:.75rem; background:#3498db; color:#fff; border:none; border-radius:4px; cursor:pointer; transition:background .3s }
+.sensor-container .main-content .assignment-form .assign-button:hover{ background:#2980b9 }
+.sensor-container .main-content .assignment-form .assign-button:disabled{ background:#bdc3c7; cursor:not-allowed }
+@keyframes spin{ 0%{transform:rotate(0deg) }
+100%{ transform:rotate(360deg) }
+}

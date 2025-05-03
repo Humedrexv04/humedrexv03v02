@@ -1,5 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, addDoc, updateDoc, deleteDoc, doc, collectionData, getDoc, getDocs } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { Firestore, collection, addDoc, doc, getDoc, updateDoc, deleteDoc, query, getDocs, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Plant } from '../Models/plant.mode';
 
@@ -7,102 +7,97 @@ import { Plant } from '../Models/plant.mode';
   providedIn: 'root'
 })
 export class PlantService {
-  private _firestore = inject(Firestore);
+  constructor(private firestore: Firestore) { }
 
-
-  constructor() { }
-
-  // Cargar plantas del usuario como un Observable
-  loadPlants(userId: string): Observable<Plant[]> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-    return collectionData(plantsCollection, { idField: 'id' }) as Observable<Plant[]>; // Agregar el id al objeto
+  // Clean undefined values while preserving Plant type
+  private cleanUndefinedValues(plant: Plant): Partial<Plant> {
+    const cleaned: Partial<Plant> = {};
+    if (plant.name) cleaned.name = plant.name;
+    if (plant.horario) cleaned.horario = plant.horario;
+    if (plant.humedad !== undefined) cleaned.humedad = plant.humedad;
+    if (plant.img) cleaned.img = plant.img;
+    if (plant.electrovalvula !== undefined) cleaned.electrovalvula = plant.electrovalvula;
+    if (plant.sensorHumedad?.deviceId && plant.sensorHumedad?.sensorKey) {
+      cleaned.sensorHumedad = plant.sensorHumedad;
+    }
+    return cleaned;
   }
 
-  async getUserPlants(userId: string): Promise<Plant[]> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-    const querySnapshot = await getDocs(plantsCollection);
-
-    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Plant));
-  }
-
-
-
-  async addPlant(userId: string, plant: any): Promise<void> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-
+  async addPlant(userId: string, plant: Plant): Promise<void> {
     try {
-      // 🔹 Agregar la planta sin sensores ni electroválvulas
-      const newPlant: Plant = {
-        ...plant // Solo se agregan las propiedades de `plant`
-      };
-
-      const plantDocRef = await addDoc(plantsCollection, newPlant);
-
-      console.log(`✅ Planta agregada con ID ${plantDocRef.id}`);
+      const plantRef = collection(this.firestore, `users/${userId}/plants`);
+      const cleanedPlant = this.cleanUndefinedValues(plant);
+      await addDoc(plantRef, cleanedPlant as { [key: string]: any });
+      console.log('✅ Planta agregada exitosamente');
     } catch (error) {
       console.error('❌ Error al agregar la planta:', error);
       throw error;
     }
   }
 
-  // Actualizar una planta
-  updatePlant(userId: string, plantId: string, updatedPlant: Plant): Promise<void> {
-    const plantDoc = doc(this._firestore, `users/${userId}/plants/${plantId}`);
-    const { img, name, horario, humedad } = updatedPlant; // Extraer los campos necesarios
-    return updateDoc(plantDoc, { img, name, horario, humedad }) // Solo pasar los campos necesarios
-      .then(() => console.log('Planta actualizada:', updatedPlant))
-      .catch(error => {
-        console.error('Error al actualizar la planta:', error);
-        throw error; // Propagar el error para manejarlo en el componente
-      });
-  }
-
-  // Eliminar una planta
-  deletePlant(userId: string, plantId: string): Promise<void> {
-    const plantDoc = doc(this._firestore, `users/${userId}/plants/${plantId}`);
-    return deleteDoc(plantDoc)
-      .then(() => console.log('Planta eliminada:', plantId))
-      .catch(error => {
-        console.error('Error al eliminar la planta:', error);
-        throw error; // Propagar el error para manejarlo en el componente
-      });
-  }
-
-  // Obtener detalles de una planta específica
   async getPlantDetails(userId: string, plantId: string): Promise<Plant> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-    const plantDocRef = doc(plantsCollection, plantId);
-    const plantDoc = await getDoc(plantDocRef);
-    if (plantDoc.exists()) {
-      const plantData = plantDoc.data() as Plant;
-      // Verificar si la propiedad sensorHumedad existe
-      if (!plantData.sensorHumedad) {
-        console.log('La propiedad sensorHumedad no existe en la base de datos');
+    try {
+      const plantDoc = doc(this.firestore, `users/${userId}/plants/${plantId}`);
+      const plantSnapshot = await getDoc(plantDoc);
+      if (plantSnapshot.exists()) {
+        return { id: plantSnapshot.id, ...plantSnapshot.data() } as Plant;
+      } else {
+        throw new Error('La planta no existe');
       }
-      return plantData;
-    } else {
-      console.log('La planta no existe en la base de datos');
-      throw new Error('La planta no existe en la base de datos');
+    } catch (error) {
+      console.error('❌ Error al obtener los detalles de la planta:', error);
+      throw error;
     }
   }
 
-  // Función para contar plantas del usuario
-  countUserPlants(userId: string): Promise<number> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-    return getDocs(plantsCollection)
-      .then(querySnapshot => {
-        const count = querySnapshot.size;
-        console.log(`Total de plantas: ${count}`);
-        return count;
-      })  
-      .catch(error => {
-        console.error('Error al contar plantas:', error);
-        throw error;
-      });
+  // plant.service.ts
+updatePlant(uid: string, plantId: string, data: Partial<Plant>): Promise<void> {
+  const plantRef = doc(this.firestore, `users/${uid}/plants/${plantId}`);
+  return updateDoc(plantRef, data);
+}
+
+
+  async deletePlant(userId: string, plantId: string): Promise<void> {
+    try {
+      const plantDoc = doc(this.firestore, `users/${userId}/plants/${plantId}`);
+      await deleteDoc(plantDoc);
+      console.log('✅ Planta eliminada exitosamente');
+    } catch (error) {
+      console.error('❌ Error al eliminar la planta:', error);
+      throw error;
+    }
   }
 
-  getPlantsObservable(userId: string): Observable<Plant[]> {
-    const plantsCollection = collection(this._firestore, `users/${userId}/plants`);
-    return collectionData(plantsCollection, { idField: 'id' }) as Observable<Plant[]>;
+  async getPlants(userId: string): Promise<Plant[]> {
+    try {
+      const plantsQuery = query(collection(this.firestore, `users/${userId}/plants`));
+      const querySnapshot = await getDocs(plantsQuery);
+      const plants: Plant[] = [];
+      querySnapshot.forEach((doc) => {
+        plants.push({ id: doc.id, ...doc.data() } as Plant);
+      });
+      return plants;
+    } catch (error) {
+      console.error('❌ Error al obtener las plantas:', error);
+      throw error;
+    }
+  }
+
+  loadPlants(userId: string): Observable<Plant[]> {
+    return new Observable<Plant[]>((observer) => {
+      const plantsQuery = query(collection(this.firestore, `users/${userId}/plants`));
+      const unsubscribe = onSnapshot(plantsQuery, (querySnapshot) => {
+        const plants: Plant[] = [];
+        querySnapshot.forEach((doc) => {
+          plants.push({ id: doc.id, ...doc.data() } as Plant);
+        });
+        observer.next(plants);
+      }, (error) => {
+        console.error('❌ Error al escuchar las plantas:', error);
+        observer.error(error);
+      });
+      // Cleanup on unsubscribe
+      return () => unsubscribe();
+    });
   }
 }

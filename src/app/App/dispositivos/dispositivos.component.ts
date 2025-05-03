@@ -1,119 +1,112 @@
-import { Component, OnInit } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
 import { DeviceService } from '../../Services/device.service';
+import { Subscription } from 'rxjs';
+import { RealtimeDataService } from '../../Services/realtime-database.service';
 
 @Component({
   selector: 'app-dispositivos',
-  standalone: true, // Añadido para componentes standalone
+  standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './dispositivos.component.html',
   styleUrls: ['./dispositivos.component.scss'],
 })
-export class DispositivosComponent implements OnInit {
+export class DispositivosComponent implements OnInit, OnDestroy {
   devices: any[] = [];
   loading: boolean = true;
   error: string | null = null;
+  unlinkLoading: { [deviceId: string]: boolean } = {};
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private deviceService: DeviceService,
-    private router: Router,
-    private authService: AuthService
+    private realtimeDataService: RealtimeDataService,
+    public router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.loadDevices();
   }
 
-  loadDevices(): void {
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  async loadDevices(): Promise<void> {
     this.loading = true;
     this.error = null;
 
-    this.deviceService.getUserDevices().subscribe({
-      next: (devices) => {
-        // Verificar que cada dispositivo tenga un id
-        this.devices = devices.map(device => {
-          // Si el ID está en una propiedad 'id'
-          if (device.id) {
-            return device;
-          }
-          // Si Firestore devuelve documentos con el ID separado
-          else if (device.payload && device.payload.doc) {
-            return {
-              id: device.payload.doc.id,
-              ...device.payload.doc.data()
-            };
-          }
-          // Log para depuración
-          console.log('Estructura del dispositivo:', device);
-          return device;
-        });
-
+    try {
+      const currentUser = await this.authService.getCurrentUser();
+      if (!currentUser) {
+        this.error = 'Usuario no autenticado';
         this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error al cargar dispositivos:', err);
-        this.error = 'No se pudieron cargar los dispositivos. Intente nuevamente.';
-        this.loading = false;
+        return;
       }
-    });
+
+      this.deviceService.getUserDevices().subscribe({
+        next: (devices) => {
+          this.devices = devices;
+          this.subscribeToConnectionStatus();
+        },
+        error: (err) => {
+          console.error('Error al cargar dispositivos:', err);
+          this.error = 'Error al cargar dispositivos';
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      this.error = 'Error al verificar usuario';
+      this.loading = false;
+    }
+  }
+
+  subscribeToConnectionStatus(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions = [];
+
+    for (const device of this.devices) {
+      const statusSub = this.realtimeDataService.subscribeToDeviceStatus(device.id).subscribe({
+        next: (response: any) => {
+          device.conectado = response.status === 'connected';
+        },
+        error: (err: any) => {
+          console.error(`Error al escuchar estado de ${device.id}:`, err);
+          device.conectado = false;
+        }
+      });
+      this.subscriptions.push(statusSub);
+    }
+    this.loading = false;
   }
 
   addDevice(): void {
     this.router.navigate(['/enter-id']);
   }
 
-  viewDevice(device: any): void {
-    // Extraer el ID correctamente según la estructura del objeto
-    const deviceId = this.getDeviceId(device);
-
-    if (deviceId) {
-      console.log('Navegando a dispositivo:', deviceId);
-      this.router.navigate(['/data-sensores', deviceId]);
-    } else {
-      console.error('ID de dispositivo no válido:', device);
-    }
+  viewDevice(deviceId: string): void {
+    this.router.navigate(['/data-sensores', deviceId]);
   }
 
-  configureWifi(device: any): void {
-    const deviceId = this.getDeviceId(device);
+  async unlinkDevice(deviceId: string): Promise<void> {
+    if (!deviceId || this.unlinkLoading[deviceId]) return;
 
-    if (deviceId) {
-      console.log('Configurando WiFi para dispositivo:', deviceId);
-      this.router.navigate(['/credential-wifi', deviceId]);
-    } else {
-      console.error('ID de dispositivo no válido para configuración WiFi:', device);
+    this.unlinkLoading[deviceId] = true;
+
+    try {
+      await this.deviceService.unlinkDevice(deviceId);
+      this.devices = this.devices.filter(d => d.id !== deviceId);
+    } catch (error) {
+      console.error('Error al desvincular:', error);
+      this.error = 'Error al desvincular dispositivo';
+    } finally {
+      this.unlinkLoading[deviceId] = false;
     }
-  }
-
-  // Método auxiliar para extraer el ID correctamente
-  private getDeviceId(device: any): string | null {
-    if (!device) return null;
-
-    // Si el ID está directamente en el objeto
-    if (typeof device === 'string') {
-      return device;
-    }
-
-    // Si el ID está en una propiedad 'id'
-    if (device.id) {
-      return device.id;
-    }
-
-    // Si el ID está en una propiedad 'deviceId'
-    if (device.deviceId) {
-      return device.deviceId;
-    }
-
-    // Si Firestore devuelve documentos con ID separado
-    if (device.payload && device.payload.doc) {
-      return device.payload.doc.id;
-    }
-
-    console.warn('No se pudo determinar el ID del dispositivo:', device);
-    return null;
   }
 
   refresh(): void {
