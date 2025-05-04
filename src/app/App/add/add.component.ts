@@ -63,7 +63,10 @@ export class AddComponent {
       }
 
       await this.plantService.addPlant(user.uid, newPlant);
-      console.log('✅ Planta agregada exitosamente');
+      this.errorMessage = '✅ Planta agregada exitosamente';
+      setTimeout(() => {
+        this.errorMessage = null;
+      }, 3000); // Clear success message after 3 seconds
       this.resetForm();
     } catch (error: any) {
       this.errorMessage = error.message || 'Error al agregar la planta. Intenta nuevamente.';

@@ -1,24 +1,35 @@
-<div class="container">
-  <h2>Ingresar ID del Dispositivo</h2>
-  <p>Por favor, ingresa el ID único de tu dispositivo para vincularlo a tu cuenta.</p>
+<div class="main-container">
+    <!-- Encabezado -->
+    <header class="header-section">
+        <div class="header-content">
+            <div class="header-title-wrapper">
+                <span class="header-icon" aria-hidden="true">🔗</span>
+                <h2 class="header-title">Ingresar ID del Dispositivo</h2>
+            </div>
+            <p class="header-description">Por favor, ingresa el ID único de tu dispositivo para vincularlo a tu cuenta.
+            </p>
+        </div>
+    </header>
 
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="deviceId">ID del Dispositivo:</label>
-      <input
-        type="text"
-        id="deviceId"
-        name="deviceId"
-        [(ngModel)]="deviceId"
-        placeholder="Ingresa el ID del dispositivo"
-        required
-      />
-    </div>
+    <!-- Formulario -->
+    <section class="form-section">
+        <form (ngSubmit)="onSubmit()" class="device-form">
+            <div class="form-group">
+                <label for="deviceId">ID del Dispositivo:</label>
+                <input type="text" id="deviceId" name="deviceId" [(ngModel)]="deviceId"
+                    placeholder="Ingresa el ID del dispositivo" required aria-required="true" />
+            </div>
+            <button type="submit" class="primary-button">Vincular Dispositivo</button>
+        </form>
+    </section>
 
-    <button type="submit" class="primary-button">Vincular Dispositivo</button>
-  </form>
+    <!-- Mensaje de Error -->
+    <section *ngIf="errorMessage" class="error-section">
+        <p class="error-text">{{ errorMessage }}</p>
+    </section>
 
-  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
-
-  <button (click)="returnToDispositivos()" class="secondary-button">Volver a Dispositivos</button>
+    <!-- Botón de Volver -->
+    <section class="action-section">
+        <button (click)="returnToDispositivos()" class="secondary-button">Volver a Dispositivos</button>
+    </section>
 </div>

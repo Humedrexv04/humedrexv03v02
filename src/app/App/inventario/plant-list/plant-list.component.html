@@ -5,7 +5,9 @@
 </header>
 
 <main class="main-content list-content">
-  <div class="plant-list">
-    <app-planta-item *ngFor="let plant of plants" [plant]="plant" class="plant-item"></app-planta-item>
+  <div class="plant-list-wrapper">
+    <div class="plant-list">
+      <app-planta-item *ngFor="let plant of plants" [plant]="plant" class="plant-item"></app-planta-item>
+    </div>
   </div>
 </main>

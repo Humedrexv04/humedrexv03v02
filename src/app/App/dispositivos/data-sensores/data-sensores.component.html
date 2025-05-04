@@ -1,72 +1,79 @@
-<div class="sensor-container">
-  <!-- Header Section -->
-  <div class="header">
-    <button (click)="goToDispositivos()" class="back-button">
-      ← Volver a Dispositivos
-    </button>
-    <div class="status-indicator">
-      <h1>Dispositivo: {{ deviceId }}</h1>
-      <div class="connection-status">
-        <div [class]="connectionStatus ? 'connected' : 'disconnected'"></div>
-        <span>{{ connectionStatus ? 'Conectado' : 'Desconectado' }}</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Loading State -->
-  <div *ngIf="loading" class="loading-state">
-    <div class="spinner"></div>
-    <p>Cargando datos del dispositivo...</p>
-  </div>
-
-  <!-- Error Message -->
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <!-- Main Content -->
-  <div *ngIf="!loading && !errorMessage" class="main-content">
-    <!-- Sensor Data Section -->
-    <section class="sensor-section">
-      <h2>Datos de Sensores</h2>
-      <div class="sensor-grid">
-        <div *ngFor="let sensorKey of sensorKeys" class="sensor-card">
-          <h3>{{ sensorKey | titlecase }}</h3>
-          <div class="sensor-value">
-            {{ deviceData[sensorKey] | number:'1.0-2' }}
-          </div>
+<div class="main-container">
+  <div class="scroll-wrapper">
+    <!-- Encabezado -->
+    <header class="header-section">
+      <button (click)="goToDispositivos()" class="back-button" aria-label="Volver a la lista de dispositivos">
+        ← Volver
+      </button>
+      <div class="status-indicator">
+        <div class="header-title-wrapper">
+          <span class="header-icon" aria-hidden="true">⚙️</span>
+          <h1 class="header-title">Dispositivo: {{ deviceId }}</h1>
+        </div>
+        <div class="connection-status">
+          <div [class]="connectionStatus ? 'connected' : 'disconnected'" aria-live="polite"></div>
+          <span>{{ connectionStatus ? 'Conectado' : 'Desconectado' }}</span>
         </div>
       </div>
+    </header>
+
+    <!-- Estado de Carga -->
+    <section class="loading-section" *ngIf="loading">
+      <div class="spinner"></div>
+      <p class="loading-text">Cargando datos...</p>
     </section>
 
-    <!-- Plant Assignment Section -->
-    <section class="assignment-section">
-      <h2>Asignación a Planta</h2>
-      <div class="assignment-form">
-        <div class="form-group">
-          <label>Planta:</label>
-          <select [(ngModel)]="selectedPlantId" class="form-select">
-            <option value="">Selecciona una planta</option>
-            <option *ngFor="let plant of plants" [value]="plant.id">
-              {{ plant.name }}
-            </option>
-          </select>
-        </div>
+    <!-- Mensaje de Error -->
+    <section class="error-section" *ngIf="errorMessage">
+      <p class="error-text">{{ errorMessage }}</p>
+    </section>
 
-        <div class="form-group">
-          <label>Sensor:</label>
-          <select [(ngModel)]="selectedSensor" class="form-select">
-            <option value="">Selecciona un sensor</option>
-            <option *ngFor="let sensorKey of sensorKeys" [value]="sensorKey">
-              {{ sensorKey | titlecase }}
-            </option>
-          </select>
+    <!-- Contenido Principal -->
+    <section class="main-content" *ngIf="!loading && !errorMessage">
+      <!-- Sección de Sensores -->
+      <section class="sensor-section">
+        <div class="section-header">
+          <span class="header-icon" aria-hidden="true">⚙️</span>
+          <h2 class="section-title">Datos de Sensores</h2>
         </div>
+        <div class="sensor-grid">
+          <div *ngFor="let sensorKey of sensorKeys" class="sensor-card"
+            [attr.aria-label]="'Dato del sensor ' + sensorKey">
+            <h3 class="sensor-name">{{ sensorKey | titlecase }}</h3>
+            <div class="sensor-value">{{ deviceData[sensorKey] | number:'1.0-2' }}</div>
+          </div>
+        </div>
+      </section>
 
-        <button (click)="assignSensorToPlant()" class="assign-button" [disabled]="!selectedPlantId || !selectedSensor">
-          Asignar Sensor
-        </button>
-      </div>
+      <!-- Sección de Asignación -->
+      <section class="assignment-section">
+        <div class="section-header">
+          <span class="header-icon" aria-hidden="true">🌱</span>
+          <h2 class="section-title">Asignación a Planta</h2>
+        </div>
+        <div class="assignment-form">
+          <div class="form-group">
+            <label for="plantSelect">Planta</label>
+            <select id="plantSelect" [(ngModel)]="selectedPlantId" class="form-select" aria-required="true">
+              <option value="">Selecciona</option>
+              <option *ngFor="let plant of plants" [value]="plant.id">{{ plant.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="sensorSelect">Sensor</label>
+            <select id="sensorSelect" [(ngModel)]="selectedSensor" class="form-select" aria-required="true">
+              <option value="">Selecciona</option>
+              <option *ngFor="let sensorKey of sensorKeys" [value]="sensorKey">{{ sensorKey | titlecase }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button (click)="assignSensorToPlant()" class="assign-button"
+              [disabled]="!selectedPlantId || !selectedSensor" aria-label="Asignar">
+              Asignar
+            </button>
+          </div>
+        </div>
+      </section>
     </section>
   </div>
 </div>

@@ -11,15 +11,54 @@
     }
 }
 
+@keyframes cosmicFlow {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 25% 25%;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
+
+@keyframes haloSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes neonGlow {
+    0% {
+        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.6), 0 0 15px rgba(171, 71, 188, 0.5);
+    }
+
+    100% {
+        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
+    }
+}
+
+
 /* ========== CARD CONTAINER ========== */
 .card {
     width: 100%;
-    max-width: 1400px;
-    min-height: 220px;
-    background: rgba(229, 217, 206, 0.95);
-    /* Subtle gradient center con opacidad */
+    max-width: 800px;
+    min-height: 280px;
+    background: linear-gradient(145deg, rgba(229, 217, 206, 0.95) 0%, rgba(245, 241, 235, 0.9) 100%);
     border: 3px solid #88AA4E;
-    /* Medium green */
     border-radius: 28px;
     overflow: hidden;
     display: flex;
@@ -27,40 +66,51 @@
     align-items: center;
     margin: 0 auto;
     box-shadow: 0 10px 30px rgba(139, 170, 78, 0.15);
-    /* Sombra verde */
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     animation: slideFadeIn 0.7s ease forwards;
+    position: relative;
 }
 
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 14px 36px rgba(139, 170, 78, 0.25);
-    /* Sombra verde más intensa */
+
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="1" fill="rgba(255, 138, 101, 0.2)" /><circle cx="5" cy="5" r="0.5" fill="rgba(171, 71, 188, 0.15)" /><path d="M5 25 Q 15 5, 25 25" fill="none" stroke="rgba(171, 71, 188, 0.1)" stroke-width="1"/></svg>') repeat;
+    animation: starDrift 20s linear infinite;
+    opacity: 0.3;
+    z-index: -1;
 }
+
 
 /* ========== IMAGE SECTION ========== */
 .image {
-    flex: 0 0 55%;
+    flex: 0 0 40%;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.209);
     border-right: 2px dashed rgba(136, 170, 78, 0.5);
-    /* Medium green con opacidad */
+    position: relative;
 }
 
 .plant-image {
     width: 100%;
     height: 100%;
-    max-height: 350px;
+    max-height: 550px;
+    /* Aumentado más para agrandar la imagen */
     object-fit: cover;
     object-position: center;
     border-radius: 22px;
     box-shadow: 0 6px 16px rgba(43, 58, 66, 0.2);
-    /* Dark blue */
+    transition: all 0.3s ease;
 }
 
 /* ========== BODY SECTION ========== */
@@ -69,7 +119,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
 }
 
 /* ========== CARD HEADER ========== */
@@ -78,16 +128,30 @@
 }
 
 .plantTitle {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: #2B3A42;
-    /* Dark blue */
     font-family: 'Poppins', sans-serif;
-    margin: 0.6rem 0;
+    margin: 0.8rem 0;
     text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
-    /* Medium green */
     position: relative;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.5rem;
+    animation: neonGlow 6s ease-in-out infinite;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* Efecto de fondo reflectante */
+.plantTitle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    right: -10px;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(171, 71, 188, 0.1), rgba(255, 255, 255, 0.2));
+    border-radius: 10px;
+    z-index: -1;
 }
 
 .plantTitle::after {
@@ -96,10 +160,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
+    width: 60px;
+    height: 4px;
     background: #88AA4E;
-    /* Medium green */
     border-radius: 3px;
 }
 
@@ -107,36 +170,59 @@
 .ver-detalles {
     width: auto;
     background: linear-gradient(to right, #D9B58C, #E5D9CE);
-    /* Light tan a subtle gradient */
     color: #2B3A42;
-    /* Dark blue */
     border-radius: 16px;
-    padding: 0.6rem 0.8rem;
+    padding: 0.9rem 1.3rem;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     letter-spacing: 0.5px;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     border: 1px solid #88AA4E;
-    /* Medium green */
     transition: all 0.25s ease;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(217, 181, 140, 0.2);
-    /* Light tan */
     text-shadow: 0 1px 1px rgba(43, 58, 66, 0.1);
-    /* Dark blue */
+    animation: buttonShine 5s ease-in-out infinite;
+    white-space: nowrap;
 }
 
 .ver-detalles:hover {
     background: linear-gradient(to right, #E5D9CE, #D9B58C);
     transform: translateY(-2px);
     box-shadow: 0 4px 14px rgba(217, 181, 140, 0.3);
-    /* Light tan */
 }
 
 /* ========== MEDIA QUERIES ========== */
-@media (max-width: 359px) {
+@media (max-width: 319px) {
     .card {
-        min-height: 180px;
+        min-height: 200px;
+        max-width: 96vw;
+    }
+
+    .plantTitle {
+        font-size: 1.4rem;
+    }
+
+    .ver-detalles {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .plant-image {
+        max-height: 350px;
+        /* Aumentado más para agrandar la imagen */
+    }
+
+    .image,
+    .card-body {
+        padding: 0.5rem;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+    .card {
+        min-height: 220px;
+        max-width: 96vw;
     }
 
     .plantTitle {
@@ -145,12 +231,24 @@
 
     .ver-detalles {
         font-size: 1rem;
+        padding: 0.6rem 0.9rem;
+    }
+
+    .plant-image {
+        max-height: 380px;
+        /* Aumentado más para agrandar la imagen */
+    }
+
+    .image,
+    .card-body {
+        padding: 0.8rem;
     }
 }
 
 @media (min-width: 360px) and (max-width: 479px) {
     .card {
-        min-height: 190px;
+        min-height: 240px;
+        max-width: 96vw;
     }
 
     .plantTitle {
@@ -159,12 +257,19 @@
 
     .ver-detalles {
         font-size: 1.1rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .plant-image {
+        max-height: 420px;
+        /* Aumentado más para agrandar la imagen */
     }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
     .card {
-        min-height: 200px;
+        min-height: 260px;
+        max-width: 96vw;
     }
 
     .plantTitle {
@@ -173,19 +278,42 @@
 
     .ver-detalles {
         font-size: 1.2rem;
+        padding: 0.8rem 1.1rem;
+    }
+
+    .plant-image {
+        max-height: 450px;
+        /* Aumentado más para agrandar la imagen */
     }
 }
 
 @media (min-width: 768px) {
     .card {
-        min-height: 210px;
+        min-height: 280px;
+        max-width: 800px;
     }
 
     .plantTitle {
-        font-size: 2.1rem;
+        font-size: 2.4rem;
     }
 
     .ver-detalles {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+        padding: 0.9rem 1.3rem;
+    }
+
+    .plant-image {
+        max-height: 550px;
+    }
+}
+
+/* ========== ANIMACIONES ADICIONALES ========== */
+@keyframes starDrift {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 400px;
     }
 }

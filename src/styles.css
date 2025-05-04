@@ -1,102 +1,60 @@
-/* ========== VARIABLES GLOBALES (AJUSTADAS A LA IMAGEN) ========== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 :root {
-    --dark-blue: #2B3A42;
-    /* Dark blue outline del faucet */
-    --medium-blue: #5B7A8C;
-    /* Medium blue-gray del faucet */
-    --turquoise: #6BAFD3;
-    /* Light blue de las gotas de agua */
-    --light-blue: #E5D9CE;
-    /* Subtle gradient center del fondo */
-    --white: #FFFFFF;
-    /* Highlight white de las gotas */
-    --peach: #D9B58C;
-    /* Light tan del suelo */
-    --black: #2B3A42;
-    /* Seeds/dots en el suelo (mismo que dark-blue para consistencia) */
-    --light-gray: #D8C9B9;
-    /* Light beige del fondo */
-    --dark-teal: #3E95C4;
-    /* Darker blue de las gotas */
-    --light-teal: #A6BFD2;
-    /* Light blue highlight del faucet */
+    /* Paleta existente */
+    --verde-claro-principal: #b2dfdb;
+    --verde-claro-secundario: #dcedc8;
+    --verde-medio: #4caf50;
+    --verde-oscuro: #2e7d32;
+    --verde-muy-oscuro: #1a3c1e;
+    --verde-intermedio: #43a047;
+    --blanco-suave: #f9faf8;
+    --blanco: #ffffff;
+    --negro-suave: #212121;
+    --sombra-card: 0 8px 32px rgba(67, 160, 71, 0.15);
+    --degradado-header: linear-gradient(135deg, var(--verde-muy-oscuro) 0%, var(--verde-intermedio) 100%);
+    --borde-card: 2px solid rgba(139, 170, 78, 0.2);
+    --brillo-card: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    --dorado-acento: #FFD54F;
+    --gris-azulado: #78909C;
+    --azul-celeste: #B0BEC5;
+    --dorado-brillante: #FFCA28;
+    --purpura-suave: #CE93D8;
+    --verde-esmeralda: #26A69A;
 }
 
-html,
+
 body {
-    height: auto !important;
-    overflow-y: auto !important;
-}
-
-/* ========== BASE ========== */
-* {
-    box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--blanco-suave);
+    color: var(--negro-suave);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* Desactivar scroll horizontal en todo el body */
 }
 
-html {
-    font-size: 15.5px;
-    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-}
-
-body {
-    background: linear-gradient(160deg, #D8C9B9 0%, #E5D9CE 100%);
-    /* Fondo beige con gradiente */
-    color: #2B3A42;
-    /* Dark blue para el texto principal */
-    line-height: 1.55;
-}
-
-/* ========== TIPOGRAFÍA ========== */
 h1,
 h2,
 h3 {
-    font-weight: 600;
-    margin-bottom: 1.2rem;
-    color: #2B3A42;
-    /* Dark blue para los encabezados */
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    font-weight: 700;
 }
 
-/* ========== BOTONES GLOBALES ========== */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.25s ease;
-    cursor: pointer;
+* {
+    box-sizing: border-box;
 }
 
-.btn-primary {
-    background-color: #88AA4E;
-    /* Medium green de las hojas */
-    color: #FFFFFF;
-    /* Blanco para contraste */
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--blanco-suave);
 }
 
-.btn-primary:hover {
-    background-color: #9CBE5F;
-    /* Light green de las hojas */
-    transform: translateY(-2px);
-}
-
-/* ========== MEDIA QUERIES GLOBALES ========== */
-@media (min-width: 360px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-@media (min-width: 480px) {
-    html {
-        font-size: 16.5px;
-    }
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 17px;
-    }
+::-webkit-scrollbar-thumb {
+    background: var(--verde-medio);
+    border-radius: 5px;
+    border: 2px solid var(--blanco-suave);
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { DeviceService } from '../../../Services/device.service';
@@ -8,7 +8,7 @@ import { DeviceService } from '../../../Services/device.service';
 @Component({
   selector: 'app-enter-id',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, CommonModule],
   templateUrl: './enter-id.component.html',
   styleUrls: ['./enter-id.component.scss'],
 })
