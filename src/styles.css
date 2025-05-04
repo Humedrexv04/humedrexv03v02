@@ -1,38 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
 :root {
-    /* Paleta existente */
-    --verde-claro-principal: #b2dfdb;
-    --verde-claro-secundario: #dcedc8;
+    --verde-claro-principal: #c8e6c9;
     --verde-medio: #4caf50;
     --verde-oscuro: #2e7d32;
-    --verde-muy-oscuro: #1a3c1e;
-    --verde-intermedio: #43a047;
     --blanco-suave: #f9faf8;
     --blanco: #ffffff;
     --negro-suave: #212121;
-    --sombra-card: 0 8px 32px rgba(67, 160, 71, 0.15);
-    --degradado-header: linear-gradient(135deg, var(--verde-muy-oscuro) 0%, var(--verde-intermedio) 100%);
-    --borde-card: 2px solid rgba(139, 170, 78, 0.2);
-    --brillo-card: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
-    --dorado-acento: #FFD54F;
-    --gris-azulado: #78909C;
-    --azul-celeste: #B0BEC5;
-    --dorado-brillante: #FFCA28;
-    --purpura-suave: #CE93D8;
-    --verde-esmeralda: #26A69A;
+    --dorado-acento: #ffd54f;
+    --sombra-card: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
-
 
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; 
     background: var(--blanco-suave);
     color: var(--negro-suave);
     scroll-behavior: smooth;
     overflow-x: hidden;
-    /* Desactivar scroll horizontal en todo el body */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 h1,
@@ -47,14 +34,14 @@ h3 {
     box-sizing: border-box;
 }
 
-/* Scroll personalizado */
+/* Barra de desplazamiento personalizada */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
     background: var(--blanco-suave);
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--verde-medio);
-    border-radius: 5px;
-    border: 2px solid var(--blanco-suave);
+    border-radius: 4px;
+    border: 1px solid var(--blanco-suave);
 }

@@ -1,4 +1,6 @@
+<!-- Contenedor Principal -->
 <div class="scroll-container">
+  <!-- Sección de Encabezado -->
   <header class="header" role="banner">
     <div class="header-container">
       <div class="header-title-wrapper">
@@ -8,9 +10,11 @@
     </div>
   </header>
 
+  <!-- Sección de Contenido Principal -->
   <main class="content-container">
     <section class="form-card">
       <form class="plant-form" (ngSubmit)="addPlant()">
+        <!-- Subida de Imagen -->
         <fieldset class="form-section image-section">
           <legend class="sr-only">Subir imagen de la planta</legend>
           <div class="image-upload-container">
@@ -26,8 +30,10 @@
           </div>
         </fieldset>
 
+        <!-- Detalles de la Planta -->
         <fieldset class="form-section form-group">
           <legend class="sr-only">Detalles de la planta</legend>
+          <!-- Nombre de la Planta -->
           <div class="form-field">
             <span class="form-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
@@ -44,6 +50,7 @@
             </div>
           </div>
 
+          <!-- Intervalo de Riego -->
           <div class="form-field">
             <span class="form-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
@@ -60,6 +67,7 @@
             </div>
           </div>
 
+          <!-- Humedad Requerida -->
           <div class="form-field">
             <span class="form-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
@@ -77,6 +85,7 @@
           </div>
         </fieldset>
 
+        <!-- Mensajes de Estado -->
         <div class="form-section status-section">
           <div class="status-message" *ngIf="errorMessage"
             [ngClass]="{'success': errorMessage.includes('exitosamente'), 'error': !errorMessage.includes('exitosamente')}"
@@ -85,6 +94,7 @@
           </div>
         </div>
 
+        <!-- Botón de Envío -->
         <div class="form-section button-section">
           <button type="submit" class="submit-button" [disabled]="isSubmitting"
             aria-label="Agregar nueva planta al jardín">

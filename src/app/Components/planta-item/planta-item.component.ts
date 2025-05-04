@@ -13,7 +13,7 @@ export class PlantaItemComponent {
   @Input() plant!: Plant; // Recibe la planta como input
   @Input() onDelete!: (plantId: string) => void; // Función para eliminar la planta
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   // Método para redirigir a la página de detalles de la planta
   viewPlantDetails() {

@@ -1,319 +1,169 @@
-/* ========== ANIMACIONES ========== */
-@keyframes slideFadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes cosmicFlow {
-    0% {
-        background-position: 0 0;
-    }
-
-    50% {
-        background-position: 25% 25%;
-    }
-
-    100% {
-        background-position: 0 0;
-    }
-}
-
-
-
-@keyframes haloSpin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes neonGlow {
-    0% {
-        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
-    }
-
-    50% {
-        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.6), 0 0 15px rgba(171, 71, 188, 0.5);
-    }
-
-    100% {
-        text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
-    }
-}
-
-
-/* ========== CARD CONTAINER ========== */
+/* ================================
+   CONTENEDOR DE LA TARJETA
+================================== */
 .card {
     width: 100%;
-    max-width: 800px;
-    min-height: 280px;
-    background: linear-gradient(145deg, rgba(229, 217, 206, 0.95) 0%, rgba(245, 241, 235, 0.9) 100%);
-    border: 3px solid #88AA4E;
-    border-radius: 28px;
-    overflow: hidden;
+    max-width: 500px;
+    background: var(--blanco-suave);
+    border: 2px dotted var(--verde-medio);
+    border-radius: 16px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(139, 170, 78, 0.15);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    animation: slideFadeIn 0.7s ease forwards;
-    position: relative;
+    margin: 0.75rem auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-
-.card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="1" fill="rgba(255, 138, 101, 0.2)" /><circle cx="5" cy="5" r="0.5" fill="rgba(171, 71, 188, 0.15)" /><path d="M5 25 Q 15 5, 25 25" fill="none" stroke="rgba(171, 71, 188, 0.1)" stroke-width="1"/></svg>') repeat;
-    animation: starDrift 20s linear infinite;
-    opacity: 0.3;
-    z-index: -1;
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-/* ========== IMAGE SECTION ========== */
+/* ================================
+     SECCIÓN DE LA IMAGEN
+  ================================== */
 .image {
     flex: 0 0 40%;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.209);
-    border-right: 2px dashed rgba(136, 170, 78, 0.5);
-    position: relative;
+    padding: 0.5rem;
 }
 
 .plant-image {
     width: 100%;
-    height: 100%;
-    max-height: 550px;
-    /* Aumentado más para agrandar la imagen */
+    height: auto;
+    max-height: 150px;
     object-fit: cover;
-    object-position: center;
-    border-radius: 22px;
-    box-shadow: 0 6px 16px rgba(43, 58, 66, 0.2);
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* ========== BODY SECTION ========== */
+/* ================================
+     CUERPO DE LA TARJETA
+  ================================== */
 .card-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
 }
 
-/* ========== CARD HEADER ========== */
+/* ================================
+     ENCABEZADO
+  ================================== */
 .card-header {
     text-align: center;
 }
 
 .plantTitle {
-    font-size: 2.4rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: #2B3A42;
-    font-family: 'Poppins', sans-serif;
-    margin: 0.8rem 0;
-    text-shadow: 0 2px 5px rgba(136, 170, 78, 0.4);
-    position: relative;
-    padding-bottom: 0.5rem;
-    animation: neonGlow 6s ease-in-out infinite;
-    white-space: nowrap;
-    overflow: visible;
+    color: var(--verde-oscuro);
+    margin: 0.25rem 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Efecto de fondo reflectante */
-.plantTitle::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -10px;
-    right: -10px;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(171, 71, 188, 0.1), rgba(255, 255, 255, 0.2));
-    border-radius: 10px;
-    z-index: -1;
-}
-
-.plantTitle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: #88AA4E;
-    border-radius: 3px;
-}
-
-/* ========== BOTÓN VER DETALLES ========== */
+/* ================================
+     BOTÓN
+  ================================== */
 .ver-detalles {
-    width: auto;
-    background: linear-gradient(to right, #D9B58C, #E5D9CE);
-    color: #2B3A42;
-    border-radius: 16px;
-    padding: 0.9rem 1.3rem;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0.5px;
-    margin-top: 1.5rem;
-    border: 1px solid #88AA4E;
-    transition: all 0.25s ease;
+    background: var(--verde-medio);
+    color: var(--blanco);
+    border: none;
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(217, 181, 140, 0.2);
-    text-shadow: 0 1px 1px rgba(43, 58, 66, 0.1);
-    animation: buttonShine 5s ease-in-out infinite;
-    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 0.5rem;
 }
 
 .ver-detalles:hover {
-    background: linear-gradient(to right, #E5D9CE, #D9B58C);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 14px rgba(217, 181, 140, 0.3);
+    background: var(--verde-oscuro);
+    transform: scale(1.05);
 }
 
-/* ========== MEDIA QUERIES ========== */
-@media (max-width: 319px) {
+/* ================================
+     MEDIA QUERIES
+  ================================== */
+@media (max-width: 320px) {
     .card {
-        min-height: 200px;
-        max-width: 96vw;
+        max-width: 90vw;
+        margin: 0.5rem auto;
+    }
+
+    .plantTitle {
+        font-size: 1.2rem;
+    }
+
+    .plant-image {
+        max-height: 120px;
+    }
+
+    .ver-detalles {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+    .card {
+        max-width: 90vw;
+    }
+
+    .plantTitle {
+        font-size: 1.3rem;
+    }
+
+    .plant-image {
+        max-height: 130px;
+    }
+
+    .ver-detalles {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 479px) {
+    .card {
+        max-width: 90vw;
     }
 
     .plantTitle {
         font-size: 1.4rem;
     }
 
-    .ver-detalles {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
-    }
-
     .plant-image {
-        max-height: 350px;
-        /* Aumentado más para agrandar la imagen */
-    }
-
-    .image,
-    .card-body {
-        padding: 0.5rem;
+        max-height: 140px;
     }
 }
 
-@media (min-width: 320px) and (max-width: 359px) {
+@media (min-width: 480px) and (max-width: 767px) {
+    .plantTitle {
+        font-size: 1.5rem;
+    }
+
+    .plant-image {
+        max-height: 160px;
+    }
+}
+
+@media (min-width: 768px) {
     .card {
-        min-height: 220px;
-        max-width: 96vw;
+        max-width: 500px;
     }
 
     .plantTitle {
         font-size: 1.6rem;
     }
 
-    .ver-detalles {
-        font-size: 1rem;
-        padding: 0.6rem 0.9rem;
-    }
-
     .plant-image {
-        max-height: 380px;
-        /* Aumentado más para agrandar la imagen */
-    }
-
-    .image,
-    .card-body {
-        padding: 0.8rem;
-    }
-}
-
-@media (min-width: 360px) and (max-width: 479px) {
-    .card {
-        min-height: 240px;
-        max-width: 96vw;
-    }
-
-    .plantTitle {
-        font-size: 1.8rem;
-    }
-
-    .ver-detalles {
-        font-size: 1.1rem;
-        padding: 0.7rem 1rem;
-    }
-
-    .plant-image {
-        max-height: 420px;
-        /* Aumentado más para agrandar la imagen */
-    }
-}
-
-@media (min-width: 480px) and (max-width: 767px) {
-    .card {
-        min-height: 260px;
-        max-width: 96vw;
-    }
-
-    .plantTitle {
-        font-size: 2rem;
-    }
-
-    .ver-detalles {
-        font-size: 1.2rem;
-        padding: 0.8rem 1.1rem;
-    }
-
-    .plant-image {
-        max-height: 450px;
-        /* Aumentado más para agrandar la imagen */
-    }
-}
-
-@media (min-width: 768px) {
-    .card {
-        min-height: 280px;
-        max-width: 800px;
-    }
-
-    .plantTitle {
-        font-size: 2.4rem;
-    }
-
-    .ver-detalles {
-        font-size: 1.2rem;
-        padding: 0.9rem 1.3rem;
-    }
-
-    .plant-image {
-        max-height: 550px;
-    }
-}
-
-/* ========== ANIMACIONES ADICIONALES ========== */
-@keyframes starDrift {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 0 400px;
+        max-height: 180px;
     }
 }

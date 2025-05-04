@@ -1,5 +1,6 @@
+<!-- Sección de Encabezado -->
 <header class="app-header">
-    <div class="toolbar header-toolbar">
+    <div class="header-toolbar">
         <button class="btn-clear profile-button" (click)="goToProfile()">
             <fa-icon [icon]="faUserCircle" class="profile-icon"></fa-icon>
         </button>
@@ -9,10 +10,12 @@
     </div>
 </header>
 
+<!-- Sección de Contenido Principal -->
 <main class="content">
     <router-outlet></router-outlet>
 </main>
 
+<!-- Sección de Navegación -->
 <nav class="app-tabs">
     <div class="tab-bar custom-tab-bar">
         <!-- Inventario -->

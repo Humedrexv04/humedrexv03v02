@@ -1,67 +1,66 @@
-<!-- plant-detail.component.html -->
-<div class="main-container">
-    <!-- Sección de Encabezado -->
-    <header class="header-section">
-        <div class="header-content">
-            <div class="header-title-wrapper">
-                <span class="header-icon" aria-hidden="true">🌱</span>
-                <h1 class="header-title">Detalles de la Planta</h1>
-            </div>
-            <button class="back-button" (click)="goToPlantList()">Volver</button>
-        </div>
-    </header>
+<!-- Sección de Encabezado -->
+<header class="header">
+    <div class="toolbar header-toolbar">
+        <button class="back-button" (click)="goToPlantList()">
+            <span class="button-icon">⬅️</span> Volver
+        </button>
+        <h1 class="header-title">Detalles de la Planta</h1>
+    </div>
+</header>
 
-    <!-- Sección de Tarjeta de Planta -->
-    <section class="plant-section">
-        <div class="plant-card-wrapper">
-            <div *ngIf="plant" class="plant-card">
-                <div class="card-header text-center">
-                    <h2 class="plant-name">{{ plant.name }}</h2>
-                    <p class="plant-schedule">
-                        <span class="schedule-icon">⏱️</span>
-                        {{ plant.horario }}
-                    </p>
+<!-- Sección de Contenido Principal -->
+<main class="main-content">
+    <div class="main-container">
+        <!-- Tarjeta de la planta -->
+        <div *ngIf="plant" class="plant-card">
+            <div class="card-header text-center">
+                <!-- Nombre de la planta -->
+                <h2 class="plant-name">{{ plant.name }}</h2>
+                <!-- Horario con icono -->
+                <p class="plant-schedule">
+                    <span class="schedule-icon">⏱️</span>
+                    {{ plant.horario }}
+                </p>
+            </div>
+
+            <div class="card-content">
+                <!-- Imagen de la planta -->
+                <div class="image-container">
+                    <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
                 </div>
-                <div class="card-content">
-                    <!-- Subsección de Imagen -->
-                    <div class="image-wrapper">
-                        <div class="image-container">
-                            <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
-                        </div>
-                    </div>
-                    <!-- Subsección de Información -->
-                    <div class="info-wrapper">
-                        <div class="humidity-container">
-                            <p class="humidity-text">Humedad registrada: {{ plant.humedad }}%</p>
-                            <div class="progress-container">
-                                <div class="progress-bar humidity-progress" [style.width.%]="plant.humedad"></div>
-                            </div>
-                        </div>
-                        <div *ngIf="humidityValue !== null" class="humidity-container">
-                            <p class="humidity-text">Humedad actual: {{ humidityValue }}%</p>
-                            <div class="progress-container">
-                                <div class="progress-bar humidity-progress" [style.width.%]="humidityValue"></div>
-                            </div>
-                        </div>
-                        <div class="valve-container">
-                            <p class="valve-text">Estado de la válvula: {{ electrovalvulaState ? 'Abierta' : 'Cerrada'
-                                }}</p>
-                        </div>
-                        <div *ngIf="errorMessage" class="error-message">
-                            <p class="error-text">{{ errorMessage }}</p>
-                        </div>
+
+                <!-- Humedad estática de la planta -->
+                <div class="humidity-container margin-top">
+                    <p class="humidity-text">Humedad registrada: {{ plant.humedad }}%</p>
+                    <div class="progress-container">
+                        <div class="progress-bar humidity-progress" [style.width.%]="plant.humedad"></div>
                     </div>
                 </div>
+
+                <!-- Humedad del sensor en tiempo real -->
+                <div *ngIf="humidityValue !== null" class="humidity-container margin-top">
+                    <p class="humidity-text">Humedad actual: {{ humidityValue }}%</p>
+                    <div class="progress-container">
+                        <div class="progress-bar humidity-progress" [style.width.%]="humidityValue"></div>
+                    </div>
+                </div>
+
+                <!-- Estado de la válvula -->
+                <div class="valve-container margin-top">
+                    <p class="valve-text">Estado de la válvula: {{ electrovalvulaState ? 'Abierta' : 'Cerrada' }}</p>
+                </div>
+
+                <!-- Mensaje de error -->
+                <div *ngIf="errorMessage" class="error-message">
+                    <p class="error-text">{{ errorMessage }}</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <!-- Sección de Control Manual -->
-    <section class="manual-control-section">
-        <div class="manual-control-content">
+        <!-- Sección de control manual -->
+        <div class="manual-control-section">
             <h3>Control Manual de Riego</h3>
-            <button (click)="activateManualWatering()" [disabled]="manualActivationActive || !plant?.sensorHumedad"
-                class="primary-button">
+            <button (click)="activateManualWatering()" [disabled]="manualActivationActive || !plant?.sensorHumedad">
                 {{ manualActivationActive ? 'Regando...' : 'Activar Riego Manual' }}
             </button>
             <div *ngIf="manualActivationActive" class="countdown">
@@ -71,21 +70,15 @@
                 No hay sensor asignado para control manual
             </p>
         </div>
-    </section>
 
-    <!-- Sección de Botones de Acción -->
-    <section class="action-section">
-        <div class="action-buttons-wrapper">
-            <div class="action-buttons">
-                <button class="btn-block delete-button rounded" (click)="deletePlant()">
-                    <span class="button-icon">🗑️</span>
-                    Eliminar Planta
-                </button>
-                <button class="btn-block edit-button rounded" (click)="gotoEditPlant()">
-                    <span class="button-icon">✏️</span>
-                    Editar
-                </button>
-            </div>
+        <!-- Botones de acciones -->
+        <div class="action-buttons">
+            <button class="btn-block delete-button rounded" (click)="deletePlant()">
+                <span class="button-icon">🗑️</span> Eliminar Planta
+            </button>
+            <button class="btn-block edit-button rounded" (click)="gotoEditPlant()">
+                <span class="button-icon">✏️</span> Editar
+            </button>
         </div>
-    </section>
-</div>
+    </div>
+</main>
