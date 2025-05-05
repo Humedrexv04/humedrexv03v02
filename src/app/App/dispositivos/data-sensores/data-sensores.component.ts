@@ -173,4 +173,8 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
     this.realtimeDataService.unsubscribeDevice(this.deviceId);
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
