@@ -17,7 +17,7 @@ export const detectarHumedadBaja = functions.database
       for (const userDoc of usersSnap.docs) {
         const userId = userDoc.id;
         const userData = userDoc.data();
-        const token = userData.token;
+        const token = userData.pushToken;
 
         const plantsSnap = await admin
           .firestore()

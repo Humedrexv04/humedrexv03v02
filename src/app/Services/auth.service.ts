@@ -1,3 +1,4 @@
+// auth.service.ts
 import { Injectable, inject } from '@angular/core';
 import {
   Auth,
@@ -13,6 +14,7 @@ import {
 import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { PushNotifications, Token } from '@capacitor/push-notifications';
 
 const LOCAL_USER_KEY = 'firebaseUserUID';
 
@@ -30,7 +32,6 @@ export class AuthService {
       if (user) {
         localStorage.setItem(LOCAL_USER_KEY, user.uid);
         this.userSubject.next(user);
-
         if (window.location.pathname === '/' || window.location.pathname.includes('login')) {
           this._router.navigate(['/view/home']);
         }
@@ -38,13 +39,7 @@ export class AuthService {
         localStorage.removeItem(LOCAL_USER_KEY);
         this.userSubject.next(null);
       }
-      console.log('Estado de autenticación cambiado:', user);
     });
-
-    const storedUid = localStorage.getItem(LOCAL_USER_KEY);
-    if (storedUid) {
-      console.log('Sesión detectada desde localStorage:', storedUid);
-    }
   }
 
   get user$() {
@@ -59,142 +54,100 @@ export class AuthService {
     return !!localStorage.getItem(LOCAL_USER_KEY);
   }
 
-  signup(email: string, password: string, name: string): Promise<void> {
-    return createUserWithEmailAndPassword(this._auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
-        localStorage.setItem(LOCAL_USER_KEY, user.uid);
-        return this.saveUser(user.uid, email, name);
-      })
-      .then(() => {
-        this._router.navigate(['/view/home']);
-        console.log('✅ Usuario registrado y redirigido');
-      })
-      .catch(error => {
-        console.error('❌ Error al registrar el usuario:', error);
-        throw error;
-      });
+  async signup(email: string, password: string, name: string): Promise<void> {
+    const userCredential = await createUserWithEmailAndPassword(this._auth, email, password);
+    const user = userCredential.user;
+    localStorage.setItem(LOCAL_USER_KEY, user.uid);
+    await this.saveUser(user.uid, email, name);
+    await this.updatePushToken(user.uid);
+    this._router.navigate(['/view/home']);
   }
 
-  login(email: string, password: string): Promise<void> {
-    return signInWithEmailAndPassword(this._auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
-        localStorage.setItem(LOCAL_USER_KEY, user.uid);
-        return this.saveUser(user.uid, email, user.displayName || 'Usuario');
-      })
-      .then(() => {
-        this._router.navigate(['/view/home']);
-        console.log('✅ Usuario logueado y redirigido');
-      })
-      .catch(error => {
-        console.error('❌ Error al iniciar sesión:', error);
-        throw error;
-      });
+  async login(email: string, password: string): Promise<void> {
+    const userCredential = await signInWithEmailAndPassword(this._auth, email, password);
+    const user = userCredential.user;
+    localStorage.setItem(LOCAL_USER_KEY, user.uid);
+    await this.saveUser(user.uid, email, user.displayName || 'Usuario');
+    await this.updatePushToken(user.uid);
+    this._router.navigate(['/view/home']);
   }
 
-  loginWithGoogle(): Promise<void> {
+  async loginWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(this._auth, provider)
-      .then(async result => {
-        const user = result.user;
-        const email = user.email;
-        const name = user.displayName || 'Usuario sin nombre';
-
-        if (email) {
-          localStorage.setItem(LOCAL_USER_KEY, user.uid);
-          return this.saveUser(user.uid, email, name);
-        } else {
-          throw new Error('El email del usuario es null');
-        }
-      })
-      .then(() => {
-        this._router.navigate(['/view/home']);
-        console.log('✅ Usuario logueado con Google y redirigido');
-      })
-      .catch(error => {
-        if (error.code === 'auth/popup-closed-by-user') {
-          console.warn('El usuario cerró la ventana emergente de inicio de sesión.');
-        } else {
-          console.error('❌ Error al iniciar sesión con Google:', error);
-        }
-        throw error;
-      });
+    const result = await signInWithPopup(this._auth, provider);
+    const user = result.user;
+    if (user.email) {
+      localStorage.setItem(LOCAL_USER_KEY, user.uid);
+      await this.saveUser(user.uid, user.email, user.displayName || 'Usuario sin nombre');
+      await this.updatePushToken(user.uid);
+      this._router.navigate(['/view/home']);
+    } else {
+      throw new Error('El email del usuario es null');
+    }
   }
 
-  logout(): Promise<void> {
+  async logout(): Promise<void> {
     const currentUser = this._auth.currentUser;
-
     if (currentUser) {
       const userDoc = doc(this._firestore, `users/${currentUser.uid}`);
-      return setDoc(userDoc, { pushToken: null }, { merge: true })
-        .then(() => this._auth.signOut())
-        .then(() => {
-          localStorage.removeItem(LOCAL_USER_KEY);
-          this._router.navigate(['/']);
-          console.log('👋 Sesión cerrada y redirigido al inicio');
-        })
-        .catch(error => {
-          console.error('❌ Error al cerrar sesión:', error);
-          throw error;
-        });
-    } else {
-      return this._auth.signOut()
-        .then(() => {
-          localStorage.removeItem(LOCAL_USER_KEY);
-          this._router.navigate(['/']);
-          console.log('👋 Sesión cerrada (sin usuario activo) y redirigido al inicio');
-        });
+      await setDoc(userDoc, { pushToken: null }, { merge: true });
+      await this._auth.signOut();
+      PushNotifications.removeAllListeners(); // Limpia listeners por si acaso
+      localStorage.removeItem(LOCAL_USER_KEY);
+      this._router.navigate(['/']);
     }
   }
 
   getCurrentUser(): Promise<User | null> {
     return new Promise((resolve, reject) => {
       onAuthStateChanged(this._auth, (user) => {
-        if (user) {
-          resolve(user);
-        } else {
-          reject('No hay usuario autenticado');
-        }
+        user ? resolve(user) : reject('No hay usuario autenticado');
       });
     });
   }
 
   async sendPasswordReset(email: string): Promise<void> {
-    try {
-      const signInMethods = await fetchSignInMethodsForEmail(this._auth, email);
-
-      if (signInMethods.length === 0) {
-        throw new Error('El correo no está registrado.');
-      }
-
-      await sendPasswordResetEmail(this._auth, email);
-      console.log('📧 Correo de restablecimiento enviado a:', email);
-    } catch (error: any) {
-      console.error('❌ Error en sendPasswordReset:', error);
-      throw new Error('Error al enviar el correo. Inténtalo de nuevo más tarde.');
+    const signInMethods = await fetchSignInMethodsForEmail(this._auth, email);
+    if (signInMethods.length === 0) {
+      throw new Error('El correo no está registrado.');
     }
+    await sendPasswordResetEmail(this._auth, email);
   }
 
-  async saveUser(userId: string, email: string, name: string, authToken?: string, pushToken?: string): Promise<void> {
+  async saveUser(userId: string, email: string, name: string): Promise<void> {
     const userDoc = doc(this._firestore, `users/${userId}`);
-    const dataToSave: any = { email, name };
-
-    if (authToken) dataToSave.authToken = authToken;
-    if (pushToken) dataToSave.pushToken = pushToken;
-
+    const data = { email, name };
     const docSnapshot = await getDoc(userDoc);
-    if (docSnapshot.exists()) {
-      return setDoc(userDoc, dataToSave, { merge: true });
-    } else {
-      return setDoc(userDoc, dataToSave);
+    await setDoc(userDoc, data, { merge: true });
+  }
+
+  async updatePushToken(userId: string): Promise<void> {
+    try {
+      const permission = await PushNotifications.requestPermissions();
+      if (permission.receive !== 'granted') {
+        console.warn('🔒 Permiso de notificaciones no concedido');
+        return;
+      }
+
+      await PushNotifications.register();
+
+      PushNotifications.addListener('registration', async (token: Token) => {
+        console.log('✅ Token obtenido:', token.value);
+        const ref = doc(this._firestore, 'users', userId);
+        await setDoc(ref, {
+          pushToken: token.value,
+          updatedAt: new Date()
+        }, { merge: true });
+        console.log('📦 Token guardado en Firestore');
+      });
+    } catch (err) {
+      console.error('❌ Error al registrar pushToken:', err);
     }
   }
 
   async getUserData(userId: string): Promise<{ name: string; email: string }> {
     const userDoc = doc(this._firestore, `users/${userId}`);
     const docSnapshot = await getDoc(userDoc);
-
     if (docSnapshot.exists()) {
       const data = docSnapshot.data();
       return {
