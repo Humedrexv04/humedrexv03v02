@@ -12,7 +12,7 @@ import { AuthService } from '../../../Services/auth.service';
   standalone: true,
   imports: [IonicModule, FormsModule, NgIf],
   templateUrl: './edit-plant.component.html',
-  styleUrls: ['./edit-plant.component.css']
+  styleUrls: ['./edit-plant.component.scss']
 })
 export class EditPlantComponent implements OnInit {
   userId: string | null = null;

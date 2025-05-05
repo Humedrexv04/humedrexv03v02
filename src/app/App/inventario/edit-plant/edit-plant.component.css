@@ -1,217 +1,76 @@
-/* ========== ESTILOS GENERALES ========== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #E5D9CE;
-  /* Fondo beige claro */
+@keyframes fadeIn{ 0%{opacity:0; transform:translateY(10px) }
+100%{ opacity:1; transform:translateY(0) }
 }
-
-/* ========== HEADER ========== */
-.header {
-  background: linear-gradient(to right, #3A5A40, #88AA4E);
-  /* Verde oscuro a medio */
-  padding: 1rem;
-  box-shadow: 0 3px 10px rgba(139, 170, 78, 0.3);
-  border-bottom: 2px solid #2B3A42;
-  /* Borde azul oscuro */
+@keyframes headerShine{ 0%{background-position:0 0 }
+50%{ background-position:200% 0 }
+100%{ background-position:0 0 }
 }
-
-.header-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@keyframes inputFocus{ 0%{transform:scale(1) }
+50%{ transform:scale(1.02) }
+100%{ transform:scale(1) }
 }
-
-.header-title {
-  font-size: 1.5rem;
-  color: #FFFFFF;
-  text-shadow: 0 1px 3px rgba(43, 58, 66, 0.3);
-  margin: 0;
+.scroll-container{ height:100vh; overflow-y:auto; scroll-behavior:smooth; background-color:#e5d9ce; -webkit-overflow-scrolling:touch; touch-action:pan-y }
+.scroll-container::-webkit-scrollbar{ width:8px }
+.scroll-container::-webkit-scrollbar-track{ background:#e5d9ce; border-radius:8px }
+.scroll-container::-webkit-scrollbar-thumb{ background:#88aa4e; border-radius:8px; border:2px solid #e5d9ce }
+.scroll-container::-webkit-scrollbar-thumb:hover{ background:#2b3a42 }
+.header-section{ background:linear-gradient(135deg,#c3b1e1,#d9b58c); padding:1rem; box-shadow:0 4px 12px rgba(43,58,66,.1); border-bottom:2px solid #6b7280; position:sticky; top:0; z-index:100; animation:headerShine 5s ease-in-out infinite; will-change:background-position }
+.header-content{ display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto }
+.header-title{ font-family:"Playfair Display",serif; font-size:clamp(1.3rem,4vw,1.5rem); color:#374151; text-shadow:0 1px 2px rgba(43,58,66,.2); margin:0; animation:fadeIn .7s ease forwards }
+.header-buttons{ display:flex; gap:1rem }
+.main-container{ padding:1.5rem; min-height:calc(100vh - 80px); background:rgba(248,241,233,.9); border-radius:12px; animation:fadeIn .7s ease forwards }
+.form-card{ background:#f8f1e9; border-radius:15px; padding:1.5rem; max-width:600px; margin:0 auto; border:2px dashed #6b7280; box-shadow:0 4px 20px rgba(43,58,66,.1); animation:fadeIn .7s ease forwards .2s; position:relative; overflow:hidden }
+.form-card::before{ content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at 50% 0,rgba(195,177,225,0.1),transparent); opacity:.5; pointer-events:none }
+.image-section{ margin-bottom:1.5rem; text-align:center }
+.image-upload-label{ background:linear-gradient(to right,#f28b82,#d4a017); color:#374151; padding:.8rem 1.5rem; border-radius:25px; border:2px solid #6b7280; display:inline-block; font-family:"Poppins",sans-serif; font-weight:600; cursor:pointer; transition:background,transform .3s ease; animation:fadeIn .7s ease forwards .4s }
+.image-upload-label:hover{ background:linear-gradient(to right,#d4a017,#f28b82); transform:translateY(-2px) }
+.image-input{ display:none }
+.image-preview{ border:2px dashed #6b7280; border-radius:10px; padding:1rem; margin-top:1rem; background:hsla(0,0%,100%,.3) }
+.preview-image{ max-width:100%; border-radius:8px; transition:transform .3s ease }
+.preview-image:hover{ transform:scale(1.03) }
+.form-item{ margin-bottom:1.5rem }
+.input-label{ display:block; font-family:"Poppins",sans-serif; font-weight:600; color:#2b3a42; margin-bottom:.5rem; font-size:clamp(.9rem,2.5vw,1rem) }
+.custom-input{ width:100%; padding:.8rem; border-radius:10px; border:2px solid #6b7280; background:hsla(0,0%,100%,.7); font-family:"Poppins",sans-serif; font-size:clamp(.9rem,2.5vw,1rem); transition:border-color,box-shadow,transform .3s ease }
+.custom-input:focus{ outline:none; border-color:#88aa4e; box-shadow:0 0 0 3px rgba(136,170,78,.3); animation:inputFocus .5s ease }
+.primary-button{ padding:.7rem 1.3rem; border-radius:25px; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2.5vw,1rem); cursor:pointer; transition:background,transform,box-shadow .3s ease }
+.cancel-button{ background:linear-gradient(to right,#d9b58c,#f28b82); color:#374151; border:2px solid #6b7280; animation:fadeIn .7s ease forwards .6s }
+.cancel-button:hover{ background:linear-gradient(to right,#f28b82,#d9b58c); transform:translateY(-2px); box-shadow:0 5px 15px rgba(242,139,130,.3) }
+.submit-button{ width:100%; background:linear-gradient(to right,#88aa4e,#606c38); color:#fff; border:2px solid #6b7280; margin-top:1rem; animation:fadeIn .7s ease forwards .8s }
+.submit-button:hover{ background:linear-gradient(to right,#606c38,#88aa4e); transform:translateY(-2px); box-shadow:0 5px 15px rgba(96,108,56,.3) }
+@media(max-width:319px){ .scroll-container{padding-bottom:.5rem }
+.header-section{ padding:.5rem }
+.header-title{ font-size:1.1rem }
+.main-container{ padding:1rem }
+.form-card{ padding:1rem }
+.primary-button,.image-upload-label{ padding:.6rem 1rem; font-size:.85rem }
+.input-label,.custom-input{ font-size:.85rem }
 }
-
-/* ===== BOTÓN CANCELAR (ESTILO COHERENTE) ===== */
-.cancel-button {
-  background: linear-gradient(to right, #D9B58C, #E5D9CE);
-  /* Gradiente beige */
-  color: #2B3A42;
-  /* Texto azul oscuro */
-  border: 2px solid #88AA4E;
-  /* Borde verde */
-  padding: 0.7rem 1.3rem;
-  border-radius: 25px;
-  font-weight: 600;
-  box-shadow: 0 3px 8px rgba(217, 181, 140, 0.2);
-  transition: all 0.3s ease;
+@media(min-width:320px)and (max-width:359px){ .scroll-container{padding-bottom:.75rem }
+.header-section{ padding:.75rem }
+.header-title{ font-size:1.2rem }
+.main-container{ padding:1.25rem }
+.form-card{ padding:1.2rem }
+.primary-button,.image-upload-label{ padding:.65rem 1.1rem; font-size:.9rem }
+.input-label,.custom-input{ font-size:.9rem }
 }
-
-.cancel-button:hover {
-  background: linear-gradient(to right, #E5D9CE, #D9B58C);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(217, 181, 140, 0.3);
+@media(min-width:360px)and (max-width:479px){ .scroll-container{padding-bottom:1rem }
+.header-section{ padding:1rem }
+.header-title{ font-size:1.3rem }
+.main-container{ padding:1.5rem }
+.form-card{ padding:1.3rem }
+.primary-button,.image-upload-label{ padding:.7rem 1.2rem; font-size:.95rem }
 }
-
-/* ========== CONTENIDO PRINCIPAL ========== */
-.content-container {
-  background-color: #E5D9CE;
-  padding: 1.5rem;
-  min-height: 100vh;
-  overflow-y: auto;
-  border-left: 2px solid #88AA4E;
-  border-right: 2px solid #88AA4E;
+@media(min-width:480px)and (max-width:767px){ .scroll-container{padding-bottom:1.25rem }
+.header-section{ padding:1.25rem }
+.header-title{ font-size:1.4rem }
+.main-container{ padding:1.75rem }
+.form-card{ padding:1.5rem }
+.primary-button,.image-upload-label{ padding:.8rem 1.3rem; font-size:1rem }
 }
-
-/* ========== SCROLL PERSONALIZADO ========== */
-.content-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.content-container::-webkit-scrollbar-track {
-  background: #D8C9B9;
-  /* Beige más oscuro */
-}
-
-.content-container::-webkit-scrollbar-thumb {
-  background: #88AA4E;
-  /* Verde medio */
-  border-radius: 4px;
-}
-
-.content-container::-webkit-scrollbar-thumb:hover {
-  background: #3A5A40;
-  /* Verde oscuro */
-}
-
-/* ========== FORMULARIO ========== */
-.form-card {
-  background: rgba(156, 190, 95, 0.8);
-  /* Verde claro semitransparente */
-  border-radius: 15px;
-  padding: 1.5rem;
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: 0 4px 20px rgba(139, 170, 78, 0.2);
-  border: 1px solid #88AA4E;
-}
-
-/* ===== BOTÓN SUBIR IMAGEN (ESTILO COHERENTE) ===== */
-.image-upload-label {
-  background: linear-gradient(to right, #5B7A8C, #6BAFD3);
-  /* Azul grisáceo a azul claro */
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 25px;
-  border: 2px solid #2B3A42;
-  display: inline-block;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 8px rgba(91, 122, 140, 0.2);
-}
-
-.image-upload-label:hover {
-  background: linear-gradient(to right, #6BAFD3, #5B7A8C);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(91, 122, 140, 0.3);
-}
-
-.image-preview {
-  border: 2px dashed #88AA4E;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1rem;
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.preview-image {
-  max-width: 100%;
-  border-radius: 8px;
-}
-
-/* ========== CAMPOS DEL FORMULARIO ========== */
-.form-item {
-  margin-bottom: 1.5rem;
-}
-
-.input-label {
-  display: block;
-  color: #2B3A42;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.custom-input {
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 10px;
-  border: 2px solid #88AA4E;
-  background-color: rgba(255, 255, 255, 0.7);
-  transition: all 0.3s ease;
-}
-
-.custom-input:focus {
-  outline: none;
-  border-color: #3A5A40;
-  box-shadow: 0 0 0 3px rgba(139, 170, 78, 0.3);
-}
-
-/* ===== BOTÓN ACTUALIZAR (ESTILO COHERENTE) ===== */
-.submit-button {
-  width: 100%;
-  background: linear-gradient(to right, #88AA4E, #9CBE5F);
-  /* Verde medio a claro */
-  color: white;
-  padding: 0.9rem;
-  border: none;
-  border-radius: 25px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 3px 8px rgba(139, 170, 78, 0.3);
-}
-
-.submit-button:hover {
-  background: linear-gradient(to right, #9CBE5F, #88AA4E);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(139, 170, 78, 0.4);
-}
-
-/* ========== ANIMACIONES ========== */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ========== MEDIA QUERIES ========== */
-@media (max-width: 768px) {
-  .header-title {
-    font-size: 1.3rem;
-  }
-
-  .content-container {
-    padding: 1rem;
-    border: none;
-  }
-
-  .form-card {
-    padding: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .cancel-button,
-  .image-upload-label,
-  .submit-button {
-    padding: 0.7rem 1rem;
-    font-size: 0.9rem;
-  }
+@media(min-width:768px){ .scroll-container{padding-bottom:1.5rem }
+.header-section{ padding:1.5rem }
+.header-title{ font-size:1.5rem }
+.main-container{ padding:2rem }
+.form-card{ padding:2rem }
+.primary-button,.image-upload-label{ padding:.9rem 1.5rem; font-size:1.1rem }
 }

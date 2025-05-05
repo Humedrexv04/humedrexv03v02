@@ -3,8 +3,8 @@
     <!-- Sección de Encabezado -->
     <header class="header-section" role="banner">
         <div class="header-content">
-            <button class="back-button" (click)="goToPlantList()" aria-label="Volver a la lista de plantas">
-                <span class="button-icon" aria-hidden="true">⬅️</span> Volver
+            <button class="back-button" (click)="goToPlantList()">
+                <span class="button-icon">⬅️</span> Volver
             </button>
             <h1 class="header-title">Detalles de la Planta</h1>
         </div>
@@ -19,7 +19,7 @@
                 <h2 class="plant-title" id="plant-name-{{ plant.id }}">{{ plant.name }}</h2>
                 <!-- Horario con Icono -->
                 <p class="plant-schedule">
-                    <span class="schedule-icon" aria-hidden="true">⏱️</span>
+                    <span class="schedule-icon">⏱️</span>
                     {{ plant.horario }}
                 </p>
             </div>
@@ -75,11 +75,11 @@
 
         <!-- Botones de Acciones -->
         <div class="action-buttons">
-            <button class="primary-button delete-button" (click)="deletePlant()" aria-label="Eliminar planta">
-                <span class="button-icon" aria-hidden="true">🗑️</span> Eliminar Planta
+            <button class="primary-button delete-button" (click)="deletePlant()">
+                <span class="button-icon">🗑️</span> Eliminar Planta
             </button>
-            <button class="primary-button edit-button" (click)="gotoEditPlant()" aria-label="Editar planta">
-                <span class="button-icon" aria-hidden="true">✏️</span> Editar
+            <button class="primary-button edit-button" (click)="gotoEditPlant()">
+                <span class="button-icon">✏️</span> Editar
             </button>
         </div>
     </main>

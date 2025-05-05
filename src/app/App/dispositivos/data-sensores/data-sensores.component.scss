@@ -1,15 +1,26 @@
-// Variables de Estilo Globales (sin cambios)
+/* Variables de Estilo Globales (Coherentes con otros componentes) */
 $primary-light: #e7dcd5;
 $primary-green: #88aa4e;
 $dark-green: #6b8a3d;
 $dark-text: #2a3740;
 $accent-peach: #dbba91;
 $white-overlay: rgba(255, 255, 255, 0.2);
+$card-bg: #f8f1e9; // Blanco cremoso de otros componentes
+$soft-blue: #6b7280; // Azul suave para bordes
+$warm-gold: #d4a017; // Dorado cálido para detalles
+$soft-coral: #f28b82; // Coral suave para botones
+$soft-lavender: #c3b1e1; // Lavanda suave para encabezado
+$error-red: #ff6b6b; // Rojo para errores
 
 $font-family-base: "Roboto", sans-serif;
 $font-family-title: "Roboto", sans-serif;
 
-// Animaciones (sin cambios)
+/* Mixin para Transiciones */
+@mixin transition($properties...) {
+    transition: $properties 0.3s ease;
+}
+
+/* Animaciones Simplificadas */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -31,56 +42,48 @@ $font-family-title: "Roboto", sans-serif;
 }
 
 @keyframes buttonGlow {
-    0% {
+    0%,
+    100% {
         box-shadow: 0 0 5px rgba(136, 170, 78, 0.3);
     }
     50% {
-        box-shadow: 0 0 10px rgba(136, 170, 78, 0.5);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba(136, 170, 78, 0.3);
+        box-shadow: 0 0 8px rgba(136, 170, 78, 0.4);
     }
 }
 
 @keyframes cardHover {
-    0% {
+    0%,
+    100% {
         transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(42, 55, 64, 0.1);
     }
     50% {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(136, 170, 78, 0.2);
-    }
-    100% {
-        transform: translateY(0);
-        box-shadow: 0 2px 8px rgba(42, 55, 64, 0.1);
     }
 }
 
-// Estilos Base (sin cambios)
+/* Contenedor Principal */
 .main-container {
     padding: 1.5rem;
     max-width: 1200px;
-    margin: 2rem auto;
-    background: linear-gradient(145deg, $primary-light, rgba(245, 241, 235, 0.9));
-    border-radius: 1.2rem;
-    box-shadow: 0 4px 12px rgba($dark-text, 0.1);
-    height: calc(100vh - 4rem);
+    margin: 1.5rem auto;
+    background: $primary-light;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba($dark-text, 0.1);
+    min-height: calc(100vh - 3rem);
     display: flex;
     flex-direction: column;
     font-family: $font-family-base;
-    animation: fadeIn 0.8s ease forwards;
+    animation: fadeIn 0.6s ease forwards;
 }
 
-.scroll-wrapper {
+/* Contenedor de Desplazamiento */
+.scroll-container {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-height: calc(100% - 3rem);
 
     &::-webkit-scrollbar {
         width: 6px;
@@ -94,195 +97,170 @@ $font-family-title: "Roboto", sans-serif;
     &::-webkit-scrollbar-thumb {
         background: $primary-green;
         border-radius: 6px;
-        opacity: 0.7;
-        transition: background 0.3s ease;
+        @include transition(background);
 
         &:hover {
-            background: $dark-text;
+            background: $dark-green;
         }
     }
 }
 
+/* Encabezado */
 .header-section {
-    background: linear-gradient(135deg, $primary-light, rgba(136, 170, 78, 0.15));
-    backdrop-filter: blur(12px);
-    padding: 1.5rem; // Aumentado de 1rem 1.5rem a 1.5rem para más espacio vertical
-    border-radius: 1rem;
-    box-shadow:
-        0 4px 10px rgba($dark-text, 0.1),
-        inset 0 0 10px rgba($primary-green, 0.25);
-    border: 2px solid $primary-green;
-    display: flex;
-    flex-direction: column; // Cambiado a columna para apilar elementos
-    align-items: center; // Centrado horizontal
-    gap: 0.8rem; // Ajustado para un espaciado limpio
-    margin: 0 1rem;
-    width: calc(100% - 2rem);
-    position: relative;
-    animation: fadeIn 0.8s ease forwards;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(circle at top left, rgba($primary-green, 0.2), transparent);
-        border-radius: 1rem;
-        z-index: -1;
-    }
-
-    .back-button {
-        background: linear-gradient(45deg, $accent-peach, $primary-light);
-        color: $dark-text;
-        padding: 0.5rem 0.5rem;
-        border-radius: 0.8rem;
-        font-weight: 700;
-        font-size: 0.9rem;
-        border: 2px solid $primary-green;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 130px; // Cambiado de min-width a width para control exacto
-        text-align: end;
-        animation: buttonGlow 1.5s infinite ease-in-out;
-
-        &:hover {
-            background: linear-gradient(45deg, $primary-light, $accent-peach);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba($accent-peach, 0.25);
-        }
-
-        &:active {
-            transform: translateY(0);
-            box-shadow: 0 3px 6px rgba($accent-peach, 0.15);
-        }
-    }
-
-    .header-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        gap: 1rem;
-    }
-
-    .status-indicator {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .header-title-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .header-icon {
-        font-size: 1.3rem;
-        color: $dark-text;
-        transition: all 0.3s ease;
-
-        &:hover {
-            transform: rotate(20deg) scale(1.1);
-        }
-    }
-
-    .header-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: $dark-text;
-        text-shadow: 0 2px 4px rgba($primary-green, 0.25);
-        margin: 0;
-        font-family: $font-family-title;
-        letter-spacing: 0.5px;
-        max-width: 85%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .connection-status {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: $dark-text;
-        background: $white-overlay;
-        padding: 0.3rem 0.8rem;
-        border-radius: 0.6rem;
-        border: 2px solid $primary-green;
-
-        div {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-
-            &.connected {
-                background: linear-gradient(45deg, #27ae60, #2ecc71);
-            }
-
-            &.disconnected {
-                background: linear-gradient(45deg, #e74c3c, #c0392b);
-            }
-        }
-    }
-}
-
-.section-base {
+    background: linear-gradient(135deg, $soft-lavender, $accent-peach);
     padding: 1.5rem;
-    background: linear-gradient(135deg, $primary-light, $white-overlay);
-    backdrop-filter: blur(10px);
-    border-radius: 1.2rem;
-    border: 2px solid $primary-green;
-    box-shadow: 0 4px 12px rgba($dark-text, 0.1);
-    animation: fadeIn 0.8s ease forwards;
+    border-radius: 10px;
+    border: 2px dashed $soft-blue;
+    box-shadow: 0 2px 6px rgba($dark-text, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
     margin: 0 1rem;
-    transition: all 0.3s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: fadeIn 0.6s ease forwards;
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+
+.back-button {
+    background: linear-gradient(to right, $warm-gold, $soft-coral);
+    color: $dark-text;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    border: 2px solid $soft-blue;
+    cursor: pointer;
+    width: 120px;
+    text-align: center;
+    @include transition(background, transform);
+    animation: buttonGlow 2s infinite ease-in-out;
+
+    &:hover {
+        background: linear-gradient(to right, $soft-coral, $warm-gold);
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.header-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-icon {
+    font-size: 1.2rem;
+    color: $dark-text;
+    @include transition(transform);
+
+    &:hover {
+        transform: rotate(15deg);
+    }
+}
+
+.header-title {
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    font-weight: 700;
+    color: $dark-text;
+    margin: 0;
+    font-family: $font-family-title;
+    animation: fadeIn 0.6s ease forwards 0.2s;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-weight: 600;
+    color: $dark-text;
+    background: $white-overlay;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    border: 2px solid $soft-blue;
+    animation: fadeIn 0.6s ease forwards 0.4s;
+
+    div {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        &.connected {
+            background: $primary-green;
+        }
+
+        &.disconnected {
+            background: $error-red;
+        }
+    }
+}
+
+/* Sección Base */
+.section-base {
+    padding: 1rem;
+    background: $card-bg;
+    border-radius: 10px;
+    border: 2px dashed $soft-blue;
+    box-shadow: 0 2px 6px rgba($dark-text, 0.1);
+    margin: 0 1rem;
+    animation: fadeIn 0.6s ease forwards;
+    @include transition(transform);
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Sección de Carga */
 .loading-section {
     @extend .section-base;
     text-align: center;
 
     .spinner {
-        border: 5px solid rgba($primary-green, 0.3);
-        border-top: 5px solid $primary-green;
+        border: 4px solid rgba($primary-green, 0.3);
+        border-top: 4px solid $primary-green;
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        animation: spin 1.2s linear infinite;
-        margin: 0 auto 1.2rem;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
     }
 
     .loading-text {
         color: $dark-text;
         font-weight: 600;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
         margin: 0;
-        font-size: 1.1rem;
-        text-shadow: 0 1px 3px rgba($primary-green, 0.2);
     }
 }
 
+/* Sección de Error */
 .error-section {
     @extend .section-base;
-    background: linear-gradient(135deg, rgba(255, 235, 235, 0.9), $white-overlay);
-    border-color: #ff6b6b;
-    text-align: center;
+    border-color: $error-red;
 
     .error-text {
-        color: #ff6b6b;
+        color: $error-red;
         font-weight: 600;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
         margin: 0;
-        font-size: 1.1rem;
-        text-shadow: 0 1px 3px rgba(255, 107, 107, 0.2);
     }
 }
 
+/* Contenido Principal */
 .main-content {
     display: flex;
     flex-direction: column;
@@ -290,6 +268,7 @@ $font-family-title: "Roboto", sans-serif;
     margin: 0 1rem;
 }
 
+/* Sección de Sensores */
 .sensor-section {
     @extend .section-base;
 
@@ -301,85 +280,62 @@ $font-family-title: "Roboto", sans-serif;
     }
 
     .header-icon {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         color: $dark-text;
-        transition: all 0.3s ease;
+        @include transition(transform);
 
         &:hover {
-            transform: scale(1.15) rotate(15deg);
+            transform: scale(1.1);
         }
     }
 
     .section-title {
-        font-size: 1.3rem;
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
         font-weight: 700;
         color: $dark-text;
-        text-shadow: 0 2px 4px rgba($primary-green, 0.25);
         margin: 0;
         font-family: $font-family-title;
     }
 
     .sensor-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1rem;
-        padding: 0.5rem;
 
         .sensor-card {
             padding: 1rem;
-            background: linear-gradient(135deg, $white-overlay, rgba(255, 255, 255, 0.4));
-            backdrop-filter: blur(8px);
-            border-radius: 0.8rem;
-            box-shadow: 0 2px 8px rgba($dark-text, 0.1);
+            background: $white-overlay;
+            border-radius: 8px;
+            border: 2px solid $soft-blue;
             text-align: center;
-            border: 2px solid $primary-green;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            animation: cardHover 6s infinite ease-in-out;
-
-            &::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-                transition: 0.5s;
-            }
+            animation: cardHover 4s infinite ease-in-out;
+            @include transition(transform);
 
             &:hover {
-                &::before {
-                    left: 100%;
-                }
                 transform: translateY(-3px);
-                box-shadow: 0 6px 15px rgba($primary-green, 0.25);
             }
 
             .sensor-name {
                 color: $dark-text;
-                font-size: 1rem;
+                font-size: clamp(0.9rem, 2.5vw, 1rem);
                 font-weight: 600;
                 margin-bottom: 0.5rem;
                 text-transform: uppercase;
-                letter-spacing: 1px;
             }
 
             .sensor-value {
-                font-size: 1.6rem;
+                font-size: clamp(1.4rem, 4vw, 1.6rem);
                 font-weight: 700;
                 color: $primary-green;
-                text-shadow: 0 2px 5px rgba($primary-green, 0.3);
             }
         }
     }
 }
 
-// Sección de Asignación (Ajustada para centrar el botón)
+/* Sección de Asignación */
 .assignment-section {
     @extend .section-base;
-    padding: 0.8rem;
+    padding: 1rem;
 
     .section-header {
         display: flex;
@@ -389,10 +345,9 @@ $font-family-title: "Roboto", sans-serif;
     }
 
     .section-title {
-        font-size: 1.3rem;
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
         font-weight: 700;
         color: $dark-text;
-        text-shadow: 0 2px 4px rgba($primary-green, 0.25);
         margin: 0;
         font-family: $font-family-title;
     }
@@ -400,291 +355,272 @@ $font-family-title: "Roboto", sans-serif;
     .assignment-form {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.6rem;
-        padding: 0.3rem;
-        justify-content: space-between; // Ajustado para espaciar los elementos
-        align-items: center; // Cambiado para centrar verticalmente
+        gap: 0.5rem;
+        justify-content: space-between;
+        align-items: center;
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
+            gap: 0.2rem;
             flex: 1;
-            min-width: 260px;
-            max-width: 310px;
+            min-width: 250px;
+            max-width: 300px;
 
             label {
                 font-weight: 600;
-                font-size: 0.9rem;
+                font-size: clamp(0.85rem, 2vw, 0.9rem);
                 color: $dark-text;
-                text-shadow: 0 1px 2px rgba($primary-green, 0.1);
             }
 
             .form-select {
-                padding: 0.35rem;
-                border: 2px solid $primary-green;
-                border-radius: 0.6rem;
-                background: #ffffff !important;
-                font-size: 0.9rem;
-                color: $dark-text !important;
-                transition: all 0.3s ease;
-                height: 45px;
-                overflow-y: auto;
-                appearance: none;
-                -webkit-appearance: none;
-                box-shadow: inset 0 2px 5px rgba($dark-text, 0.1);
-
-                &::-webkit-scrollbar {
-                    width: 6px;
-                }
-
-                &::-webkit-scrollbar-track {
-                    background: $primary-light;
-                    border-radius: 4px;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background: linear-gradient(45deg, $primary-green, darken($primary-green, 10%));
-                    border-radius: 4px;
-
-                    &:hover {
-                        background: linear-gradient(45deg, darken($primary-green, 15%), $dark-text);
-                    }
-                }
+                padding: 0.4rem;
+                border: 2px solid $soft-blue;
+                border-radius: 6px;
+                font-size: clamp(0.85rem, 2vw, 0.9rem);
+                color: $dark-text;
+                height: 40px;
+                @include transition(border-color);
 
                 &:focus {
-                    border-color: $accent-peach;
-                    box-shadow:
-                        0 0 8px rgba($accent-peach, 0.25),
-                        inset 0 2px 5px rgba($dark-text, 0.1);
+                    border-color: $warm-gold;
                     outline: none;
-                }
-
-                option {
-                    background: #ffffff !important;
-                    color: $dark-text !important;
-                    padding: 0.4rem;
-                    font-size: 0.9rem;
                 }
             }
         }
 
-        .assign-button {
-            padding: 0.2rem 0.8rem;
-            background: linear-gradient(45deg, $dark-green, lighten($dark-green, 10%));
+        .primary-button {
+            padding: 0.4rem 0.8rem;
+            background: linear-gradient(to right, $dark-green, $primary-green);
             color: $primary-light;
-            border: 2px solid $primary-green;
-            border-radius: 0.6rem;
-            font-weight: 700;
-            font-size: 0.9rem;
+            border: 2px solid $soft-blue;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 120px;
-            height: 50px;
+            width: 110px;
             text-align: center;
-            animation: buttonGlow 1.5s infinite ease-in-out;
-            box-shadow: 0 2px 6px rgba($dark-text, 0.1);
-            margin: 0 auto; // Centrado horizontalmente
-            display: block; // Para que margin auto funcione
+            @include transition(background, transform);
+            animation: buttonGlow 2s infinite ease-in-out;
+            margin: 0 auto;
 
             &:hover {
-                background: linear-gradient(45deg, lighten($dark-green, 10%), $dark-green);
+                background: linear-gradient(to right, $primary-green, $dark-green);
                 transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba($dark-green, 0.3);
-            }
-
-            &:active {
-                transform: translateY(0);
-                box-shadow: 0 3px 6px rgba($dark-green, 0.15);
             }
 
             &:disabled {
-                background: #bdc3c7;
+                background: $soft-blue;
                 cursor: not-allowed;
                 opacity: 0.6;
-                box-shadow: none;
             }
         }
     }
 }
 
-// Media Queries (Ajustados)
+/* Media Queries */
 @media (max-width: 319px) {
     .main-container {
         padding: 0.8rem;
         margin: 1rem;
-        height: calc(100vh - 2rem);
     }
-    .scroll-wrapper {
+
+    .scroll-container {
         padding: 0.5rem;
         gap: 1rem;
     }
+
     .header-section {
         padding: 1rem;
-        gap: 0.5rem;
+        margin: 0 0.5rem;
     }
-    .header-section .back-button,
-    .header-section .header-title,
-    .header-section .connection-status {
+
+    .back-button,
+    .header-title,
+    .connection-status {
         font-size: 0.8rem;
     }
-    .header-section .back-button {
-        width: 110px;
+
+    .back-button {
+        width: 100px;
     }
-    .header-section .header-icon {
-        font-size: 1.1rem;
+
+    .header-icon {
+        font-size: 1rem;
     }
+
     .section-base {
         padding: 0.8rem;
         margin: 0 0.5rem;
     }
-    .loading-section .loading-text,
-    .error-section .error-text {
-        font-size: 0.8rem;
+
+    .loading-text,
+    .error-text {
+        font-size: 0.85rem;
     }
+
     .sensor-section .sensor-grid {
         grid-template-columns: 1fr;
         gap: 0.8rem;
     }
+
     .sensor-section .sensor-card {
         padding: 0.8rem;
     }
-    .sensor-section .sensor-card .sensor-value {
+
+    .sensor-section .sensor-value {
         font-size: 1.3rem;
     }
+
     .assignment-section .assignment-form {
         flex-direction: column;
         gap: 0.4rem;
     }
+
     .assignment-section .assignment-form .form-group {
         min-width: 100%;
     }
+
     .assignment-section .assignment-form .form-select {
-        padding: 0.3rem;
-        font-size: 0.7rem;
-        height: 40px;
+        font-size: 0.8rem;
+        height: 36px;
     }
-    .assignment-section .assignment-form .assign-button {
-        padding: 0.2rem 0.6rem;
-        font-size: 0.7rem;
+
+    .assignment-section .assignment-form .primary-button {
+        font-size: 0.8rem;
         width: 100px;
-        height: 45px;
     }
 }
 
 @media (min-width: 320px) and (max-width: 479px) {
     .main-container {
         padding: 1rem;
-        margin: 1.2rem;
+        margin: 1rem;
     }
-    .scroll-wrapper {
+
+    .scroll-container {
         padding: 0.8rem;
         gap: 1.2rem;
     }
+
     .header-section {
         padding: 1.2rem;
-        gap: 0.6rem;
+        margin: 0 0.8rem;
     }
-    .header-section .back-button,
-    .header-section .header-title,
-    .header-section .connection-status {
+
+    .back-button,
+    .header-title,
+    .connection-status {
         font-size: 0.9rem;
     }
-    .header-section .back-button {
-        width: 120px;
+
+    .back-button {
+        width: 110px;
     }
-    .header-section .header-icon {
-        font-size: 1.2rem;
+
+    .header-icon {
+        font-size: 1.1rem;
     }
+
     .section-base {
         padding: 1rem;
         margin: 0 0.8rem;
     }
-    .loading-section .loading-text,
-    .error-section .error-text {
+
+    .loading-text,
+    .error-text {
         font-size: 0.9rem;
     }
+
     .sensor-section .sensor-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
+
     .sensor-section .sensor-card {
         padding: 1rem;
     }
-    .sensor-section .sensor-card .sensor-value {
+
+    .sensor-section .sensor-value {
         font-size: 1.4rem;
     }
+
     .assignment-section .assignment-form {
         flex-direction: column;
         gap: 0.5rem;
     }
+
     .assignment-section .assignment-form .form-group {
         min-width: 100%;
     }
+
     .assignment-section .assignment-form .form-select {
-        padding: 0.35rem;
-        font-size: 0.8rem;
-        height: 45px;
+        font-size: 0.85rem;
+        height: 38px;
     }
-    .assignment-section .assignment-form .assign-button {
-        padding: 0.2rem 0.7rem;
-        font-size: 0.8rem;
+
+    .assignment-section .assignment-form .primary-button {
+        font-size: 0.85rem;
         width: 110px;
-        height: 50px;
     }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
     .main-container {
         padding: 1.2rem;
-        margin: 1.5rem auto;
+        margin: 1.2rem auto;
         max-width: 600px;
     }
-    .scroll-wrapper {
+
+    .scroll-container {
         padding: 1rem;
         gap: 1.5rem;
     }
+
     .header-section {
         padding: 1.3rem;
-        gap: 0.8rem;
+        margin: 0 1rem;
     }
-    .header-section .back-button,
-    .header-section .header-title,
-    .header-section .connection-status {
+
+    .back-button,
+    .header-title,
+    .connection-status {
         font-size: 1rem;
     }
-    .header-section .back-button {
+
+    .back-button {
         width: 120px;
     }
-    .header-section .header-icon {
-        font-size: 1.3rem;
+
+    .header-icon {
+        font-size: 1.2rem;
     }
+
     .section-base {
         padding: 1.2rem;
         margin: 0 1rem;
     }
-    .loading-section .loading-text,
-    .error-section .error-text {
+
+    .loading-text,
+    .error-text {
         font-size: 1rem;
     }
+
     .sensor-section .sensor-grid {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1rem;
     }
-    .sensor-section .sensor-card {
-        padding: 1rem;
-    }
+
     .assignment-section .assignment-form .form-group {
-        min-width: 240px;
+        min-width: 220px;
     }
+
     .assignment-section .assignment-form .form-select {
-        height: 45px;
+        height: 40px;
     }
-    .assignment-section .assignment-form .assign-button {
-        padding: 0.2rem 0.8rem;
-        font-size: 0.9rem;
+
+    .assignment-section .assignment-form .primary-button {
         width: 120px;
-        height: 50px;
     }
 }
 
@@ -693,47 +629,55 @@ $font-family-title: "Roboto", sans-serif;
         padding: 1.5rem;
         max-width: 1200px;
     }
-    .scroll-wrapper {
+
+    .scroll-container {
         padding: 1.2rem;
         gap: 1.5rem;
     }
+
     .header-section {
         padding: 1.5rem;
-        gap: 1rem;
+        margin: 0 1.2rem;
     }
-    .header-section .back-button,
-    .header-section .header-title,
-    .header-section .connection-status {
+
+    .back-button,
+    .header-title,
+    .connection-status {
         font-size: 1.1rem;
     }
-    .header-section .back-button {
+
+    .back-button {
         width: 130px;
     }
-    .header-section .header-icon {
-        font-size: 1.4rem;
+
+    .header-icon {
+        font-size: 1.3rem;
     }
+
     .section-base {
         padding: 1.5rem;
         margin: 0 1.2rem;
     }
-    .loading-section .loading-text,
-    .error-section .error-text {
+
+    .loading-text,
+    .error-text {
         font-size: 1.1rem;
     }
+
     .sensor-section .sensor-grid {
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1.2rem;
     }
+
     .assignment-section .assignment-form .form-group {
-        min-width: 260px;
+        min-width: 250px;
     }
+
     .assignment-section .assignment-form .form-select {
-        height: 45px;
+        height: 40px;
     }
-    .assignment-section .assignment-form .assign-button {
-        padding: 0.2rem 0.8rem;
-        font-size: 0.9rem;
+
+    .assignment-section .assignment-form .primary-button {
         width: 120px;
-        height: 50px;
     }
 }

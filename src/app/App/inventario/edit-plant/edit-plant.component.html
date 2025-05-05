@@ -1,44 +1,57 @@
-<header class="header">
-  <div class="header-toolbar">
-    <h1 class="header-title">Editar Planta</h1>
-    <div class="header-buttons">
-      <button type="button" class="cancel-button" (click)="gotoPlantDetail()">Cancelar</button>
-    </div>
-  </div>
-</header>
-
-<main class="content-container">
-  <form *ngIf="plant" class="form-card">
-    <div class="image-section">
-      <label class="image-upload-label">
-        📸 Cambiar imagen
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input">
-      </label>
-      <div class="image-preview" *ngIf="img">
-        <img [src]="img" alt="Previsualización de la planta" class="preview-image">
-      </div>
-      <div class="image-preview" *ngIf="!img && plant.img">
-        <img [src]="plant.img" alt="Imagen actual de la planta" class="preview-image">
+<!-- Contenedor Principal -->
+<div class="scroll-container">
+  <!-- Sección de Encabezado -->
+  <header class="header-section" role="banner">
+    <div class="header-content">
+      <h1 class="header-title">Editar Planta</h1>
+      <div class="header-buttons">
+        <button type="button" class="primary-button cancel-button" (click)="gotoPlantDetail()"
+          aria-label="Cancelar edición">Cancelar</button>
       </div>
     </div>
+  </header>
 
-    <div class="form-item">
-      <label for="plant-name" class="input-label">Nombre</label>
-      <input id="plant-name" type="text" [(ngModel)]="plant.name" name="name" required class="custom-input">
-    </div>
+  <!-- Contenido Principal -->
+  <main class="main-container" role="main">
+    <form *ngIf="plant" class="form-card" role="form" aria-labelledby="edit-plant-title">
+      <!-- Sección de Imagen -->
+      <div class="image-section">
+        <label class="image-upload-label" for="image-upload">
+          📸 Cambiar imagen
+          <input id="image-upload" type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input"
+            aria-label="Subir imagen de la planta">
+        </label>
+        <div class="image-preview" *ngIf="img">
+          <img [src]="img" alt="Previsualización de la planta" class="preview-image" />
+        </div>
+        <div class="image-preview" *ngIf="!img && plant.img">
+          <img [src]="plant.img" alt="Imagen actual de la planta" class="preview-image" />
+        </div>
+      </div>
 
-    <div class="form-item">
-      <label for="plant-horario" class="input-label">Horario</label>
-      <input id="plant-horario" type="time" [(ngModel)]="plant.horario" name="horario" required class="custom-input">
-    </div>
+      <!-- Campo de Nombre -->
+      <div class="form-item">
+        <label for="plant-name" class="input-label">Nombre</label>
+        <input id="plant-name" type="text" [(ngModel)]="plant.name" name="name" required class="custom-input"
+          aria-required="true" />
+      </div>
 
-    <div class="form-item">
-      <label for="plant-humedad" class="input-label">Humedad (%)</label>
-      <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input">
-    </div>
+      <!-- Campo de Horario -->
+      <div class="form-item">
+        <label for="plant-horario" class="input-label">Horario</label>
+        <input id="plant-horario" type="time" [(ngModel)]="plant.horario" name="horario" required class="custom-input"
+          aria-required="true" />
+      </div>
 
-    <button type="button" class="submit-button" (click)="updatePlant()">
-      Actualizar Planta
-    </button>
-  </form>
-</main>
+      <!-- Campo de Humedad -->
+      <div class="form-item">
+        <label for="plant-humedad" class="input-label">Humedad (%)</label>
+        <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input"
+          aria-required="true" />
+      </div>
+
+      <!-- Botón de Actualizar -->
+      <button type="button" class="primary-button submit-button" (click)="updatePlant()">Actualizar Planta</button>
+    </form>
+  </main>
+</div>

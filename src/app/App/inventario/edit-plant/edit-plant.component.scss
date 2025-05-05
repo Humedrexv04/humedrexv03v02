@@ -1,0 +1,425 @@
+/* Variables de Color (Coherentes con Add/View/PlantItem/PlantList/Home/PlantDetail, con nuevo tono experimental) */
+$light-green: #e5d9ce;
+$white: #ffffff;
+$dark-green: #2b3a42;
+$medium-green: #88aa4e;
+$peach: #d9b58c;
+$black: #1f2937;
+$error-red: #ff6b6b;
+$card-bg: #f8f1e9; // Blanco cremoso para formulario
+$soft-blue: #6b7280; // Azul suave para bordes
+$warm-gold: #d4a017; // Dorado cálido para detalles
+$dark-gray: #374151; // Gris oscuro para texto secundario
+$olive-green: #606c38; // Verde oliva para detalles
+$soft-coral: #f28b82; // Coral suave para botones
+$soft-lavender: #c3b1e1; // Lavanda suave para encabezado
+$list-bg: rgba(248, 241, 233, 0.9); // Beige claro para fondo
+
+/* Mixin para Transiciones */
+@mixin transition($properties...) {
+  transition: $properties 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes headerShine {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes inputFocus {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Contenedor Principal */
+.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  background-color: $light-green;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $light-green;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $medium-green;
+    border-radius: 8px;
+    border: 2px solid $light-green;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $dark-green;
+  }
+}
+
+/* Encabezado */
+.header-section {
+  background: linear-gradient(135deg, $soft-lavender, $peach);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(43, 58, 66, 0.1);
+  border-bottom: 2px solid $soft-blue;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: headerShine 5s ease-in-out infinite;
+  will-change: background-position;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
+  color: $dark-gray;
+  text-shadow: 0 1px 2px rgba(43, 58, 66, 0.2);
+  margin: 0;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Contenido Principal */
+.main-container {
+  padding: 1.5rem;
+  min-height: calc(100vh - 80px);
+  background: $list-bg;
+  border-radius: 12px;
+  animation: fadeIn 0.7s ease forwards;
+}
+
+/* Formulario */
+.form-card {
+  background: $card-bg;
+  border-radius: 15px;
+  padding: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 2px dashed $soft-blue;
+  box-shadow: 0 4px 20px rgba(43, 58, 66, 0.1);
+  animation: fadeIn 0.7s ease forwards 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0, rgba(195, 177, 225, 0.1), transparent);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+/* Sección de Imagen */
+.image-section {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.image-upload-label {
+  background: linear-gradient(to right, $soft-coral, $warm-gold);
+  color: $dark-gray;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  border: 2px solid $soft-blue;
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  @include transition(background, transform);
+  animation: fadeIn 0.7s ease forwards 0.4s;
+
+  &:hover {
+    background: linear-gradient(to right, $warm-gold, $soft-coral);
+    transform: translateY(-2px);
+  }
+}
+
+.image-input {
+  display: none;
+}
+
+.image-preview {
+  border: 2px dashed $soft-blue;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.preview-image {
+  max-width: 100%;
+  border-radius: 8px;
+  @include transition(transform);
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
+
+/* Campos del Formulario */
+.form-item {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: $dark-green;
+  margin-bottom: 0.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.custom-input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 2px solid $soft-blue;
+  background: rgba(255, 255, 255, 0.7);
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  @include transition(border-color, box-shadow, transform);
+
+  &:focus {
+    outline: none;
+    border-color: $medium-green;
+    box-shadow: 0 0 0 3px rgba(136, 170, 78, 0.3);
+    animation: inputFocus 0.5s ease;
+  }
+}
+
+/* Botones */
+.primary-button {
+  padding: 0.7rem 1.3rem;
+  border-radius: 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  cursor: pointer;
+  @include transition(background, transform, box-shadow);
+}
+
+.cancel-button {
+  background: linear-gradient(to right, $peach, $soft-coral);
+  color: $dark-gray;
+  border: 2px solid $soft-blue;
+  animation: fadeIn 0.7s ease forwards 0.6s;
+
+  &:hover {
+    background: linear-gradient(to right, $soft-coral, $peach);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(242, 139, 130, 0.3);
+  }
+}
+
+.submit-button {
+  width: 100%;
+  background: linear-gradient(to right, $medium-green, $olive-green);
+  color: $white;
+  border: 2px solid $soft-blue;
+  margin-top: 1rem;
+  animation: fadeIn 0.7s ease forwards 0.8s;
+
+  &:hover {
+    background: linear-gradient(to right, $olive-green, $medium-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(96, 108, 56, 0.3);
+  }
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 319px) {
+  .scroll-container {
+    padding-bottom: 0.5rem;
+  }
+
+  .header-section {
+    padding: 0.5rem;
+  }
+
+  .header-title {
+    font-size: 1.1rem;
+  }
+
+  .main-container {
+    padding: 1rem;
+  }
+
+  .form-card {
+    padding: 1rem;
+  }
+
+  .primary-button,
+  .image-upload-label {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .input-label,
+  .custom-input {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+  .scroll-container {
+    padding-bottom: 0.75rem;
+  }
+
+  .header-section {
+    padding: 0.75rem;
+  }
+
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .main-container {
+    padding: 1.25rem;
+  }
+
+  .form-card {
+    padding: 1.2rem;
+  }
+
+  .primary-button,
+  .image-upload-label {
+    padding: 0.65rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  .input-label,
+  .custom-input {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+  .scroll-container {
+    padding-bottom: 1rem;
+  }
+
+  .header-section {
+    padding: 1rem;
+  }
+
+  .header-title {
+    font-size: 1.3rem;
+  }
+
+  .main-container {
+    padding: 1.5rem;
+  }
+
+  .form-card {
+    padding: 1.3rem;
+  }
+
+  .primary-button,
+  .image-upload-label {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .scroll-container {
+    padding-bottom: 1.25rem;
+  }
+
+  .header-section {
+    padding: 1.25rem;
+  }
+
+  .header-title {
+    font-size: 1.4rem;
+  }
+
+  .main-container {
+    padding: 1.75rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .primary-button,
+  .image-upload-label {
+    padding: 0.8rem 1.3rem;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .scroll-container {
+    padding-bottom: 1.5rem;
+  }
+
+  .header-section {
+    padding: 1.5rem;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .main-container {
+    padding: 2rem;
+  }
+
+  .form-card {
+    padding: 2rem;
+  }
+
+  .primary-button,
+  .image-upload-label {
+    padding: 0.9rem 1.5rem;
+    font-size: 1.1rem;
+  }
+}
