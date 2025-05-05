@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "386733567915",
+    "firebase_url": "https://humedrex-c91e1-default-rtdb.firebaseio.com",
+    "project_id": "humedrex-c91e1",
+    "storage_bucket": "humedrex-c91e1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386733567915:android:1d905e97d02a5a83982cee",
+        "android_client_info": {
+          "package_name": "com.humedrex.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386733567915-7e8uui7864tdavh07o208pv0k8h400dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD24NlOOUl7KqW44gXgudR5tlbwz7eCLRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386733567915-7e8uui7864tdavh07o208pv0k8h400dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
