@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
       // Guardar token en Firestore si hay usuario
       const user = await this.authService.getCurrentUser();
       if (user) {
-        const ref = doc(this.firestore, 'usuarios', user.uid);
+        const ref = doc(this.firestore, 'users', user.uid);
         await setDoc(ref, {
           pushToken: token.value,
           updatedAt: new Date()
