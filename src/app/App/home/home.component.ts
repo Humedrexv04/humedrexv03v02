@@ -9,7 +9,7 @@ import { leafOutline, moon, personCircleOutline, sunny } from 'ionicons/icons';
   selector: 'app-home',
   imports: [IonicModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   route = inject(Router);

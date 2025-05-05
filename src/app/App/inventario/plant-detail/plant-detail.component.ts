@@ -11,11 +11,11 @@ import { Plant } from '../../../Models/plant.mode';
   selector: 'app-plant-detail',
   imports: [NgIf],
   templateUrl: './plant-detail.component.html',
-  styleUrls: ['./plant-detail.component.css'],
+  styleUrls: ['./plant-detail.component.scss'],
   standalone: true
 })
 export class PlantDetailComponent implements OnInit, OnDestroy {
-  @Input() plant: Plant| null = null;
+  @Input() plant: Plant | null = null;
   userId: string | null = null;
   plantId!: string;
   humidityWidth: string = '0%';

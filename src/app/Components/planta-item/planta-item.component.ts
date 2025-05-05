@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-planta-item',
   imports: [IonicModule],
   templateUrl: './planta-item.component.html',
-  styleUrl: './planta-item.component.css'
+  styleUrl: './planta-item.component.scss'
 })
 export class PlantaItemComponent {
   @Input() plant!: Plant; // Recibe la planta como input

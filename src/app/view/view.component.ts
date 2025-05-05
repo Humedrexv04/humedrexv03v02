@@ -20,7 +20,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
     FontAwesomeModule
   ],
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.css']
+  styleUrls: ['./view.component.scss']
 })
 export class ViewComponent {
   route = inject(Router);

@@ -1,0 +1,599 @@
+/* Variables de Color (Coherentes con Add/View/PlantItem/PlantList, con nuevos tonos experimentales) */
+$light-green: #e5d9ce;
+$white: #ffffff;
+$dark-green: #2b3a42;
+$medium-green: #88aa4e;
+$peach: #d9b58c;
+$black: #1f2937;
+$error-red: #ff6b6b;
+$card-bg: #f8f1e9; // Blanco cremoso para tarjeta
+$soft-blue: #6b7280; // Azul suave para bordes
+$warm-gold: #d4a017; // Dorado cálido para detalles
+$dark-gray: #374151; // Gris oscuro para texto secundario
+$olive-green: #606c38; // Verde oliva para detalles
+$soft-coral: #f28b82; // Coral suave para el encabezado y botón
+$list-bg: rgba(248, 241, 233, 0.9); // Beige claro para fondo
+
+/* Mixin para Transiciones */
+@mixin transition($properties...) {
+    transition: $properties 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes headerShine {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes rotateLeaf {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Contenedor Principal */
+.scroll-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    background-color: $light-green;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $light-green;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $medium-green;
+        border-radius: 8px;
+        border: 2px solid $light-green;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $dark-green;
+    }
+}
+
+/* Encabezado */
+.header-section {
+    background: linear-gradient(135deg, $soft-coral, $peach);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(43, 58, 66, 0.1);
+    border: 2px solid $olive-green;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: headerShine 5s ease-in-out infinite;
+    will-change: background-position;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-title {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(1.3rem, 4vw, 1.5rem);
+    font-weight: 600;
+    color: $dark-gray;
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.2);
+    margin: 0;
+    animation: fadeIn 0.7s ease forwards;
+}
+
+/* Contenido Principal */
+.main-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    background: $list-bg;
+    border-radius: 12px;
+    animation: fadeIn 0.7s ease forwards;
+}
+
+.welcome-text {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(1.5rem, 5vw, 1.8rem);
+    font-weight: 700;
+    color: $dark-green;
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    animation: fadeIn 0.7s ease forwards 0.2s;
+}
+
+/* Tarjeta de Perfil */
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background: $card-bg;
+    border: 2px solid $olive-green;
+    margin: 1rem auto;
+    overflow: hidden;
+    animation: fadeIn 0.7s ease forwards 0.4s;
+    @include transition(transform, box-shadow);
+    will-change: transform;
+
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 16px rgba(96, 108, 56, 0.2);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 0, rgba(242, 139, 130, 0.1), transparent);
+        opacity: 0.5;
+        pointer-events: none;
+        animation: pulse 3s ease-in-out infinite;
+    }
+}
+
+/* Fondo de la Tarjeta */
+.card-image {
+    height: 150px;
+    width: 100%;
+    background: linear-gradient(135deg, $peach, $soft-coral, rgba(255, 255, 255, 0.5));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px 20px 0 0;
+}
+
+/* Avatar */
+.card-avatar {
+    width: 100px;
+    height: 100px;
+    background: $white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $soft-blue;
+    @include transition(transform);
+    animation: fadeIn 0.7s ease forwards 0.6s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.profile-icon {
+    width: 80px;
+    height: 80px;
+    fill: $dark-green;
+    filter: drop-shadow(0 1px 2px rgba(43, 58, 66, 0.4));
+}
+
+/* Información del Usuario */
+.card-header {
+    text-align: center;
+    margin-top: 1rem;
+    padding: 0;
+    width: 100%;
+}
+
+.card-title {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: $dark-green;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+    animation: fadeIn 0.7s ease forwards 0.8s;
+}
+
+.card-subtitle {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    color: $soft-blue;
+    margin: 0.3rem 0 0;
+    text-shadow: 0 1px 1px rgba(43, 58, 66, 0.15);
+    animation: fadeIn 0.7s ease forwards 0.9s;
+}
+
+/* Contenido de la Tarjeta */
+.card-content {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background: rgba(248, 241, 233, 0.7);
+    border-radius: 0 0 16px 16px;
+    animation: fadeIn 0.7s ease forwards 1s;
+}
+
+/* Sección de Plantas en Inventario */
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 2px dashed $soft-blue;
+    border-radius: 8px;
+    @include transition(background);
+
+    &:hover {
+        background: rgba(107, 114, 128, 0.1);
+    }
+}
+
+.icon-leaf {
+    width: 24px;
+    height: 24px;
+    color: $olive-green;
+    margin-right: 1rem;
+    @include transition(transform);
+    filter: drop-shadow(0 1px 2px rgba(43, 58, 66, 0.4));
+
+    .info-item:hover & {
+        animation: rotateLeaf 1.5s ease-in-out infinite;
+    }
+}
+
+.info-label {
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: $dark-green;
+    text-shadow: 0 1px 2px rgba(43, 58, 66, 0.15);
+}
+
+/* Botón de Cerrar Sesión */
+.primary-button {
+    width: 100%;
+    margin-top: 1rem;
+    background: linear-gradient(to right, $warm-gold, $soft-coral);
+    color: $dark-gray;
+    border: 2px solid $olive-green;
+    border-radius: 12px;
+    padding: 0.75rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(43, 58, 66, 0.1);
+    @include transition(background, transform, box-shadow);
+    animation: headerShine 5s ease-in-out infinite;
+    will-change: background-position;
+
+    &:hover {
+        background: linear-gradient(to right, $soft-coral, $warm-gold);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(242, 139, 130, 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 8px rgba(242, 139, 130, 0.2);
+    }
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 319px) {
+    .scroll-container {
+        padding-bottom: 0.5rem;
+    }
+
+    .header-section {
+        padding: 0.5rem;
+    }
+
+    .header-title {
+        font-size: 1.2rem;
+    }
+
+    .main-container {
+        padding: 0.5rem;
+    }
+
+    .welcome-text {
+        font-size: 1.3rem;
+    }
+
+    .card {
+        max-width: 280px;
+        height: 360px;
+    }
+
+    .card-image {
+        height: 120px;
+    }
+
+    .card-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .card-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .primary-button {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 359px) {
+    .scroll-container {
+        padding-bottom: 0.75rem;
+    }
+
+    .header-section {
+        padding: 0.75rem;
+    }
+
+    .header-title {
+        font-size: 1.25rem;
+    }
+
+    .main-container {
+        padding: 0.75rem;
+    }
+
+    .welcome-text {
+        font-size: 1.4rem;
+    }
+
+    .card {
+        max-width: 300px;
+        height: 380px;
+    }
+
+    .card-image {
+        height: 130px;
+    }
+
+    .card-avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    .profile-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .primary-button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 479px) {
+    .scroll-container {
+        padding-bottom: 1rem;
+    }
+
+    .header-section {
+        padding: 1rem;
+    }
+
+    .header-title {
+        font-size: 1.3rem;
+    }
+
+    .main-container {
+        padding: 1rem;
+    }
+
+    .welcome-text {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        max-width: 320px;
+        height: 400px;
+    }
+
+    .card-image {
+        height: 140px;
+    }
+
+    .card-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .primary-button {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+    .scroll-container {
+        padding-bottom: 1.25rem;
+    }
+
+    .header-section {
+        padding: 1.25rem;
+    }
+
+    .header-title {
+        font-size: 1.4rem;
+    }
+
+    .main-container {
+        padding: 1.25rem;
+    }
+
+    .welcome-text {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        max-width: 360px;
+        height: 420px;
+    }
+
+    .card-image {
+        height: 150px;
+    }
+
+    .card-avatar {
+        width: 110px;
+        height: 110px;
+    }
+
+    .profile-icon {
+        width: 90px;
+        height: 90px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .primary-button {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .scroll-container {
+        padding-bottom: 1.5rem;
+    }
+
+    .header-section {
+        padding: 1.5rem;
+    }
+
+    .header-title {
+        font-size: 1.5rem;
+    }
+
+    .main-container {
+        padding: 1.5rem;
+    }
+
+    .welcome-text {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        max-width: 400px;
+        height: 440px;
+    }
+
+    .card-image {
+        height: 160px;
+    }
+
+    .card-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-icon {
+        width: 100px;
+        height: 100px;
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+    }
+
+    .card-subtitle {
+        font-size: 1rem;
+    }
+
+    .primary-button {
+        font-size: 1.1rem;
+    }
+}

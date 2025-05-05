@@ -1,435 +1,101 @@
-/* ================================
-   ESTILOS GENERALES
-================================== */
-.main-content {
-    padding: 1rem;
-    background: var(--blanco-suave);
-    overflow-x: hidden;
-    width: 100%;
-    box-sizing: border-box;
+@keyframes fadeIn{ 0%{opacity:0; transform:translateY(10px) }
+100%{ opacity:1; transform:translateY(0) }
 }
-
-/* ================================
-     CONTENEDOR PRINCIPAL
-  ================================== */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
+@keyframes headerShine{ 0%{background-position:0 0 }
+50%{ background-position:200% 0 }
+100%{ background-position:0 0 }
 }
-
-/* ================================
-     HEADER Y TOOLBAR
-  ================================== */
-.header {
-    background: var(--verde-oscuro);
-    padding: 1rem;
-    width: 100%;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.scroll-container{ height:100vh; overflow-y:auto; scroll-behavior:smooth; background-color:#e5d9ce; -webkit-overflow-scrolling:touch; touch-action:pan-y }
+.scroll-container::-webkit-scrollbar{ width:8px }
+.scroll-container::-webkit-scrollbar-track{ background:#e5d9ce; border-radius:8px }
+.scroll-container::-webkit-scrollbar-thumb{ background:#88aa4e; border-radius:8px; border:2px solid #e5d9ce }
+.scroll-container::-webkit-scrollbar-thumb:hover{ background:#2b3a42 }
+.header-section{ background:linear-gradient(135deg,#606c38,#88aa4e); padding:1rem; box-shadow:0 4px 12px rgba(43,58,66,.1); border-bottom:2px solid #6b7280; position:sticky; top:0; z-index:100; animation:headerShine 5s ease-in-out infinite; will-change:background-position }
+.header-content{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center }
+.header-title{ font-family:"Playfair Display",serif; font-size:clamp(1.6rem,4vw,1.8rem); color:#fff; text-shadow:0 1px 3px rgba(43,58,66,.3); margin:0; animation:fadeIn .7s ease forwards }
+.back-button{ background:linear-gradient(to right,#d4a017,#d9b58c); color:#374151; border:2px solid #6b7280; border-radius:12px; padding:.6rem 1rem; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2vw,1rem); cursor:pointer; display:flex; align-items:center; gap:.5rem; transition:background,transform .3s ease; animation:fadeIn .7s ease forwards .2s }
+.back-button:hover{ background:linear-gradient(to right,#d9b58c,#d4a017); transform:scale(1.05) }
+.button-icon{ font-size:clamp(1rem,3vw,1.2rem) }
+.main-container{ padding:1rem; display:flex; flex-direction:column; align-items:center; width:100%; background:rgba(248,241,233,.9); border-radius:12px; animation:fadeIn .7s ease forwards }
+.plant-card{ background:#f8f1e9; border:2px dashed #6b7280; border-radius:20px; max-width:700px; width:100%; margin:0 auto 1.5rem; box-shadow:0 4px 12px rgba(43,58,66,.1); animation:fadeIn .7s ease forwards .4s; transition:transform .3s ease }
+.plant-card:hover{ transform:translateY(-4px) }
+.card-header{ padding:1rem; text-align:center }
+.card-content{ padding:0 1rem 1rem }
+.plant-title{ font-family:"Playfair Display",serif; font-size:clamp(1.8rem,5vw,2rem); font-weight:700; color:#2b3a42; margin-bottom:.5rem; text-shadow:0 1px 2px rgba(43,58,66,.2) }
+.plant-schedule{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); color:#374151; display:flex; align-items:center; justify-content:center; gap:.5rem; margin:.5rem 0 }
+.schedule-icon{ font-size:clamp(1.3rem,3vw,1.5rem) }
+.image-container{ margin:1rem 0; text-align:center }
+.plant-image{ width:100%; height:auto; max-height:300px; object-fit:cover; border-radius:16px; border:1px solid #6b7280; transition:transform .3s ease }
+.plant-image:hover{ transform:scale(1.03) }
+.humidity-container{ padding:1rem; background:hsla(0,0%,100%,.7); border-radius:12px; border:2px solid #6b7280; margin:1rem 0 }
+.humidity-text{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); font-weight:600; color:#2b3a42; margin-bottom:.5rem }
+.progress-container{ background:rgba(107,114,128,.2); height:12px; border-radius:6px; overflow:hidden }
+.progress-bar{ height:100%; background:linear-gradient(to right,#88aa4e,#606c38); transition:width .3s ease }
+.valve-container{ margin:1rem 0 }
+.valve-text{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); color:#374151 }
+.error-message{ margin:1rem 0 }
+.error-text{ font-family:"Poppins",sans-serif; font-size:clamp(.9rem,2.5vw,1rem); color:#ff6b6b }
+.manual-control-section{ margin:1.5rem 0; padding:1rem; border:2px dashed #6b7280; border-radius:12px; width:100%; max-width:700px; text-align:center; animation:fadeIn .7s ease forwards .6s }
+.control-title{ font-family:"Playfair Display",serif; font-size:clamp(1.3rem,4vw,1.5rem); color:#2b3a42; margin-bottom:1rem }
+.manual-control-section .primary-button{ background:linear-gradient(to right,#f28b82,#d9b58c); color:#374151; padding:.8rem 1.2rem; border:2px solid #6b7280; border-radius:12px; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2.5vw,1rem); cursor:pointer; transition:background,transform .3s ease }
+.manual-control-section .primary-button:hover:not(:disabled){ background:linear-gradient(to right,#d9b58c,#f28b82); transform:scale(1.05) }
+.manual-control-section .primary-button:disabled{ background:#374151; cursor:not-allowed; opacity:.6 }
+.countdown{ margin-top:.5rem; font-family:"Poppins",sans-serif; font-weight:600; color:#2b3a42; font-size:clamp(.9rem,2.5vw,1rem) }
+.warning-text{ font-family:"Poppins",sans-serif; color:#ff6b6b; margin-top:.5rem; font-size:clamp(.9rem,2.5vw,1rem) }
+.action-buttons{ display:flex; gap:1rem; width:100%; max-width:700px; margin-top:1rem; animation:fadeIn .7s ease forwards .8s }
+.primary-button{ flex:1; border-radius:12px; padding:.8rem; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2.5vw,1rem); border:2px solid #6b7280; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background,transform .3s ease }
+.delete-button{ background:linear-gradient(to right,#ff6b6b,#f28b82); color:#fff }
+.delete-button:hover{ background:linear-gradient(to right,#f28b82,#ff6b6b); transform:scale(1.05) }
+.edit-button{ background:linear-gradient(to right,#d4a017,#f28b82); color:#374151 }
+.edit-button:hover{ background:linear-gradient(to right,#f28b82,#d4a017); transform:scale(1.05) }
+.button-icon{ margin-right:.5rem; font-size:clamp(1rem,3vw,1.2rem) }
+.text-center{ text-align:center }
+.margin-top{ margin-top:1.5rem }
+@media(max-width:319px){ .scroll-container{padding-bottom:.5rem }
+.header-section{ padding:.5rem }
+.header-title{ font-size:1.3rem }
+.back-button{ font-size:.85rem; padding:.5rem .8rem }
+.main-container{ padding:.5rem }
+.plant-title{ font-size:1.5rem }
+.plant-schedule{ font-size:.9rem }
+.plant-image{ max-height:200px }
+.humidity-text,.valve-text,.control-title,.countdown,.warning-text{ font-size:.9rem }
+.action-buttons{ flex-direction:column; gap:.5rem }
+.primary-button{ font-size:.85rem; padding:.6rem }
 }
-
-.toolbar {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media(min-width:320px)and (max-width:359px){ .scroll-container{padding-bottom:.75rem }
+.header-section{ padding:.75rem }
+.header-title{ font-size:1.4rem }
+.back-button{ font-size:.9rem }
+.main-container{ padding:.75rem }
+.plant-title{ font-size:1.6rem }
+.plant-schedule{ font-size:1rem }
+.plant-image{ max-height:220px }
+.humidity-text,.valve-text,.control-title,.countdown,.warning-text{ font-size:1rem }
+.action-buttons{ flex-direction:column; gap:.8rem }
 }
-
-.header-toolbar {
-    background: transparent;
+@media(min-width:360px)and (max-width:479px){ .scroll-container{padding-bottom:1rem }
+.header-section{ padding:1rem }
+.header-title{ font-size:1.5rem }
+.main-container{ padding:1rem }
+.plant-title{ font-size:1.7rem }
+.plant-schedule{ font-size:1.1rem }
+.plant-image{ max-height:240px }
 }
-
-.header-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: var(--blanco);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    margin: 0;
+@media(min-width:480px)and (max-width:767px){ .scroll-container{padding-bottom:1.25rem }
+.header-section{ padding:1.25rem }
+.header-title{ font-size:1.7rem }
+.main-container{ padding:1.25rem }
+.plant-title{ font-size:1.9rem }
+.plant-schedule{ font-size:1.2rem }
+.plant-image{ max-height:260px }
 }
-
-.back-button {
-    background: var(--verde-medio);
-    color: var(--blanco);
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.back-button:hover {
-    background: var(--verde-oscuro);
-    transform: scale(1.05);
-}
-
-.button-icon {
-    font-size: 1.2rem;
-}
-
-/* ================================
-     UTILIDADES
-  ================================== */
-.text-center {
-    text-align: center;
-}
-
-.margin-top {
-    margin-top: 1.5rem;
-}
-
-/* ================================
-     TARJETA DE PLANTA
-  ================================== */
-.plant-card {
-    background: var(--blanco-suave);
-    border: 2px solid var(--verde-medio);
-    border-radius: 20px;
-    max-width: 700px;
-    width: 100%;
-    margin: 0 auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.card-header {
-    padding: 1rem;
-}
-
-.card-content {
-    padding: 0 1rem 1rem;
-}
-
-/* ================================
-     NOMBRE Y HORARIO
-  ================================== */
-.plant-name {
-    color: var(--verde-oscuro);
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: 'Playfair Display', serif;
-}
-
-.plant-schedule {
-    color: var(--verde-oscuro);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0.5rem 0;
-    font-family: 'Poppins', sans-serif;
-}
-
-.schedule-icon {
-    font-size: 1.5rem;
-}
-
-/* ================================
-     IMAGEN
-  ================================== */
-.image-container {
-    margin: 1rem 0;
-    text-align: center;
-}
-
-.plant-image {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* ================================
-     HUMEDAD
-  ================================== */
-.humidity-container {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 12px;
-    border: 1px solid var(--verde-medio);
-    margin: 1rem 0;
-}
-
-.humidity-text {
-    color: var(--verde-oscuro);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-.progress-container {
-    background: rgba(200, 230, 201, 0.3);
-    height: 12px;
-    border-radius: 6px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: var(--verde-medio);
-    transition: width 0.3s ease;
-}
-
-/* ================================
-     VÁLVULA
-  ================================== */
-.valve-container {
-    margin: 1rem 0;
-}
-
-.valve-text {
-    color: var(--verde-oscuro);
-    font-size: 1.2rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* ================================
-     MENSAJE DE ERROR
-  ================================== */
-.error-message {
-    margin: 1rem 0;
-}
-
-.error-text {
-    color: #ff5722;
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* ================================
-     CONTROL MANUAL
-  ================================== */
-.manual-control-section {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    border: 1px solid var(--verde-medio);
-    border-radius: 12px;
-    width: 100%;
-    max-width: 700px;
-    text-align: center;
-}
-
-.manual-control-section h3 {
-    font-family: 'Playfair Display', serif;
-    color: var(--verde-oscuro);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.manual-control-section button {
-    background: var(--verde-medio);
-    color: var(--blanco);
-    padding: 0.8rem 1.2rem;
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.manual-control-section button:disabled {
-    background: #cccccc;
-    cursor: not-allowed;
-}
-
-.manual-control-section button:hover:not(:disabled) {
-    background: var(--verde-oscuro);
-    transform: scale(1.05);
-}
-
-.countdown {
-    margin-top: 0.5rem;
-    color: var(--verde-oscuro);
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-}
-
-.warning {
-    color: #ff5722;
-    margin-top: 0.5rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* ================================
-     BOTONES DE ACCIÓN
-  ================================== */
-.action-buttons {
-    display: flex;
-    gap: 1rem;
-    width: 100%;
-    max-width: 700px;
-    margin-top: 1rem;
-}
-
-.btn-block {
-    flex: 1;
-    color: var(--blanco);
-    border-radius: 12px;
-    padding: 0.8rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-}
-
-.btn-block:hover {
-    transform: scale(1.05);
-}
-
-.delete-button {
-    background: #ff5722;
-}
-
-.delete-button:hover {
-    background: #e64a19;
-}
-
-.edit-button {
-    background: var(--verde-medio);
-}
-
-.edit-button:hover {
-    background: var(--verde-oscuro);
-}
-
-.button-icon {
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-}
-
-/* ================================
-     MEDIA QUERIES
-  ================================== */
-@media (max-width: 320px) {
-    .header-title {
-        font-size: 1.4rem;
-    }
-
-    .back-button {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
-    }
-
-    .plant-name {
-        font-size: 1.6rem;
-    }
-
-    .plant-schedule {
-        font-size: 1rem;
-    }
-
-    .plant-image {
-        max-height: 200px;
-    }
-
-    .humidity-text,
-    .valve-text {
-        font-size: 1rem;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .btn-block {
-        font-size: 0.9rem;
-        padding: 0.6rem;
-    }
-}
-
-@media (min-width: 321px) and (max-width: 375px) {
-    .header-title {
-        font-size: 1.5rem;
-    }
-
-    .plant-name {
-        font-size: 1.7rem;
-    }
-
-    .plant-schedule {
-        font-size: 1.1rem;
-    }
-
-    .plant-image {
-        max-height: 220px;
-    }
-
-    .humidity-text,
-    .valve-text {
-        font-size: 1.1rem;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        gap: 0.8rem;
-    }
-}
-
-@media (min-width: 376px) and (max-width: 479px) {
-    .header-title {
-        font-size: 1.6rem;
-    }
-
-    .plant-name {
-        font-size: 1.8rem;
-    }
-
-    .plant-schedule {
-        font-size: 1.2rem;
-    }
-
-    .plant-image {
-        max-height: 240px;
-    }
-}
-
-@media (min-width: 480px) and (max-width: 767px) {
-    .header-title {
-        font-size: 1.8rem;
-    }
-
-    .plant-name {
-        font-size: 2rem;
-    }
-
-    .plant-image {
-        max-height: 260px;
-    }
-}
-
-@media (min-width: 768px) {
-    .header-title {
-        font-size: 2rem;
-    }
-
-    .plant-name {
-        font-size: 2.2rem;
-    }
-
-    .plant-image {
-        max-height: 300px;
-    }
-
-    .action-buttons {
-        flex-direction: row;
-    }
+@media(min-width:768px){ .scroll-container{padding-bottom:1.5rem }
+.header-section{ padding:1.5rem }
+.header-title{ font-size:2rem }
+.main-container{ padding:1.5rem }
+.plant-title{ font-size:2.2rem }
+.plant-schedule{ font-size:1.3rem }
+.plant-image{ max-height:300px }
+.action-buttons{ flex-direction:row }
 }

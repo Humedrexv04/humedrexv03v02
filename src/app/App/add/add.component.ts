@@ -12,7 +12,7 @@ import { thermometer } from 'ionicons/icons';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css']
+  styleUrls: ['./add.component.scss']
 })
 export class AddComponent {
   img: string = '';

@@ -1,42 +1,46 @@
-<!-- Sección de Encabezado -->
-<header class="app-header">
-    <div class="header-toolbar">
-        <button class="btn-clear profile-button" (click)="goToProfile()">
-            <fa-icon [icon]="faUserCircle" class="profile-icon"></fa-icon>
-        </button>
-        <div class="header-title-container">
-            <h1 class="header-title">MI JARDÍN</h1>
+<!-- Contenedor Principal -->
+<div class="scroll-container">
+    <!-- Sección de Encabezado -->
+    <header class="header-section" role="banner">
+        <div class="header-content">
+            <button class="profile-button" (click)="goToProfile()" aria-label="Ir al perfil">
+                <fa-icon [icon]="faUserCircle" class="profile-icon"></fa-icon>
+            </button>
+            <div class="header-title-wrapper">
+                <h1 class="header-title">Mi Jardín</h1>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<!-- Sección de Contenido Principal -->
-<main class="content">
-    <router-outlet></router-outlet>
-</main>
+    <!-- Contenido Principal -->
+    <main class="main-container">
+        <router-outlet></router-outlet>
+    </main>
 
-<!-- Sección de Navegación -->
-<nav class="app-tabs">
-    <div class="tab-bar custom-tab-bar">
-        <!-- Inventario -->
-        <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
-            id="tab-button-plant-list">
-            <fa-icon [icon]="faLeaf" class="tab-icon"></fa-icon>
-            <span class="tab-label">Plantas</span>
-            <div class="plant-counter">{{ plantCount }}</div>
-        </a>
+    <!-- Sección de Navegación -->
+    <nav class="navigation-section" role="navigation">
+        <div class="tab-bar">
+            <!-- Inventario -->
+            <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
+                id="tab-button-plant-list" aria-label="Ver lista de plantas">
+                <fa-icon [icon]="faLeaf" class="tab-icon"></fa-icon>
+                <span class="tab-label">Plantas</span>
+                <div class="plant-counter">{{ plantCount }}</div>
+            </a>
 
-        <!-- Agregar Planta -->
-        <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected" id="tab-button-add">
-            <fa-icon [icon]="faSeedling" class="tab-icon"></fa-icon>
-            <span class="tab-label">Agregar</span>
-        </a>
+            <!-- Agregar Planta -->
+            <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected"
+                id="tab-button-add" aria-label="Agregar nueva planta">
+                <fa-icon [icon]="faSeedling" class="tab-icon"></fa-icon>
+                <span class="tab-label">Agregar</span>
+            </a>
 
-        <!-- Dispositivos -->
-        <a class="tab-button add-tab" [routerLink]="['/view/dispositivos']" routerLinkActive="tab-selected"
-            id="tab-button-dispositivos">
-            <fa-icon [icon]="faMicrochip" class="tab-icon"></fa-icon>
-            <span class="tab-label">Dispositivos</span>
-        </a>
-    </div>
-</nav>
+            <!-- Dispositivos -->
+            <a class="tab-button devices-tab" [routerLink]="['/view/dispositivos']" routerLinkActive="tab-selected"
+                id="tab-button-dispositivos" aria-label="Ver dispositivos">
+                <fa-icon [icon]="faMicrochip" class="tab-icon"></fa-icon>
+                <span class="tab-label">Dispositivos</span>
+            </a>
+        </div>
+    </nav>
+</div>
