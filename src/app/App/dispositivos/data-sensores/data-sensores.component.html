@@ -24,14 +24,6 @@
       <p class="error-text">{{ errorMessage }}</p>
     </section>
 
-    <!-- Última actualización -->
-    <section *ngIf="!loading && !errorMessage" class="timestamp-section">
-      <div class="timestamp-display">
-        <i class="fa fa-clock-o"></i>
-        <span class="timestamp-text">Última actualización: {{ formattedLastUpdated }}</span>
-      </div>
-    </section>
-
     <!-- Contenido -->
     <section *ngIf="!loading && !errorMessage" class="content-section">
 

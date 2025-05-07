@@ -37,13 +37,20 @@
     flex: 1;
 }
 
+.back-button i {
+    font-size: 24px;
+    /* Aumenta el tamaño del icono */
+    transition: transform 0.3s ease, color 0.3s ease;
+    /* Añade una transición suave */
+}
+
 .back-button {
     background: none;
     border: none;
-    font-size: 1.2rem;
-    color: #ffffff;
     cursor: pointer;
+    /* Cambia el cursor para indicar que es clickeable */
 }
+
 
 /* Contenido principal */
 .main-container {
@@ -275,6 +282,10 @@
     display: inline-block;
 }
 
-h1, h2, h3, p, button {
+h1,
+h2,
+h3,
+p,
+button {
     font-family: "Roboto", sans-serif;
 }
