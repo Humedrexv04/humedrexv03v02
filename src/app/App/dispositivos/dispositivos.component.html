@@ -32,6 +32,7 @@
           </div>
           <div class="device-actions">
             <button (click)="viewDevice(device.id)" class="submit-button small">Ver Datos</button>
+            <button (click)="gotoCrediential(device.id)" class="submit-button small">Cambiar WiFi</button>
             <button (click)="unlinkDevice(device.id)" [disabled]="unlinkLoading[device.id]" class="submit-button small">
               <span *ngIf="!unlinkLoading[device.id]">Desvincular</span>
               <span *ngIf="unlinkLoading[device.id]" class="spinner"></span>

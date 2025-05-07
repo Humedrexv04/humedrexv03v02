@@ -119,4 +119,8 @@ export class DispositivosComponent implements OnInit, OnDestroy {
   refresh(): void {
     this.loadDevices();
   }
+
+  gotoCrediential(deviceId: string): void {
+    this.router.navigate(['/crediential-wifi', deviceId]);
+  }
 }
