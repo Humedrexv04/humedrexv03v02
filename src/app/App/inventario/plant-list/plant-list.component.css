@@ -1,0 +1,116 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal scrollable */
+.scroll-container {
+    width: 100%;
+    height: 91vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+/* Header fijo con estilo elegante */
+.header-section {
+    background: linear-gradient(135deg, #c5e1a5, #dcedc8);
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenido del encabezado */
+.header-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.header-title {
+    font-size: clamp(1.6rem, 4vw, 2rem);
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.header-icon .icon {
+    width: 28px;
+    height: 28px;
+    color: #2e7d32;
+}
+
+/* Water Level Card */
+.water-level-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 80px;
+    /* Para evitar que se superponga con el header */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #29b6f6;
+}
+
+.water-level-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.water-level-header i {
+    color: #29b6f6;
+    font-size: 1.2rem;
+}
+
+.water-level-header h2 {
+    font-size: 1.1rem;
+    color: #2e7d32;
+    margin: 0;
+}
+
+.water-level-value {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.water-level-value .value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #29b6f6;
+}
+
+.water-level-value .unit {
+    margin-left: 6px;
+    font-size: 1rem;
+    color: #757575;
+}
+/* Contenedor del main */
+.main-container {
+    flex-grow: 1;
+    padding: 2rem 1.5rem 2rem;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor de la lista */
+.plant-list-wrapper {
+    width: 100%;
+    max-width: 900px;
+}
+
+.plant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}

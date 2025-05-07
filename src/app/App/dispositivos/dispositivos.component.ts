@@ -1,3 +1,4 @@
+// src/app/dispositivos/dispositivos.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
@@ -11,7 +12,7 @@ import { RealtimeDataService } from '../../Services/realtime-database.service';
   standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './dispositivos.component.html',
-  styleUrls: ['./dispositivos.component.scss'],
+  styleUrls: ['./dispositivos.component.css'],
 })
 export class DispositivosComponent implements OnInit, OnDestroy {
   devices: any[] = [];
@@ -50,6 +51,12 @@ export class DispositivosComponent implements OnInit, OnDestroy {
 
       this.deviceService.getUserDevices().subscribe({
         next: (devices) => {
+          // control si no hay dispositivos
+          if (!devices || devices.length === 0) {
+            this.devices = [];
+            this.loading = false;
+            return;
+          }
           this.devices = devices;
           this.subscribeToConnectionStatus();
         },

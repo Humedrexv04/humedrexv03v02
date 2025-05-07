@@ -6,52 +6,60 @@
       <h1 class="header-title">Editar Planta</h1>
       <div class="header-buttons">
         <button type="button" class="primary-button cancel-button" (click)="gotoPlantDetail()"
-          aria-label="Cancelar edición">Cancelar</button>
+          aria-label="Cancelar edición">
+          Cancelar
+        </button>
       </div>
     </div>
   </header>
 
+
   <!-- Contenido Principal -->
   <main class="main-container" role="main">
-    <form *ngIf="plant" class="form-card" role="form" aria-labelledby="edit-plant-title">
-      <!-- Sección de Imagen -->
-      <div class="image-section">
-        <label class="image-upload-label" for="image-upload">
-          📸 Cambiar imagen
+    <div class="form-container">
+      <form *ngIf="plant" class="plant-form" role="form" aria-labelledby="edit-plant-title">
+        <!-- Subida de imagen -->
+        <label class="field-base image-upload" for="image-upload">
+          <span class="camera-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+              <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
+                stroke="currentColor" stroke-width="2" />
+              <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+            </svg>
+          </span> Cambiar imagen
           <input id="image-upload" type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input"
             aria-label="Subir imagen de la planta">
         </label>
-        <div class="image-preview" *ngIf="img">
+
+        <!-- Vista previa de imagen -->
+        <div class="image-preview-wrapper" *ngIf="img">
           <img [src]="img" alt="Previsualización de la planta" class="preview-image" />
         </div>
         <div class="image-preview" *ngIf="!img && plant.img">
           <img [src]="plant.img" alt="Imagen actual de la planta" class="preview-image" />
         </div>
-      </div>
 
-      <!-- Campo de Nombre -->
-      <div class="form-item">
-        <label for="plant-name" class="input-label">Nombre</label>
-        <input id="plant-name" type="text" [(ngModel)]="plant.name" name="name" required class="custom-input"
-          aria-required="true" />
-      </div>
+        <!-- Campo de Nombre -->
+        <div class="form-field field-base text-input">
+          <input id="plant-name" type="text" [(ngModel)]="plant.name" name="name" required class="custom-input"
+            placeholder="Nombre" aria-required="true" />
+        </div>
 
-      <!-- Campo de Horario -->
-      <div class="form-item">
-        <label for="plant-horario" class="input-label">Horario</label>
-        <input id="plant-horario" type="time" [(ngModel)]="plant.horario" name="horario" required class="custom-input"
-          aria-required="true" />
-      </div>
+        <!-- Campo de Horario -->
+        <div class="form-field field-base time-input">
+          <input id="plant-horario" type="time" [(ngModel)]="plant.horario" name="horario" required class="custom-input"
+            aria-required="true" />
+        </div>
 
-      <!-- Campo de Humedad -->
-      <div class="form-item">
-        <label for="plant-humedad" class="input-label">Humedad (%)</label>
-        <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required class="custom-input"
-          aria-required="true" />
-      </div>
+        <!-- Campo de Humedad -->
+        <div class="form-field field-base number-input">
+          <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required
+            class="custom-input" placeholder="Humedad (%)" aria-required="true" />
+        </div>
 
-      <!-- Botón de Actualizar -->
-      <button type="button" class="primary-button submit-button" (click)="updatePlant()">Actualizar Planta</button>
-    </form>
+        <!-- Botón de Actualizar -->
+        <button type="button" class="submit-button" (click)="updatePlant()">Actualizar Planta</button>
+      </form>
+    </div>
   </main>
 </div>

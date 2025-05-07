@@ -1,6 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { AuthService } from '../../Services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../Services/auth.service';  // Importa AuthService
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
@@ -9,10 +8,9 @@ import { NgIf } from '@angular/common';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [IonicModule, FormsModule, NgIf]
+  imports: [FormsModule, NgIf],
 })
 export class RegisterComponent implements OnInit {
-  route = inject(Router);
   name: string = '';
   email: string = '';
   password: string = '';
@@ -20,12 +18,13 @@ export class RegisterComponent implements OnInit {
   emailError: string = ''; // Mensaje de error para el correo
   passwordError: string = ''; // Mensaje de error para la contraseña
 
-  constructor(private authService: AuthService) { }
+  // Inyección correcta a través del constructor
+  constructor(private authService: AuthService, private route: Router) { }
 
   ngOnInit() {
-    // Aquí puedes inicializar cualquier dato si es necesario
     console.log('Componente de registro inicializado');
   }
+
   // Método para validar el nombre
   validateName() {
     if (!this.name) {
@@ -65,17 +64,14 @@ export class RegisterComponent implements OnInit {
 
   // Método para registrar un nuevo usuario
   signup() {
-    // Validar todos los campos
     const isNameValid = this.validateName();
     const isEmailValid = this.validateEmail();
     const isPasswordValid = this.validatePassword();
 
-    // Si alguno de los campos no es válido, detener el proceso
     if (!isNameValid || !isEmailValid || !isPasswordValid) {
       return;
     }
 
-    // Si todos los campos son válidos, proceder con el registro
     this.authService.signup(this.email, this.password, this.name)
       .then(() => {
         this.route.navigate(['/login']);
@@ -86,10 +82,7 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-
-
   gotoLogin() {
     this.route.navigate(['/login']);
   }
-
 }

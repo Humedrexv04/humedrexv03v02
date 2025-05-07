@@ -1,45 +1,35 @@
 <!-- Contenedor Principal -->
-<div class="scroll-container">
-    <!-- Sección de Encabezado -->
-    <header class="header-section" role="banner">
-        <div class="header-content">
-            <button class="profile-button" (click)="goToProfile()" aria-label="Ir al perfil">
-                <fa-icon [icon]="faUserCircle" class="profile-icon"></fa-icon>
-            </button>
-            <div class="header-title-wrapper">
-                <h1 class="header-title">Mi Jardín</h1>
-            </div>
-        </div>
-    </header>
-
+<div class="app-container">
     <!-- Contenido Principal -->
-    <main class="main-container">
+    <main class="main-content">
         <router-outlet></router-outlet>
     </main>
 
-    <!-- Sección de Navegación -->
-    <nav class="navigation-section" role="navigation">
-        <div class="tab-bar">
-            <!-- Inventario -->
-            <a class="tab-button inventory-tab" [routerLink]="['/view/plant-list']" routerLinkActive="tab-selected"
-                id="tab-button-plant-list" aria-label="Ver lista de plantas">
-                <fa-icon [icon]="faLeaf" class="tab-icon"></fa-icon>
-                <span class="tab-label">Plantas</span>
-                <div class="plant-counter">{{ plantCount }}</div>
+    <!-- Barra de Navegación -->
+    <nav class="navigation-bar" role="navigation">
+        <div class="nav-container">
+            <!-- Home -->
+            <a class="nav-item" [routerLink]="['/view/home']" routerLinkActive="active">
+                <fa-icon [icon]="faHome" class="nav-icon"></fa-icon>
+                <span class="nav-label">Home</span>
             </a>
 
-            <!-- Agregar Planta -->
-            <a class="tab-button add-tab" [routerLink]="['/view/add']" routerLinkActive="tab-selected"
-                id="tab-button-add" aria-label="Agregar nueva planta">
-                <fa-icon [icon]="faSeedling" class="tab-icon"></fa-icon>
-                <span class="tab-label">Agregar</span>
+            <!-- Plantas -->
+            <a class="nav-item" [routerLink]="['/view/plant-list']" routerLinkActive="active">
+                <fa-icon [icon]="faLeaf" class="nav-icon"></fa-icon>
+                <span class="nav-label">Plantas</span>
+            </a>
+
+            <!-- Agregar -->
+            <a class="nav-item" [routerLink]="['/view/add']" routerLinkActive="active">
+                <fa-icon [icon]="faSeedling" class="nav-icon"></fa-icon>
+                <span class="nav-label">Agregar</span>
             </a>
 
             <!-- Dispositivos -->
-            <a class="tab-button devices-tab" [routerLink]="['/view/dispositivos']" routerLinkActive="tab-selected"
-                id="tab-button-dispositivos" aria-label="Ver dispositivos">
-                <fa-icon [icon]="faMicrochip" class="tab-icon"></fa-icon>
-                <span class="tab-label">Dispositivos</span>
+            <a class="nav-item" [routerLink]="['/view/dispositivos']" routerLinkActive="active">
+                <fa-icon [icon]="faMicrochip" class="nav-icon"></fa-icon>
+                <span class="nav-label">Dispositivos</span>
             </a>
         </div>
     </nav>

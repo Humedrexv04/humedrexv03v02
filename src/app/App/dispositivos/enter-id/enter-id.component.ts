@@ -1,3 +1,4 @@
+// src/app/enter-id/enter-id.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
@@ -10,24 +11,22 @@ import { DeviceService } from '../../../Services/device.service';
   standalone: true,
   imports: [FormsModule, NgIf, CommonModule],
   templateUrl: './enter-id.component.html',
-  styleUrls: ['./enter-id.component.scss'],
+  styleUrls: ['./enter-id.component.css'],
 })
 export class EnterIdComponent implements OnInit {
   deviceId: string = '';
-  errorMessage: string | null = null; // Para mostrar errores al usuario
+  errorMessage: string | null = null;
 
   constructor(
     private router: Router,
     private auth: Auth,
-    private deviceService: DeviceService // Inject the DeviceService
+    private deviceService: DeviceService
   ) { }
 
   ngOnInit(): void { }
 
   onSubmit(): void {
-    this.errorMessage = null; // Resetear mensaje de error
-
-    // Validar y sanitizar deviceId
+    this.errorMessage = null;
     const sanitizedDeviceId = this.sanitizeDeviceId(this.deviceId);
     if (!sanitizedDeviceId) {
       this.errorMessage = 'Por favor, ingresa un ID de dispositivo válido.';
@@ -41,14 +40,11 @@ export class EnterIdComponent implements OnInit {
       return;
     }
 
-    // Usar el DeviceService para agregar el dispositivo
     this.deviceService.addDevice(sanitizedDeviceId)
       .then(() => {
-        // Redirigir a la configuración WiFi
         this.router.navigate(['/crediential-wifi', sanitizedDeviceId]);
       })
       .catch((err) => {
-        // Mapear errores del servicio a mensajes amigables para el usuario
         if (err === 'Usuario no autenticado') {
           this.errorMessage = 'Usuario no autenticado. Por favor, inicia sesión.';
         } else if (err === 'El dispositivo no existe en Realtime Database') {
@@ -62,14 +58,13 @@ export class EnterIdComponent implements OnInit {
       });
   }
 
-  // Método para sanitizar deviceId
   private sanitizeDeviceId(deviceId: string): string | null {
     if (!deviceId) return null;
-    const sanitized = deviceId.trim(); // Eliminar espacios
+    const sanitized = deviceId.trim();
     return sanitized.length > 0 ? sanitized : null;
   }
 
   returnToDispositivos(): void {
-    this.router.navigate(['/dispositivos']);
+    this.router.navigate(['/view/dispositivos']);
   }
 }

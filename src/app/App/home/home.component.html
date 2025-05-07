@@ -1,51 +1,26 @@
-<!-- Contenedor Principal -->
+<!-- src/app/home/home.component.html -->
 <div class="scroll-container">
-  <!-- Sección de Encabezado -->
-  <header class="header-section" role="banner">
+  <header class="header-section">
     <div class="header-content">
       <h1 class="header-title">Mi Perfil</h1>
     </div>
   </header>
 
-  <!-- Contenido Principal -->
-  <main class="main-container" role="main">
-    <h2 class="welcome-text">Bienvenido a la aplicación</h2>
+  <main class="main-container">
+    <h2 class="welcome-text">Bienvenido, {{ user.name }}</h2>
 
-    <!-- Tarjeta de Perfil -->
-    <section class="card" role="article" aria-labelledby="profile-title">
-      <!-- Imagen de Fondo de la Tarjeta -->
-      <div class="card-image">
-        <div class="card-avatar">
-          <svg class="profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
-            <path
-              d="M258.9 48C141.92 46.42 46.42 141.92 48 258.9c1.56 112.19 92.91 203.54 205.1 205.1 117 1.6 212.48-93.9 210.88-210.88C462.44 140.91 371.09 49.56 258.9 48zm126.42 327.25a4 4 0 01-6.14-.32 124.27 124.27 0 00-32.35-29.59C321.37 329 289.11 320 256 320s-65.37 9-90.83 25.34a124.24 124.24 0 00-32.35 29.58 4 4 0 01-6.14.32A175.32 175.32 0 0180 259c-1.63-97.31 78.22-178.76 175.57-179S432 158.81 432 256a175.32 175.32 0 01-46.68 119.25z" />
-            <path
-              d="M256 144c-19.72 0-37.55 7.39-50.22 20.82s-19 32-17.57 51.93C191.11 256 221.52 288 256 288s64.83-32 67.79-71.24c1.48-19.74-4.8-38.14-17.68-51.82C293.39 151.44 275.59 144 256 144z" />
-          </svg>
-        </div>
+    <section class="card">
+      <div class="card-avatar">
+        <i class="fa fa-user-circle"></i>
       </div>
-
-      <!-- Información del Usuario -->
-      <div class="card-header">
-        <h2 class="card-title" id="profile-title">{{ user.name }}</h2>
-        <h3 class="card-subtitle">{{ user.email }}</h3>
+      <div class="card-info">
+        <h3 class="user-name">{{ user.name }}</h3>
+        <p class="user-email">{{ user.email }}</p>
+        <p class="plant-count">
+          <i class="fa fa-leaf"></i> Plantas en inventario: <span>{{ user.plantCount }}</span>
+        </p>
       </div>
-
-      <!-- Detalles Adicionales -->
-      <div class="card-content">
-        <div class="info-item">
-          <svg class="icon-leaf" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-              d="M321.89 171.42C233 114 141 155.22 56 65.22c-19.8-21-8.3 235.5 98.1 332.7 77.79 71 197.9 63.08 238.4-5.92s18.28-163.17-70.61-220.58z" />
-            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-              d="M173 253c86 81 175 129 292 147" />
-          </svg>
-          <span class="info-label">Plantas en inventario: {{ user.plantCount }}</span>
-        </div>
-
-        <!-- Botón de Cerrar Sesión -->
-        <button class="primary-button" (click)="logout()" aria-label="Cerrar sesión">Cerrar Sesión</button>
-      </div>
+      <button class="logout-button" (click)="logout()">Cerrar Sesión</button>
     </section>
   </main>
 </div>

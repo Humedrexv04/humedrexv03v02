@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { Plant } from '../../../Models/plant.mode';
 import { PlantService } from '../../../Services/plant.service';
 import { FormsModule } from '@angular/forms';
@@ -10,9 +9,9 @@ import { AuthService } from '../../../Services/auth.service';
 @Component({
   selector: 'app-edit-plant',
   standalone: true,
-  imports: [IonicModule, FormsModule, NgIf],
+  imports: [FormsModule, NgIf],
   templateUrl: './edit-plant.component.html',
-  styleUrls: ['./edit-plant.component.scss']
+  styleUrls: ['./edit-plant.component.css']
 })
 export class EditPlantComponent implements OnInit {
   userId: string | null = null;

@@ -1,68 +1,50 @@
-<div class="main-container">
-  <!-- Encabezado -->
+<!-- src/app/dispositivos/dispositivos.component.html -->
+<div class="scroll-container">
   <header class="header-section">
-    <div class="header-content">
-      <div class="header-title-wrapper">
-        <span class="header-icon" aria-hidden="true">⚙️</span>
-        <h1 class="header-title">Mis Dispositivos</h1>
-      </div>
-      <button (click)="addDevice()" class="add-device-button">
-        + Añadir Dispositivo
-      </button>
-    </div>
+    <h1 class="header-title">Mis Dispositivos</h1>
   </header>
 
-  <!-- Estados (Loading, Error, Lista Vacía) -->
-  <section class="status-section">
-    <!-- Loading -->
-    <div *ngIf="loading" class="loading-spinner">
-      <div class="spinner"></div>
-      <p class="loading-text">Cargando dispositivos...</p>
-    </div>
+  <div class="main-container">
+    <!-- Estados generales -->
+    <section class="status-section" *ngIf="loading || error || devices.length === 0">
+      <div *ngIf="loading" class="status-message">Cargando dispositivos...</div>
+      <div *ngIf="!loading && error" class="status-message error">{{ error }}</div>
+      <div *ngIf="!loading && !error && devices.length === 0" class="status-message">
+        No tienes dispositivos registrados.
+      </div>
+      <button class="submit-button" (click)="addDevice()">+ Añadir Dispositivo</button>
+    </section>
 
-    <!-- Error -->
-    <div *ngIf="error && !loading" class="error-card">
-      {{ error }}
-    </div>
-
-    <!-- Lista vacía -->
-    <div *ngIf="!loading && !error && devices.length === 0" class="no-devices">
-      No tienes dispositivos registrados. Añade tu primer dispositivo para comenzar.
-    </div>
-  </section>
-
-  <!-- Lista de Dispositivos -->
-  <section *ngIf="!loading && !error && devices.length > 0" class="device-list-section">
-    <div class="device-list">
-      <div *ngFor="let device of devices; let i = index" class="device-item"
-        [attr.aria-label]="'Dispositivo ' + (device.name || 'Dispositivo')">
-        <!-- Encabezado Tarjeta -->
-        <div class="device-header">
-          <h2 class="device-name">{{ device.name || 'Dispositivo' }}</h2>
-          <span class="device-status">
-            <span [class.status-online]="device.conectado" [class.status-offline]="!device.conectado"
-              class="status-indicator"></span>
-            {{ device.conectado ? 'En línea' : 'Desconectado' }}
-          </span>
-        </div>
-
-        <!-- ID del dispositivo -->
-        <div class="device-info">
-          <p>ID: {{ device.deviceId }}</p>
-        </div>
-
-        <!-- Acciones -->
-        <div class="device-actions">
-          <button (click)="viewDevice(device.deviceId)" class="action-button view-button">
-            Ver Datos del Sensor
-          </button>
-          <button (click)="unlinkDevice(device.deviceId)" [disabled]="unlinkLoading[device.deviceId]"
-            class="action-button unlink-button">
-            <span *ngIf="!unlinkLoading[device.deviceId]">Desvincular</span>
-            <span *ngIf="unlinkLoading[device.deviceId]" class="spinner"></span>
-          </button>
+    <!-- Lista de dispositivos -->
+    <section *ngIf="!loading && !error && devices.length > 0" class="device-list-section">
+      <div class="device-list">
+        <div *ngFor="let device of devices" class="device-item">
+          <div class="device-header">
+            <h2 class="device-name">{{ device.name || 'Dispositivo' }}</h2>
+            <span class="device-status">
+              <span [class.status-online]="device.conectado" [class.status-offline]="!device.conectado"
+                class="status-indicator"></span>
+              {{ device.conectado ? 'En línea' : 'Desconectado' }}
+            </span>
+          </div>
+          <div class="device-info">
+            <p>ID: {{ device.deviceId || device.id }}</p>
+          </div>
+          <div class="device-actions">
+            <button (click)="viewDevice(device.id)" class="submit-button small">Ver Datos</button>
+            <button (click)="unlinkDevice(device.id)" [disabled]="unlinkLoading[device.id]" class="submit-button small">
+              <span *ngIf="!unlinkLoading[device.id]">Desvincular</span>
+              <span *ngIf="unlinkLoading[device.id]" class="spinner"></span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+
+      <!-- Controles separados -->
+      <div class="list-controls">
+        <button class="submit-button" (click)="refresh()">↻ Refrescar</button>
+        <button class="submit-button" (click)="addDevice()">+ Añadir Dispositivo</button>
+      </div>
+    </section>
+  </div>
 </div>

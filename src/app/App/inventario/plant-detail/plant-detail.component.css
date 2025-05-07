@@ -1,101 +1,280 @@
-@keyframes fadeIn{ 0%{opacity:0; transform:translateY(10px) }
-100%{ opacity:1; transform:translateY(0) }
+/* Reset general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-@keyframes headerShine{ 0%{background-position:0 0 }
-50%{ background-position:200% 0 }
-100%{ background-position:0 0 }
+
+/* Scroll & Layout */
+.scroll-container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
 }
-.scroll-container{ height:100vh; overflow-y:auto; scroll-behavior:smooth; background-color:#e5d9ce; -webkit-overflow-scrolling:touch; touch-action:pan-y }
-.scroll-container::-webkit-scrollbar{ width:8px }
-.scroll-container::-webkit-scrollbar-track{ background:#e5d9ce; border-radius:8px }
-.scroll-container::-webkit-scrollbar-thumb{ background:#88aa4e; border-radius:8px; border:2px solid #e5d9ce }
-.scroll-container::-webkit-scrollbar-thumb:hover{ background:#2b3a42 }
-.header-section{ background:linear-gradient(135deg,#606c38,#88aa4e); padding:1rem; box-shadow:0 4px 12px rgba(43,58,66,.1); border-bottom:2px solid #6b7280; position:sticky; top:0; z-index:100; animation:headerShine 5s ease-in-out infinite; will-change:background-position }
-.header-content{ max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center }
-.header-title{ font-family:"Playfair Display",serif; font-size:clamp(1.6rem,4vw,1.8rem); color:#fff; text-shadow:0 1px 3px rgba(43,58,66,.3); margin:0; animation:fadeIn .7s ease forwards }
-.back-button{ background:linear-gradient(to right,#d4a017,#d9b58c); color:#374151; border:2px solid #6b7280; border-radius:12px; padding:.6rem 1rem; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2vw,1rem); cursor:pointer; display:flex; align-items:center; gap:.5rem; transition:background,transform .3s ease; animation:fadeIn .7s ease forwards .2s }
-.back-button:hover{ background:linear-gradient(to right,#d9b58c,#d4a017); transform:scale(1.05) }
-.button-icon{ font-size:clamp(1rem,3vw,1.2rem) }
-.main-container{ padding:1rem; display:flex; flex-direction:column; align-items:center; width:100%; background:rgba(248,241,233,.9); border-radius:12px; animation:fadeIn .7s ease forwards }
-.plant-card{ background:#f8f1e9; border:2px dashed #6b7280; border-radius:20px; max-width:700px; width:100%; margin:0 auto 1.5rem; box-shadow:0 4px 12px rgba(43,58,66,.1); animation:fadeIn .7s ease forwards .4s; transition:transform .3s ease }
-.plant-card:hover{ transform:translateY(-4px) }
-.card-header{ padding:1rem; text-align:center }
-.card-content{ padding:0 1rem 1rem }
-.plant-title{ font-family:"Playfair Display",serif; font-size:clamp(1.8rem,5vw,2rem); font-weight:700; color:#2b3a42; margin-bottom:.5rem; text-shadow:0 1px 2px rgba(43,58,66,.2) }
-.plant-schedule{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); color:#374151; display:flex; align-items:center; justify-content:center; gap:.5rem; margin:.5rem 0 }
-.schedule-icon{ font-size:clamp(1.3rem,3vw,1.5rem) }
-.image-container{ margin:1rem 0; text-align:center }
-.plant-image{ width:100%; height:auto; max-height:300px; object-fit:cover; border-radius:16px; border:1px solid #6b7280; transition:transform .3s ease }
-.plant-image:hover{ transform:scale(1.03) }
-.humidity-container{ padding:1rem; background:hsla(0,0%,100%,.7); border-radius:12px; border:2px solid #6b7280; margin:1rem 0 }
-.humidity-text{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); font-weight:600; color:#2b3a42; margin-bottom:.5rem }
-.progress-container{ background:rgba(107,114,128,.2); height:12px; border-radius:6px; overflow:hidden }
-.progress-bar{ height:100%; background:linear-gradient(to right,#88aa4e,#606c38); transition:width .3s ease }
-.valve-container{ margin:1rem 0 }
-.valve-text{ font-family:"Poppins",sans-serif; font-size:clamp(1rem,3vw,1.2rem); color:#374151 }
-.error-message{ margin:1rem 0 }
-.error-text{ font-family:"Poppins",sans-serif; font-size:clamp(.9rem,2.5vw,1rem); color:#ff6b6b }
-.manual-control-section{ margin:1.5rem 0; padding:1rem; border:2px dashed #6b7280; border-radius:12px; width:100%; max-width:700px; text-align:center; animation:fadeIn .7s ease forwards .6s }
-.control-title{ font-family:"Playfair Display",serif; font-size:clamp(1.3rem,4vw,1.5rem); color:#2b3a42; margin-bottom:1rem }
-.manual-control-section .primary-button{ background:linear-gradient(to right,#f28b82,#d9b58c); color:#374151; padding:.8rem 1.2rem; border:2px solid #6b7280; border-radius:12px; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2.5vw,1rem); cursor:pointer; transition:background,transform .3s ease }
-.manual-control-section .primary-button:hover:not(:disabled){ background:linear-gradient(to right,#d9b58c,#f28b82); transform:scale(1.05) }
-.manual-control-section .primary-button:disabled{ background:#374151; cursor:not-allowed; opacity:.6 }
-.countdown{ margin-top:.5rem; font-family:"Poppins",sans-serif; font-weight:600; color:#2b3a42; font-size:clamp(.9rem,2.5vw,1rem) }
-.warning-text{ font-family:"Poppins",sans-serif; color:#ff6b6b; margin-top:.5rem; font-size:clamp(.9rem,2.5vw,1rem) }
-.action-buttons{ display:flex; gap:1rem; width:100%; max-width:700px; margin-top:1rem; animation:fadeIn .7s ease forwards .8s }
-.primary-button{ flex:1; border-radius:12px; padding:.8rem; font-family:"Poppins",sans-serif; font-weight:600; font-size:clamp(.9rem,2.5vw,1rem); border:2px solid #6b7280; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background,transform .3s ease }
-.delete-button{ background:linear-gradient(to right,#ff6b6b,#f28b82); color:#fff }
-.delete-button:hover{ background:linear-gradient(to right,#f28b82,#ff6b6b); transform:scale(1.05) }
-.edit-button{ background:linear-gradient(to right,#d4a017,#f28b82); color:#374151 }
-.edit-button:hover{ background:linear-gradient(to right,#f28b82,#d4a017); transform:scale(1.05) }
-.button-icon{ margin-right:.5rem; font-size:clamp(1rem,3vw,1.2rem) }
-.text-center{ text-align:center }
-.margin-top{ margin-top:1.5rem }
-@media(max-width:319px){ .scroll-container{padding-bottom:.5rem }
-.header-section{ padding:.5rem }
-.header-title{ font-size:1.3rem }
-.back-button{ font-size:.85rem; padding:.5rem .8rem }
-.main-container{ padding:.5rem }
-.plant-title{ font-size:1.5rem }
-.plant-schedule{ font-size:.9rem }
-.plant-image{ max-height:200px }
-.humidity-text,.valve-text,.control-title,.countdown,.warning-text{ font-size:.9rem }
-.action-buttons{ flex-direction:column; gap:.5rem }
-.primary-button{ font-size:.85rem; padding:.6rem }
+
+.header-section {
+    background: linear-gradient(135deg, #c5e1a5, #dcedc8);
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
-@media(min-width:320px)and (max-width:359px){ .scroll-container{padding-bottom:.75rem }
-.header-section{ padding:.75rem }
-.header-title{ font-size:1.4rem }
-.back-button{ font-size:.9rem }
-.main-container{ padding:.75rem }
-.plant-title{ font-size:1.6rem }
-.plant-schedule{ font-size:1rem }
-.plant-image{ max-height:220px }
-.humidity-text,.valve-text,.control-title,.countdown,.warning-text{ font-size:1rem }
-.action-buttons{ flex-direction:column; gap:.8rem }
+
+.header-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    flex: 1;
 }
-@media(min-width:360px)and (max-width:479px){ .scroll-container{padding-bottom:1rem }
-.header-section{ padding:1rem }
-.header-title{ font-size:1.5rem }
-.main-container{ padding:1rem }
-.plant-title{ font-size:1.7rem }
-.plant-schedule{ font-size:1.1rem }
-.plant-image{ max-height:240px }
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #ffffff;
+    cursor: pointer;
 }
-@media(min-width:480px)and (max-width:767px){ .scroll-container{padding-bottom:1.25rem }
-.header-section{ padding:1.25rem }
-.header-title{ font-size:1.7rem }
-.main-container{ padding:1.25rem }
-.plant-title{ font-size:1.9rem }
-.plant-schedule{ font-size:1.2rem }
-.plant-image{ max-height:260px }
+
+/* Contenido principal */
+.main-container {
+    padding: 6rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-@media(min-width:768px){ .scroll-container{padding-bottom:1.5rem }
-.header-section{ padding:1.5rem }
-.header-title{ font-size:2rem }
-.main-container{ padding:1.5rem }
-.plant-title{ font-size:2.2rem }
-.plant-schedule{ font-size:1.3rem }
-.plant-image{ max-height:300px }
-.action-buttons{ flex-direction:row }
+
+/* Tarjeta principal */
+.plant-card {
+    background: #f9fbe7;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.plant-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #33691e;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.plant-schedule {
+    font-size: 1rem;
+    color: #689f38;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* Humedad y barra */
+.humidity-info {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.humidity-info p {
+    color: #33691e;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 12px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #aed581;
+    transition: width 0.3s ease;
+}
+
+/* Válvula */
+.valve-status {
+    font-weight: 600;
+    color: #558b2f;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Mensaje de error */
+.status-message {
+    background-color: #ffccbc;
+    color: #d32f2f;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Control manual */
+.manual-control-section {
+    text-align: center;
+    background-color: #f1f8e9;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.manual-control-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #33691e;
+}
+
+.countdown {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #558b2f;
+}
+
+.warning-text {
+    color: #f57c00;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Botones */
+.submit-button {
+    background: linear-gradient(135deg, #ffe0b2, #ffccbc);
+    color: #2e7d32;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    background: linear-gradient(135deg, #ffccbc, #ffe0b2);
+    transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+    background: #e0e0e0;
+    color: #9e9e9e;
+    cursor: not-allowed;
+}
+
+/* Botones finales */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.delete-button {
+    background: #ffcdd2;
+    color: #b71c1c;
+}
+
+.delete-button:hover {
+    background: #ef9a9a;
+}
+
+.edit-button {
+    background: #b2dfdb;
+    color: #004d40;
+}
+
+.edit-button:hover {
+    background: #80cbc4;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .header-title {
+        font-size: 1.3rem;
+    }
+
+    .plant-card,
+    .manual-control-section {
+        padding: 1.5rem;
+    }
+
+    .submit-button {
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* Iconos en botón de volver */
+.back-button i {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+/* Iconos dentro de botones generales */
+.submit-button i,
+.delete-button i,
+.edit-button i {
+    font-size: 1.2rem;
+    color: inherit;
+    /* Hereda color del botón */
+}
+
+/* Asegurar que los íconos tengan espacio */
+.submit-button i,
+.delete-button i,
+.edit-button i,
+.back-button i {
+    margin-right: 0.4rem;
+    display: inline-block;
+}
+
+h1, h2, h3, p, button {
+    font-family: "Roboto", sans-serif;
 }

@@ -4,7 +4,8 @@ import {
   faUserCircle,         // Icono más estándar para perfil
   faLeaf,               // Icono clásico de hoja
   faSeedling,           // Icono de plantín/planta pequeña
-  faMicrochip           // Icono para dispositivos
+  faMicrochip,           // Icono para dispositivos
+  faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import { PlantService } from '../Services/plant.service';
 import { AuthService } from '../Services/auth.service';
@@ -20,7 +21,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
     FontAwesomeModule
   ],
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
   route = inject(Router);
@@ -33,6 +34,7 @@ export class ViewComponent {
   faLeaf = faLeaf;
   faSeedling = faSeedling;
   faMicrochip = faMicrochip;
+  faHome = faHome;
 
   constructor(
     private plantService: PlantService,

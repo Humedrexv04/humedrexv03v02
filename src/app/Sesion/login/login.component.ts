@@ -1,6 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { AuthService } from '../../Services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../Services/auth.service';  // Importa AuthService
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
@@ -9,16 +8,16 @@ import { NgIf } from '@angular/common';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  imports: [IonicModule, FormsModule, NgIf],
+  imports: [FormsModule, NgIf],
 })
 export class LoginComponent implements OnInit {
-  route = inject(Router);
   email: string = '';
   password: string = '';
   emailError: string = ''; // Mensaje de error para el correo
   passwordError: string = ''; // Mensaje de error para la contraseña
 
-  constructor(private authService: AuthService) {}
+  // Inyección correcta a través del constructor
+  constructor(private authService: AuthService, private route: Router) { }
 
   ngOnInit() {
     // Aquí puedes inicializar cualquier dato si es necesario
@@ -68,18 +67,6 @@ export class LoginComponent implements OnInit {
           this.passwordError = 'Correo o Contraseña Incorrectos. Inténtalo de nuevo.';
         }
         console.error('Error al iniciar sesión:', error);
-      });
-  }
-
-  // Método para iniciar sesión con Google
-  loginWithGoogle() {
-    this.authService.loginWithGoogle()
-      .then((user) => {
-        this.route.navigate(['/view/home']);
-        console.log('Usuario logueado con Google:', user);
-      })
-      .catch((error) => {
-        console.error('Error al iniciar sesión con Google:', error);
       });
   }
 

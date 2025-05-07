@@ -1,12 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-sesion',
   templateUrl: './view-sesion.component.html',
   styleUrl: './view-sesion.component.css',
-  imports:[IonicModule]
+  imports:[]
 })
 export class ViewSesionComponent  implements OnInit {
 

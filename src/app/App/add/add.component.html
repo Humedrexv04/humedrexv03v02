@@ -1,111 +1,92 @@
-<!-- Contenedor Principal -->
 <div class="scroll-container">
-  <!-- Sección de Encabezado -->
-  <header class="header-section" role="banner">
-    <div class="header-content">
-      <div class="header-title-wrapper">
-        <span class="header-icon" aria-label="Ícono decorativo de hoja">🌿</span>
-        <h1 class="header-title">Agregar Nueva Planta</h1>
-      </div>
-    </div>
+  <header class="header-section">
+    <h1 class="header-title">Agregar Nueva Planta</h1>
   </header>
 
-  <!-- Contenido Principal -->
   <main class="main-container">
-    <!-- Tarjeta de Formulario -->
-    <section class="form-section" role="region" aria-labelledby="form-title">
-      <form class="plant-form" (ngSubmit)="addPlant()" role="form">
-        <!-- Subida de Imagen -->
-        <fieldset class="image-upload-section">
-          <legend class="sr-only">Subir imagen de la planta</legend>
-          <div class="image-upload-container">
-            <label class="image-upload-label" for="fileInput" tabindex="0" aria-label="Subir imagen de la planta">
-              📸 Subir imagen
-              <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput"
-                #fileInput aria-describedby="image-help">
-            </label>
-            <span id="image-help" class="sr-only">Sube una imagen de tu planta para previsualizarla.</span>
-            <div class="image-preview" *ngIf="img">
-              <img [src]="img" alt="Previsualización de la planta" class="plant-image">
-            </div>
-          </div>
-        </fieldset>
-
-        <!-- Detalles de la Planta -->
-        <fieldset class="form-group">
-          <legend class="sr-only">Detalles de la planta</legend>
-          <!-- Nombre de la Planta -->
-          <div class="form-field">
-            <span class="form-icon" aria-hidden="true">
+    <section class="form-container">
+      <form class="plant-form" (ngSubmit)="addPlant()">
+        <!-- Subida de imagen -->
+        <div class="form-field">
+          <label class="field-base image-upload" for="fileInput">
+            <span class="camera-icon">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path
-                  d="M12 2C9.24 2 7 4.24 7 7c0 2.76 2.24 5 5 5s5-2.24 5-5c0-2.76-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3zm0 2c-4.42 0-8 3.58-8 8h2c0-3.31 2.69-6 6-6s6 2.69 6 6h2c0-4.42-3.58-8-8-8z"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
+                  stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
               </svg>
             </span>
-            <div class="input-container">
-              <label class="input-label" for="name">Nombre de la planta</label>
-              <input [(ngModel)]="name" name="name" id="name" class="custom-input" placeholder="Ej: Suculenta"
-                aria-describedby="name-help" aria-required="true">
-              <span id="name-help" class="sr-only">Ingresa el nombre de tu planta, por ejemplo, Suculenta.</span>
-            </div>
-          </div>
+            <span class="upload-text">Subir imagen</span>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput" />
+          </label>
+        </div>
 
-          <!-- Intervalo de Riego -->
-          <div class="form-field">
-            <span class="form-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path
-                  d="M17 3H7a2 2 0 00-2 2v2c0 1.1.9 2 2 2h10a2 2 0 002-2V5a2 2 0 00-2-2zm0 4H7V5h10v2zm-2 4l-3 3-3-3H5l4 4v6h2v-6l4-4h-2z"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-            <div class="input-container">
-              <label class="input-label" for="horario">Riego cada (horas)</label>
-              <input type="time" [(ngModel)]="horario" name="horario" id="horario" class="custom-input"
-                aria-describedby="horario-help" aria-required="true">
-              <span id="horario-help" class="sr-only">Selecciona el intervalo de riego en horas.</span>
-            </div>
-          </div>
+        <!-- Vista previa de imagen -->
+        <div class="image-preview-wrapper" *ngIf="img">
+          <img [src]="img" alt="Previsualización de la planta" class="preview-image" />
+        </div>
 
-          <!-- Humedad Requerida -->
-          <div class="form-field">
-            <span class="form-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path
-                  d="M12 2a10 10 0 00-7 2.93V5a1 1 0 00-2 0v2.07A10 10 0 002 12a1 1 0 002 0 8 8 0 0116 0 1 1 0 002 0 10 10 0 00-10-10zm0 16a1 1 0 01-1-1v-4a1 1 0 012 0v4a1 1 0 01-1 1z"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-            <div class="input-container">
-              <label class="input-label" for="humedad">Humedad requerida (%)</label>
+        <!-- Nombre de la planta -->
+        <div class="form-field">
+          <label for="name" class="field-label">
+            <div class="field-base text-input">
+              <span class="form-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C9.24 2 7 4.24 7 7c0 2.76 2.24 5 5 5s5-2.24 5-5c0-2.76-2.24-5-5-5zM12 12c-4.42 0-8 3.58-8 8h2a6 6 0 0112 0h2c0-4.42-3.58-8-8-8z"
+                    fill="none" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </span>
+              <input [(ngModel)]="name" name="name" id="name" class="custom-input" placeholder="Nombre de la planta"
+                required />
+            </div>
+          </label>
+        </div>
+
+        <div class="form-field">
+          <label for="horario" class="field-label">
+            <div class="field-base time-input">
+              <span class="form-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                  <path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </span>
+              <input type="time" [(ngModel)]="horario" name="horario" id="horario" class="custom-input" required />
+            </div>
+          </label>
+        </div>
+
+        <div class="form-field">
+          <label for="humedad" class="field-label">
+            <div class="field-base number-input">
+              <span class="form-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                  <path d="M12 2C12 2 7 9 7 13a5 5 0 0010 0c0-4-5-11-5-11z" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                </svg>
+              </span>
               <input type="number" [(ngModel)]="humedad" name="humedad" id="humedad" class="custom-input"
-                placeholder="Ej: 60" aria-describedby="humedad-help" aria-required="true">
-              <span id="humedad-help" class="sr-only">Ingresa el porcentaje de humedad requerido.</span>
+                placeholder="Humedad (%)" min="1" max="100" required />
             </div>
-          </div>
-        </fieldset>
+          </label>
+        </div>
 
-        <!-- Mensajes de Estado -->
-        <div class="status-section" *ngIf="errorMessage" aria-live="polite">
+        <div class="status-section" *ngIf="errorMessage">
           <p class="status-message"
             [ngClass]="{'success': errorMessage.includes('exitosamente'), 'error': !errorMessage.includes('exitosamente')}">
             {{ errorMessage }}
           </p>
         </div>
 
-        <!-- Botón de Envío -->
-        <div class="action-section">
-          <button type="submit" class="primary-button" [disabled]="isSubmitting"
-            aria-label="Agregar nueva planta al jardín">
+        <div class="form-field">
+          <button type="submit" class="field-base submit-button" [disabled]="isSubmitting">
             <span class="button-icon-wrapper">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path
-                  d="M12 2a10 10 0 00-10 10c0 4.42 3.58 8 8 8s8-3.58 8-8a1 1 0 012 0 10 10 0 00-10-10zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
-                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               </svg>
             </span>
-            {{ isSubmitting ? 'Agregando...' : 'Agregar a mi jardín' }}
+            Agregar a mi jardín
           </button>
         </div>
       </form>

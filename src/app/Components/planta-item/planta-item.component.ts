@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Plant } from '../../Models/plant.mode';
-import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-planta-item',
-  imports: [IonicModule],
+  imports: [],
   templateUrl: './planta-item.component.html',
-  styleUrl: './planta-item.component.scss'
+  styleUrl: './planta-item.component.css'
 })
 export class PlantaItemComponent {
   @Input() plant!: Plant; // Recibe la planta como input

@@ -1,23 +1,38 @@
-<!-- HTML -->
 <main class="main-content">
   <div class="container">
-    <!-- Fondo con imagen y efecto de olas -->
-    <div class="animated-waves">
-      <img src="https://i.pinimg.com/736x/aa/02/24/aa02246aaf88c873feed936b5d10d677.jpg" alt="Fondo floral"
-        class="wave-background">
-      <div class="wave-overlay"></div>
+    <div class="animated-background">
+      <div class="plant plant1"></div>
+      <div class="plant plant2"></div>
+      <div class="plant plant3"></div>
+      <div class="plant plant4"></div>
+      <div class="plant plant5"></div>
+      <div class="plant plant6"></div>
+
+      <div class="animal bird"></div>
+      <div class="animal bird2"></div>
+      <div class="animal butterfly"></div>
+      <div class="animal butterfly2"></div>
+      <div class="animal bee"></div>
+      <div class="animal dragonfly"></div>
     </div>
 
-    <!-- Título fuera del card -->
-    <h1 class="floating-title">HUMEDREX</h1>
+    <div class="title-container">
+      <h1 class="floating-title">
+        <span>H</span>
+        <span>U</span>
+        <span>M</span>
+        <span>E</span>
+        <span>D</span>
+        <span>R</span>
+        <span>E</span>
+        <span>X</span>
+      </h1>
+    </div>
 
-    <!-- Tarjeta de login transparente -->
     <div class="login-card">
       <button class="btn btn-primary" (click)="gotoLogIn()">Iniciar Sesión</button>
       <div class="instruction-text">¿No tienes cuenta?</div>
-      <button class="btn btn-outline" (click)="gotoRegister()">
-        Crear Cuenta
-      </button>
+      <button class="btn btn-outline" (click)="gotoRegister()">Crear Cuenta</button>
     </div>
   </div>
 </main>

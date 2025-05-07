@@ -1,3 +1,4 @@
+// src/app/data-sensores/data-sensores.component.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf, CommonModule, NgFor } from '@angular/common';
@@ -13,7 +14,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [NgIf, CommonModule, NgFor, FormsModule],
   templateUrl: './data-sensores.component.html',
-  styleUrls: ['./data-sensores.component.scss']
+  styleUrls: ['./data-sensores.component.css']
 })
 export class DataSensoresComponent implements OnInit, OnDestroy {
   deviceId: string = '';
@@ -26,6 +27,8 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
   connectionStatus: boolean = false;
   relayIds: string[] = [];
   sensorKeys: string[] = [];
+  lastUpdated: string = '';
+  formattedLastUpdated: string = '';
   private subscriptions: Subscription[] = [];
 
   constructor(
@@ -38,8 +41,14 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.selectedSensor = '';
     this.deviceId = this.route.snapshot.paramMap.get('deviceId')!;
     this.initializeComponent();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.realtimeDataService.unsubscribeDevice(this.deviceId);
   }
 
   private async initializeComponent(): Promise<void> {
@@ -58,12 +67,14 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
       this.handleError('Usuario no autenticado');
       return;
     }
-
     try {
       const data = await this.deviceService.getDeviceData(this.deviceId);
       this.deviceData = { ...data, relays: data.relays || {} };
       this.relayIds = Object.keys(this.deviceData.relays);
       this.sensorKeys = this.getSensorKeys();
+      if (this.deviceData.timestamp) {
+        this.updateTimestampDisplay(this.deviceData.timestamp);
+      }
       this.loading = false;
     } catch (err) {
       this.handleError('Error al cargar datos del dispositivo', err);
@@ -74,68 +85,69 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.deviceService.getDeviceConnectionStatus(this.deviceId)
         .subscribe({
-          next: (status) => this.connectionStatus = status.status === 'connected',
-          error: (err) => console.error('Error estado conexión:', err)
+          next: s => this.connectionStatus = s.status === 'connected',
+          error: err => console.error('Error estado conexiÃ³n:', err)
         })
     );
-
     this.subscriptions.push(
       this.deviceService.subscribeToSensorData(this.deviceId)
         .subscribe({
-          next: (sensors) => {
+          next: sensors => {
             this.deviceData = { ...this.deviceData, ...sensors };
             this.sensorKeys = this.getSensorKeys();
+            if (sensors['timestamp']) {
+              this.updateTimestampDisplay(sensors['timestamp']);
+            }
           },
-          error: (err) => console.error('Error datos sensores:', err)
+          error: err => console.error('Error datos sensores:', err)
         })
     );
   }
 
+  private updateTimestampDisplay(timestamp: any): void {
+    const date = new Date(timestamp);
+    this.lastUpdated = date.toISOString();
+    this.formattedLastUpdated = date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+  }
+
   getSensorKeys(): string[] {
-    const excludedKeys = ['id', 'relays', 'conectado', 'uid', 'creado', 'actualizadoEn'];
+    const excluded = ['id', 'relays', 'conectado', 'uid', 'creado', 'actualizadoEn', 'timestamp'];
     return Object.keys(this.deviceData)
       .filter(key =>
-        !excludedKeys.includes(key) &&
+        !excluded.includes(key) &&
         typeof this.deviceData[key] === 'number' &&
         !key.toLowerCase().includes('relay')
       );
   }
 
-  async toggleRelay(relayId: string): Promise<void> {
-    const newState = !this.deviceData.relays[relayId];
-    try {
-      await this.deviceService.updateRelayState(this.deviceId, relayId, newState);
-    } catch (error) {
-      this.handleError('Error al actualizar relé', error);
-    }
+  getWaterLevelSensor(): string | null {
+    return this.sensorKeys.find(k =>
+      k.toLowerCase().includes('nivel') && k.toLowerCase().includes('agua')
+    ) || null;
   }
 
-  private async loadUserPlants(): Promise<void> {
-    const userUid = this.auth.currentUser?.uid;
-    if (!userUid) return;
-
-    try {
-      this.plants = await this.plantService.getPlants(userUid);
-    } catch (err) {
-      this.handleError('Error cargando plantas', err);
-    }
+  getAssignableSensors(): string[] {
+    const waterKey = this.getWaterLevelSensor();
+    return this.sensorKeys.filter(k => k !== waterKey);
   }
 
   async assignSensorToPlant(): Promise<void> {
     if (!this.validateAssignment()) return;
-
     const userUid = this.auth.currentUser?.uid;
     if (!userUid) {
       this.handleError('Usuario no autenticado');
       return;
     }
-
     try {
       await this.plantService.updatePlant(userUid, this.selectedPlantId, {
-        sensorHumedad: {
-          deviceId: this.deviceId,
-          sensorKey: this.selectedSensor
-        }
+        sensorHumedad: { deviceId: this.deviceId, sensorKey: this.selectedSensor }
       });
       this.handleAssignmentSuccess();
     } catch (err) {
@@ -159,22 +171,27 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
     this.loadUserPlants();
   }
 
-  private handleError(message: string, error?: any): void {
-    this.errorMessage = message;
+  private async loadUserPlants(): Promise<void> {
+    const userUid = this.auth.currentUser?.uid;
+    if (!userUid) return;
+    try {
+      this.plants = await this.plantService.getPlants(userUid);
+    } catch (err) {
+      this.handleError('Error cargando plantas', err);
+    }
+  }
+
+  private handleError(msg: string, err?: any): void {
+    this.errorMessage = msg;
     this.loading = false;
-    console.error(error || message);
+    console.error(err || msg);
   }
 
   goToDispositivos(): void {
     this.router.navigate(['/view/dispositivos']);
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.realtimeDataService.unsubscribeDevice(this.deviceId);
-  }
-
-  scrollToTop() {
+  scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

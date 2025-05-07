@@ -168,12 +168,29 @@ export class DeviceService {
 
   getSensorData(deviceId: string, sensorKey: string): Promise<any> {
     const uid = this.auth.currentUser?.uid;
-    if (!uid) { return Promise.reject("Usuario no autenticado"); }
+    if (!uid) {
+      return Promise.reject("Usuario no autenticado");
+    }
+
     const deviceRefFirestore = doc(this.firestore, `devices/${deviceId}`);
     return getDoc(deviceRefFirestore).then((docSnapshot) => {
-      if (!docSnapshot.exists() || docSnapshot.data()?.['uid'] !== uid) { return Promise.reject("El dispositivo no está asignado a este usuario"); } const sensorRefRTDB = ref(this.database, `devices/${deviceId}/sensors/${sensorKey}`); return get(sensorRefRTDB).then((snapshot) => { if (snapshot.exists()) { return snapshot.val(); } else { return Promise.reject("No se encontraron datos para este sensor"); } }).catch((error) => { return Promise.reject(`Error al obtener los datos del sensor: ${error.message}`); });
+      if (!docSnapshot.exists() || docSnapshot.data()?.['uid'] !== uid) {
+        return Promise.reject("El dispositivo no está asignado a este usuario");
+      }
+
+      const sensorRefRTDB = ref(this.database, `devices/${deviceId}/sensors/${sensorKey}`);
+      return get(sensorRefRTDB).then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          return Promise.reject("No se encontraron datos para este sensor");
+        }
+      }).catch((error) => {
+        return Promise.reject(`Error al obtener los datos del sensor: ${error.message}`);
+      });
     });
   }
+
 
   private activeTimers: { [deviceId: string]: { [relayId: string]: any } } = {};
 

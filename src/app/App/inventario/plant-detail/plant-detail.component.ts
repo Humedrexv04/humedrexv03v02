@@ -11,7 +11,7 @@ import { Plant } from '../../../Models/plant.mode';
   selector: 'app-plant-detail',
   imports: [NgIf],
   templateUrl: './plant-detail.component.html',
-  styleUrls: ['./plant-detail.component.scss'],
+  styleUrls: ['./plant-detail.component.css'],
   standalone: true
 })
 export class PlantDetailComponent implements OnInit, OnDestroy {

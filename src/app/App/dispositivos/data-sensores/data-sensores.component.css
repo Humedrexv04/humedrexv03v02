@@ -1,62 +1,263 @@
-@keyframes fadeIn{ from{opacity:0; transform:translateY(5px) }
-to{ opacity:1; transform:translateY(0) }
+/* data-sensores.component.css */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-@keyframes spin{ to{transform:rotate(360deg) }
+
+/* Contenedor principal */
+.main-container {
+  padding: 16px;
+  background: #f0f2f5;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
 }
-@keyframes glow{ 0%,100%{box-shadow:0 0 5px rgba(136,170,78,.3) }
-50%{ box-shadow:0 0 8px rgba(136,170,78,.4) }
+
+/* Header */
+.header-section {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5e9;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
 }
-.main-container{ padding:1rem; max-width:1200px; margin:1rem auto; background:#e7dcd5; border-radius:8px; box-shadow:0 2px 6px rgba(42,55,64,.1); min-height:calc(100vh - 2rem); font-family:"Open Sans",sans-serif; animation:fadeIn .5s ease }
-.scroll-wrapper{ max-height:calc(100vh - 4rem); overflow-y:auto; padding:.5rem; -webkit-overflow-scrolling:touch; scroll-behavior:smooth }
-.scroll-wrapper::-webkit-scrollbar{ width:6px }
-.scroll-wrapper::-webkit-scrollbar-track{ background:#e7dcd5; border-radius:6px }
-.scroll-wrapper::-webkit-scrollbar-thumb{ background:#88aa4e; border-radius:6px; transition:background .3s ease }
-.scroll-wrapper::-webkit-scrollbar-thumb:hover{ background:#6b8a3d }
-.header-section{ background:linear-gradient(135deg,#c3b1e1,#dbba91); padding:1rem; border-radius:8px; border:1px solid #6b7280; box-shadow:0 1px 4px rgba(42,55,64,.1); animation:fadeIn .5s ease }
-.back-button{ background:linear-gradient(to right,#d4a017,#f28b82); color:#2a3740; padding:.5rem 1rem; border-radius:6px; font-weight:600; font-size:clamp(.8rem,2vw,.9rem); border:1px solid #6b7280; cursor:pointer; font-family:"Open Sans",sans-serif; transition:background,transform .3s ease; animation:glow 2s infinite }
-.back-button:hover{ background:linear-gradient(to right,#f28b82,#d4a017); transform:translateY(-1px) }
-.header-title-wrapper{ display:flex; align-items:center; gap:.5rem }
-.header-icon{ font-size:1.1rem; color:#2a3740; transition:transform .3s ease }
-.header-icon:hover{ transform:scale(1.1) }
-.header-title{ font-size:clamp(1rem,2.5vw,1.2rem); font-weight:700; color:#2a3740; margin:0; text-shadow:0 1px 1px rgba(42,55,64,.1); font-family:"Poppins",sans-serif }
-.section-base,.assignment-section,.sensor-section,.error-section,.loading-section{ padding:1rem; background:#f8f1e9; border-radius:8px; border:1px solid #6b7280; box-shadow:0 1px 4px rgba(42,55,64,.1); animation:fadeIn .5s ease }
-.loading-section{ text-align:center }
-.loading-section .spinner{ border:3px solid rgba(136,170,78,.3); border-top:3px solid #88aa4e; border-radius:50%; width:30px; height:30px; animation:spin 1s linear infinite; margin:0 auto .5rem }
-.loading-section .loading-text{ color:#2a3740; font-size:clamp(.8rem,2vw,.9rem); font-family:"Open Sans",sans-serif }
-.error-section{ border-color:#ff6b6b }
-.error-section .error-text{ color:#ff6b6b; font-size:clamp(.8rem,2vw,.9rem); font-family:"Open Sans",sans-serif }
-.main-content{ display:flex; flex-direction:column; gap:1rem }
-.sensor-section .section-header{ display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; background:hsla(0,0%,100%,.4); padding:.5rem; border-radius:4px; border-bottom:2px solid #88aa4e }
-.sensor-section .header-icon{ font-size:1.1rem; color:#6b8a3d; transition:transform .3s ease }
-.sensor-section .header-icon:hover{ transform:scale(1.1) }
-.sensor-section .section-title{ font-size:clamp(1rem,2.5vw,1.2rem); font-weight:700; color:#2a3740; text-shadow:0 1px 1px rgba(42,55,64,.1); font-family:"Poppins",sans-serif }
-.sensor-section .sensor-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:.8rem }
-.sensor-section .sensor-grid .sensor-card{ padding:.8rem; background:hsla(0,0%,100%,.4); border-radius:6px; border:1px solid #6b7280; text-align:center; transition:transform .3s ease }
-.sensor-section .sensor-grid .sensor-card:hover{ transform:translateY(-2px) }
-.sensor-section .sensor-grid .sensor-card .sensor-name{ color:#2a3740; font-size:clamp(.8rem,2vw,.9rem); font-weight:600; text-transform:uppercase; font-family:"Open Sans",sans-serif }
-.sensor-section .sensor-grid .sensor-card .sensor-value{ font-size:clamp(1.2rem,3vw,1.4rem); font-weight:600; color:#88aa4e; font-family:"Open Sans",sans-serif }
-.assignment-section .section-header{ display:flex; align-items:center; gap:.5rem; margin-bottom:.5rem; background:hsla(0,0%,100%,.4); padding:.5rem; border-radius:4px; border-bottom:2px solid #88aa4e }
-.assignment-section .header-icon{ font-size:1.1rem; color:#6b8a3d; transition:transform .3s ease }
-.assignment-section .header-icon:hover{ transform:scale(1.1) }
-.assignment-section .section-title{ font-size:clamp(1rem,2.5vw,1.2rem); font-weight:700; color:#2a3740; text-shadow:0 1px 1px rgba(42,55,64,.1); font-family:"Poppins",sans-serif }
-.assignment-section .assignment-form{ display:flex; flex-wrap:wrap; gap:.5rem; align-items:center }
-.assignment-section .assignment-form .form-group{ flex:1; min-width:200px; max-width:250px }
-.assignment-section .assignment-form .form-group label{ font-size:clamp(.8rem,2vw,.9rem); color:#2a3740; font-weight:600; font-family:"Open Sans",sans-serif }
-.assignment-section .assignment-form .form-group .form-select{ padding:.3rem; border:1px solid #6b7280; border-radius:4px; font-size:clamp(.8rem,2vw,.9rem); height:36px; background:#f8f1e9; color:#2a3740; font-family:"Open Sans",sans-serif; transition:border-color,box-shadow .3s ease }
-.assignment-section .assignment-form .form-group .form-select:focus{ border-color:#d4a017; box-shadow:0 0 4px rgba(212,160,23,.3); outline:none }
-.assignment-section .assignment-form .form-group .form-select option{ background:#e7dcd5; color:#2a3740; font-size:clamp(.8rem,2vw,.9rem); padding:.3rem; font-family:"Open Sans",sans-serif }
-.assignment-section .assignment-form .assign-button{ padding:.5rem 1rem; background:linear-gradient(to right,#6b8a3d,#88aa4e); color:#e7dcd5; border:1px solid #6b7280; border-radius:6px; font-size:clamp(.8rem,2vw,.9rem); cursor:pointer; font-family:"Open Sans",sans-serif; transition:background,transform .3s ease; animation:glow 2s infinite }
-.assignment-section .assignment-form .assign-button:hover{ background:linear-gradient(to right,#88aa4e,#6b8a3d); transform:translateY(-1px) }
-.assignment-section .assignment-form .assign-button:disabled{ background:#6b7280; cursor:not-allowed; opacity:.6 }
-@media(max-width:479px){ .main-container{padding:.8rem; margin:.8rem }
-.scroll-wrapper{ padding:.3rem }
-.header-section,.section-base,.loading-section,.error-section,.sensor-section,.assignment-section{ margin:0 .5rem; padding:.8rem }
-.back-button,.header-title,.connection-status,.loading-text,.error-text{ font-size:.85rem }
-.sensor-grid{ grid-template-columns:1fr }
-.assignment-form{ flex-direction:column }
-.form-group{ min-width:100% }
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: #388e3c;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
-@media(min-width:480px){ .main-container{padding:1rem; max-width:1200px }
-.scroll-wrapper{ padding:.5rem }
-.header-section,.section-base,.loading-section,.error-section,.sensor-section,.assignment-section{ margin:0 1rem; padding:1rem }
+
+.header-title {
+  text-align: center;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: #2e7d32;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.connected,
+.disconnected {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.connected {
+  background: #81c784;
+}
+
+.disconnected {
+  background: #e57373;
+}
+
+.status-text {
+  color: #2e7d32;
+  font-size: 0.9rem;
+}
+
+/* Loading / Error */
+.status-section {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.error-text {
+  color: #d32f2f;
+}
+
+/* Timestamp Section */
+.timestamp-section {
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+.timestamp-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #757575;
+}
+
+.timestamp-display i {
+  color: #388e3c;
+}
+
+/* Water Level Card */
+.water-level-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #29b6f6;
+}
+
+.water-level-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.water-level-header i {
+  color: #29b6f6;
+  font-size: 1.2rem;
+}
+
+.water-level-header h2 {
+  font-size: 1.1rem;
+  color: #2e7d32;
+  margin: 0;
+}
+
+.water-level-value {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.water-level-value .value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #29b6f6;
+}
+
+.water-level-value .unit {
+  margin-left: 6px;
+  font-size: 1rem;
+  color: #757575;
+}
+
+.water-level-indicator {
+  background: #e3f2fd;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.indicator-bar {
+  height: 100%;
+  width: 65%;
+  background: linear-gradient(90deg, #29b6f6, #0288d1);
+  border-radius: 3px;
+}
+
+/* Grid de sensores */
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.sensor-card {
+  background: #ffffff;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sensor-name {
+  font-size: 0.95rem;
+  color: #2e7d32;
+  margin-bottom: 6px;
+}
+
+.sensor-value {
+  font-size: 1.1rem;
+  color: #424242;
+}
+
+/* Assignment */
+.assignment-section {
+  background: #ffffff;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.assignment-title {
+  font-size: 1.1rem;
+  color: #2e7d32;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #a5d6a7;
+  border-radius: 4px;
+  background: #f1f8e9;
+  font-size: 0.95rem;
+}
+
+.assign-button {
+  width: 100%;
+  padding: 10px;
+  background: #81c784;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.assign-button:hover:not(:disabled) {
+  background: #66bb6a;
+}
+
+.assign-button:disabled {
+  background: #e0e0e0;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid #c8e6c9;
+  border-top: 4px solid #388e3c;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .water-level-value .value {
+    font-size: 1.8rem;
+  }
+
+  .sensor-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
 }

@@ -1,0 +1,102 @@
+/* Colores y estilo general */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: #e8f5e9;
+  /* color verde claro */
+  font-family: "Roboto", sans-serif;
+}
+
+/* Contenido Principal */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Barra de Navegación */
+.navigation-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  /* color blanco */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+/* Contenedor de los Íconos de Navegación */
+.nav-container {
+  display: flex;
+  justify-content: space-evenly;
+  /* Espaciado uniforme entre los elementos */
+  align-items: center;
+  height: 64px;
+  padding: 0 16px;
+}
+
+/* Estilo de cada ítem de la navegación */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #666666;
+  /* color gris claro */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  /* Añadimos la transición de color y fondo */
+  width: 64px;
+  padding: 8px;
+  /* Añadimos algo de padding para hacerlo más "clickeable" */
+  border-radius: 8px;
+  /* Bordes redondeados */
+}
+
+.nav-item:hover {
+  background-color: #e8f5e9;
+  /* Fondo suave cuando se pasa el cursor */
+  color: #2c8a56;
+  /* color verde más intenso al hacer hover */
+}
+
+.nav-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.nav-label {
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Enlace activo */
+.nav-item.active {
+  color: #2c8a56;
+  /* Color verde fuerte cuando el ítem está activo */
+}
+
+/* Ajustes para dispositivos con preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .nav-item {
+    transition: none;
+    /* Desactivamos las transiciones para usuarios con esta preferencia */
+  }
+}
+
+/* Responsive: Ajuste en pantallas más pequeñas */
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 8px;
+    /* Menos padding en pantallas pequeñas */
+  }
+
+  .nav-item {
+    width: auto;
+    /* Los ítems se ajustan al contenido */
+    padding: 8px 12px;
+    /* Ajustamos el padding para que no se vean tan apretados */
+  }
+}

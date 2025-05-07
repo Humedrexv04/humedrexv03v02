@@ -1,4 +1,3 @@
-// auth.service.ts
 import { Injectable, inject } from '@angular/core';
 import {
   Auth,
@@ -11,7 +10,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup
 } from '@angular/fire/auth';
-import { Firestore, doc, setDoc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, getDoc, collection, getDocs } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
@@ -26,6 +25,7 @@ export class AuthService {
   private _firestore = inject(Firestore);
   private _router = inject(Router);
   private userSubject = new BehaviorSubject<User | null>(null);
+  private loadingSubject = new BehaviorSubject<boolean>(false); // Agregado para controlar el estado de carga
 
   constructor() {
     onAuthStateChanged(this._auth, (user) => {
@@ -46,6 +46,10 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
+  get loading$() {
+    return this.loadingSubject.asObservable(); // Exponer el estado de carga
+  }
+
   isLoggedIn(): boolean {
     return !!this.userSubject.value;
   }
@@ -55,46 +59,56 @@ export class AuthService {
   }
 
   async signup(email: string, password: string, name: string): Promise<void> {
-    const userCredential = await createUserWithEmailAndPassword(this._auth, email, password);
-    const user = userCredential.user;
-    localStorage.setItem(LOCAL_USER_KEY, user.uid);
-    await this.saveUser(user.uid, email, name);
-    await this.updatePushToken(user.uid);
-    this._router.navigate(['/view/home']);
+    this.loadingSubject.next(true); // Mostrar el splash
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this._auth, email, password);
+      const user = userCredential.user;
+      localStorage.setItem(LOCAL_USER_KEY, user.uid);
+      await this.saveUser(user.uid, email, name);
+      await this.updatePushToken(user.uid);
+      this._router.navigate(['/view/home']);
+    } catch (error) {
+      console.error('Error en el registro:', error);
+      // Manejar error
+    } finally {
+      this.loadingSubject.next(false); // Ocultar el splash
+    }
   }
 
   async login(email: string, password: string): Promise<void> {
-    const userCredential = await signInWithEmailAndPassword(this._auth, email, password);
-    const user = userCredential.user;
-    localStorage.setItem(LOCAL_USER_KEY, user.uid);
-    await this.saveUser(user.uid, email, user.displayName || 'Usuario');
-    await this.updatePushToken(user.uid);
-    this._router.navigate(['/view/home']);
-  }
-
-  async loginWithGoogle(): Promise<void> {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(this._auth, provider);
-    const user = result.user;
-    if (user.email) {
+    this.loadingSubject.next(true); // Mostrar el splash
+    try {
+      const userCredential = await signInWithEmailAndPassword(this._auth, email, password);
+      const user = userCredential.user;
       localStorage.setItem(LOCAL_USER_KEY, user.uid);
-      await this.saveUser(user.uid, user.email, user.displayName || 'Usuario sin nombre');
+      await this.saveUser(user.uid, email, user.displayName || 'Usuario');
       await this.updatePushToken(user.uid);
       this._router.navigate(['/view/home']);
-    } else {
-      throw new Error('El email del usuario es null');
+    } catch (error) {
+      console.error('Error en el inicio de sesión:', error);
+      // Manejar error
+    } finally {
+      this.loadingSubject.next(false); // Ocultar el splash
     }
   }
 
   async logout(): Promise<void> {
-    const currentUser = this._auth.currentUser;
-    if (currentUser) {
-      const userDoc = doc(this._firestore, `users/${currentUser.uid}`);
-      await setDoc(userDoc, { pushToken: null }, { merge: true });
-      await this._auth.signOut();
-      PushNotifications.removeAllListeners(); // Limpia listeners por si acaso
-      localStorage.removeItem(LOCAL_USER_KEY);
-      this._router.navigate(['/']);
+    this.loadingSubject.next(true); // Mostrar el splash
+    try {
+      const currentUser = this._auth.currentUser;
+      if (currentUser) {
+        const userDoc = doc(this._firestore, `users/${currentUser.uid}`);
+        await setDoc(userDoc, { pushToken: null }, { merge: true });
+        await this._auth.signOut();
+        PushNotifications.removeAllListeners(); // Limpia listeners por si acaso
+        localStorage.removeItem(LOCAL_USER_KEY);
+        this._router.navigate(['/']);
+      }
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      // Manejar error
+    } finally {
+      this.loadingSubject.next(false); // Ocultar el splash
     }
   }
 
@@ -157,5 +171,11 @@ export class AuthService {
     } else {
       throw new Error('Usuario no encontrado en Firestore');
     }
+  }
+
+  async getPlantCount(userId: string): Promise<number> {
+    const plantsCol = collection(this._firestore, `users/${userId}/plants`);
+    const snapshot = await getDocs(plantsCol);
+    return snapshot.size;
   }
 }

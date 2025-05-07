@@ -12,7 +12,7 @@ import { thermometer } from 'ionicons/icons';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  styleUrls: ['./add.component.css']
 })
 export class AddComponent {
   img: string = '';
@@ -77,22 +77,33 @@ export class AddComponent {
   }
 
   private validateForm(): boolean {
+    // Validación para asegurar que los campos obligatorios estén llenos
     if (!this.name.trim()) {
       this.errorMessage = 'El nombre de la planta es requerido.';
       return false;
     }
     if (!this.horario.trim()) {
-      this.errorMessage = 'El horario es requerido.';
+      this.errorMessage = 'El horario de riego es requerido.';
       return false;
     }
+
+    // Validación para la humedad: debe ser mayor que 0 y menor o igual a 100
     if (this.humedad <= 0 || isNaN(this.humedad)) {
       this.errorMessage = 'La humedad debe ser un número mayor que 0.';
       return false;
     }
+    if (this.humedad > 100) {
+      this.errorMessage = 'La humedad no puede ser mayor a 100%.';
+      return false;
+    }
+
+    // Validación para electroválvula
     if (this.electrovalvula < 0) {
       this.errorMessage = 'La electroválvula no puede ser negativa.';
       return false;
     }
+
+    // Validaciones para los campos del sensor de humedad
     if (this.sensorHumedad.deviceId && !this.sensorHumedad.sensorKey) {
       this.errorMessage = 'Si se especifica un dispositivo, también se debe especificar un sensor.';
       return false;
@@ -101,6 +112,7 @@ export class AddComponent {
       this.errorMessage = 'Si se especifica un sensor, también se debe especificar un dispositivo.';
       return false;
     }
+
     return true;
   }
 

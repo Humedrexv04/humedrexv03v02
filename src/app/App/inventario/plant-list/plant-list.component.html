@@ -4,11 +4,30 @@
   <header class="header-section" role="banner">
     <div class="header-content">
       <div class="header-title-wrapper">
-        <span class="header-icon" aria-hidden="true">🌱</span>
+        <span class="header-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+            <path
+              d="M12 2C9.24 2 7 4.24 7 7c0 2.76 2.24 5 5 5s5-2.24 5-5c0-2.76-2.24-5-5-5zm0 12c-4.42 0-8 3.58-8 8h2c0-3.31 2.69-6 6-6s6 2.69 6 6h2c0-4.42-3.58-8-8-8z"
+              fill="currentColor" />
+          </svg>
+        </span>
         <h1 class="header-title">Inventario de Plantas</h1>
       </div>
     </div>
   </header>
+
+  <!-- Contenedor de Nivel de Agua (por encima de los items) -->
+  <!-- Contenedor de Nivel de Agua (por encima de los items) -->
+  <section class="water-level-card">
+    <div class="water-level-header">
+      <i class="icon-water-level" aria-hidden="true"></i>
+      <h2>Nivel de Agua</h2>
+    </div>
+    <div class="water-level-value">
+      <span class="value">{{ getNivelAgua() }}</span><span class="unit">mm</span>
+    </div>
+  </section>
+
 
   <!-- Contenido Principal -->
   <main class="main-container" role="main">

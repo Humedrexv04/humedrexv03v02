@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { caretBack } from 'ionicons/icons';
@@ -12,7 +11,7 @@ import { caretBack } from 'ionicons/icons';
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css'],
   standalone: true, // Asegúrate de que el componente sea standalone
-  imports: [NgIf, IonicModule, FormsModule], // Importa los módulos necesarios
+  imports: [NgIf, FormsModule], // Importa los módulos necesarios
 })
 export class ResetPasswordComponent implements OnInit {
   email: string = '';

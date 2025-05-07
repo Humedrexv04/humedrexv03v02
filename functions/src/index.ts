@@ -3,13 +3,13 @@ import * as admin from "firebase-admin";
 
 admin.initializeApp();
 
-export const detectarHumedadBaja = functions.database
-  .ref("/devices/{device}/sensors/humedad1")
+export const monitorDeviceSensors = functions.database
+  .ref("/devices/{deviceId}/sensors/{sensorKey}")
   .onUpdate(async (change, context) => {
-    const deviceId = context.params.device;
-    const humedadActual = change.after.val();
+    const { deviceId, sensorKey } = context.params;
+    const newValue = change.after.val();
 
-    console.log(`🔄 Cambio en dispositivo ${deviceId}: humedad1 = ${humedadActual}`);
+    console.log(`🔄 Cambio en ${sensorKey} del dispositivo ${deviceId}: ${newValue}`);
 
     try {
       const usersSnap = await admin.firestore().collection("users").get();
@@ -17,41 +17,68 @@ export const detectarHumedadBaja = functions.database
       for (const userDoc of usersSnap.docs) {
         const userId = userDoc.id;
         const userData = userDoc.data();
+
+        // Accede al pushToken directamente desde el documento del usuario
         const token = userData.pushToken;
 
-        const plantsSnap = await admin
-          .firestore()
-          .collection(`users/${userId}/plants`)
-          .get();
+        if (!token || typeof token !== "string") {
+          console.warn(`⚠️ Usuario ${userId} sin token válido`);
+          continue;
+        }
 
-        for (const plantDoc of plantsSnap.docs) {
-          const plantData = plantDoc.data();
-          const sensor = plantData.sensorHumedad;
-          const umbral = plantData.humedad;
+        // === HUMEDAD ===
+        if (sensorKey !== "nivel_agua") {
+          const plantsSnap = await admin
+            .firestore()
+            .collection(`users/${userId}/plants`)
+            .get();
 
-          if (sensor?.deviceId === deviceId && humedadActual < umbral) {
-            console.log(`⚠️ Humedad baja detectada para usuario ${userId}, planta ${plantDoc.id}`);
+          for (const plantDoc of plantsSnap.docs) {
+            const plantData = plantDoc.data();
+            const sensor = plantData.sensorHumedad;
+            const umbral = plantData.humedad;
 
-            if (!token) {
-              console.warn(`⚠️ Usuario ${userId} sin token de FCM`);
-              continue;
+            if (sensor?.deviceId === deviceId && sensor?.sensorKey === sensorKey) {
+              if (typeof newValue === "number" && typeof umbral === "number") {
+                let mensaje = "";
+
+                if (newValue < umbral) {
+                  mensaje = `La humedad de tu planta "${plantData.name}" está baja: ${newValue}%`;
+                } else if (newValue > umbral) {
+                  mensaje = `La humedad de tu planta "${plantData.name}" está alta: ${newValue}%`;
+                } else {
+                  continue; // Igual al umbral, no notificamos
+                }
+
+                await admin.messaging().send({
+                  token,
+                  notification: {
+                    title: "🌿 Alerta de humedad",
+                    body: mensaje,
+                  },
+                });
+                console.log(`✅ Notificación de humedad enviada a ${userId}`);
+              }
             }
-
-            const message: admin.messaging.Message = {
-              token: token,
-              notification: {
-                title: "⚠️ Alerta de humedad",
-                body: `Humedad baja detectada: ${humedadActual}%`,
-              },
-            };
-
-            await admin.messaging().send(message);
-            console.log(`✅ Notificación enviada a usuario ${userId}`);
           }
+        }
+
+        // === NIVEL DE AGUA ===
+        else if (sensorKey === "nivel_agua" && typeof newValue === "number" && newValue < 1000) {
+          const mensaje = `El nivel de agua del tanque del dispositivo ${deviceId} está bajo. ¡Rellénalo pronto!`;
+
+          await admin.messaging().send({
+            token,
+            notification: {
+              title: "🚱 Nivel de agua bajo",
+              body: mensaje,
+            },
+          });
+          console.log(`✅ Notificación de nivel enviada a ${userId}`);
         }
       }
     } catch (error) {
-      console.error("❌ Error en detectarHumedadBaja():", error);
+      console.error("❌ Error en monitorDeviceSensors():", error);
     }
 
     return null;

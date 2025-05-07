@@ -1,18 +1,9 @@
-<!-- Contenedor de la Tarjeta -->
-<div class="card" role="article" [attr.aria-labelledby]="'plant-title-' + plant.name">
-  <!-- Sección de la Imagen -->
-  <div class="image-section">
-    <img [src]="plant.img" alt="Imagen de {{ plant.name }}" class="plant-image" />
-  </div>
-  <!-- Cuerpo de la Tarjeta -->
-  <div class="card-body">
-    <!-- Encabezado -->
-    <div class="card-header">
-      <h2 class="plant-title" id="plant-title-{{ plant.name }}">{{ plant.name }}</h2>
-    </div>
-    <!-- Acción -->
-    <div class="action-section">
-      <button class="primary-button" (click)="viewPlantDetails()">Ver Detalles</button>
-    </div>
+<div class="plant-card">
+  <img [src]="plant.img" alt="{{ plant.name }}" class="plant-image" />
+  <div class="plant-info">
+    <h2 class="card-title">{{ plant.name }}</h2>
+    <button class="primary-button" (click)="viewPlantDetails()">
+      <i class="fas fa-search"></i> Ver detalles
+    </button>
   </div>
 </div>
