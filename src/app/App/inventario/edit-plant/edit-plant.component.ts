@@ -3,13 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Plant } from '../../../Models/plant.mode';
 import { PlantService } from '../../../Services/plant.service';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass } from '@angular/common';
 import { AuthService } from '../../../Services/auth.service';
+import { CameraService } from '../../../Services/camera.service';
 
 @Component({
   selector: 'app-edit-plant',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf, NgClass],
   templateUrl: './edit-plant.component.html',
   styleUrls: ['./edit-plant.component.css']
 })
@@ -20,12 +21,14 @@ export class EditPlantComponent implements OnInit {
   errorMessage: string | null = null;
   img: string | undefined = '';
   isSubmitting: boolean = false;
+  isCapturingImage: boolean = false;
 
   constructor(
     private plantService: PlantService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cameraService: CameraService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -61,6 +64,10 @@ export class EditPlantComponent implements OnInit {
     this.plantService.getPlantDetails(this.userId, this.plantId)
       .then(data => {
         this.plant = data;
+        // Asegurarse de que la humedad no supere el 100% al cargar los datos
+        if (this.plant.humedad > 100) {
+          this.plant.humedad = 100;
+        }
         this.img = this.plant.img || '';
         console.log('Detalles de la planta cargados:', this.plant);
       })
@@ -68,6 +75,54 @@ export class EditPlantComponent implements OnInit {
         this.errorMessage = error.message || 'Error al cargar los detalles de la planta.';
         console.error('Error al cargar los detalles de la planta:', error);
       });
+  }
+
+  async captureImage(): Promise<void> {
+    try {
+      this.isCapturingImage = true;
+      this.errorMessage = null;
+      
+      // Llamada directa al método básico de la cámara
+      const imageUrl = await this.cameraService.takePicture();
+      
+      if (imageUrl) {
+        this.img = imageUrl;
+        console.log('Imagen capturada exitosamente:', imageUrl);
+      }
+    } catch (error: any) {
+      if (error.message?.includes('User cancelled') || error.message?.includes('canceled')) {
+        console.log('El usuario canceló la captura de imagen');
+        // No mostramos error si el usuario canceló la operación
+      } else {
+        this.errorMessage = error.message || 'Error al capturar la imagen';
+        console.error('Error al capturar la imagen:', error);
+      }
+    } finally {
+      this.isCapturingImage = false;
+    }
+  }
+
+  // Mantener también la función existente para compatibilidad
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        this.errorMessage = 'Por favor, selecciona un archivo de imagen válido.';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.img = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Método para manejar cambios en el campo de humedad
+  onHumedadChange(): void {
+    if (this.plant && this.plant.humedad > 100) {
+      this.plant.humedad = 100;
+    }
   }
 
   updatePlant(): void {
@@ -130,6 +185,10 @@ export class EditPlantComponent implements OnInit {
       this.errorMessage = 'La humedad debe ser un número mayor que 0.';
       return false;
     }
+    // Verificar que la humedad no sea mayor de 100
+    if (this.plant.humedad > 100) {
+      this.plant.humedad = 100; // Limitar a 100 si es mayor
+    }
     if (this.plant.electrovalvula && this.plant.electrovalvula < 0) {
       this.errorMessage = 'La electroválvula no puede ser negativa.';
       return false;
@@ -141,21 +200,6 @@ export class EditPlantComponent implements OnInit {
       return false;
     }
     return true;
-  }
-
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      if (!file.type.startsWith('image/')) {
-        this.errorMessage = 'Por favor, selecciona un archivo de imagen válido.';
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.img = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   gotoPlantDetail() {

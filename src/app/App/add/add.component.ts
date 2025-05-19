@@ -5,6 +5,7 @@ import { Plant } from '../../Models/plant.mode';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
+import { CameraService } from '../../Services/camera.service';
 import { thermometer } from 'ionicons/icons';
 
 @Component({
@@ -26,7 +27,8 @@ export class AddComponent {
 
   constructor(
     private plantService: PlantService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cameraService: CameraService
   ) {
     addIcons({ thermometer });
   }
@@ -140,4 +142,17 @@ export class AddComponent {
     this.electrovalvula = 0;
     this.errorMessage = null;
   }
+
+  async takePhoto() {
+    try {
+      const image = await this.cameraService.takePicture();
+      if (image) {
+        this.img = image;
+      }
+    } catch (error) {
+      console.error('Error al tomar la foto:', error);
+      this.errorMessage = 'No se pudo acceder a la cámara.';
+    }
+  }
+  
 }

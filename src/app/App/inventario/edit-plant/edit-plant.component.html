@@ -13,23 +13,34 @@
     </div>
   </header>
 
-
   <!-- Contenido Principal -->
   <main class="main-container" role="main">
     <div class="form-container">
       <form *ngIf="plant" class="plant-form" role="form" aria-labelledby="edit-plant-title">
-        <!-- Subida de imagen -->
-        <label class="field-base image-upload" for="image-upload">
-          <span class="camera-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-              <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
-                stroke="currentColor" stroke-width="2" />
-              <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
-            </svg>
-          </span> Cambiar imagen
-          <input id="image-upload" type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input"
-            aria-label="Subir imagen de la planta">
-        </label>
+        <!-- Mensaje de error -->
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+        
+        <!-- Botones para capturar imagen -->
+        <div class="image-buttons">
+          <!-- Botón para usar la cámara -->
+          <button 
+            type="button" 
+            class="field-base image-upload camera-button" 
+            (click)="captureImage()"
+            [disabled]="isCapturingImage"
+            [ngClass]="{'loading': isCapturingImage}"
+            aria-label="Tomar foto con la cámara">
+            <span class="camera-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
+                  stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </span>
+            <span *ngIf="!isCapturingImage">Cambiar foto</span>
+            <span *ngIf="isCapturingImage">Capturando...</span>
+          </button>
+        </div>
 
         <!-- Vista previa de imagen -->
         <div class="image-preview-wrapper" *ngIf="img">
@@ -54,11 +65,15 @@
         <!-- Campo de Humedad -->
         <div class="form-field field-base number-input">
           <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required
-            class="custom-input" placeholder="Humedad (%)" aria-required="true" />
+            class="custom-input" placeholder="Humedad (%)" aria-required="true" 
+            min="1" max="100" (change)="onHumedadChange()" />
         </div>
 
         <!-- Botón de Actualizar -->
-        <button type="button" class="submit-button" (click)="updatePlant()">Actualizar Planta</button>
+        <button type="button" class="submit-button" (click)="updatePlant()" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting">Actualizar Planta</span>
+          <span *ngIf="isSubmitting">Actualizando...</span>
+        </button>
       </form>
     </div>
   </main>

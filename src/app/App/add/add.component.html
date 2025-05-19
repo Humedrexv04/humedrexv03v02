@@ -18,6 +18,9 @@
             </span>
             <span class="upload-text">Subir imagen</span>
             <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput" />
+            <button type="button" class="camera-button" (click)="takePhoto()">
+              📷 Tomar foto con cámara
+            </button>            
           </label>
         </div>
 
