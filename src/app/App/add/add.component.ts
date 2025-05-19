@@ -1,3 +1,4 @@
+// src/app/components/add/add.component.ts
 import { Component } from '@angular/core';
 import { PlantService } from '../../Services/plant.service';
 import { AuthService } from '../../Services/auth.service';
@@ -5,13 +6,15 @@ import { Plant } from '../../Models/plant.mode';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { addIcons } from 'ionicons';
-import { CameraService } from '../../Services/camera.service';
 import { thermometer } from 'ionicons/icons';
+import { CameraComponent } from '../../camera/camera.component';
+import { Router } from '@angular/router';
+import { CameraService } from '../../Services/camera.service'; // NUEVO
 
 @Component({
   selector: 'app-add',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CameraComponent],
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css']
 })
@@ -28,94 +31,15 @@ export class AddComponent {
   constructor(
     private plantService: PlantService,
     private authService: AuthService,
-    private cameraService: CameraService
+    private router: Router,
+    private cameraService: CameraService // INYECTADO
   ) {
     addIcons({ thermometer });
   }
 
-  async addPlant() {
-    if (this.isSubmitting) {
-      this.errorMessage = 'Por favor, espera a que se complete la operación actual.';
-      return;
-    }
-
-    if (!this.validateForm()) {
-      return;
-    }
-
-    this.isSubmitting = true;
-    this.errorMessage = null;
-
-    try {
-      const user = await this.authService.getCurrentUser();
-      if (!user) {
-        throw new Error('No se pudo obtener el usuario');
-      }
-
-      const newPlant: Plant = {
-        name: this.name,
-        horario: this.horario,
-        humedad: this.humedad,
-        img: this.img || undefined,
-        electrovalvula: this.electrovalvula || undefined
-      };
-
-      if (this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
-        newPlant.sensorHumedad = this.sensorHumedad;
-      }
-
-      await this.plantService.addPlant(user.uid, newPlant);
-      this.errorMessage = '✅ Planta agregada exitosamente';
-      setTimeout(() => {
-        this.errorMessage = null;
-      }, 3000); // Clear success message after 3 seconds
-      this.resetForm();
-    } catch (error: any) {
-      this.errorMessage = error.message || 'Error al agregar la planta. Intenta nuevamente.';
-      console.error('❌ Error al agregar la planta:', error);
-    } finally {
-      this.isSubmitting = false;
-    }
-  }
-
-  private validateForm(): boolean {
-    // Validación para asegurar que los campos obligatorios estén llenos
-    if (!this.name.trim()) {
-      this.errorMessage = 'El nombre de la planta es requerido.';
-      return false;
-    }
-    if (!this.horario.trim()) {
-      this.errorMessage = 'El horario de riego es requerido.';
-      return false;
-    }
-
-    // Validación para la humedad: debe ser mayor que 0 y menor o igual a 100
-    if (this.humedad <= 0 || isNaN(this.humedad)) {
-      this.errorMessage = 'La humedad debe ser un número mayor que 0.';
-      return false;
-    }
-    if (this.humedad > 100) {
-      this.errorMessage = 'La humedad no puede ser mayor a 100%.';
-      return false;
-    }
-
-    // Validación para electroválvula
-    if (this.electrovalvula < 0) {
-      this.errorMessage = 'La electroválvula no puede ser negativa.';
-      return false;
-    }
-
-    // Validaciones para los campos del sensor de humedad
-    if (this.sensorHumedad.deviceId && !this.sensorHumedad.sensorKey) {
-      this.errorMessage = 'Si se especifica un dispositivo, también se debe especificar un sensor.';
-      return false;
-    }
-    if (!this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
-      this.errorMessage = 'Si se especifica un sensor, también se debe especificar un dispositivo.';
-      return false;
-    }
-
-    return true;
+  onImageSelected(imageUrl: string) {
+    this.img = imageUrl || '';
+    console.log('Imagen seleccionada desde el componente cámara:', imageUrl);
   }
 
   onFileSelected(event: any) {
@@ -133,6 +57,93 @@ export class AddComponent {
     }
   }
 
+  async addPlant() {
+    if (this.isSubmitting) {
+      this.errorMessage = 'Por favor, espera a que se complete la operación actual.';
+      return;
+    }
+
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.errorMessage = null;
+
+    try {
+      const user = await this.authService.getCurrentUser();
+      if (!user) throw new Error('No se pudo obtener el usuario');
+
+      let imageUrl: string | undefined = undefined;
+
+      // Subir imagen si es base64
+      if (this.img.startsWith('data:image')) {
+        imageUrl = await this.cameraService.uploadImageToFirebase(this.img);
+      } else if (this.img.startsWith('http')) {
+        imageUrl = this.img; // Ya es una URL válida
+      }
+
+      const newPlant: Plant = {
+        name: this.name,
+        horario: this.horario,
+        humedad: this.humedad,
+        img: imageUrl,
+        electrovalvula: this.electrovalvula || undefined,
+      };
+
+      if (this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
+        newPlant.sensorHumedad = this.sensorHumedad;
+      }
+
+      await this.plantService.addPlant(user.uid, newPlant);
+      this.errorMessage = '✅ Planta agregada exitosamente';
+
+      setTimeout(() => {
+        this.resetForm();
+        this.router.navigate(['/view/plant-list']);
+      }, 2000);
+
+    } catch (error: any) {
+      this.errorMessage = error.message || 'Error al agregar la planta. Intenta nuevamente.';
+      console.error('❌ Error al agregar la planta:', error);
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  private validateForm(): boolean {
+    if (!this.name.trim()) {
+      this.errorMessage = 'El nombre de la planta es requerido.';
+      return false;
+    }
+    if (!this.horario.trim()) {
+      this.errorMessage = 'El horario de riego es requerido.';
+      return false;
+    }
+    if (this.humedad <= 0 || isNaN(this.humedad)) {
+      this.errorMessage = 'La humedad debe ser un número mayor que 0.';
+      return false;
+    }
+    if (this.humedad > 100) {
+      this.errorMessage = 'La humedad no puede ser mayor a 100%.';
+      return false;
+    }
+    if (this.electrovalvula < 0) {
+      this.errorMessage = 'La electroválvula no puede ser negativa.';
+      return false;
+    }
+    if (this.sensorHumedad.deviceId && !this.sensorHumedad.sensorKey) {
+      this.errorMessage = 'Si se especifica un dispositivo, también se debe especificar un sensor.';
+      return false;
+    }
+    if (!this.sensorHumedad.deviceId && this.sensorHumedad.sensorKey) {
+      this.errorMessage = 'Si se especifica un sensor, también se debe especificar un dispositivo.';
+      return false;
+    }
+
+    return true;
+  }
+
   resetForm() {
     this.img = '';
     this.name = '';
@@ -142,17 +153,4 @@ export class AddComponent {
     this.electrovalvula = 0;
     this.errorMessage = null;
   }
-
-  async takePhoto() {
-    try {
-      const image = await this.cameraService.takePicture();
-      if (image) {
-        this.img = image;
-      }
-    } catch (error) {
-      console.error('Error al tomar la foto:', error);
-      this.errorMessage = 'No se pudo acceder a la cámara.';
-    }
-  }
-  
 }

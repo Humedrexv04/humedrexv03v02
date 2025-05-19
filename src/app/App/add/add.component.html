@@ -1,3 +1,4 @@
+
 <div class="scroll-container">
   <header class="header-section">
     <h1 class="header-title">Agregar Nueva Planta</h1>
@@ -6,7 +7,15 @@
   <main class="main-container">
     <section class="form-container">
       <form class="plant-form" (ngSubmit)="addPlant()">
-        <!-- Subida de imagen -->
+        <!-- Componente de cámara integrado -->
+        <div class="form-field">
+          <app-camera 
+            [initialImage]="img" 
+            (imageSelected)="onImageSelected($event)">
+          </app-camera>
+        </div>
+
+        <!-- Alternativa de subida de imagen (opcional) -->
         <div class="form-field">
           <label class="field-base image-upload" for="fileInput">
             <span class="camera-icon">
@@ -16,11 +25,8 @@
                 <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
               </svg>
             </span>
-            <span class="upload-text">Subir imagen</span>
+            <span class="upload-text">Subir imagen desde galeria</span>
             <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput" />
-            <button type="button" class="camera-button" (click)="takePhoto()">
-              📷 Tomar foto con cámara
-            </button>            
           </label>
         </div>
 
@@ -89,7 +95,8 @@
                 <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               </svg>
             </span>
-            Agregar a mi jardín
+            <span *ngIf="!isSubmitting">Agregar a mi jardín</span>
+            <span *ngIf="isSubmitting">Guardando...</span>
           </button>
         </div>
       </form>

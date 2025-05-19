@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Plant } from '../../../Models/plant.mode';
@@ -64,10 +65,6 @@ export class EditPlantComponent implements OnInit {
     this.plantService.getPlantDetails(this.userId, this.plantId)
       .then(data => {
         this.plant = data;
-        // Asegurarse de que la humedad no supere el 100% al cargar los datos
-        if (this.plant.humedad > 100) {
-          this.plant.humedad = 100;
-        }
         this.img = this.plant.img || '';
         console.log('Detalles de la planta cargados:', this.plant);
       })
@@ -81,26 +78,25 @@ export class EditPlantComponent implements OnInit {
     try {
       this.isCapturingImage = true;
       this.errorMessage = null;
-      
-      // Llamada directa al método básico de la cámara
-      const imageUrl = await this.cameraService.takePicture();
-      
+
+      const imageUrl = await this.cameraService.captureAndUpload();
+
       if (imageUrl) {
         this.img = imageUrl;
-        console.log('Imagen capturada exitosamente:', imageUrl);
+        console.log('Imagen capturada y subida exitosamente:', imageUrl);
       }
     } catch (error: any) {
       if (error.message?.includes('User cancelled') || error.message?.includes('canceled')) {
         console.log('El usuario canceló la captura de imagen');
-        // No mostramos error si el usuario canceló la operación
       } else {
-        this.errorMessage = error.message || 'Error al capturar la imagen';
-        console.error('Error al capturar la imagen:', error);
+        this.errorMessage = error.message || 'Error al capturar o subir la imagen';
+        console.error('Error en captura o subida de imagen:', error);
       }
     } finally {
       this.isCapturingImage = false;
     }
   }
+
 
   // Mantener también la función existente para compatibilidad
   onFileSelected(event: any) {
@@ -115,13 +111,6 @@ export class EditPlantComponent implements OnInit {
         this.img = e.target.result;
       };
       reader.readAsDataURL(file);
-    }
-  }
-
-  // Método para manejar cambios en el campo de humedad
-  onHumedadChange(): void {
-    if (this.plant && this.plant.humedad > 100) {
-      this.plant.humedad = 100;
     }
   }
 
@@ -184,10 +173,6 @@ export class EditPlantComponent implements OnInit {
     if (this.plant.humedad <= 0 || isNaN(this.plant.humedad)) {
       this.errorMessage = 'La humedad debe ser un número mayor que 0.';
       return false;
-    }
-    // Verificar que la humedad no sea mayor de 100
-    if (this.plant.humedad > 100) {
-      this.plant.humedad = 100; // Limitar a 100 si es mayor
     }
     if (this.plant.electrovalvula && this.plant.electrovalvula < 0) {
       this.errorMessage = 'La electroválvula no puede ser negativa.';
