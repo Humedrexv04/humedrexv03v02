@@ -7,27 +7,23 @@
   <main class="main-container">
     <section class="form-container">
       <form class="plant-form" (ngSubmit)="addPlant()">
-        <!-- Componente de cámara integrado -->
-        <div class="form-field">
-          <app-camera 
-            [initialImage]="img" 
-            (imageSelected)="onImageSelected($event)">
-          </app-camera>
-        </div>
+        <!-- Contenedor flex para cámara y subida de imagen -->
+        <div class="camera-upload-container">
+          <!-- Componente de cámara integrado -->
+          <div class="camera-component">
+            <app-camera 
+              [initialImage]="img" 
+              (imageSelected)="onImageSelected($event)">
+            </app-camera>
+          </div>
 
-        <!-- Alternativa de subida de imagen (opcional) -->
-        <div class="form-field">
-          <label class="field-base image-upload" for="fileInput">
-            <span class="camera-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
-                  stroke="currentColor" stroke-width="2" />
-                <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
-              </svg>
-            </span>
-            <span class="upload-text">Subir imagen desde galeria</span>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput" />
-          </label>
+          <!-- Alternativa de subida de imagen -->
+          <div class="upload-component">
+            <label class="field-base image-upload" for="fileInput">
+              <span class="upload-text">Subir imagen desde galeria</span>
+              <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input" id="fileInput" />
+            </label>
+          </div>
         </div>
 
         <!-- Vista previa de imagen -->

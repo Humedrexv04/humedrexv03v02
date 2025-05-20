@@ -40,6 +40,7 @@
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+    margin-top: 60px; /* Ajuste para el header fijo */
 }
 
 /* Contenedor del formulario */
@@ -57,6 +58,34 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+/* Nuevo contenedor para cámara y subir imagen */
+.camera-upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.camera-component {
+    flex: 1;
+    min-width: 0; /* Permite que el componente se encoja si es necesario */
+    display: block;
+}
+
+.upload-component {
+    flex: 1;
+    min-width: 0; /* Permite que el componente se encoja si es necesario */
+    display: block;
+}
+
+/* Estilos para el app-camera */
+app-camera {
+    display: block;
+    width: 100%;
 }
 
 /* Campos del formulario */
@@ -83,6 +112,8 @@
     cursor: pointer;
     gap: 0.75rem;
     justify-content: center;
+    height: 100%; /* Asegura que tenga la misma altura que el componente de cámara */
+    min-height: 60px;
 }
 
 .image-upload:hover {
@@ -193,6 +224,21 @@
     color: #d32f2f;
 }
 
+/* Previsualización de la imagen */
+.image-preview-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.image-preview-wrapper img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
 /* Animación */
 @keyframes fadeIn {
     from {
@@ -212,6 +258,16 @@
 
     .form-container {
         padding: 1.25rem;
+    }
+
+    .camera-upload-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .camera-component,
+    .upload-component {
+        width: 100%;
     }
 
     .field-base {
@@ -236,43 +292,4 @@
     .form-container {
         max-width: 460px;
     }
-}
-
-/* Subida de imagen */
-.image-upload {
-    background-color: #f1f8e9;
-    color: #2e7d32;
-    cursor: pointer;
-    gap: 0.75rem;
-    justify-content: center;
-}
-
-.image-upload:hover {
-    background-color: #c5e1a5;
-    transform: translateY(-2px);
-}
-
-.image-input {
-    display: none;
-}
-
-.camera-icon svg {
-    width: 26px;
-    height: 26px;
-    color: #2e7d32;
-}
-
-/* Previsualización de la imagen */
-.image-preview-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-}
-
-.image-preview-wrapper img {
-    max-width: 100%;
-    max-height: 200px;
-    border-radius: 12px;
-    object-fit: cover;
 }
