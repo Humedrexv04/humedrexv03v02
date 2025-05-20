@@ -1,14 +1,14 @@
-<div class="camera-container">
-
+<div class="camera-button-wrapper">
   <!-- Botón para tomar foto -->
-  <button class="camera-button" [disabled]="loading" (click)="takePicture()">
-    <span *ngIf="!loading">
+  <button class="field-base photo-option-button camera-button" [disabled]="loading" (click)="takePicture()">
+    <span class="button-icon-wrapper" *ngIf="!loading">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
           stroke="currentColor" stroke-width="2" />
         <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
       </svg>
     </span>
+    <span *ngIf="!loading">Tomar Foto</span>
     <span *ngIf="loading">Procesando...</span>
   </button>
 
@@ -16,5 +16,4 @@
   <div class="error-message" *ngIf="errorMessage">
     {{ errorMessage }}
   </div>
-
 </div>

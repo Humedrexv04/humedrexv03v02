@@ -19,27 +19,39 @@
       <form *ngIf="plant" class="plant-form" role="form" aria-labelledby="edit-plant-title">
         <!-- Mensaje de error -->
         <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-        
-        <!-- Botones para capturar imagen -->
-        <div class="image-buttons">
-          <!-- Botón para usar la cámara -->
-          <button 
-            type="button" 
-            class="field-base image-upload camera-button" 
-            (click)="captureImage()"
-            [disabled]="isCapturingImage"
-            [ngClass]="{'loading': isCapturingImage}"
-            aria-label="Tomar foto con la cámara">
-            <span class="camera-icon">
+
+        <!-- Botón para cambiar foto (se oculta cuando showPhotoOptions es true) -->
+        <div class="form-field" *ngIf="!showPhotoOptions">
+          <button type="button" class="field-base add-photo-button" (click)="togglePhotoOptions()"
+            aria-label="Cambiar foto de la planta">
+            <span class="button-icon-wrapper">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                <path d="M4 5h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="none"
-                  stroke="currentColor" stroke-width="2" />
-                <circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M3 9h4V6h10v3h4v8H3v-8zm6-3a3 3 0 11-6 0 3 3 0 016 0z" fill="none" stroke="currentColor"
+                  stroke-width="2" />
               </svg>
             </span>
-            <span *ngIf="!isCapturingImage">Cambiar foto</span>
-            <span *ngIf="isCapturingImage">Capturando...</span>
+            <span>Cambiar Foto</span>
           </button>
+        </div>
+
+        <!-- Opciones de cámara y galería (mostradas condicionalmente) -->
+        <div class="photo-options" *ngIf="showPhotoOptions">
+          <div class="camera-component">
+            <app-camera [initialImage]="img" (imageSelected)="onImageSelected($event)"></app-camera>
+          </div>
+          <div class="upload-component">
+            <label class="field-base photo-option-button" for="fileInput">
+              <span class="button-icon-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                  <path d="M4 4h7v7H4V4zm0 9h7v7H4v-7zm9-9h7v7h-7V4zm0 9h7v7h-7v-7z" fill="none" stroke="currentColor"
+                    stroke-width="2" />
+                </svg>
+              </span>
+              <span>Abrir Galería</span>
+              <input type="file" (change)="onFileSelected($event)" accept="image/*" class="image-input"
+                id="fileInput" />
+            </label>
+          </div>
         </div>
 
         <!-- Vista previa de imagen -->
@@ -64,18 +76,8 @@
 
         <!-- Campo de Humedad -->
         <div class="form-field field-base number-input">
-          <input 
-            id="plant-humedad" 
-            type="number" 
-            [(ngModel)]="plant.humedad" 
-            name="humedad" 
-            required
-            min="1" 
-            max="100" 
-            class="custom-input" 
-            placeholder="Humedad (1-100%)" 
-            aria-required="true"
-            aria-describedby="humidity-help" />
+          <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required min="1" max="100"
+            class="custom-input" placeholder="Humedad (1-100%)" aria-required="true" aria-describedby="humidity-help" />
           <small id="humidity-help" class="field-hint"></small>
         </div>
 

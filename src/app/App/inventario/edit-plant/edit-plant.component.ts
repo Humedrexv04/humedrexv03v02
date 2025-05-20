@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { NgIf, NgClass } from '@angular/common';
 import { AuthService } from '../../../Services/auth.service';
 import { CameraService } from '../../../Services/camera.service';
+import { CameraComponent } from '../../../camera/camera.component';
 
 @Component({
   selector: 'app-edit-plant',
   standalone: true,
-  imports: [FormsModule, NgIf, NgClass],
+  imports: [FormsModule, NgIf, CameraComponent],
   templateUrl: './edit-plant.component.html',
   styleUrls: ['./edit-plant.component.css']
 })
@@ -22,6 +23,7 @@ export class EditPlantComponent implements OnInit {
   img: string | undefined = '';
   isSubmitting: boolean = false;
   isCapturingImage: boolean = false;
+  showPhotoOptions: boolean = false; // Añadido para controlar visibilidad de opciones
 
   constructor(
     private plantService: PlantService,
@@ -73,6 +75,10 @@ export class EditPlantComponent implements OnInit {
       });
   }
 
+  togglePhotoOptions(): void {
+    this.showPhotoOptions = !this.showPhotoOptions;
+  }
+
   async captureImage(): Promise<void> {
     try {
       this.isCapturingImage = true;
@@ -82,6 +88,7 @@ export class EditPlantComponent implements OnInit {
 
       if (imageUrl) {
         this.img = imageUrl;
+        this.showPhotoOptions = false; // Oculta opciones tras capturar
         console.log('Imagen capturada y subida exitosamente:', imageUrl);
       }
     } catch (error: any) {
@@ -96,8 +103,11 @@ export class EditPlantComponent implements OnInit {
     }
   }
 
+  onImageSelected(imageUrl: string): void {
+    this.img = imageUrl;
+    this.showPhotoOptions = false; // Oculta opciones tras seleccionar imagen
+  }
 
-  // Mantener también la función existente para compatibilidad
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -108,6 +118,7 @@ export class EditPlantComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.img = e.target.result;
+        this.showPhotoOptions = false; // Oculta opciones tras seleccionar imagen
       };
       reader.readAsDataURL(file);
     }
@@ -173,7 +184,6 @@ export class EditPlantComponent implements OnInit {
       this.errorMessage = 'La humedad debe ser un número mayor que 0.';
       return false;
     }
-    // Nueva validación para asegurar que la humedad sea máximo 100
     if (this.plant.humedad > 100) {
       this.errorMessage = 'La humedad debe estar en un rango de 0 a 100.';
       return false;

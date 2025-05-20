@@ -1,4 +1,3 @@
-// src/app/components/add/add.component.ts
 import { Component } from '@angular/core';
 import { PlantService } from '../../Services/plant.service';
 import { AuthService } from '../../Services/auth.service';
@@ -9,7 +8,7 @@ import { addIcons } from 'ionicons';
 import { thermometer } from 'ionicons/icons';
 import { CameraComponent } from '../../camera/camera.component';
 import { Router } from '@angular/router';
-import { CameraService } from '../../Services/camera.service'; // NUEVO
+import { CameraService } from '../../Services/camera.service';
 
 @Component({
   selector: 'app-add',
@@ -27,19 +26,25 @@ export class AddComponent {
   electrovalvula: number = 0;
   errorMessage: string | null = null;
   isSubmitting: boolean = false;
+  showPhotoOptions: boolean = false;
 
   constructor(
     private plantService: PlantService,
     private authService: AuthService,
     private router: Router,
-    private cameraService: CameraService // INYECTADO
+    private cameraService: CameraService
   ) {
     addIcons({ thermometer });
+  }
+
+  togglePhotoOptions() {
+    this.showPhotoOptions = !this.showPhotoOptions;
   }
 
   onImageSelected(imageUrl: string) {
     this.img = imageUrl || '';
     console.log('Imagen seleccionada desde el componente cámara:', imageUrl);
+    this.showPhotoOptions = false; // Oculta las opciones tras seleccionar la imagen
   }
 
   onFileSelected(event: any) {
@@ -52,6 +57,7 @@ export class AddComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.img = e.target.result;
+        this.showPhotoOptions = false; // Oculta las opciones tras seleccionar
       };
       reader.readAsDataURL(file);
     }
@@ -76,11 +82,10 @@ export class AddComponent {
 
       let imageUrl: string | undefined = undefined;
 
-      // Subir imagen si es base64
       if (this.img.startsWith('data:image')) {
         imageUrl = await this.cameraService.uploadImageToFirebase(this.img);
       } else if (this.img.startsWith('http')) {
-        imageUrl = this.img; // Ya es una URL válida
+        imageUrl = this.img;
       }
 
       const newPlant: Plant = {
@@ -152,5 +157,6 @@ export class AddComponent {
     this.sensorHumedad = { deviceId: '', sensorKey: '' };
     this.electrovalvula = 0;
     this.errorMessage = null;
+    this.showPhotoOptions = false;
   }
 }

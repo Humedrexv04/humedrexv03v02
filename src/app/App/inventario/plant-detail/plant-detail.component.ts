@@ -202,14 +202,17 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
 
   deletePlant(): void {
     if (this.plantId && this.userId) {
-      this.plantService.deletePlant(this.userId, this.plantId)
-        .then(() => {
-          console.log('Planta eliminada con éxito');
-          this.router.navigate(['/view/plant-list']);
-        })
-        .catch(error => {
-          console.error('Error al eliminar la planta:', error);
-        });
+      const confirmation = confirm('¿Estás seguro de que deseas eliminar esta planta? Esta acción no se puede deshacer.');
+      if (confirmation) {
+        this.plantService.deletePlant(this.userId, this.plantId)
+          .then(() => {
+            console.log('Planta eliminada con éxito');
+            this.router.navigate(['/view/plant-list']);
+          })
+          .catch(error => {
+            console.error('Error al eliminar la planta:', error);
+          });
+      }
     }
   }
 
