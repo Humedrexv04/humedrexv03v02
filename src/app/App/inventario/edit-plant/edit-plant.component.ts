@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Plant } from '../../../Models/plant.mode';
@@ -172,6 +171,11 @@ export class EditPlantComponent implements OnInit {
     }
     if (this.plant.humedad <= 0 || isNaN(this.plant.humedad)) {
       this.errorMessage = 'La humedad debe ser un número mayor que 0.';
+      return false;
+    }
+    // Nueva validación para asegurar que la humedad sea máximo 100
+    if (this.plant.humedad > 100) {
+      this.errorMessage = 'La humedad debe estar en un rango de 0 a 100.';
       return false;
     }
     if (this.plant.electrovalvula && this.plant.electrovalvula < 0) {

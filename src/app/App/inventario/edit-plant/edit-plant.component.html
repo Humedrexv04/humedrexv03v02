@@ -64,8 +64,19 @@
 
         <!-- Campo de Humedad -->
         <div class="form-field field-base number-input">
-          <input id="plant-humedad" type="number" [(ngModel)]="plant.humedad" name="humedad" required
-            class="custom-input" placeholder="Humedad (%)" aria-required="true" />
+          <input 
+            id="plant-humedad" 
+            type="number" 
+            [(ngModel)]="plant.humedad" 
+            name="humedad" 
+            required
+            min="1" 
+            max="100" 
+            class="custom-input" 
+            placeholder="Humedad (1-100%)" 
+            aria-required="true"
+            aria-describedby="humidity-help" />
+          <small id="humidity-help" class="field-hint"></small>
         </div>
 
         <!-- Botón de Actualizar -->
