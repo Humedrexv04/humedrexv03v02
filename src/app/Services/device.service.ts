@@ -196,7 +196,7 @@ export class DeviceService {
 
   // ... resto del código existente ...
 
-  async manualActivateRelay(deviceId: string, relayId: string, duration: number = 10000): Promise<void> {
+  async manualActivateRelay(deviceId: string, relayId: string, duration: number = 5000): Promise<void> {
     const uid = this.auth.currentUser?.uid;
     if (!uid) throw new Error('Usuario no autenticado');
 

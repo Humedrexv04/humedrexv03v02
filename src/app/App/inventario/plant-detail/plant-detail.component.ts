@@ -233,7 +233,7 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
 
     try {
       this.manualActivationActive = true;
-      this.remainingTime = 10;
+      this.remainingTime = 5;
 
       // Iniciar cuenta regresiva
       this.countdownInterval = setInterval(() => {
@@ -244,7 +244,7 @@ export class PlantDetailComponent implements OnInit, OnDestroy {
         }
       }, 1000);
 
-      await this.deviceService.manualActivateRelay(deviceId, relayId, 10000);
+      await this.deviceService.manualActivateRelay(deviceId, relayId, 5000);
     } catch (error) {
       console.error('Error en activación manual:', error);
       this.manualActivationActive = false;

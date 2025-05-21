@@ -129,7 +129,7 @@ export class DataSensoresComponent implements OnInit, OnDestroy {
 
   getWaterLevelSensor(): string | null {
     return this.sensorKeys.find(k =>
-      k.toLowerCase().includes('nivel') && k.toLowerCase().includes('agua')
+      k.toLowerCase().includes('volumen') && k.toLowerCase().includes('agua')
     ) || null;
   }
 

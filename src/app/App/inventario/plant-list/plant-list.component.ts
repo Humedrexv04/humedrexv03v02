@@ -51,7 +51,7 @@ export class PlantListComponent implements OnInit {
       if (devices.length > 0) {
         const deviceId = devices[0].id;
         this.deviceId = deviceId;
-        this.deviceService.getSensorData(deviceId, 'nivel_agua')
+        this.deviceService.getSensorData(deviceId, 'volumen_agua')
           .then(nivel => {
             this.nivelAgua = nivel;
           })
